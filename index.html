@@ -1487,6 +1487,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 <button class="totop" id="totop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top"><svg class="icon"><use href="#i-up"/></svg></button>
 <div id="toasts"></div>
 
+   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 (function(){
 'use strict';
@@ -2308,6 +2309,67 @@ window.addEventListener('hashchange',()=>{if(location.hash==='#admin')openAdmin(
 
 /* init */
 refreshDynamicText();renderTesti();renderFaq();
+
+   /* ===== Supabase cloud sync ===== */
+const SUPA_URL   = 'https://nmzwvxdegtfartbhoixx.supabase.co';
+const SUPA_KEY   = 'sb_publishable_EsNS8St8xkIZgSqEGxp4yQ_y1BmeTDh';
+const ADMIN_EMAIL= 'admin@yourlab.com';           // <- 🛑 เปลี่ยนเป็นอีเมลแอดมินของคุณ
+
+if (SUPA_URL.indexOf('xxxxx') < 0 && window.supabase) {
+  const supa = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+
+  // (1) โหลดเนื้อหาจากคลาวด์แล้ว refresh หน้า
+  supa.from('site_content').select('data').eq('id',1).single().then(({data,error})=>{
+    if (error || !data || !data.data) return;
+    const s = data.data;
+    if (Array.isArray(s.members)  && s.members.length)  MEMBERS  = s.members;
+    if (Array.isArray(s.news)     && s.news.length)     NEWS     = s.news;
+    if (s.cpubs)                                        CPUBS    = s.cpubs;
+    if (Array.isArray(s.products) && s.products.length) PRODUCTS = s.products;
+    if (Array.isArray(s.videos)   && s.videos.length)   VIDEOS   = s.videos;
+    
+    if(typeof renderProjectTeam === 'function') renderProjectTeam(); 
+    if(typeof renderTeam === 'function') renderTeam(typeof teamCat !== 'undefined' ? teamCat : 'all'); 
+    if(typeof renderNews === 'function') renderNews();
+    if(typeof renderProducts === 'function') renderProducts(); 
+    if(typeof renderVideos === 'function') renderVideos(); 
+    if(typeof renderPubAll === 'function') renderPubAll();
+  });
+
+  // (2) ทุกครั้งที่กด Save ในหลังบ้าน ให้เขียนขึ้นคลาวด์ด้วย
+  if(typeof saveStore !== 'undefined') {
+    const _saveStore = saveStore;
+    saveStore = function(silent){
+      const ok = _saveStore(silent);
+      supa.from('site_content').update({
+        data:{members:MEMBERS, news:NEWS, cpubs:CPUBS, products:PRODUCTS, videos:VIDEOS},
+        updated_at: new Date()
+      }).eq('id',1).then(({error})=>{ 
+        if(error && typeof toast === 'function') toast('Cloud save failed — ล็อกอินหรือยัง?'); 
+      });
+      return ok;
+    };
+  }
+
+  // (3) ใช้บัญชี Supabase ล็อกอินแทนรหัสเดิม
+  window.tryUnlock = function(){
+    const passVal = typeof val === 'function' ? val('adminPass') : document.getElementById('adminPass').value;
+    supa.auth.signInWithPassword({ email:ADMIN_EMAIL, password: passVal }).then(({error})=>{
+      if (error){ 
+        if(typeof toast === 'function') toast(typeof lang !== 'undefined' && lang==='th'?'รหัสไม่ถูกต้อง':'Wrong password'); 
+        return; 
+      }
+      if(typeof adminUnlocked !== 'undefined') adminUnlocked = true;
+      document.getElementById('adminLock').style.display='none';
+      document.getElementById('adminBody').style.display='flex';
+      if(typeof renderAdmin === 'function') renderAdmin('team');
+    });
+  };
+  
+  supa.auth.getSession().then(({data})=>{ 
+    if(data && data.session && typeof adminUnlocked !== 'undefined') adminUnlocked = true; 
+  });
+}
 })();
 </script>
 </body>
