@@ -653,8 +653,6 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
   .hero-cta{flex-direction:column;align-items:stretch}
   .hero-cta .btn{justify-content:center}
   .prof-label{flex-direction:column;align-items:flex-start;gap:10px}
-  .admin__tabs{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch}
-  .atab{flex:none}
 }
 @media(max-width:420px){
   .adm-2{grid-template-columns:1fr}
@@ -720,8 +718,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 .admin{position:fixed;inset:0;z-index:1500;display:none}
 .admin.open{display:block}
 .admin__scrim{position:absolute;inset:0;background:rgba(10,14,11,.5);backdrop-filter:blur(4px)}
-.admin__panel{position:absolute;top:0;right:0;height:100%;width:min(560px,100%);background:var(--bg);box-shadow:-30px 0 80px -30px rgba(0,0,0,.5);display:flex;flex-direction:column;animation:slideIn .4s var(--ease)}
-@keyframes slideIn{from{transform:translateX(40px);opacity:0}to{transform:none;opacity:1}}
+.admin__panel{position:absolute;top:0;right:0;height:100%;width:min(560px,100%);max-width:100%;background:var(--bg);box-shadow:-30px 0 80px -30px rgba(0,0,0,.5);display:flex;flex-direction:column;animation:slideIn .4s var(--ease);overflow:hidden}@keyframes slideIn{from{transform:translateX(40px);opacity:0}to{transform:none;opacity:1}}
 .admin__bar{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--line)}
 .admin__brand{display:flex;align-items:center;gap:9px;font-size:.95rem}
 .admin__brand .icon{color:var(--accent);font-size:18px}
@@ -738,8 +735,10 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 .lock-card .btn{width:100%;justify-content:center}
 .lock-note{display:block;margin-top:16px;font-size:11px;color:var(--faint);line-height:1.5}
 .admin__body{flex:1;display:flex;flex-direction:column;min-height:0}
-.admin__tabs{display:flex;gap:4px;padding:14px 22px 0;border-bottom:1px solid var(--line)}
-.atab{font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;font-weight:500;padding:11px 15px;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;transition:.25s}
+.admin__tabs{display:flex;gap:4px;padding:14px 22px 0;border-bottom:1px solid var(--line);overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.admin__tabs::-webkit-scrollbar{height:4px}
+.admin__tabs::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:10px}
+.atab{font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;font-weight:500;padding:11px 15px;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;transition:.25s;flex:none;white-space:nowrap}
 .atab:hover{color:var(--ink)}
 .atab.active{color:var(--accent);border-bottom-color:var(--accent)}
 .admin__content{flex:1;overflow-y:auto;padding:22px}
@@ -2344,8 +2343,17 @@ window.openAdmin=function(){
   if(adminUnlocked)renderAdmin(adminCurrentTab);else setTimeout(()=>{const p=el('adminPass');if(p)p.focus();},100);
 };
 window.closeAdmin=function(){el('admin').classList.remove('open');document.body.style.overflow='';};
-window.tryUnlock=function(){if(val('adminPass')===ADMIN_PASS){adminUnlocked=true;el('adminLock').style.display='none';el('adminBody').style.display='flex';renderAdmin('team');}else{toast(lang==='th'?'รหัสไม่ถูกต้อง':'Wrong passcode');}}; const lb=el('adminLogoutBtn'); if(lb) lb.style.display='inline-flex';
-window.adminTab=function(t,btn){adminCurrentTab=t;document.querySelectorAll('.atab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderAdmin(t);};
+window.tryUnlock=function(){
+  if(val('adminPass')===ADMIN_PASS){
+    adminUnlocked=true;
+    el('adminLock').style.display='none';
+    el('adminBody').style.display='flex';
+    const lb=el('adminLogoutBtn'); if(lb) lb.style.display='inline-flex';
+    renderAdmin('team');
+  }else{
+    toast(lang==='th'?'รหัสไม่ถูกต้อง':'Wrong passcode');
+  }
+};window.adminTab=function(t,btn){adminCurrentTab=t;document.querySelectorAll('.atab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderAdmin(t);};
 window.adminLogout=function(){
   adminUnlocked=false;
   const p=el('adminPass'); if(p) p.value='';
@@ -2666,12 +2674,16 @@ supa.from('site_content').update({
       if(typeof adminUnlocked !== 'undefined') adminUnlocked = true;
       document.getElementById('adminLock').style.display='none';
       document.getElementById('adminBody').style.display='flex';
+      const lb=document.getElementById('adminLogoutBtn'); if(lb) lb.style.display='inline-flex';
       if(typeof renderAdmin === 'function') renderAdmin('team');
     });
   };
-  
+
   supa.auth.getSession().then(({data})=>{ 
-    if(data && data.session && typeof adminUnlocked !== 'undefined') adminUnlocked = true; 
+    if(data && data.session){
+      if(typeof adminUnlocked !== 'undefined') adminUnlocked = true;
+      const lb=document.getElementById('adminLogoutBtn'); if(lb) lb.style.display='inline-flex';
+    }
   });
 }
 
