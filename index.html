@@ -201,6 +201,19 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 .cp-ring .t{font-family:var(--serif);font-style:italic;font-size:.98rem;line-height:1.15}
 .cp-ring .m{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:5px;letter-spacing:.02em}
 
+/* ===== announcement banner ===== */
+.banner-wrap{position:relative;border-radius:var(--r);overflow:hidden;box-shadow:var(--hair);aspect-ratio:21/7;background:var(--surface-2)}
+.banner-slide{position:absolute;inset:0;opacity:0;transition:opacity 1s var(--ease);display:block}
+.banner-slide.active{opacity:1;z-index:1}
+.banner-slide img{width:100%;height:100%;object-fit:cover}
+.banner-slide .grad{position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(10,14,11,.82))}
+.banner-slide .cap{position:absolute;left:28px;right:28px;bottom:24px;color:#fff;font-family:var(--serif);font-size:clamp(1.1rem,2.2vw,1.6rem);font-weight:500;line-height:1.25}
+.banner-dots{position:absolute;bottom:16px;right:20px;display:flex;gap:7px;z-index:2}
+.banner-dots button{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.45);transition:.3s}
+.banner-dots button.active{background:#fff;width:22px;border-radius:5px}
+.banner-empty{display:flex;align-items:center;justify-content:center;height:100%;color:var(--faint);font-family:var(--mono);font-size:.85rem}
+@media(max-width:760px){.banner-wrap{aspect-ratio:4/3}}
+
 /* ===== research ===== */
 .rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .rcard{background:var(--surface);border-radius:var(--r);padding:clamp(26px,2.4vw,36px);box-shadow:var(--hair);
@@ -1015,6 +1028,13 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
   </div>
 </section>
 
+<!-- ANNOUNCEMENT BANNER -->
+<section class="section" style="padding-block:clamp(28px,4vw,48px)">
+  <div class="wrap">
+    <div class="banner-wrap reveal" id="bannerWrap"></div>
+  </div>
+</section>
+
 <!-- RESEARCH -->
 <section id="research" class="section">
   <div class="wrap">
@@ -1278,6 +1298,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
         <div class="testi__by"><img id="testiImg" src="" alt=""><div><div class="nm" id="testiName"></div><div class="rl" id="testiRole"></div></div></div>
         <div class="testi__nav"><button onclick="prevTesti()"><svg class="icon"><use href="#i-arrow"/></svg></button><button onclick="nextTesti()"><svg class="icon"><use href="#i-arrow"/></svg></button></div>
       </div>
+      <button class="btn btn--ghost btn--sm" style="margin-top:16px" onclick="openTestiForm()"><svg class="icon"><use href="#i-send"/></svg> <span data-i18n="voices_share">Share your story</span></button>
     </div>
     <div class="reveal" data-d="1">
       <div class="mini-head"><svg class="icon"><use href="#i-spark"/></svg> <span data-i18n="faq">Questions, answered</span></div>
@@ -1473,6 +1494,25 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
   </div>
 </div>
 
+<!-- TESTIMONIAL SUBMISSION MODAL -->
+<div class="modal" id="testiFormModal">
+  <div class="modal__scrim" onclick="closeModal('testiFormModal')"></div>
+  <div class="modal__box">
+    <button class="modal__close" onclick="closeModal('testiFormModal')"><svg class="icon"><use href="#i-close"/></svg></button>
+    <div class="modal__body">
+      <span class="chip" style="margin-bottom:16px" data-i18n="voices_share_chip">Alumni story</span>
+      <h3 style="font-family:var(--serif);font-size:1.5rem;font-weight:500;margin-bottom:20px" data-i18n="voices_share_title">Share your experience</h3>
+      <form onsubmit="submitTesti(event)">
+        <div class="field"><label data-i18n="form_name">Your name</label><input type="text" id="ts_name" required placeholder="Jane Doe"></div>
+        <div class="field"><label data-i18n="voices_role">Your role / where you work now</label><input type="text" id="ts_role" required placeholder="Researcher, Dept. of Agriculture"></div>
+        <div class="field"><label data-i18n="voices_quote">Your story</label><textarea id="ts_quote" required placeholder="What was your experience at AC Lab like?"></textarea></div>
+        <button type="submit" class="btn btn--primary" style="width:100%;justify-content:center" data-i18n="voices_submit">Submit for review <svg class="icon"><use href="#i-send"/></svg></button>
+        <p style="font-size:11px;color:var(--muted);margin-top:12px" data-i18n="voices_note">Submissions are reviewed by the lab before appearing on the site.</p>
+      </form>
+    </div>
+  </div>
+</div>
+
 <!-- ADMIN PANEL -->
 <button class="admin-fab" id="adminFab" onclick="openAdmin()" title="Admin / edit content" aria-label="Admin"><svg class="icon"><use href="#i-spark"/></svg></button>
 <div class="admin" id="admin">
@@ -1500,15 +1540,19 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
     </div>
 
     <div class="admin__body" id="adminBody" style="display:none">
-      <div class="admin__tabs">
+<div class="admin__tabs">
         <button class="atab active" data-tab="team" onclick="adminTab('team',this)">Team</button>
         <button class="atab" data-tab="news" onclick="adminTab('news',this)">News</button>
         <button class="atab" data-tab="pubs" onclick="adminTab('pubs',this)">Publications</button>
         <button class="atab" data-tab="products" onclick="adminTab('products',this)">Products</button>
         <button class="atab" data-tab="videos" onclick="adminTab('videos',this)">Videos</button>
+        <button class="atab" data-tab="taxa" onclick="adminTab('taxa',this)">Taxa</button>
+        <button class="atab" data-tab="collabs" onclick="adminTab('collabs',this)">Partners</button>
+        <button class="atab" data-tab="voices" onclick="adminTab('voices',this)">Voices</button>
+        <button class="atab" data-tab="banner" onclick="adminTab('banner',this)">Banner</button>
         <button class="atab" data-tab="data" onclick="adminTab('data',this)">Data</button>
       </div>
-      <div class="admin__content" id="adminContent"></div>
+            <div class="admin__content" id="adminContent"></div>
     </div>
   </div>
 </div>
@@ -1541,7 +1585,7 @@ const PIPE=[
   {no:'04',icon:'i-flask',title:'Extract',desc:'Phytochemical extraction and HPLC compound profiling.'},
   {no:'05',icon:'i-cell',title:'Test',desc:'Cytotoxicity and bioassays on human cancer cell lines.'}
 ];
-const TAXA=[
+let TAXA=[
   {sp:'Cratoxylum formosum',en:'Hypericaceae · resveratrol source',acc:'CP · 157,204 bp',img:'https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=800&auto=format&fit=crop',desc:'A rich, newly-recognised source of resveratrol. We characterised its plastid genome and tested its extracts on normal and cancer cells.'},
   {sp:'Barleria',en:'Acanthaceae · model plastome',acc:'CP · first assembly',img:'https://images.unsplash.com/photo-1470509037663-253afd7f0f51?q=80&w=800&auto=format&fit=crop',desc:'The genus behind our first NGS project in 2018 — the chloroplast genome that put the lab on the genomics map.'},
   {sp:'Morinda citrifolia',en:'Rubiaceae · noni',acc:'Leaf extract study',img:'https://images.unsplash.com/photo-1615485925600-97237c4fc1ec?q=80&w=800&auto=format&fit=crop',desc:'Better known as noni. We investigated how its leaf extracts influence collagen type II synthesis through gene expression.'}
@@ -1600,7 +1644,7 @@ const INNOV=[
   {no:'04',icon:'i-cell',title:'Bioactivity mechanisms',titleTh:'กลไกการออกฤทธิ์',desc:'Decoding how compounds act on human cells — from cancer to the digestive system — to prove therapeutic potential.',descTh:'ถอดรหัสว่าสารออกฤทธิ์ทำงานกับเซลล์มนุษย์อย่างไร ตั้งแต่มะเร็งจนถึงระบบทางเดินอาหาร เพื่อพิสูจน์ศักยภาพการรักษา'},
   {no:'05',icon:'i-doc',title:'IP & products',titleTh:'ทรัพย์สินทางปัญญาและผลิตภัณฑ์',desc:'Turning results into registered innovations — medicine, supplements, cosmetics, food — protected by petty patents and patents.',descTh:'แปลงผลวิจัยเป็นนวัตกรรมที่ขึ้นทะเบียน — ยา อาหารเสริม เครื่องสำอาง อาหาร — คุ้มครองด้วยอนุสิทธิบัตรและสิทธิบัตร'}
 ];
-const COLLABS=[
+let COLLABS=[
   {flag:'https://flagcdn.com/w160/us.png',cc:'USA',name:'University of Washington',desc:'Primate genetics and global health at the Center for Global Field Study.',tags:['Genetics','Primatology']},
   {flag:'https://flagcdn.com/w160/be.png',cc:'Belgium',name:'KU Leuven',desc:'Joint work in toxicology and pharmacology, focused on ion-channel inhibitors.',tags:['Toxicology','Pharmacology']},
   {flag:'https://flagcdn.com/w160/cn.png',cc:'China',name:'Chinese Academy of Sciences',desc:'Plant taxonomy and evolution with the South China Botanical Garden.',tags:['Botany','Evolution']}
@@ -1646,18 +1690,24 @@ const GALLERY=[
   'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=800&auto=format&fit=crop',
   'https://images.unsplash.com/photo-1554475900-0a0350e3fc7b?q=80&w=800&auto=format&fit=crop'
 ];
-const TESTI={
-  en:[
-    {q:'Studying at AC Lab taught me to think systematically. The NGS skills I gained went straight into my job, and the atmosphere was supportive throughout.',name:'Dr. Somchai T.',role:'Researcher · Dept. of Agriculture',img:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop'},
-    {q:'I gained intense research experience, both in the lab and in the field. I am proud to have been part of new discoveries here.',name:'Ms. Malee J.',role:'QC Scientist · CPF',img:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop'},
-    {q:'The working atmosphere is warm, seniors mentor juniors, and the instruments are modern enough for international-level research.',name:'Dr. Pratee',role:'Postdoctoral researcher',img:'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=200&auto=format&fit=crop'}
-  ],
-  th:[
-    {q:'การเรียนที่ AC Lab สอนให้คิดเป็นระบบ ความรู้ด้าน NGS นำไปใช้ทำงานจริงได้ทันที บรรยากาศในแล็บสนับสนุนกันดีมาก',name:'Dr. Somchai T.',role:'นักวิจัย · กรมวิชาการเกษตร',img:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop'},
-    {q:'ได้รับประสบการณ์วิจัยที่เข้มข้น ทั้งในแล็บและการลงพื้นที่จริง ภูมิใจที่ได้เป็นส่วนหนึ่งของการค้นพบใหม่ๆ',name:'Ms. Malee J.',role:'นักวิทยาศาสตร์ QC · CPF',img:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop'},
-    {q:'บรรยากาศการทำงานเป็นกันเอง รุ่นพี่สอนรุ่นน้อง เครื่องมือทันสมัยพร้อมสำหรับงานวิจัยระดับนานาชาติ',name:'Dr. Pratee',role:'นักวิจัยหลังปริญญาเอก',img:'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=200&auto=format&fit=crop'}
-  ]
-};
+let TESTIMONIALS=[
+  {q:'Studying at AC Lab taught me to think systematically. The NGS skills I gained went straight into my job, and the atmosphere was supportive throughout.',
+   qTh:'การเรียนที่ AC Lab สอนให้คิดเป็นระบบ ความรู้ด้าน NGS นำไปใช้ทำงานจริงได้ทันที บรรยากาศในแล็บสนับสนุนกันดีมาก',
+   name:'Dr. Somchai T.',role:'Researcher · Dept. of Agriculture',roleTh:'นักวิจัย · กรมวิชาการเกษตร',
+   img:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop'},
+  {q:'I gained intense research experience, both in the lab and in the field. I am proud to have been part of new discoveries here.',
+   qTh:'ได้รับประสบการณ์วิจัยที่เข้มข้น ทั้งในแล็บและการลงพื้นที่จริง ภูมิใจที่ได้เป็นส่วนหนึ่งของการค้นพบใหม่ๆ',
+   name:'Ms. Malee J.',role:'QC Scientist · CPF',roleTh:'นักวิทยาศาสตร์ QC · CPF',
+   img:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop'},
+  {q:'The working atmosphere is warm, seniors mentor juniors, and the instruments are modern enough for international-level research.',
+   qTh:'บรรยากาศการทำงานเป็นกันเอง รุ่นพี่สอนรุ่นน้อง เครื่องมือทันสมัยพร้อมสำหรับงานวิจัยระดับนานาชาติ',
+   name:'Dr. Pratee',role:'Postdoctoral researcher',roleTh:'นักวิจัยหลังปริญญาเอก',
+   img:'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=200&auto=format&fit=crop'}
+];
+let BANNERS=[
+  {img:'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=1600&auto=format&fit=crop',
+   caption:'Now accepting applications for the 2026 intake',captionTh:'เปิดรับสมัครนักศึกษาใหม่ ปีการศึกษา 2569',link:'#join'}
+];
 const FAQ={
   en:[
     {q:'How do I apply for a position in the lab?',a:'Send your CV and a brief statement of research interests to Prof. Dr. Arunrat by email. We welcome students with backgrounds in biology, genetics or biochemistry.'},
@@ -1710,6 +1760,9 @@ const I18N={en:{},th:{
   mem_eye:'ภายในแล็บ',mem_title:'สมาชิกในแล็บ',
   team_all:'ทั้งหมด',team_lead:'หัวหน้าโครงการ',team_co:'ผู้ร่วมวิจัย',team_intl:'ต่างประเทศ',
   team_postdoc:'หลังปริญญาเอก',team_phd:'ป.เอก',team_master:'ป.โท',team_intern:'ฝึกงาน',pub_chart_t:'ผลงานต่อปี',saved_toast:'บันทึกแล้ว',
+voices_share:'ร่วมเขียนรีวิว',voices_share_chip:'เรื่องราวจากศิษย์เก่า',voices_share_title:'แบ่งปันประสบการณ์ของคุณ',
+voices_role:'ตำแหน่ง/ที่ทำงานปัจจุบันของคุณ',voices_quote:'เรื่องราวของคุณ',voices_submit:'ส่งเพื่อตรวจสอบ',
+voices_note:'ทีมงานจะตรวจสอบก่อนเผยแพร่บนเว็บไซต์',
   collab_eye:'เครือข่ายระดับโลก',collab_title:'ทำงานข้ามพรมแดน',
   collab_lede:'ความร่วมมือเชื่อมขอนแก่นกับสถาบันชั้นนำในสามทวีป สนับสนุนการแลกเปลี่ยนนักศึกษาและผลงานตีพิมพ์ร่วม',
   collab_wide_title:'จากขอนแก่นสู่โลกกว้าง',collab_wide_sub:'พื้นที่ภาคสนามในไทยหล่อเลี้ยงความร่วมมือที่เปลี่ยนความหลากหลายทางชีวภาพท้องถิ่นให้เป็นวิทยาศาสตร์ร่วมระดับโลก',
@@ -1768,9 +1821,8 @@ document.querySelectorAll('[data-prof]').forEach(i=>{i.src=PROF_IMG;});
 /* ============ CMS STORE (localStorage) ============ */
 const LS_KEY='aclab_cms_v1';
 function loadStore(){try{return JSON.parse(localStorage.getItem(LS_KEY))||{};}catch(e){return {};}}
-function saveStore(silent){try{localStorage.setItem(LS_KEY,JSON.stringify({members:MEMBERS,news:NEWS,cpubs:CPUBS,products:PRODUCTS,videos:VIDEOS}));if(!silent)toast(T('saved_toast'));return true;}catch(e){toast('Save failed — storage full');return false;}}
-(function(){const s=loadStore();if(s.members&&s.members.length)MEMBERS=s.members;if(s.news&&s.news.length)NEWS=s.news;if(s.cpubs)CPUBS=s.cpubs;if(s.products&&s.products.length)PRODUCTS=s.products;if(s.videos&&s.videos.length)VIDEOS=s.videos;})();
-
+function saveStore(silent){try{localStorage.setItem(LS_KEY,JSON.stringify({members:MEMBERS,news:NEWS,cpubs:CPUBS,products:PRODUCTS,videos:VIDEOS,taxa:TAXA,collabs:COLLABS,testimonials:TESTIMONIALS,banners:BANNERS}));if(!silent)toast(T('saved_toast'));return true;}catch(e){toast('Save failed — storage full');return false;}}
+(function(){const s=loadStore();if(s.members&&s.members.length)MEMBERS=s.members;if(s.news&&s.news.length)NEWS=s.news;if(s.cpubs)CPUBS=s.cpubs;if(s.products&&s.products.length)PRODUCTS=s.products;if(s.videos&&s.videos.length)VIDEOS=s.videos;if(s.taxa&&s.taxa.length)TAXA=s.taxa;if(s.collabs&&s.collabs.length)COLLABS=s.collabs;if(s.testimonials&&s.testimonials.length)TESTIMONIALS=s.testimonials;if(s.banners&&s.banners.length)BANNERS=s.banners;})();
 /* ============ RENDER STATIC ============ */
 el('rgrid').innerHTML=THEMES.map((t,i)=>`
   <article class="rcard reveal" data-d="${i}"><span class="rcard__no mono">0${i+1}</span><span class="rcard__ic">${icon(t.icon)}</span><h3>${t.title}</h3><p>${t.desc}</p><div class="rcard__tags">${t.tags.map(x=>`<span class="t">${x}</span>`).join('')}</div></article>`).join('');
@@ -1778,12 +1830,18 @@ el('rgrid').innerHTML=THEMES.map((t,i)=>`
 el('pipe').innerHTML=PIPE.map((p,i)=>`
   <div class="pstep reveal" data-d="${i}"><span class="no">${p.no}</span><div class="ic">${icon(p.icon)}</div><h4>${p.title}</h4><p>${p.desc}</p>${i<PIPE.length-1?`<span class="arr">${icon('i-arrow')}</span>`:''}</div>`).join('');
 
-el('taxaGrid').innerHTML=TAXA.map((t,i)=>`
-  <article class="taxa reveal" data-d="${i}"><div class="taxa__img"><span class="taxa__acc mono">${t.acc}</span><img src="${t.img}" alt="${t.sp}" loading="lazy" onerror="this.style.opacity=.2"></div><div class="taxa__body"><h3>${t.sp}</h3><div class="en">${t.en}</div><p>${t.desc}</p></div></article>`).join('');
+function renderTaxa(){
+  el('taxaGrid').innerHTML=TAXA.map((t,i)=>`
+  <article class="taxa reveal in" data-d="${i%3}"><div class="taxa__img"><span class="taxa__acc mono">${t.acc||''}</span><img src="${t.img||''}" alt="${t.sp}" loading="lazy" onerror="this.style.opacity=.2"></div><div class="taxa__body"><h3>${t.sp}</h3><div class="en">${lang==='th'&&t.enTh?t.enTh:t.en}</div><p>${lang==='th'&&t.descTh?t.descTh:t.desc}</p></div></article>`).join('');
+}
+renderTaxa();
 
 el('facGrid').innerHTML=FACILITIES.map(f=>`<div class="fac"><span class="ic">${icon(f.icon)}</span><h4>${f.title}</h4><div class="spec">${f.spec}</div></div>`).join('');
 el('timeline').innerHTML=TIMELINE.map(t=>`<div class="tl"><div class="yr">${t.yr}</div><h4>${t.title}</h4><p>${t.desc}</p></div>`).join('');
-el('collabGrid').innerHTML=COLLABS.map((c,i)=>`<article class="collab reveal" data-d="${i}"><div class="collab__top"><span class="flag"><img src="${c.flag}" alt="${c.cc}" loading="lazy"></span><span class="cc">${c.cc}</span></div><h3>${c.name}</h3><p>${c.desc}</p><div class="collab__tags">${c.tags.map(x=>`<span class="t">${x}</span>`).join('')}</div></article>`).join('');
+function renderCollabs(){
+  el('collabGrid').innerHTML=COLLABS.map((c,i)=>`<article class="collab reveal in" data-d="${i}"><div class="collab__top"><span class="flag"><img src="${c.flag}" alt="${c.cc}" loading="lazy"></span><span class="cc">${c.cc}</span></div><h3>${c.name}</h3><p>${lang==='th'&&c.descTh?c.descTh:c.desc}</p><div class="collab__tags">${(c.tags||[]).map(x=>`<span class="t">${x}</span>`).join('')}</div></article>`).join('');
+}
+renderCollabs();
 el('road').innerHTML=ROAD.map(s=>`<div class="step"><span class="step__no">${s.no}</span><div class="step__b"><h4>${s.title}</h4><p>${s.desc}</p></div></div>`).join('');
 el('gallery').innerHTML=GALLERY.map(src=>`<div class="g" onclick="openLightbox('${src}')"><img src="${src}" alt="Lab" loading="lazy"></div>`).join('');
 function renderNews(){el('newsGrid').innerHTML=NEWS.slice(0,2).map(n=>`<article class="news-card reveal in" onclick="openNews(${n.id})"><div class="news-card__img"><img src="${n.img}" alt="${n.title}" loading="lazy" onerror="this.style.opacity=.15"></div><div class="news-card__b"><div class="news-card__date">${n.date}</div><h4>${n.title}</h4><div class="news-card__more" data-more>Read more ${icon('i-arrow')}</div></div></article>`).join('');}
@@ -2085,13 +2143,66 @@ window.toggleFaq=function(btn){
 /* ============ TESTIMONIALS ============ */
 let ti=0;
 function renderTesti(){
-  const arr=TESTI[lang],t=arr[ti%arr.length],q=el('testiQ');
+  if(!TESTIMONIALS.length){el('testiQ').textContent='';el('testiName').textContent='';el('testiRole').textContent='';el('testiImg').style.display='none';return;}
+  el('testiImg').style.display='';
+  const t=TESTIMONIALS[ti%TESTIMONIALS.length],q=el('testiQ');
   q.style.opacity='0';
-  setTimeout(()=>{q.textContent='“'+t.q+'”';el('testiName').textContent=t.name;el('testiRole').textContent=t.role;el('testiImg').src=t.img;q.style.opacity='1';},200);
+  setTimeout(()=>{
+    q.textContent='“'+(lang==='th'&&t.qTh?t.qTh:t.q)+'”';
+    el('testiName').textContent=t.name;
+    el('testiRole').textContent=(lang==='th'&&t.roleTh?t.roleTh:t.role)||'';
+    el('testiImg').src=t.img||'';
+    q.style.opacity='1';
+  },200);
 }
 window.nextTesti=function(){ti++;renderTesti();};
-window.prevTesti=function(){ti=(ti-1+TESTI[lang].length)%TESTI[lang].length;renderTesti();};
+window.prevTesti=function(){ti=(ti-1+TESTIMONIALS.length)%TESTIMONIALS.length;renderTesti();};
 
+/* ===== banner carousel ===== */
+let bannerIdx=0,bannerTimer=null;
+function renderBanner(){
+  const w=el('bannerWrap');if(!w)return;
+  if(!BANNERS.length){w.innerHTML=`<div class="banner-empty">${lang==='th'?'ยังไม่มีแบนเนอร์ — เพิ่มได้ในระบบหลังบ้าน':'No banners yet — add one in the admin panel.'}</div>`;return;}
+  bannerIdx=0;
+  w.innerHTML=BANNERS.map((b,i)=>`<div class="banner-slide ${i===0?'active':''}" data-i="${i}"><img src="${b.img}" alt=""><div class="grad"></div><div class="cap">${esc(lang==='th'&&b.captionTh?b.captionTh:(b.caption||''))}</div></div>`).join('')+
+    `<div class="banner-dots">${BANNERS.map((_,i)=>`<button class="${i===0?'active':''}" data-i="${i}"></button>`).join('')}</div>`;
+  w.querySelectorAll('.banner-slide').forEach(s=>{
+    const b=BANNERS[+s.dataset.i];
+    if(b.link&&b.link.trim()){
+      s.style.cursor='pointer';
+      s.addEventListener('click',()=>{
+        if(b.link.startsWith('#')){const t=document.querySelector(b.link);if(t)t.scrollIntoView({behavior:'smooth'});}
+        else window.open(b.link,'_blank');
+      });
+    }
+  });
+  w.querySelectorAll('.banner-dots button').forEach(d=>d.addEventListener('click',()=>gotoBanner(+d.dataset.i)));
+  clearInterval(bannerTimer);
+  if(BANNERS.length>1)bannerTimer=setInterval(()=>gotoBanner((bannerIdx+1)%BANNERS.length),5000);
+}
+window.gotoBanner=function(i){
+  const w=el('bannerWrap');if(!w)return;
+  w.querySelectorAll('.banner-slide').forEach((s,idx)=>s.classList.toggle('active',idx===i));
+  w.querySelectorAll('.banner-dots button').forEach((d,idx)=>d.classList.toggle('active',idx===i));
+  bannerIdx=i;
+  clearInterval(bannerTimer);
+  if(BANNERS.length>1)bannerTimer=setInterval(()=>gotoBanner((bannerIdx+1)%BANNERS.length),5000);
+};
+renderBanner();
+
+/* ===== alumni self-submission ===== */
+window.openTestiForm=function(){openModal('testiFormModal');};
+window.submitTesti=async function(e){
+  e.preventDefault();
+  const name=val('ts_name').trim(),role=val('ts_role').trim(),quote=val('ts_quote').trim();
+  if(!name||!role||!quote)return;
+  if(window.supa){
+    const {error}=await supa.from('testimonial_submissions').insert({name,role,quote,status:'pending'});
+    if(error){toast(lang==='th'?'ส่งไม่สำเร็จ ลองใหม่อีกครั้ง':'Could not submit — please try again');return;}
+  }
+  closeModal('testiFormModal');e.target.reset();
+  toast(lang==='th'?'ขอบคุณ! ทีมงานจะตรวจสอบก่อนเผยแพร่':'Thank you! Our team will review it before it appears.');
+};
 /* ============ MODALS ============ */
 let activePub=null;
 window.openModal=function(id){el(id).classList.add('open');document.body.style.overflow='hidden';};
@@ -2164,8 +2275,7 @@ document.querySelectorAll('.nav-scroll').forEach(a=>{
 function refreshDynamicText(){
   document.querySelectorAll('[data-more]').forEach(n=>{n.innerHTML=(lang==='th'?'อ่านต่อ':'Read more')+' '+icon('i-arrow');});
 }
-const _applyLang=applyLang;applyLang=function(){_applyLang();refreshDynamicText();renderPubAll();renderInnov();renderProducts();renderVideos();renderProjectTeam();renderTeam(teamCat);renderNews();};
-
+const _applyLang=applyLang;applyLang=function(){_applyLang();refreshDynamicText();renderPubAll();renderInnov();renderProducts();renderVideos();renderProjectTeam();renderTeam(teamCat);renderNews();renderTaxa();renderCollabs();renderBanner();};
 /* nav bg + progress + totop + scrollspy */
 const nav=el('nav'),totop=el('totop'),bar=el('progress');
 const spy=[...document.querySelectorAll('section[id]')];
@@ -2256,8 +2366,121 @@ function renderAdmin(tab){adminCurrentTab=tab;const c=el('adminContent');
   else if(tab==='pubs')c.innerHTML=admPubList();
   else if(tab==='products')c.innerHTML=admProdList();
   else if(tab==='videos')c.innerHTML=admVidList();
+  else if(tab==='taxa')c.innerHTML=admTaxaList();
+  else if(tab==='collabs')c.innerHTML=admCollabList();
+  else if(tab==='voices')admVoicesList();
+  else if(tab==='banner')c.innerHTML=admBannerList();
   else c.innerHTML=admData();
 }
+
+/* --- TAXA admin --- */
+function admTaxaList(){return `<div class="adm-section-t">${TAXA.length} plants · click to edit</div>`+
+  TAXA.map((t,i)=>`<div class="adm-row">${t.img?`<img class="thumb" src="${t.img}">`:`<span class="mono-av" style="background:${hue(t.sp)}">${icon('i-leaf')}</span>`}<div class="r-main"><h4>${esc(t.sp)}</h4><div class="r-sub">${esc(t.en||'')}</div></div><div class="r-act"><button class="adm-ic" onclick="admEditTaxa(${i})">${icon('i-doc')}</button><button class="adm-ic del" onclick="admDelTaxa(${i})">${icon('i-close')}</button></div></div>`).join('')+
+  `<button class="adm-add" onclick="admEditTaxa(-1)">${icon('i-plus')} Add plant</button>`;}
+window.admEditTaxa=function(i){editIdx=i;const t=i>=0?TAXA[i]:{sp:'',en:'',enTh:'',acc:'',img:'',desc:'',descTh:''};formImg=t.img||'';
+  el('adminContent').innerHTML=`<span class="adm-back" onclick="renderAdmin('taxa')">${icon('i-arrow')} Back</span>
+  <div class="adm-form">
+    <div class="adm-field"><label>Photo</label><div class="adm-photo-row" id="n_photowrap"></div></div>
+    <div class="adm-field"><label>Species name (italic)</label><input id="tx_sp" placeholder="Cratoxylum formosum"></div>
+    <div class="adm-2"><div class="adm-field"><label>Tagline (English)</label><input id="tx_en" placeholder="Hypericaceae · resveratrol source"></div><div class="adm-field"><label>Tagline (Thai)</label><input id="tx_enth"></div></div>
+    <div class="adm-field"><label>Accession label</label><input id="tx_acc" placeholder="CP · 157,204 bp"></div>
+    <div class="adm-field"><label>Description (English)</label><textarea id="tx_desc"></textarea></div>
+    <div class="adm-field"><label>Description (Thai)</label><textarea id="tx_descth"></textarea></div>
+    <div class="adm-actions"><button class="btn btn--ghost" onclick="renderAdmin('taxa')">Cancel</button><button class="btn btn--primary" onclick="admSaveTaxa()">${icon('i-check')} Save</button></div>
+  </div>`;
+  el('tx_sp').value=t.sp||'';el('tx_en').value=t.en||'';el('tx_enth').value=t.enTh||'';el('tx_acc').value=t.acc||'';el('tx_desc').value=t.desc||'';el('tx_descth').value=t.descTh||'';
+  refreshPhoto(true);};
+window.admSaveTaxa=function(){const sp=val('tx_sp').trim();if(!sp){toast(lang==='th'?'ต้องมีชื่อพืช':'Species name required');return;}
+  const item={sp,en:val('tx_en').trim(),enTh:val('tx_enth').trim(),acc:val('tx_acc').trim(),desc:val('tx_desc').trim(),descTh:val('tx_descth').trim(),img:formImg};
+  if(editIdx>=0)TAXA[editIdx]=item;else TAXA.push(item);
+  saveStore();renderTaxa();renderAdmin('taxa');};
+window.admDelTaxa=function(i){if(!confirm((lang==='th'?'ลบ ':'Delete ')+TAXA[i].sp+'?'))return;TAXA.splice(i,1);saveStore();renderTaxa();renderAdmin('taxa');};
+
+/* --- PARTNERS/COLLABS admin --- */
+function admCollabList(){return `<div class="adm-section-t">${COLLABS.length} partners · click to edit</div>`+
+  COLLABS.map((c,i)=>`<div class="adm-row"><span class="flag" style="width:44px;height:44px;border-radius:10px;overflow:hidden"><img src="${c.flag}" style="width:100%;height:100%;object-fit:cover"></span><div class="r-main"><h4>${esc(c.name)}</h4><div class="r-sub">${esc(c.cc)}</div></div><div class="r-act"><button class="adm-ic" onclick="admEditCollab(${i})">${icon('i-doc')}</button><button class="adm-ic del" onclick="admDelCollab(${i})">${icon('i-close')}</button></div></div>`).join('')+
+  `<button class="adm-add" onclick="admEditCollab(-1)">${icon('i-plus')} Add partner</button>`;}
+window.admEditCollab=function(i){editIdx=i;const c=i>=0?COLLABS[i]:{flag:'',cc:'',name:'',desc:'',descTh:'',tags:[]};
+  el('adminContent').innerHTML=`<span class="adm-back" onclick="renderAdmin('collabs')">${icon('i-arrow')} Back</span>
+  <div class="adm-form">
+    <div class="adm-2"><div class="adm-field"><label>Country</label><input id="cl_cc" placeholder="USA"></div><div class="adm-field"><label>Flag image URL</label><input id="cl_flag" placeholder="https://flagcdn.com/w160/us.png"></div></div>
+    <div class="adm-field"><label>Institution name</label><input id="cl_name"></div>
+    <div class="adm-field"><label>Description (English)</label><textarea id="cl_desc"></textarea></div>
+    <div class="adm-field"><label>Description (Thai)</label><textarea id="cl_descth"></textarea></div>
+    <div class="adm-field"><label>Tags (comma-separated)</label><input id="cl_tags"></div>
+    <div class="adm-actions"><button class="btn btn--ghost" onclick="renderAdmin('collabs')">Cancel</button><button class="btn btn--primary" onclick="admSaveCollab()">${icon('i-check')} Save</button></div>
+  </div>`;
+  el('cl_cc').value=c.cc||'';el('cl_flag').value=c.flag||'';el('cl_name').value=c.name||'';el('cl_desc').value=c.desc||'';el('cl_descth').value=c.descTh||'';el('cl_tags').value=(c.tags||[]).join(', ');};
+window.admSaveCollab=function(){const name=val('cl_name').trim();if(!name){toast(lang==='th'?'ต้องมีชื่อสถาบัน':'Institution name required');return;}
+  const item={cc:val('cl_cc').trim(),flag:val('cl_flag').trim(),name,desc:val('cl_desc').trim(),descTh:val('cl_descth').trim(),tags:val('cl_tags').split(',').map(s=>s.trim()).filter(Boolean)};
+  if(editIdx>=0)COLLABS[editIdx]=item;else COLLABS.push(item);
+  saveStore();renderCollabs();renderAdmin('collabs');};
+window.admDelCollab=function(i){if(!confirm((lang==='th'?'ลบ ':'Delete ')+COLLABS[i].name+'?'))return;COLLABS.splice(i,1);saveStore();renderCollabs();renderAdmin('collabs');};
+
+/* --- BANNER admin --- */
+function admBannerList(){return `<div class="adm-section-t">${BANNERS.length} banners · shown in rotation, ~5s each</div>`+
+  BANNERS.map((b,i)=>`<div class="adm-row"><img class="thumb" src="${b.img}"><div class="r-main"><h4>${esc(b.caption||'(no caption)')}</h4><div class="r-sub">${esc(b.link||'')}</div></div><div class="r-act"><button class="adm-ic" onclick="admEditBanner(${i})">${icon('i-doc')}</button><button class="adm-ic del" onclick="admDelBanner(${i})">${icon('i-close')}</button></div></div>`).join('')+
+  `<button class="adm-add" onclick="admEditBanner(-1)">${icon('i-plus')} Add banner</button>`;}
+window.admEditBanner=function(i){editIdx=i;const b=i>=0?BANNERS[i]:{img:'',caption:'',captionTh:'',link:''};formImg=b.img||'';
+  el('adminContent').innerHTML=`<span class="adm-back" onclick="renderAdmin('banner')">${icon('i-arrow')} Back</span>
+  <div class="adm-form">
+    <div class="adm-field"><label>Image</label><div class="adm-photo-row" id="n_photowrap"></div></div>
+    <div class="adm-field"><label>Caption (English)</label><input id="bn_cap" placeholder="Now accepting applications for 2026"></div>
+    <div class="adm-field"><label>Caption (Thai)</label><input id="bn_capth"></div>
+    <div class="adm-field"><label>Link (optional — e.g. #join or https://...)</label><input id="bn_link" placeholder="#join"></div>
+    <div class="adm-actions"><button class="btn btn--ghost" onclick="renderAdmin('banner')">Cancel</button><button class="btn btn--primary" onclick="admSaveBanner()">${icon('i-check')} Save</button></div>
+  </div>`;
+  el('bn_cap').value=b.caption||'';el('bn_capth').value=b.captionTh||'';el('bn_link').value=b.link||'';
+  refreshPhoto(true);};
+window.admSaveBanner=function(){if(!formImg){toast(lang==='th'?'ต้องมีรูปภาพ':'Image required');return;}
+  const item={img:formImg,caption:val('bn_cap').trim(),captionTh:val('bn_capth').trim(),link:val('bn_link').trim()};
+  if(editIdx>=0)BANNERS[editIdx]=item;else BANNERS.push(item);
+  saveStore();renderBanner();renderAdmin('banner');};
+window.admDelBanner=function(i){if(!confirm(lang==='th'?'ลบแบนเนอร์นี้?':'Delete this banner?'))return;BANNERS.splice(i,1);saveStore();renderBanner();renderAdmin('banner');};
+
+/* --- VOICES admin (published + pending public submissions) --- */
+async function admVoicesList(){
+  const c=el('adminContent');
+  c.innerHTML=`<div class="adm-section-t">Pending submissions</div><div id="admPendingWrap"><p style="font-size:.85rem;color:var(--muted)">Loading…</p></div>
+  <div class="adm-section-t" style="margin-top:22px">${TESTIMONIALS.length} published voices · click to edit</div>
+  <div id="admTestiWrap">${TESTIMONIALS.map((t,i)=>`<div class="adm-row"><span class="mono-av" style="background:${hue(t.name)}">${initials(t.name)}</span><div class="r-main"><h4>${esc(t.name)}</h4><div class="r-sub">${esc(t.role||'')}</div></div><div class="r-act"><button class="adm-ic" onclick="admEditTesti(${i})">${icon('i-doc')}</button><button class="adm-ic del" onclick="admDelTesti(${i})">${icon('i-close')}</button></div></div>`).join('')}
+  <button class="adm-add" onclick="admEditTesti(-1)">${icon('i-plus')} Add voice</button></div>`;
+  if(window.supa){
+    const {data,error}=await supa.from('testimonial_submissions').select('*').eq('status','pending').order('created_at',{ascending:false});
+    const pw=el('admPendingWrap');
+    if(error){pw.innerHTML=`<p style="font-size:.85rem;color:var(--muted)">Could not load submissions.</p>`;return;}
+    if(!data||!data.length){pw.innerHTML=`<p style="font-size:.85rem;color:var(--muted)">No pending submissions.</p>`;return;}
+    pw.innerHTML=data.map(s=>`<div class="adm-row"><span class="mono-av" style="background:${hue(s.name)}">${initials(s.name)}</span><div class="r-main"><h4>${esc(s.name)}</h4><div class="r-sub">${esc(s.role||'')} · ${esc((s.quote||'').slice(0,60))}${(s.quote||'').length>60?'…':''}</div></div><div class="r-act"><button class="adm-ic" onclick='admApproveTesti(${JSON.stringify(s.id)},${JSON.stringify(s.name)},${JSON.stringify(s.role)},${JSON.stringify(s.quote)})'>${icon('i-check')}</button><button class="adm-ic del" onclick="admRejectTesti('${s.id}')">${icon('i-close')}</button></div></div>`).join('');
+  } else {
+    el('admPendingWrap').innerHTML=`<p style="font-size:.85rem;color:var(--muted)">Connect Supabase to receive public submissions.</p>`;
+  }
+}
+window.admApproveTesti=function(id,name,role,quote){
+  TESTIMONIALS.push({q:quote,name,role,img:''});
+  saveStore();renderTesti();
+  if(window.supa)supa.from('testimonial_submissions').update({status:'approved'}).eq('id',id).then(()=>renderAdmin('voices'));
+  else renderAdmin('voices');
+};
+window.admRejectTesti=function(id){
+  if(window.supa)supa.from('testimonial_submissions').update({status:'rejected'}).eq('id',id).then(()=>renderAdmin('voices'));
+};
+window.admEditTesti=function(i){editIdx=i;const t=i>=0?TESTIMONIALS[i]:{q:'',qTh:'',name:'',role:'',roleTh:'',img:''};formImg=t.img||'';
+  el('adminContent').innerHTML=`<span class="adm-back" onclick="renderAdmin('voices')">${icon('i-arrow')} Back</span>
+  <div class="adm-form">
+    <div class="adm-field"><label>Photo</label><div class="adm-photo-row" id="n_photowrap"></div></div>
+    <div class="adm-2"><div class="adm-field"><label>Name</label><input id="ts_e_name"></div><div class="adm-field"><label>Role</label><input id="ts_e_role"></div></div>
+    <div class="adm-field"><label>Role (Thai, optional)</label><input id="ts_e_roleth"></div>
+    <div class="adm-field"><label>Quote (English)</label><textarea id="ts_e_q"></textarea></div>
+    <div class="adm-field"><label>Quote (Thai, optional)</label><textarea id="ts_e_qth"></textarea></div>
+    <div class="adm-actions"><button class="btn btn--ghost" onclick="renderAdmin('voices')">Cancel</button><button class="btn btn--primary" onclick="admSaveTesti()">${icon('i-check')} Save</button></div>
+  </div>`;
+  el('ts_e_name').value=t.name||'';el('ts_e_role').value=t.role||'';el('ts_e_roleth').value=t.roleTh||'';el('ts_e_q').value=t.q||'';el('ts_e_qth').value=t.qTh||'';
+  refreshPhoto(false);};
+window.admSaveTesti=function(){const name=val('ts_e_name').trim();const q=val('ts_e_q').trim();if(!name||!q){toast(lang==='th'?'ต้องมีชื่อและข้อความ':'Name and quote required');return;}
+  const item={name,role:val('ts_e_role').trim(),roleTh:val('ts_e_roleth').trim(),q,qTh:val('ts_e_qth').trim(),img:formImg};
+  if(editIdx>=0)TESTIMONIALS[editIdx]=item;else TESTIMONIALS.push(item);
+  saveStore();renderTesti();renderAdmin('voices');};
+window.admDelTesti=function(i){if(!confirm((lang==='th'?'ลบรีวิวของ ':'Delete ')+TESTIMONIALS[i].name+'?'))return;TESTIMONIALS.splice(i,1);saveStore();renderTesti();renderAdmin('voices');};
 /* --- TEAM --- */
 function admTeamList(){return `<div class="adm-section-t">${MEMBERS.length} members · click to edit</div>`+
   MEMBERS.map((m,i)=>`<div class="adm-row">${m.img?`<img class="thumb" src="${m.img}">`:`<span class="mono-av" style="background:${hue(m.en)}">${initials(m.en)}</span>`}<div class="r-main"><h4>${esc(m.en)}</h4><div class="r-sub">${ROLE_EN[m.group]||m.group}${m.pi?' · locked photo':''}</div></div><div class="r-act"><button class="adm-ic" onclick="admEditMember(${i})">${icon('i-doc')}</button>${m.pi?'':`<button class="adm-ic del" onclick="admDelMember(${i})">${icon('i-close')}</button>`}</div></div>`).join('')+
@@ -2373,9 +2596,8 @@ function admData(){return `
   <div class="data-card danger"><h4>${icon('i-close')} Reset</h4><p>Remove all saved edits from this browser and restore the original built-in content.</p><button class="btn btn--ghost" onclick="admReset()">Reset to defaults</button></div>
   <div class="data-card"><h4>${icon('i-spark')} How this works</h4><p>Edits are saved in this browser's local storage — they persist for you here, but other visitors won't see them until you export the JSON and paste it into the site's source, or host the edited file. Change the passcode by editing <code>ADMIN_PASS</code> in the code.</p></div>`;}
 function download(name,text){const b=new Blob([text],{type:'application/json'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1200);}
-window.admExport=function(){download('ac-lab-content.json',JSON.stringify({members:MEMBERS,news:NEWS,cpubs:CPUBS,products:PRODUCTS,videos:VIDEOS},null,2));toast(lang==='th'?'ดาวน์โหลดแล้ว':'Downloaded');};
-window.admImport=function(){const inp=document.createElement('input');inp.type='file';inp.accept='application/json,.json';inp.onchange=()=>{const f=inp.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const d=JSON.parse(rd.result);if(Array.isArray(d.members))MEMBERS=d.members;if(Array.isArray(d.news))NEWS=d.news;if(Array.isArray(d.cpubs))CPUBS=d.cpubs;if(Array.isArray(d.products))PRODUCTS=d.products;if(Array.isArray(d.videos))VIDEOS=d.videos;saveStore(true);renderProjectTeam();renderTeam(teamCat);renderNews();renderProducts();renderVideos();renderPubAll();renderAdmin('data');toast(lang==='th'?'นำเข้าแล้ว':'Imported');}catch(e){toast('Invalid file');}};rd.readAsText(f);};inp.click();};
-window.admReset=function(){if(!confirm(lang==='th'?'ลบข้อมูลที่บันทึกไว้ทั้งหมด?':'Remove all saved edits and restore defaults?'))return;try{localStorage.removeItem(LS_KEY);}catch(e){}location.reload();};
+window.admExport=function(){download('ac-lab-content.json',JSON.stringify({members:MEMBERS,news:NEWS,cpubs:CPUBS,products:PRODUCTS,videos:VIDEOS,taxa:TAXA,collabs:COLLABS,testimonials:TESTIMONIALS,banners:BANNERS},null,2));toast(lang==='th'?'ดาวน์โหลดแล้ว':'Downloaded');};
+window.admImport=function(){const inp=document.createElement('input');inp.type='file';inp.accept='application/json,.json';inp.onchange=()=>{const f=inp.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const d=JSON.parse(rd.result);if(Array.isArray(d.members))MEMBERS=d.members;if(Array.isArray(d.news))NEWS=d.news;if(Array.isArray(d.cpubs))CPUBS=d.cpubs;if(Array.isArray(d.products))PRODUCTS=d.products;if(Array.isArray(d.videos))VIDEOS=d.videos;if(Array.isArray(d.taxa))TAXA=d.taxa;if(Array.isArray(d.collabs))COLLABS=d.collabs;if(Array.isArray(d.testimonials))TESTIMONIALS=d.testimonials;if(Array.isArray(d.banners))BANNERS=d.banners;saveStore(true);renderProjectTeam();renderTeam(teamCat);renderNews();renderProducts();renderVideos();renderPubAll();renderTaxa();renderCollabs();renderTesti();renderBanner();renderAdmin('data');toast(lang==='th'?'นำเข้าแล้ว':'Imported');}catch(e){toast('Invalid file');}};rd.readAsText(f);};inp.click();};window.admReset=function(){if(!confirm(lang==='th'?'ลบข้อมูลที่บันทึกไว้ทั้งหมด?':'Remove all saved edits and restore defaults?'))return;try{localStorage.removeItem(LS_KEY);}catch(e){}location.reload();};
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&el('admin').classList.contains('open'))closeAdmin();});
 if(location.hash==='#admin')setTimeout(openAdmin,300);
 window.addEventListener('hashchange',()=>{if(location.hash==='#admin')openAdmin();});
@@ -2389,7 +2611,8 @@ const SUPA_KEY   = 'sb_publishable_EsNS8St8xkIZgSqEGxp4yQ_y1BmeTDh';
 const ADMIN_EMAIL= 'suthawarin.ksw19@gmail.com';           // <- 🛑 เปลี่ยนเป็นอีเมลแอดมินของคุณ
 
 if (SUPA_URL.indexOf('xxxxx') < 0 && window.supabase) {
-  const supa = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+const supa = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+  window.supa = supa;
 
   // (1) โหลดเนื้อหาจากคลาวด์แล้ว refresh หน้า
   supa.from('site_content').select('data').eq('id',1).single().then(({data,error})=>{
@@ -2398,15 +2621,23 @@ if (SUPA_URL.indexOf('xxxxx') < 0 && window.supabase) {
     if (Array.isArray(s.members)  && s.members.length)  MEMBERS  = s.members;
     if (Array.isArray(s.news)     && s.news.length)     NEWS     = s.news;
     if (s.cpubs)                                        CPUBS    = s.cpubs;
-    if (Array.isArray(s.products) && s.products.length) PRODUCTS = s.products;
+   if (Array.isArray(s.products) && s.products.length) PRODUCTS = s.products;
     if (Array.isArray(s.videos)   && s.videos.length)   VIDEOS   = s.videos;
-    
+    if (Array.isArray(s.taxa)         && s.taxa.length)         TAXA         = s.taxa;
+    if (Array.isArray(s.collabs)      && s.collabs.length)      COLLABS      = s.collabs;
+    if (Array.isArray(s.testimonials) && s.testimonials.length) TESTIMONIALS = s.testimonials;
+    if (Array.isArray(s.banners)      && s.banners.length)      BANNERS      = s.banners;
+
     if(typeof renderProjectTeam === 'function') renderProjectTeam(); 
     if(typeof renderTeam === 'function') renderTeam(typeof teamCat !== 'undefined' ? teamCat : 'all'); 
     if(typeof renderNews === 'function') renderNews();
     if(typeof renderProducts === 'function') renderProducts(); 
     if(typeof renderVideos === 'function') renderVideos(); 
     if(typeof renderPubAll === 'function') renderPubAll();
+    if(typeof renderTaxa === 'function') renderTaxa();
+    if(typeof renderCollabs === 'function') renderCollabs();
+    if(typeof renderTesti === 'function') renderTesti();
+    if(typeof renderBanner === 'function') renderBanner();
   });
 
   // (2) ทุกครั้งที่กด Save ในหลังบ้าน ให้เขียนขึ้นคลาวด์ด้วย
@@ -2414,10 +2645,10 @@ if (SUPA_URL.indexOf('xxxxx') < 0 && window.supabase) {
     const _saveStore = saveStore;
     saveStore = function(silent){
       const ok = _saveStore(silent);
-      supa.from('site_content').update({
-        data:{members:MEMBERS, news:NEWS, cpubs:CPUBS, products:PRODUCTS, videos:VIDEOS},
+supa.from('site_content').update({
+        data:{members:MEMBERS, news:NEWS, cpubs:CPUBS, products:PRODUCTS, videos:VIDEOS, taxa:TAXA, collabs:COLLABS, testimonials:TESTIMONIALS, banners:BANNERS},
         updated_at: new Date()
-      }).eq('id',1).then(({error})=>{ 
+      }).eq('id',1).then(({error})=>{
         if(error && typeof toast === 'function') toast('Cloud save failed — ล็อกอินหรือยัง?'); 
       });
       return ok;
