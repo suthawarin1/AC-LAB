@@ -632,6 +632,36 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
   .reveal{opacity:1;transform:none}
 }
+
+/* ===== extra responsive polish ===== */
+@media(max-width:600px){
+  .nav__actions a.btn--primary{display:none} /* ปุ่ม Join the lab ซ้ำกับในเมนู drawer แล้ว */
+  #hero{padding-top:88px}
+  .hero-cta{flex-direction:column;align-items:stretch}
+  .hero-cta .btn{justify-content:center}
+  .prof-label{flex-direction:column;align-items:flex-start;gap:10px}
+  .admin__tabs{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch}
+  .atab{flex:none}
+}
+@media(max-width:420px){
+  .adm-2{grid-template-columns:1fr}
+}
+@media(max-width:380px){
+  .wrap{padding-inline:16px}
+  .h-display{font-size:2.05rem}
+  .nav__inner{height:64px}
+  .brand__sub{display:none}
+  .btn--sm{padding:9px 14px;font-size:.8rem}
+  .lang span{display:none}
+  .lang{padding:8px 10px}
+  .fig .num{font-size:2.2rem}
+}
+@supports(padding:max(0px)){
+  .nav__inner{padding-left:max(0px,env(safe-area-inset-left));padding-right:max(0px,env(safe-area-inset-right))}
+  .totop{bottom:max(26px,env(safe-area-inset-bottom));right:max(26px,env(safe-area-inset-right))}
+  .foot{padding-bottom:max(30px,env(safe-area-inset-bottom))}
+}
+
 /* ===== publications: source chip + chart ===== */
 .pub-source{display:inline-flex;align-items:center;gap:9px;margin-top:18px;font-family:var(--mono);font-size:11px;letter-spacing:.03em;color:var(--muted);padding:7px 14px;border-radius:100px;box-shadow:inset 0 0 0 1px var(--line);background:var(--surface)}
 .pub-source .dot{width:7px;height:7px;border-radius:50%;background:var(--faint);animation:pulse 2.4s infinite}
@@ -1052,7 +1082,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
         <div class="pub-tools reveal">
           <div class="pub-search">
             <svg class="icon"><use href="#i-search"/></svg>
-            <input type="text" id="pubSearch" oninput="renderPubs()" placeholder="Search title, journal, year…">
+           <input type="text" id="pubSearch" oninput="pubExpanded=false;renderPubs()" placeholder="Search title, journal, year…">
           </div>
           <div class="pub-filters" id="pubFilters"></div>
         </div>
@@ -1448,10 +1478,15 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 <div class="admin" id="admin">
   <div class="admin__scrim" onclick="closeAdmin()"></div>
   <div class="admin__panel">
-    <div class="admin__bar">
-      <div class="admin__brand"><svg class="icon"><use href="#i-spark"/></svg> <b>AC Lab</b> <span>Content manager</span></div>
-      <button class="iconbtn" onclick="closeAdmin()"><svg class="icon"><use href="#i-close"/></svg></button>
-    </div>
+   <div class="admin__bar">
+  <div class="admin__brand"><svg class="icon"><use href="#i-spark"/></svg> <b>AC Lab</b> <span>Content manager</span></div>
+  <div style="display:flex;align-items:center;gap:8px">
+    <button class="btn btn--ghost btn--sm" id="adminLogoutBtn" onclick="adminLogout()" style="display:none">
+      <svg class="icon"><use href="#i-close"/></svg> Log out
+    </button>
+    <button class="iconbtn" onclick="closeAdmin()"><svg class="icon"><use href="#i-close"/></svg></button>
+  </div>
+</div>
 
     <div class="admin__lock" id="adminLock">
       <div class="lock-card">
@@ -1757,6 +1792,7 @@ renderNews();
 /* ============ PUBLICATIONS (live from ORCID) ============ */
 const ORCID='0000-0002-7466-4243';
 let pubYear='all';
+let pubExpanded=false;
 let ORCID_OK=false;
 let SRC={mode:'load',n:0};
 function setSrc(){const t=el('pubSourceTxt'),P=el('pubSource');if(!t)return;P.classList.remove('ok','warn');
@@ -1772,13 +1808,47 @@ function enrich(p){ // add abstract from curated match if ORCID lacks one
 }
 function norm(s){return (s||'').toLowerCase().replace(/[^a-z0-9]+/g,'').slice(0,50);}
 function pubCard(p){return `<div class="pub" onclick="openPub(${p.id})"><span class="pub__yr">${p.year||'—'}</span><div class="pub__main"><h4>${p.title}</h4>${p.authors?`<div class="by">${p.authors}</div>`:''}<div class="jr">${p.journal||''}</div></div><span class="pub__go">${icon('i-arrow')}</span></div>`;}
-window.setYear=function(y,btn){pubYear=y;document.querySelectorAll('#pubFilters .pfilter').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderPubs();};
-function renderYearChips(){
+window.setYear=function(y,btn){
+  pubYear=y;pubExpanded=false;
+  document.querySelectorAll('#pubFilters .pfilter').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');renderPubs();
+};function renderYearChips(){
   const years=[...new Set(activePubs().map(p=>p.year).filter(Boolean))].sort((a,b)=>b-a);
   const all=`<button class="pfilter ${pubYear==='all'?'active':''}" onclick="setYear('all',this)" data-i18n="pf_all">${lang==='th'?'ทั้งหมด':'All'}</button>`;
   el('pubFilters').innerHTML=all+years.map(y=>`<button class="pfilter ${pubYear==y?'active':''}" onclick="setYear('${y}',this)">${y}</button>`).join('');
 }
 window.renderPubs=function(){
+  const term=(el('pubSearch').value||'').toLowerCase();
+  let items=activePubs();
+  if(pubYear!=='all')items=items.filter(p=>String(p.year)===String(pubYear));
+  if(term)items=items.filter(p=>((p.title||'')+(p.authors||'')+(p.journal||'')+(p.year||'')).toLowerCase().includes(term));
+  const L=el('pubList');
+  if(!items.length){L.innerHTML='';el('pubEmpty').style.display='block';el('pubMore').style.display='none';L.classList.remove('pub-list--scroll');return;}
+  el('pubEmpty').style.display='none';
+
+  const LIMIT=5;
+  const shown=pubExpanded?items:items.slice(0,LIMIT);
+  const groups={};shown.forEach(p=>{const y=p.year||'—';(groups[y]=groups[y]||[]).push(p);});
+  const years=Object.keys(groups).sort((a,b)=>(b==='—'?-1:(a==='—'?1:b-a)));
+  L.innerHTML=years.map(y=>`<div class="pub-year-h"><span>${y}</span><span class="mono">${groups[y].length}</span></div>`+groups[y].map(pubCard).join('')).join('');
+  L.classList.remove('pub-list--scroll');
+
+  const remaining=items.length-shown.length;
+  const moreBtn=el('pubMore');
+  if(items.length>LIMIT){
+    moreBtn.style.display='block';
+    moreBtn.innerHTML=pubExpanded
+      ? `<button class="btn btn--ghost" onclick="togglePubExpand()">${lang==='th'?'ย่อรายการ':'Show less'} <svg class="icon" style="transform:rotate(-90deg)"><use href="#i-arrow"/></svg></button>`
+      : `<button class="btn btn--ghost" onclick="togglePubExpand()">${lang==='th'?('ดูอีก '+remaining+' รายการ'):('Show '+remaining+' more')} <svg class="icon" style="transform:rotate(90deg)"><use href="#i-arrow"/></svg></button>`;
+  } else {
+    moreBtn.style.display='none';
+  }
+};
+window.togglePubExpand=function(){
+  pubExpanded=!pubExpanded;renderPubs();
+  const card=document.querySelector('.pub-tools');
+  if(card)card.scrollIntoView({behavior:'smooth',block:'nearest'});
+};
   const term=(el('pubSearch').value||'').toLowerCase();
   let items=activePubs();
   if(pubYear!=='all')items=items.filter(p=>String(p.year)===String(pubYear));
@@ -2167,10 +2237,25 @@ const ADMIN_PASS='aclab2010';
 let adminUnlocked=false, adminCurrentTab='team', editIdx=-1, formImg='';
 function esc(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 function val(id){const e=el(id);return e?e.value:'';}
-window.openAdmin=function(){el('admin').classList.add('open');document.body.style.overflow='hidden';el('adminLock').style.display=adminUnlocked?'none':'flex';el('adminBody').style.display=adminUnlocked?'flex':'none';if(adminUnlocked)renderAdmin(adminCurrentTab);else setTimeout(()=>{const p=el('adminPass');if(p)p.focus();},100);};
+window.openAdmin=function(){
+  el('admin').classList.add('open');document.body.style.overflow='hidden';
+  el('adminLock').style.display=adminUnlocked?'none':'flex';
+  el('adminBody').style.display=adminUnlocked?'flex':'none';
+  const lb=el('adminLogoutBtn'); if(lb) lb.style.display=adminUnlocked?'inline-flex':'none';
+  if(adminUnlocked)renderAdmin(adminCurrentTab);else setTimeout(()=>{const p=el('adminPass');if(p)p.focus();},100);
+};
 window.closeAdmin=function(){el('admin').classList.remove('open');document.body.style.overflow='';};
-window.tryUnlock=function(){if(val('adminPass')===ADMIN_PASS){adminUnlocked=true;el('adminLock').style.display='none';el('adminBody').style.display='flex';renderAdmin('team');}else{toast(lang==='th'?'รหัสไม่ถูกต้อง':'Wrong passcode');}};
+window.tryUnlock=function(){if(val('adminPass')===ADMIN_PASS){adminUnlocked=true;el('adminLock').style.display='none';el('adminBody').style.display='flex';renderAdmin('team');}else{toast(lang==='th'?'รหัสไม่ถูกต้อง':'Wrong passcode');}}; const lb=el('adminLogoutBtn'); if(lb) lb.style.display='inline-flex';
 window.adminTab=function(t,btn){adminCurrentTab=t;document.querySelectorAll('.atab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderAdmin(t);};
+window.adminLogout=function(){
+  adminUnlocked=false;
+  const p=el('adminPass'); if(p) p.value='';
+  el('adminLock').style.display='flex';
+  el('adminBody').style.display='none';
+  const lb=el('adminLogoutBtn'); if(lb) lb.style.display='none';
+  if(window.supa && supa.auth) supa.auth.signOut().catch(()=>{});
+  toast(lang==='th'?'ออกจากระบบแล้ว':'Logged out');
+};
 
 function pickImage(cb){const inp=document.createElement('input');inp.type='file';inp.accept='image/*';inp.onchange=()=>{const f=inp.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{const img=new Image();img.onload=()=>{const max=560;let w=img.width,h=img.height;const s=Math.min(1,max/Math.max(w,h));const c=document.createElement('canvas');c.width=Math.round(w*s);c.height=Math.round(h*s);c.getContext('2d').drawImage(img,0,0,c.width,c.height);cb(c.toDataURL('image/jpeg',0.85));};img.src=rd.result;};rd.readAsDataURL(f);};inp.click();}
 function photoWidget(name,isNews){let av;if(formImg)av=`<img class="prev" src="${formImg}">`;else if(isNews)av=`<span class="prev" style="display:flex;align-items:center;justify-content:center;color:var(--faint)">${icon('i-scope')}</span>`;else av=`<span class="mono-av" style="background:${hue(name||'?')}">${initials(name||'?')}</span>`;return `${av}<div><div class="adm-file" onclick="pickImage(function(d){formImg=d;refreshPhoto(${isNews?'true':'false'})})">${icon('i-up')} Upload image</div>${formImg?`<div class="adm-file" style="color:var(--muted);margin-top:5px" onclick="formImg='';refreshPhoto(${isNews?'true':'false'})">Remove</div>`:''}</div>`;}
