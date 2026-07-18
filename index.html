@@ -571,7 +571,9 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 .news-modal .hero-img .cap h3{color:#fff;font-size:1.6rem;font-weight:500;margin-top:7px}
 .news-modal .body{padding:34px;color:var(--muted);font-weight:300;line-height:1.7}
 .news-modal .body strong{color:var(--ink);font-weight:600}
-.news-modal .body em{color:var(--accent);font-style:italic}
+.news-modal .body em{color:var(--accent);font-style:italic}.news-gallery{display:flex;gap:8px;flex-wrap:wrap;padding:0 34px 30px}
+.news-gallery img{width:84px;height:84px;object-fit:cover;border-radius:10px;cursor:pointer;transition:.2s}
+.news-gallery img:hover{transform:scale(1.05)}
 
 .list-modal .modal__box{max-width:780px}
 .list-modal .head{position:sticky;top:0;background:var(--surface);padding:22px 28px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;z-index:3}
@@ -780,7 +782,12 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 .adm-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .adm-photo-row{display:flex;gap:12px;align-items:center}
 .adm-photo-row .prev{width:56px;height:56px;border-radius:12px;object-fit:cover;background:var(--surface-2);flex:none}
-.adm-photo-row .mono-av{width:56px;height:56px;border-radius:12px;font-size:1.1rem;flex:none}
+.adm-photo-row .mono-av{width:56px;height:56px;border-radius:12px;font-size:1.1rem;flex:none}.multi-photo-grid{display:flex;flex-wrap:wrap;gap:10px}
+.multi-photo-item{position:relative;width:64px;height:64px;border-radius:10px;overflow:hidden;box-shadow:var(--hair)}
+.multi-photo-item img{width:100%;height:100%;object-fit:cover}
+.multi-photo-item .mp-remove{position:absolute;top:2px;right:2px;width:18px;height:18px;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px}
+.multi-photo-add{width:64px;height:64px;border-radius:10px;box-shadow:inset 0 0 0 1.5px var(--line-2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--accent);cursor:pointer;font-size:9px;text-align:center}
+.multi-photo-add:hover{box-shadow:inset 0 0 0 1.5px var(--accent);background:var(--accent-soft)}
 .adm-file{font-family:var(--mono);font-size:11px;color:var(--accent);cursor:pointer}
 .adm-actions{display:flex;gap:9px;margin-top:6px}
 .adm-actions .btn{flex:1;justify-content:center}
@@ -828,7 +835,21 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
   .pub-list--scroll{max-height:none;overflow:visible;padding-right:0;margin-right:0}
 }
 /* ===== products ===== */
-.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px} .prod-grid.bento{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:230px;gap:14px}
+.prod-grid.bento .prod{position:relative;grid-column:span 3;grid-row:span 1;border-radius:24px}
+.prod-grid.bento .prod:nth-child(6n+1){grid-column:span 4;grid-row:span 2}
+.prod-grid.bento .prod:nth-child(6n+4){grid-column:span 2;grid-row:span 2}
+.prod-grid.bento .prod__img{position:absolute;inset:0;height:100%;aspect-ratio:auto}
+.prod-grid.bento .prod__b{position:absolute;inset:auto 0 0 0;padding:24px;border-radius:0 0 24px 24px;
+  background:linear-gradient(transparent 30%,rgba(10,14,11,.82));color:#fff;flex:none}
+.prod-grid.bento .prod__type,.prod-grid.bento .prod__th{color:rgba(255,255,255,.78)}
+.prod-grid.bento .prod__benefit,.prod-grid.bento .prod__meta{display:none}
+.prod-grid.bento .prod h3{color:#fff;font-size:1.5rem;letter-spacing:-.02em}
+.prod-grid.bento .prod:hover{transform:translateY(-2px) scale(1.012)}
+@media(max-width:760px){
+  .prod-grid.bento{grid-template-columns:repeat(2,1fr);grid-auto-rows:210px}
+  .prod-grid.bento .prod,.prod-grid.bento .prod:nth-child(6n+1),.prod-grid.bento .prod:nth-child(6n+4){grid-column:span 2;grid-row:span 1}
+}
 .prod{background:var(--surface);border-radius:16px;overflow:hidden;box-shadow:var(--hair);cursor:pointer;display:flex;flex-direction:column;transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
 .prod:hover{transform:translateY(-6px);box-shadow:var(--lift)}
 .prod__img{position:relative;aspect-ratio:4/3;background:linear-gradient(135deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;overflow:hidden}
@@ -850,7 +871,9 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 .prod-modal__vis .prod__wm{font-size:6rem}
 .prod-modal__vis img{width:100%;height:100%;object-fit:cover}
 .prod-spec{display:flex;flex-direction:column;gap:3px;margin-bottom:13px;font-size:.9rem;color:var(--ink);line-height:1.45}
-.prod-spec__l{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.prod-spec__l{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}.prod-gallery-strip{display:flex;gap:8px;flex-wrap:wrap;margin:2px 0 16px}
+.prod-gallery-strip img{width:60px;height:60px;object-fit:cover;border-radius:10px;cursor:pointer;box-shadow:var(--hair);transition:.2s}
+.prod-gallery-strip img:hover{transform:scale(1.06)}
 @media(max-width:1024px){.prod-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.prod-grid{grid-template-columns:1fr}}
 /* ===== videos ===== */
@@ -1450,10 +1473,10 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
   <div class="modal__box">
     <button class="modal__close" onclick="closeModal('newsModal')"><svg class="icon"><use href="#i-close"/></svg></button>
     <div class="hero-img"><img id="nmImg" src="" alt=""><div class="grad"></div><div class="cap"><div class="d" id="nmDate"></div><h3 id="nmTitle"></h3></div></div>
-    <div class="body" id="nmBody"></div>
+<div class="body" id="nmBody"></div>
+    <div class="news-gallery" id="nmGallery"></div>
   </div>
 </div>
-
 <div class="modal list-modal" id="listModal">
   <div class="modal__scrim" onclick="closeModal('listModal')"></div>
   <div class="modal__box">
@@ -1485,12 +1508,13 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
   <div class="modal__box">
     <button class="modal__close" onclick="closeModal('prodModal')"><svg class="icon"><use href="#i-close"/></svg></button>
     <div class="mm-photo prod-modal__vis" id="prodModalVis"></div>
-    <div class="mm-info">
+<div class="mm-info">
       <span class="role" id="pmoType"></span>
       <h3 id="pmoName"></h3>
       <div class="mm-th" id="pmoTh"></div>
       <p class="mm-bio" id="pmoBenefit"></p>
-      <div class="prod-spec"><span class="prod-spec__l" data-i18n="prod_ing">Key ingredients</span><span id="pmoIng"></span></div>
+      <div class="prod-gallery-strip" id="pmoGallery"></div>
+            <div class="prod-spec"><span class="prod-spec__l" data-i18n="prod_ing">Key ingredients</span><span id="pmoIng"></span></div>
       <div class="prod-spec"><span class="prod-spec__l" data-i18n="prod_size">Size</span><span id="pmoSize"></span></div>
       <div class="prod-spec" id="pmoPriceRow"><span class="prod-spec__l" data-i18n="prod_price">Price</span><span id="pmoPrice"></span></div>
     </div>
@@ -1568,8 +1592,9 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
         <button class="atab" data-tab="collabs" onclick="adminTab('collabs',this)">Partners</button>
 <button class="atab" data-tab="voices" onclick="adminTab('voices',this)">Voices</button>
 <button class="atab" data-tab="messages" onclick="adminTab('messages',this)">Messages</button>
-<button class="atab" data-tab="banner" onclick="adminTab('banner',this)">Banner</button>        <button class="atab" data-tab="data" onclick="adminTab('data',this)">Data</button>      </div>
-            <div class="admin__content" id="adminContent"></div>
+<button class="atab" data-tab="banner" onclick="adminTab('banner',this)">Banner</button>
+<button class="atab" data-tab="theme" onclick="adminTab('theme',this)">Theme</button>
+<button class="atab" data-tab="data" onclick="adminTab('data',this)">Data</button>            <div class="admin__content" id="adminContent"></div>
     </div>
   </div>
 </div>
@@ -1842,12 +1867,12 @@ const THEME_PRESETS=[
   {id:'slate', name:'Slate', nameTh:'สเลท',c1:'#3a4a5c',c2:'#f6f7f8'}
 ];
 let SITE_ACCENT='forest';
+let SITE_LAYOUT='classic'; // 'classic' | 'bento'
 function applyAccent(id){SITE_ACCENT=id;document.documentElement.setAttribute('data-preset',id);}
 const LS_KEY='aclab_cms_v1';
 function loadStore(){try{return JSON.parse(localStorage.getItem(LS_KEY))||{};}catch(e){return {};}}
-function saveStore(silent){try{localStorage.setItem(LS_KEY,JSON.stringify({members:MEMBERS,news:NEWS,cpubs:CPUBS,products:PRODUCTS,videos:VIDEOS,taxa:TAXA,collabs:COLLABS,testimonials:TESTIMONIALS,banners:BANNERS,theme:SITE_ACCENT}));if(!silent)toast(T('saved_toast'));return true;}catch(e){toast('Save failed — storage full');return false;}}
-(function(){const s=loadStore();if(s.members&&s.members.length)MEMBERS=s.members;if(s.news&&s.news.length)NEWS=s.news;if(s.cpubs)CPUBS=s.cpubs;if(s.products&&s.products.length)PRODUCTS=s.products;if(s.videos&&s.videos.length)VIDEOS=s.videos;if(s.taxa&&s.taxa.length)TAXA=s.taxa;if(s.collabs&&s.collabs.length)COLLABS=s.collabs;if(s.testimonials&&s.testimonials.length)TESTIMONIALS=s.testimonials;if(s.banners&&s.banners.length)BANNERS=s.banners;if(s.theme)SITE_ACCENT=s.theme;applyAccent(SITE_ACCENT);})();/* ============ RENDER STATIC ============ */
-el('rgrid').innerHTML=THEMES.map((t,i)=>`
+function saveStore(silent){try{localStorage.setItem(LS_KEY,JSON.stringify({members:MEMBERS,news:NEWS,cpubs:CPUBS,products:PRODUCTS,videos:VIDEOS,taxa:TAXA,collabs:COLLABS,testimonials:TESTIMONIALS,banners:BANNERS,theme:SITE_ACCENT,layout:SITE_LAYOUT}));if(!silent)toast(T('saved_toast'));return true;}catch(e){toast('Save failed — storage full');return false;}}
+(function(){const s=loadStore();if(s.members&&s.members.length)MEMBERS=s.members;if(s.news&&s.news.length)NEWS=s.news;if(s.cpubs)CPUBS=s.cpubs;if(s.products&&s.products.length)PRODUCTS=s.products;if(s.videos&&s.videos.length)VIDEOS=s.videos;if(s.taxa&&s.taxa.length)TAXA=s.taxa;if(s.collabs&&s.collabs.length)COLLABS=s.collabs;if(s.testimonials&&s.testimonials.length)TESTIMONIALS=s.testimonials;if(s.banners&&s.banners.length)BANNERS=s.banners;if(s.theme)SITE_ACCENT=s.theme;if(s.layout)SITE_LAYOUT=s.layout;applyAccent(SITE_ACCENT);})();el('rgrid').innerHTML=THEMES.map((t,i)=>`
   <article class="rcard reveal" data-d="${i}"><span class="rcard__no mono">0${i+1}</span><span class="rcard__ic">${icon(t.icon)}</span><h3>${t.title}</h3><p>${t.desc}</p><div class="rcard__tags">${t.tags.map(x=>`<span class="t">${x}</span>`).join('')}</div></article>`).join('');
 
 el('pipe').innerHTML=PIPE.map((p,i)=>`
@@ -2019,15 +2044,16 @@ function productCard(p,i){
 }
 function renderProducts(){
   const g=el('prodGrid');if(!g)return;
+  g.className='prod-grid'+(SITE_LAYOUT==='bento'?' bento':'');
   g.innerHTML=PRODUCTS.length?PRODUCTS.map(productCard).join(''):`<div class="pub-empty" style="grid-column:1/-1">${lang==='th'?'ยังไม่มีผลิตภัณฑ์ — เพิ่มได้ในระบบหลังบ้าน':'No products yet — add them in the admin panel.'}</div>`;
-}
-renderProducts();
+}renderProducts();
 window.openProduct=function(i){
   const p=PRODUCTS[i];if(!p)return;
   const type=lang==='th'?(p.typeTh||p.type):p.type;
   const ben=lang==='th'?(p.benefitTh||p.benefit):p.benefit;
-  const v=el('prodModalVis');
-  v.style.setProperty('--c1',p.c1||'#2f6b4f');v.style.setProperty('--c2',p.c2||'#4f9d78');
+  const gw=el('pmoGallery');
+  if(gw)gw.innerHTML=(p.images&&p.images.length)?p.images.map(src=>`<img src="${src}" onclick="openLightbox('${src}')">`).join(''):'';
+  const v=el('prodModalVis');  v.style.setProperty('--c1',p.c1||'#2f6b4f');v.style.setProperty('--c2',p.c2||'#4f9d78');
   v.innerHTML=prodVisual(p);
   el('pmoType').textContent=type;el('pmoName').textContent=p.name;el('pmoTh').textContent=p.nameTh||'';
   el('pmoBenefit').textContent=ben;el('pmoIng').textContent=p.ingredients||'—';el('pmoSize').textContent=p.size||'—';
@@ -2271,9 +2297,10 @@ window.copyCitation=function(){
 window.openNews=function(id){
   const n=NEWS.find(x=>x.id===id);if(!n)return;
   el('nmImg').src=n.img;el('nmTitle').textContent=n.title;el('nmDate').textContent=n.date;el('nmBody').innerHTML=n.body;
+  const gw=el('nmGallery');
+  if(gw)gw.innerHTML=(n.images&&n.images.length)?n.images.map(src=>`<img src="${src}" onclick="openLightbox('${src}')">`).join(''):'';
   openModal('newsModal');
-};
-window.openListModal=function(type){
+};window.openListModal=function(type){
   const title=el('listTitle'),content=el('listContent');
   if(type==='news'){title.textContent=lang==='th'?'ข่าวย้อนหลัง':'News archive';content.innerHTML=NEWS.map(n=>`<div class="list-news" onclick="closeModal('listModal');openNews(${n.id})"><img src="${n.img}" alt=""><div><div class="d mono">${n.date}</div><h4>${n.title}</h4></div></div>`).join('');}
   else{title.textContent=lang==='th'?'ผลงานทั้งหมด':'All publications';const AP=activePubs();const years=[...new Set(AP.map(p=>p.year).filter(Boolean))].sort((a,b)=>b-a);content.innerHTML=years.map(y=>`<div class="list-yr">${y}</div>`+AP.filter(p=>p.year===y).map(p=>`<div class="list-pub" onclick="closeModal('listModal');openPub(${p.id})"><h4>${p.title}</h4><p>${p.authors||p.journal||''}</p></div>`).join('')).join('');}
@@ -2412,7 +2439,46 @@ window.adminLogout=function(){
   toast(lang==='th'?'ออกจากระบบแล้ว':'Logged out');
 };
 
-function pickImage(cb){const inp=document.createElement('input');inp.type='file';inp.accept='image/*';inp.onchange=()=>{const f=inp.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{const img=new Image();img.onload=()=>{const max=560;let w=img.width,h=img.height;const s=Math.min(1,max/Math.max(w,h));const c=document.createElement('canvas');c.width=Math.round(w*s);c.height=Math.round(h*s);c.getContext('2d').drawImage(img,0,0,c.width,c.height);cb(c.toDataURL('image/jpeg',0.85));};img.src=rd.result;};rd.readAsDataURL(f);};inp.click();}
+function pickImage(cb){const inp=document.createElement('input');inp.type='file';inp.accept='image/*';inp.onchange=()=>{const f=inp.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{const img=new Image();img.onload=()=>{const max=560;let w=img.width,h=img.height;const s=Math.min(1,max/Math.max(w,h));const c=document.createElement('canvas');c.width=Math.round(w*s);c.height=Math.round(h*s);c.getContext('2d').drawImage(img,0,0,c.width,c.height);cb(c.toDataURL('image/jpeg',0.85));};img.src=rd.result;};rd.readAsDataURL(f);};inp.click();}function pickImages(cb){
+  const inp=document.createElement('input');
+  inp.type='file';inp.accept='image/*';inp.multiple=true;
+  inp.onchange=()=>{
+    const files=[...inp.files];if(!files.length)return;
+    const out=[];let left=files.length;
+    files.forEach(f=>{
+      const rd=new FileReader();
+      rd.onload=()=>{
+        const img=new Image();
+        img.onload=()=>{
+          const max=900;let w=img.width,h=img.height;
+          const s=Math.min(1,max/Math.max(w,h));
+          const c=document.createElement('canvas');
+          c.width=Math.round(w*s);c.height=Math.round(h*s);
+          c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+          out.push(c.toDataURL('image/jpeg',0.82));
+          left--;if(left===0)cb(out);
+        };
+        img.src=rd.result;
+      };
+      rd.readAsDataURL(f);
+    });
+  };
+  inp.click();
+}
+window.pickImages=pickImages;
+
+// รายการรูปที่กำลังแก้ไขอยู่ในฟอร์ม (ใช้ร่วมกันได้ทีละฟอร์ม)
+let formGallery=[];
+function galleryWidget(images){
+  images=images||[];
+  return `<div class="multi-photo-grid" id="galleryGrid">
+    ${images.map((src,i)=>`<div class="multi-photo-item"><img src="${src}"><button class="mp-remove" onclick="removeGalleryImg(${i})">${icon('i-close')}</button></div>`).join('')}
+    <div class="multi-photo-add" onclick="pickImages(function(arr){formGallery=formGallery.concat(arr);refreshGalleryWidget()})">${icon('i-plus')}<span>${lang==='th'?'เพิ่มรูป':'Add'}</span></div>
+  </div>`;
+}
+window.refreshGalleryWidget=function(){const w=el('galleryWrap');if(w)w.innerHTML=galleryWidget(formGallery);};
+window.removeGalleryImg=function(i){formGallery.splice(i,1);refreshGalleryWidget();};
+
 function photoWidget(name,isNews){let av;if(formImg)av=`<img class="prev" src="${formImg}">`;else if(isNews)av=`<span class="prev" style="display:flex;align-items:center;justify-content:center;color:var(--faint)">${icon('i-scope')}</span>`;else av=`<span class="mono-av" style="background:${hue(name||'?')}">${initials(name||'?')}</span>`;return `${av}<div><div class="adm-file" onclick="pickImage(function(d){formImg=d;refreshPhoto(${isNews?'true':'false'})})">${icon('i-up')} Upload image</div>${formImg?`<div class="adm-file" style="color:var(--muted);margin-top:5px" onclick="formImg='';refreshPhoto(${isNews?'true':'false'})">Remove</div>`:''}</div>`;}
 window.refreshPhoto=function(isNews){const w=el(isNews?'n_photowrap':'f_photowrap');if(w)w.innerHTML=photoWidget(isNews?(el('n_title')?el('n_title').value:''):(el('f_en')?el('f_en').value:''),isNews);};
 
@@ -2439,9 +2505,22 @@ function admThemeList(){
     <div class="adm-row" style="cursor:pointer;${SITE_ACCENT===p.id?'box-shadow:inset 0 0 0 2px var(--accent)':''}" onclick="admSetTheme('${p.id}')">
       <span style="width:44px;height:44px;border-radius:10px;flex:none;background:linear-gradient(135deg,${p.c1},${p.c2});box-shadow:inset 0 0 0 1px var(--line)"></span>
       <div class="r-main"><h4>${lang==='th'?p.nameTh:p.name}</h4><div class="r-sub">${SITE_ACCENT===p.id?(lang==='th'?'กำลังใช้งานอยู่':'Currently active'):(lang==='th'?'คลิกเพื่อใช้':'Click to apply')}</div></div>
-    </div>`).join('')}
+</div>`).join('')}
+  </div>
+  <div class="adm-section-t" style="margin-top:26px">${lang==='th'?'รูปแบบหมวดผลิตภัณฑ์':'Products layout style'}</div>
+  <p style="font-size:.85rem;color:var(--muted);margin:-4px 0 14px">${lang==='th'?'สลับระหว่างกริดปกติ กับ Bento Grid สไตล์มินิมอลเน้นภาพแบบ Apple/Samsung':'Switch between a standard grid and a minimal, visual-first Bento Grid.'}</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+    <div class="adm-row" style="cursor:pointer;${SITE_LAYOUT==='classic'?'box-shadow:inset 0 0 0 2px var(--accent)':''}" onclick="admSetLayout('classic')">
+      <span class="mono-av" style="background:var(--accent)">${icon('i-doc')}</span>
+      <div class="r-main"><h4>${lang==='th'?'กริดปกติ':'Classic grid'}</h4><div class="r-sub">${lang==='th'?'การ์ดเท่ากัน มีข้อมูลครบ':'Even cards, full detail'}</div></div>
+    </div>
+    <div class="adm-row" style="cursor:pointer;${SITE_LAYOUT==='bento'?'box-shadow:inset 0 0 0 2px var(--accent)':''}" onclick="admSetLayout('bento')">
+      <span class="mono-av" style="background:var(--accent)">${icon('i-spark')}</span>
+      <div class="r-main"><h4>Bento Grid</h4><div class="r-sub">${lang==='th'?'ภาพใหญ่ ตัวหนังสือน้อย เน้นความรู้สึก':'Big visuals, minimal text'}</div></div>
+    </div>
   </div>`;
 }
+window.admSetLayout=function(id){SITE_LAYOUT=id;saveStore();renderProducts();renderAdmin('theme');toast(lang==='th'?'เปลี่ยนรูปแบบแล้ว':'Layout updated');};
 window.admSetTheme=function(id){
   applyAccent(id);
   saveStore();
@@ -2624,19 +2703,18 @@ window.admDelMember=function(i){if(!confirm((lang==='th'?'ลบสมาชิ�
 function admNewsList(){return `<div class="adm-section-t">${NEWS.length} news items</div>`+
   NEWS.map((n,i)=>`<div class="adm-row">${n.img?`<img class="thumb" src="${n.img}">`:`<span class="mono-av" style="background:${hue(n.title)}">${initials(n.title)}</span>`}<div class="r-main"><h4>${esc(n.title)}</h4><div class="r-sub">${esc(n.date)}</div></div><div class="r-act"><button class="adm-ic" onclick="admEditNews(${i})">${icon('i-doc')}</button><button class="adm-ic del" onclick="admDelNews(${i})">${icon('i-close')}</button></div></div>`).join('')+
   `<button class="adm-add" onclick="admEditNews(-1)">${icon('i-plus')} Add news</button>`;}
-window.admEditNews=function(i){editIdx=i;const n=i>=0?NEWS[i]:{title:'',date:'',body:'',img:''};formImg=n.img||'';
+window.admEditNews=function(i){editIdx=i;const n=i>=0?NEWS[i]:{title:'',date:'',body:'',img:''};formImg=n.img||'';formGallery=(n.images||[]).slice();
   el('adminContent').innerHTML=`<span class="adm-back" onclick="renderAdmin('news')">${icon('i-arrow')} Back</span>
   <div class="adm-form">
     <div class="adm-field"><label>Cover image</label><div class="adm-photo-row" id="n_photowrap"></div></div>
     <div class="adm-2"><div class="adm-field"><label>Title</label><input id="n_title"></div><div class="adm-field"><label>Date (e.g. 15 Jan 2024)</label><input id="n_date"></div></div>
     <div class="adm-field"><label>Body (plain text or HTML)</label><textarea id="n_body" style="min-height:130px"></textarea></div>
+    <div class="adm-field"><label>${lang==='th'?'คลังภาพประกอบข่าว (หลายรูป)':'Photo gallery (multi-select)'}</label><div id="galleryWrap">${galleryWidget(formGallery)}</div></div>
     <div class="adm-actions"><button class="btn btn--ghost" onclick="renderAdmin('news')">Cancel</button><button class="btn btn--primary" onclick="admSaveNews()">${icon('i-check')} Save</button></div>
   </div>`;
-  el('n_title').value=n.title||'';el('n_date').value=n.date||'';el('n_body').value=(n.body||'').replace(/<\/?p>/g,'').trim();refreshPhoto(true);};
-window.admSaveNews=function(){const t=val('n_title').trim();if(!t){toast(lang==='th'?'ต้องมีหัวข้อ':'Title required');return;}
+  el('n_title').value=n.title||'';el('n_date').value=n.date||'';el('n_body').value=(n.body||'').replace(/<\/?p>/g,'').trim();refreshPhoto(true);};window.admSaveNews=function(){const t=val('n_title').trim();if(!t){toast(lang==='th'?'ต้องมีหัวข้อ':'Title required');return;}
   let body=val('n_body').trim();if(body&&body.indexOf('<')<0)body='<p>'+body.replace(/\n{2,}/g,'</p><p>').replace(/\n/g,'<br>')+'</p>';
-  const item={id:editIdx>=0?NEWS[editIdx].id:(Math.max(0,...NEWS.map(n=>n.id))+1),title:t,date:val('n_date').trim(),img:formImg,body:body};
-  if(editIdx>=0)NEWS[editIdx]=item;else NEWS.unshift(item);
+  const item={id:editIdx>=0?NEWS[editIdx].id:(Math.max(0,...NEWS.map(n=>n.id))+1),title:t,date:val('n_date').trim(),img:formImg,body:body,images:formGallery.slice()};  if(editIdx>=0)NEWS[editIdx]=item;else NEWS.unshift(item);
   saveStore();renderNews();renderAdmin('news');};
 window.admDelNews=function(i){if(!confirm((lang==='th'?'ลบข่าว ':'Delete ')+NEWS[i].title+'?'))return;NEWS.splice(i,1);saveStore();renderNews();renderAdmin('news');};
 /* --- PUBS (extra curated; ORCID loads automatically) --- */
@@ -2664,25 +2742,24 @@ window.admDelPub=function(i){if(!confirm('Delete this publication?'))return;CPUB
 function admProdList(){return `<div class="adm-section-t">${PRODUCTS.length} products · click to edit</div>`+
   PRODUCTS.map((p,i)=>`<div class="adm-row">${p.img?`<img class="thumb" src="${p.img}">`:`<span class="mono-av" style="background:linear-gradient(135deg,${p.c1||'#2f6b4f'},${p.c2||'#4f9d78'})">${icon(p.icon||'i-flask')}</span>`}<div class="r-main"><h4>${esc(p.name)}</h4><div class="r-sub">${esc(p.type||'')}</div></div><div class="r-act"><button class="adm-ic" onclick="admEditProduct(${i})">${icon('i-doc')}</button><button class="adm-ic del" onclick="admDelProduct(${i})">${icon('i-close')}</button></div></div>`).join('')+
   `<button class="adm-add" onclick="admEditProduct(-1)">${icon('i-plus')} Add product</button>`;}
-window.admEditProduct=function(i){editIdx=i;const p=i>=0?PRODUCTS[i]:{name:'',nameTh:'',type:'',typeTh:'',benefit:'',benefitTh:'',ingredients:'',size:'',price:'',c1:'#2f6b4f',c2:'#4f9d78',icon:'i-flask',img:''};formImg=p.img||'';
+window.admEditProduct=function(i){editIdx=i;const p=i>=0?PRODUCTS[i]:{name:'',nameTh:'',type:'',typeTh:'',benefit:'',benefitTh:'',ingredients:'',size:'',price:'',c1:'#2f6b4f',c2:'#4f9d78',icon:'i-flask',img:''};formImg=p.img||'';formGallery=(p.images||[]).slice();
   el('adminContent').innerHTML=`<span class="adm-back" onclick="renderAdmin('products')">${icon('i-arrow')} Back</span>
   <div class="adm-form">
-    <div class="adm-field"><label>Product image (optional)</label><div class="adm-photo-row" id="n_photowrap"></div></div>
-    <div class="adm-2"><div class="adm-field"><label>Name (English)</label><input id="pr_name"></div><div class="adm-field"><label>Name (Thai)</label><input id="pr_nameth"></div></div>
+    <div class="adm-field"><label>Product image (optional)</label><div class="adm-photo-row" id="n_photowrap"></div></div>    <div class="adm-2"><div class="adm-field"><label>Name (English)</label><input id="pr_name"></div><div class="adm-field"><label>Name (Thai)</label><input id="pr_nameth"></div></div>
     <div class="adm-2"><div class="adm-field"><label>Type / tag (English)</label><input id="pr_type"></div><div class="adm-field"><label>Type / tag (Thai)</label><input id="pr_typeth"></div></div>
     <div class="adm-field"><label>Benefit (English)</label><textarea id="pr_ben"></textarea></div>
     <div class="adm-field"><label>Benefit (Thai)</label><textarea id="pr_benth"></textarea></div>
     <div class="adm-field"><label>Key ingredients</label><input id="pr_ing"></div>
     <div class="adm-2"><div class="adm-field"><label>Size</label><input id="pr_size"></div><div class="adm-field"><label>Price (optional)</label><input id="pr_price"></div></div>
-    <div class="adm-2"><div class="adm-field"><label>Colour top</label><input id="pr_c1" type="color"></div><div class="adm-field"><label>Colour bottom</label><input id="pr_c2" type="color"></div></div>
+<div class="adm-2"><div class="adm-field"><label>Colour top</label><input id="pr_c1" type="color"></div><div class="adm-field"><label>Colour bottom</label><input id="pr_c2" type="color"></div></div>
+    <div class="adm-field"><label>${lang==='th'?'คลังภาพเพิ่มเติม (เลือกได้หลายรูป)':'Additional photos (multi-select)'}</label><div id="galleryWrap">${galleryWidget(formGallery)}</div></div>
     <div class="adm-actions"><button class="btn btn--ghost" onclick="renderAdmin('products')">Cancel</button><button class="btn btn--primary" onclick="admSaveProduct()">${icon('i-check')} Save</button></div>
-  </div>`;
+      </div>`;
   el('pr_name').value=p.name||'';el('pr_nameth').value=p.nameTh||'';el('pr_type').value=p.type||'';el('pr_typeth').value=p.typeTh||'';el('pr_ben').value=p.benefit||'';el('pr_benth').value=p.benefitTh||'';el('pr_ing').value=p.ingredients||'';el('pr_size').value=p.size||'';el('pr_price').value=p.price||'';el('pr_c1').value=p.c1||'#2f6b4f';el('pr_c2').value=p.c2||'#4f9d78';
   refreshPhoto(true);};
 window.admSaveProduct=function(){const n=val('pr_name').trim();if(!n){toast(lang==='th'?'ต้องมีชื่อ':'Name required');return;}
   const base=editIdx>=0?PRODUCTS[editIdx]:{icon:'i-flask'};
-  const item=Object.assign({},base,{name:n,nameTh:val('pr_nameth').trim(),type:val('pr_type').trim(),typeTh:val('pr_typeth').trim(),benefit:val('pr_ben').trim(),benefitTh:val('pr_benth').trim(),ingredients:val('pr_ing').trim(),size:val('pr_size').trim(),price:val('pr_price').trim(),c1:val('pr_c1')||'#2f6b4f',c2:val('pr_c2')||'#4f9d78',img:formImg});
-  if(editIdx>=0)PRODUCTS[editIdx]=item;else PRODUCTS.push(item);
+  const item=Object.assign({},base,{name:n,nameTh:val('pr_nameth').trim(),type:val('pr_type').trim(),typeTh:val('pr_typeth').trim(),benefit:val('pr_ben').trim(),benefitTh:val('pr_benth').trim(),ingredients:val('pr_ing').trim(),size:val('pr_size').trim(),price:val('pr_price').trim(),c1:val('pr_c1')||'#2f6b4f',c2:val('pr_c2')||'#4f9d78',img:formImg,images:formGallery.slice()});  if(editIdx>=0)PRODUCTS[editIdx]=item;else PRODUCTS.push(item);
   saveStore();renderProducts();renderAdmin('products');};
 window.admDelProduct=function(i){if(!confirm((lang==='th'?'ลบผลิตภัณฑ์ ':'Delete ')+PRODUCTS[i].name+'?'))return;PRODUCTS.splice(i,1);saveStore();renderProducts();renderAdmin('products');};
 /* --- VIDEOS --- */
@@ -2751,7 +2828,7 @@ const supa = window.supabase.createClient(SUPA_URL, SUPA_KEY, {
     if (Array.isArray(s.testimonials) && s.testimonials.length) TESTIMONIALS = s.testimonials;
 if (Array.isArray(s.banners)      && s.banners.length)      BANNERS      = s.banners;
     if (s.theme) applyAccent(s.theme);
-
+    if (s.layout) SITE_LAYOUT = s.layout;
     if(typeof renderProjectTeam === 'function') renderProjectTeam();    if(typeof renderTeam === 'function') renderTeam(typeof teamCat !== 'undefined' ? teamCat : 'all'); 
     if(typeof renderNews === 'function') renderNews();
     if(typeof renderProducts === 'function') renderProducts(); 
@@ -2769,8 +2846,7 @@ if (Array.isArray(s.banners)      && s.banners.length)      BANNERS      = s.ban
     saveStore = function(silent){
       const ok = _saveStore(silent);
 supa.from('site_content').update({
-        data:{members:MEMBERS, news:NEWS, cpubs:CPUBS, products:PRODUCTS, videos:VIDEOS, taxa:TAXA, collabs:COLLABS, testimonials:TESTIMONIALS, banners:BANNERS, theme:SITE_ACCENT},
-        updated_at: new Date()
+data:{members:MEMBERS, news:NEWS, cpubs:CPUBS, products:PRODUCTS, videos:VIDEOS, taxa:TAXA, collabs:COLLABS, testimonials:TESTIMONIALS, banners:BANNERS, theme:SITE_ACCENT, layout:SITE_LAYOUT},        updated_at: new Date()
       }).eq('id',1).then(({error})=>{        if(error && typeof toast === 'function') toast('Cloud save failed — ล็อกอินหรือยัง?'); 
       });
       return ok;
