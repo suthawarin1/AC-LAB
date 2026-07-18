@@ -57,7 +57,20 @@
   --hair:inset 0 0 0 1px var(--line);
   --lift:0 2px 4px rgba(0,0,0,.2), 0 30px 60px -34px rgba(0,0,0,.6);
 }
+/* ===== theme presets (chosen by manager) ===== */
+[data-theme="light"][data-preset="ocean"]{--bg:#f5f7fa;--surface:#ffffff;--surface-2:#eaeff5;--ink:#141a22;--muted:#5f6b7a;--faint:#93a0af;--line:#dde4ec;--line-2:#cdd7e2;--accent:#1f5fa8;--accent-ink:#164173;--accent-soft:#e6eefb;--accent-bright:#3f7fd6;--ochre:#b8863a;}
+[data-theme="dark"][data-preset="ocean"]{--bg:#0b1420;--surface:#101c2b;--surface-2:#152435;--ink:#e9f0f8;--muted:#94a6bb;--faint:#5c6f85;--line:#1f3145;--line-2:#2a3f56;--accent:#5b9de0;--accent-ink:#8ec2ee;--accent-soft:#142235;--accent-bright:#6fb0ee;--ochre:#d1a256;}
 
+[data-theme="light"][data-preset="amber"]{--bg:#faf6ef;--surface:#fffdfa;--surface-2:#f3ead9;--ink:#241a10;--muted:#7a6a55;--faint:#a99c86;--line:#ede0cb;--line-2:#e2d2b6;--accent:#b1591f;--accent-ink:#8a4114;--accent-soft:#f7e8d8;--accent-bright:#d9772f;--ochre:#8a6a2a;}
+[data-theme="dark"][data-preset="amber"]{--bg:#1c140c;--surface:#241a10;--surface-2:#2c2013;--ink:#f6ead8;--muted:#c2ab8c;--faint:#8a7458;--line:#3a2c1a;--line-2:#4a3823;--accent:#e08a44;--accent-ink:#f0b07c;--accent-soft:#2c2013;--accent-bright:#eda05f;--ochre:#d6ab5f;}
+
+[data-theme="light"][data-preset="berry"]{--bg:#f8f5f7;--surface:#ffffff;--surface-2:#f1e8ee;--ink:#241220;--muted:#7a5f72;--faint:#a68a9c;--line:#e8dbe4;--line-2:#dcc9d5;--accent:#8a2f66;--accent-ink:#63204a;--accent-soft:#f3e3ee;--accent-bright:#ab4587;--ochre:#a9772a;}
+[data-theme="dark"][data-preset="berry"]{--bg:#180f16;--surface:#20141d;--surface-2:#281a24;--ink:#f4e9f0;--muted:#b998ac;--faint:#7a5f70;--line:#3a2434;--line-2:#4a2e42;--accent:#c266a0;--accent-ink:#e0a0c4;--accent-soft:#281a24;--accent-bright:#d17fb0;--ochre:#c99a4a;}
+
+[data-theme="light"][data-preset="slate"]{--bg:#f6f7f8;--surface:#ffffff;--surface-2:#eceef1;--ink:#171a1e;--muted:#61686f;--faint:#98a0a8;--line:#e2e5e9;--line-2:#d5d9de;--accent:#3a4a5c;--accent-ink:#26323f;--accent-soft:#e8ebef;--accent-bright:#56697e;--ochre:#a9772a;}
+[data-theme="dark"][data-preset="slate"]{--bg:#101214;--surface:#17191c;--surface-2:#1d2023;--ink:#eceef0;--muted:#a1a7ad;--faint:#686e74;--line:#282b2f;--line-2:#33373c;--accent:#7d93a8;--accent-ink:#a3b6c6;--accent-soft:#1d2023;--accent-bright:#93a8bc;--ochre:#c99a4a;}
+
+*,*::before,*::after{box-sizing:border-box}
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden;width:100%}
 body{
@@ -1504,9 +1517,9 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
       <form onsubmit="submitTesti(event)">
         <div class="field"><label data-i18n="form_name">Your name</label><input type="text" id="ts_name" required placeholder="Jane Doe"></div>
         <div class="field"><label data-i18n="voices_role">Your role / where you work now</label><input type="text" id="ts_role" required placeholder="Researcher, Dept. of Agriculture"></div>
-        <div class="field"><label data-i18n="voices_quote">Your story</label><textarea id="ts_quote" required placeholder="What was your experience at AC Lab like?"></textarea></div>
-        <button type="submit" class="btn btn--primary" style="width:100%;justify-content:center" data-i18n="voices_submit">Submit for review <svg class="icon"><use href="#i-send"/></svg></button>
-        <p style="font-size:11px;color:var(--muted);margin-top:12px" data-i18n="voices_note">Submissions are reviewed by the lab before appearing on the site.</p>
+<div class="field"><label data-i18n="voices_quote">Your story</label><textarea id="ts_quote" required placeholder="What was your experience at AC Lab like?"></textarea></div>
+        <div class="field"><label data-i18n="voices_photo">Your photo (optional)</label><div class="adm-photo-row" id="tsSubmitPhotoWrap"></div></div>
+        <button type="submit" class="btn btn--primary" style="width:100%;justify-content:center" data-i18n="voices_submit">Submit for review <svg class="icon"><use href="#i-send"/></svg></button>        <p style="font-size:11px;color:var(--muted);margin-top:12px" data-i18n="voices_note">Submissions are reviewed by the lab before appearing on the site.</p>
       </form>
     </div>
   </div>
@@ -1548,9 +1561,9 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
         <button class="atab" data-tab="taxa" onclick="adminTab('taxa',this)">Taxa</button>
         <button class="atab" data-tab="collabs" onclick="adminTab('collabs',this)">Partners</button>
         <button class="atab" data-tab="voices" onclick="adminTab('voices',this)">Voices</button>
-        <button class="atab" data-tab="banner" onclick="adminTab('banner',this)">Banner</button>
-        <button class="atab" data-tab="data" onclick="adminTab('data',this)">Data</button>
-      </div>
+<button class="atab" data-tab="banner" onclick="adminTab('banner',this)">Banner</button>
+        <button class="atab" data-tab="theme" onclick="adminTab('theme',this)">Theme</button>
+        <button class="atab" data-tab="data" onclick="adminTab('data',this)">Data</button>      </div>
             <div class="admin__content" id="adminContent"></div>
     </div>
   </div>
@@ -1761,8 +1774,7 @@ const I18N={en:{},th:{
   team_postdoc:'หลังปริญญาเอก',team_phd:'ป.เอก',team_master:'ป.โท',team_intern:'ฝึกงาน',pub_chart_t:'ผลงานต่อปี',saved_toast:'บันทึกแล้ว',
 voices_share:'ร่วมเขียนรีวิว',voices_share_chip:'เรื่องราวจากศิษย์เก่า',voices_share_title:'แบ่งปันประสบการณ์ของคุณ',
 voices_role:'ตำแหน่ง/ที่ทำงานปัจจุบันของคุณ',voices_quote:'เรื่องราวของคุณ',voices_submit:'ส่งเพื่อตรวจสอบ',
-voices_note:'ทีมงานจะตรวจสอบก่อนเผยแพร่บนเว็บไซต์',
-  collab_eye:'เครือข่ายระดับโลก',collab_title:'ทำงานข้ามพรมแดน',
+voices_note:'ทีมงานจะตรวจสอบก่อนเผยแพร่บนเว็บไซต์',voices_photo:'รูปถ่ายของคุณ (ไม่บังคับ)',  collab_eye:'เครือข่ายระดับโลก',collab_title:'ทำงานข้ามพรมแดน',
   collab_lede:'ความร่วมมือเชื่อมขอนแก่นกับสถาบันชั้นนำในสามทวีป สนับสนุนการแลกเปลี่ยนนักศึกษาและผลงานตีพิมพ์ร่วม',
   collab_wide_title:'จากขอนแก่นสู่โลกกว้าง',collab_wide_sub:'พื้นที่ภาคสนามในไทยหล่อเลี้ยงความร่วมมือที่เปลี่ยนความหลากหลายทางชีวภาพท้องถิ่นให้เป็นวิทยาศาสตร์ร่วมระดับโลก',
   collab_countries:'ประเทศ',collab_inst:'สถาบัน',
@@ -1818,11 +1830,19 @@ function icon(id){return `<svg class="icon"><use href="#${id}"/></svg>`;}
 document.querySelectorAll('[data-prof]').forEach(i=>{i.src=PROF_IMG;});
 
 /* ============ CMS STORE (localStorage) ============ */
+const THEME_PRESETS=[
+  {id:'forest',name:'Forest',nameTh:'ป่าเขียว (ค่าเริ่มต้น)',c1:'#2f6b4f',c2:'#f7f6f1'},
+  {id:'ocean', name:'Ocean', nameTh:'สีน้ำเงินทะเล',c1:'#1f5fa8',c2:'#f5f7fa'},
+  {id:'amber', name:'Amber', nameTh:'อำพัน',c1:'#b1591f',c2:'#faf6ef'},
+  {id:'berry', name:'Berry', nameTh:'เบอร์รี่',c1:'#8a2f66',c2:'#f8f5f7'},
+  {id:'slate', name:'Slate', nameTh:'สเลท',c1:'#3a4a5c',c2:'#f6f7f8'}
+];
+let SITE_ACCENT='forest';
+function applyAccent(id){SITE_ACCENT=id;document.documentElement.setAttribute('data-preset',id);}
 const LS_KEY='aclab_cms_v1';
 function loadStore(){try{return JSON.parse(localStorage.getItem(LS_KEY))||{};}catch(e){return {};}}
-function saveStore(silent){try{localStorage.setItem(LS_KEY,JSON.stringify({members:MEMBERS,news:NEWS,cpubs:CPUBS,products:PRODUCTS,videos:VIDEOS,taxa:TAXA,collabs:COLLABS,testimonials:TESTIMONIALS,banners:BANNERS}));if(!silent)toast(T('saved_toast'));return true;}catch(e){toast('Save failed — storage full');return false;}}
-(function(){const s=loadStore();if(s.members&&s.members.length)MEMBERS=s.members;if(s.news&&s.news.length)NEWS=s.news;if(s.cpubs)CPUBS=s.cpubs;if(s.products&&s.products.length)PRODUCTS=s.products;if(s.videos&&s.videos.length)VIDEOS=s.videos;if(s.taxa&&s.taxa.length)TAXA=s.taxa;if(s.collabs&&s.collabs.length)COLLABS=s.collabs;if(s.testimonials&&s.testimonials.length)TESTIMONIALS=s.testimonials;if(s.banners&&s.banners.length)BANNERS=s.banners;})();
-/* ============ RENDER STATIC ============ */
+function saveStore(silent){try{localStorage.setItem(LS_KEY,JSON.stringify({members:MEMBERS,news:NEWS,cpubs:CPUBS,products:PRODUCTS,videos:VIDEOS,taxa:TAXA,collabs:COLLABS,testimonials:TESTIMONIALS,banners:BANNERS,theme:SITE_ACCENT}));if(!silent)toast(T('saved_toast'));return true;}catch(e){toast('Save failed — storage full');return false;}}
+(function(){const s=loadStore();if(s.members&&s.members.length)MEMBERS=s.members;if(s.news&&s.news.length)NEWS=s.news;if(s.cpubs)CPUBS=s.cpubs;if(s.products&&s.products.length)PRODUCTS=s.products;if(s.videos&&s.videos.length)VIDEOS=s.videos;if(s.taxa&&s.taxa.length)TAXA=s.taxa;if(s.collabs&&s.collabs.length)COLLABS=s.collabs;if(s.testimonials&&s.testimonials.length)TESTIMONIALS=s.testimonials;if(s.banners&&s.banners.length)BANNERS=s.banners;if(s.theme)SITE_ACCENT=s.theme;applyAccent(SITE_ACCENT);})();/* ============ RENDER STATIC ============ */
 el('rgrid').innerHTML=THEMES.map((t,i)=>`
   <article class="rcard reveal" data-d="${i}"><span class="rcard__no mono">0${i+1}</span><span class="rcard__ic">${icon(t.icon)}</span><h3>${t.title}</h3><p>${t.desc}</p><div class="rcard__tags">${t.tags.map(x=>`<span class="t">${x}</span>`).join('')}</div></article>`).join('');
 
@@ -2141,22 +2161,23 @@ window.toggleFaq=function(btn){
 
 /* ============ TESTIMONIALS ============ */
 let ti=0;
+function visibleTesti(){return TESTIMONIALS.filter(t=>!t.hidden);}
 function renderTesti(){
-  if(!TESTIMONIALS.length){el('testiQ').textContent='';el('testiName').textContent='';el('testiRole').textContent='';el('testiImg').style.display='none';return;}
-  el('testiImg').style.display='';
-  const t=TESTIMONIALS[ti%TESTIMONIALS.length],q=el('testiQ');
+  const list=visibleTesti();
+  if(!list.length){el('testiQ').textContent='';el('testiName').textContent='';el('testiRole').textContent='';el('testiImg').style.display='none';return;}
+  const t=list[((ti%list.length)+list.length)%list.length],q=el('testiQ');
   q.style.opacity='0';
   setTimeout(()=>{
     q.textContent='“'+(lang==='th'&&t.qTh?t.qTh:t.q)+'”';
     el('testiName').textContent=t.name;
     el('testiRole').textContent=(lang==='th'&&t.roleTh?t.roleTh:t.role)||'';
-    el('testiImg').src=t.img||'';
+    if(t.img){el('testiImg').src=t.img;el('testiImg').style.display='';}
+    else{el('testiImg').style.display='none';}
     q.style.opacity='1';
   },200);
 }
 window.nextTesti=function(){ti++;renderTesti();};
-window.prevTesti=function(){ti=(ti-1+TESTIMONIALS.length)%TESTIMONIALS.length;renderTesti();};
-
+window.prevTesti=function(){const list=visibleTesti();ti=(ti-1+list.length)%list.length;renderTesti();};
 /* ===== banner carousel ===== */
 let bannerIdx=0,bannerTimer=null;
 function renderBanner(){
@@ -2190,20 +2211,22 @@ window.gotoBanner=function(i){
 renderBanner();
 
 /* ===== alumni self-submission ===== */
-window.openTestiForm=function(){openModal('testiFormModal');};
+let testiSubmitImg='';
+function refreshTestiSubmitPhoto(){
+  const w=el('tsSubmitPhotoWrap');if(!w)return;
+  const av=testiSubmitImg?`<img class="prev" src="${testiSubmitImg}">`:`<span class="prev" style="display:flex;align-items:center;justify-content:center;color:var(--faint)">${icon('i-users')}</span>`;
+  w.innerHTML=`${av}<div><div class="adm-file" onclick="pickImage(function(d){testiSubmitImg=d;refreshTestiSubmitPhoto()})">${icon('i-up')} ${lang==='th'?'อัปโหลดรูป':'Upload photo'}</div>${testiSubmitImg?`<div class="adm-file" style="color:var(--muted);margin-top:5px" onclick="testiSubmitImg='';refreshTestiSubmitPhoto()">${lang==='th'?'ลบรูป':'Remove'}</div>`:''}</div>`;
+}
+window.openTestiForm=function(){testiSubmitImg='';refreshTestiSubmitPhoto();openModal('testiFormModal');};
 window.submitTesti=async function(e){
   e.preventDefault();
   const name=val('ts_name').trim(),role=val('ts_role').trim(),quote=val('ts_quote').trim();
   if(!name||!role||!quote)return;
   if(window.supa){
-    const {error}=await supa.from('testimonial_submissions').insert({name,role,quote,status:'pending'});
-    if(error){
-      console.error('testimonial submit error:', error);
-      toast(lang==='th'?'ส่งไม่สำเร็จ ลองใหม่อีกครั้ง':'Could not submit — please try again');
-      return;
-    }
+    const {error}=await supa.from('testimonial_submissions').insert({name,role,quote,img:testiSubmitImg||null,status:'pending'});
+    if(error){console.error('testimonial submit error:',error);toast(lang==='th'?'ส่งไม่สำเร็จ ลองใหม่อีกครั้ง':'Could not submit — please try again');return;}
   }
-  closeModal('testiFormModal');e.target.reset();
+  closeModal('testiFormModal');e.target.reset();testiSubmitImg='';
   toast(lang==='th'?'ขอบคุณ! ทีมงานจะตรวจสอบก่อนเผยแพร่':'Thank you! Our team will review it before it appears.');
 };
 /* ============ MODALS ============ */
@@ -2382,9 +2405,27 @@ function renderAdmin(tab){adminCurrentTab=tab;const c=el('adminContent');
   else if(tab==='collabs')c.innerHTML=admCollabList();
   else if(tab==='voices')admVoicesList();
   else if(tab==='banner')c.innerHTML=admBannerList();
+  else if(tab==='theme')c.innerHTML=admThemeList();
   else c.innerHTML=admData();
 }
 
+function admThemeList(){
+  return `<div class="data-card"><h4>${icon('i-spark')} Site theme</h4><p>${lang==='th'?'เลือกโทนสีของทั้งเว็บไซต์ ใช้กับผู้เข้าชมทุกคน (บันทึกขึ้นคลาวด์) แยกจากปุ่มมืด/สว่างที่แต่ละคนเลือกเองได้':'Pick a color theme for the whole site — applied for every visitor (saved to the cloud), separate from each visitor\u2019s own light/dark switch.'}</p></div>
+  <div class="adm-section-t">${lang==='th'?'เลือกธีม':'Choose a theme'}</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+  ${THEME_PRESETS.map(p=>`
+    <div class="adm-row" style="cursor:pointer;${SITE_ACCENT===p.id?'box-shadow:inset 0 0 0 2px var(--accent)':''}" onclick="admSetTheme('${p.id}')">
+      <span style="width:44px;height:44px;border-radius:10px;flex:none;background:linear-gradient(135deg,${p.c1},${p.c2});box-shadow:inset 0 0 0 1px var(--line)"></span>
+      <div class="r-main"><h4>${lang==='th'?p.nameTh:p.name}</h4><div class="r-sub">${SITE_ACCENT===p.id?(lang==='th'?'กำลังใช้งานอยู่':'Currently active'):(lang==='th'?'คลิกเพื่อใช้':'Click to apply')}</div></div>
+    </div>`).join('')}
+  </div>`;
+}
+window.admSetTheme=function(id){
+  applyAccent(id);
+  saveStore();
+  renderAdmin('theme');
+  toast(lang==='th'?'เปลี่ยนธีมแล้ว':'Theme updated');
+};
 /* --- TAXA admin --- */
 function admTaxaList(){return `<div class="adm-section-t">${TAXA.length} plants · click to edit</div>`+
   TAXA.map((t,i)=>`<div class="adm-row">${t.img?`<img class="thumb" src="${t.img}">`:`<span class="mono-av" style="background:${hue(t.sp)}">${icon('i-leaf')}</span>`}<div class="r-main"><h4>${esc(t.sp)}</h4><div class="r-sub">${esc(t.en||'')}</div></div><div class="r-act"><button class="adm-ic" onclick="admEditTaxa(${i})">${icon('i-doc')}</button><button class="adm-ic del" onclick="admDelTaxa(${i})">${icon('i-close')}</button></div></div>`).join('')+
@@ -2451,30 +2492,42 @@ window.admSaveBanner=function(){if(!formImg){toast(lang==='th'?'ต้องม�
 window.admDelBanner=function(i){if(!confirm(lang==='th'?'ลบแบนเนอร์นี้?':'Delete this banner?'))return;BANNERS.splice(i,1);saveStore();renderBanner();renderAdmin('banner');};
 
 /* --- VOICES admin (published + pending public submissions) --- */
+let PENDING_TESTI=[];
 async function admVoicesList(){
   const c=el('adminContent');
-  c.innerHTML=`<div class="adm-section-t">Pending submissions</div><div id="admPendingWrap"><p style="font-size:.85rem;color:var(--muted)">Loading…</p></div>
-  <div class="adm-section-t" style="margin-top:22px">${TESTIMONIALS.length} published voices · click to edit</div>
-  <div id="admTestiWrap">${TESTIMONIALS.map((t,i)=>`<div class="adm-row"><span class="mono-av" style="background:${hue(t.name)}">${initials(t.name)}</span><div class="r-main"><h4>${esc(t.name)}</h4><div class="r-sub">${esc(t.role||'')}</div></div><div class="r-act"><button class="adm-ic" onclick="admEditTesti(${i})">${icon('i-doc')}</button><button class="adm-ic del" onclick="admDelTesti(${i})">${icon('i-close')}</button></div></div>`).join('')}
+  c.innerHTML=`<div class="adm-section-t">${lang==='th'?'รอตรวจสอบ':'Pending submissions'}</div><div id="admPendingWrap"><p style="font-size:.85rem;color:var(--muted)">Loading…</p></div>
+  <div class="adm-section-t" style="margin-top:22px">${TESTIMONIALS.length} ${lang==='th'?'รีวิวที่เผยแพร่แล้ว · คลิกเพื่อแก้ไข':'published voices · click to edit'}</div>
+  <div id="admTestiWrap">${TESTIMONIALS.map((t,i)=>admTestiRow(t,i)).join('')}
   <button class="adm-add" onclick="admEditTesti(-1)">${icon('i-plus')} Add voice</button></div>`;
   if(window.supa){
     const {data,error}=await supa.from('testimonial_submissions').select('*').eq('status','pending').order('created_at',{ascending:false});
     const pw=el('admPendingWrap');
     if(error){pw.innerHTML=`<p style="font-size:.85rem;color:var(--muted)">Could not load submissions.</p>`;return;}
-    if(!data||!data.length){pw.innerHTML=`<p style="font-size:.85rem;color:var(--muted)">No pending submissions.</p>`;return;}
-    pw.innerHTML=data.map(s=>`<div class="adm-row"><span class="mono-av" style="background:${hue(s.name)}">${initials(s.name)}</span><div class="r-main"><h4>${esc(s.name)}</h4><div class="r-sub">${esc(s.role||'')} · ${esc((s.quote||'').slice(0,60))}${(s.quote||'').length>60?'…':''}</div></div><div class="r-act"><button class="adm-ic" onclick='admApproveTesti(${JSON.stringify(s.id)},${JSON.stringify(s.name)},${JSON.stringify(s.role)},${JSON.stringify(s.quote)})'>${icon('i-check')}</button><button class="adm-ic del" onclick="admRejectTesti('${s.id}')">${icon('i-close')}</button></div></div>`).join('');
+    PENDING_TESTI=data||[];
+    if(!PENDING_TESTI.length){pw.innerHTML=`<p style="font-size:.85rem;color:var(--muted)">${lang==='th'?'ไม่มีรีวิวรอตรวจสอบ':'No pending submissions.'}</p>`;return;}
+    pw.innerHTML=PENDING_TESTI.map((s,i)=>`<div class="adm-row">${s.img?`<img class="thumb" src="${s.img}">`:`<span class="mono-av" style="background:${hue(s.name)}">${initials(s.name)}</span>`}<div class="r-main"><h4>${esc(s.name)}</h4><div class="r-sub">${esc(s.role||'')} · ${esc((s.quote||'').slice(0,60))}${(s.quote||'').length>60?'…':''}</div></div><div class="r-act"><button class="adm-ic" title="${lang==='th'?'อนุมัติ':'Approve'}" onclick="admApproveTesti(${i})">${icon('i-check')}</button><button class="adm-ic del" title="${lang==='th'?'ปฏิเสธ':'Reject'}" onclick="admRejectTesti(${i})">${icon('i-close')}</button></div></div>`).join('');
   } else {
     el('admPendingWrap').innerHTML=`<p style="font-size:.85rem;color:var(--muted)">Connect Supabase to receive public submissions.</p>`;
   }
 }
-window.admApproveTesti=function(id,name,role,quote){
-  TESTIMONIALS.push({q:quote,name,role,img:''});
+function admTestiRow(t,i){
+  return `<div class="adm-row" style="${t.hidden?'opacity:.5':''}">${t.img?`<img class="thumb" src="${t.img}">`:`<span class="mono-av" style="background:${hue(t.name)}">${initials(t.name)}</span>`}<div class="r-main"><h4>${esc(t.name)}</h4><div class="r-sub">${esc(t.role||'')}${t.hidden?(lang==='th'?' · ซ่อนอยู่':' · hidden'):''}</div></div><div class="r-act"><button class="adm-ic" title="${t.hidden?(lang==='th'?'แสดง':'Show'):(lang==='th'?'ซ่อน':'Hide')}" onclick="admToggleHideTesti(${i})">${icon(t.hidden?'i-sun':'i-moon')}</button><button class="adm-ic" onclick="admEditTesti(${i})">${icon('i-doc')}</button><button class="adm-ic del" onclick="admDelTesti(${i})">${icon('i-close')}</button></div></div>`;
+}
+window.admToggleHideTesti=function(i){
+  TESTIMONIALS[i].hidden=!TESTIMONIALS[i].hidden;
+  saveStore();renderTesti();renderAdmin('voices');
+};
+window.admApproveTesti=function(i){
+  const s=PENDING_TESTI[i];if(!s)return;
+  TESTIMONIALS.push({q:s.quote,name:s.name,role:s.role,img:s.img||''});
   saveStore();renderTesti();
-  if(window.supa)supa.from('testimonial_submissions').update({status:'approved'}).eq('id',id).then(()=>renderAdmin('voices'));
+  if(window.supa)supa.from('testimonial_submissions').update({status:'approved'}).eq('id',s.id).then(()=>{renderAdmin('voices');toast(lang==='th'?'อนุมัติแล้ว':'Approved');});
   else renderAdmin('voices');
 };
-window.admRejectTesti=function(id){
-  if(window.supa)supa.from('testimonial_submissions').update({status:'rejected'}).eq('id',id).then(()=>renderAdmin('voices'));
+window.admRejectTesti=function(i){
+  const s=PENDING_TESTI[i];if(!s)return;
+  if(!confirm(lang==='th'?'ปฏิเสธรีวิวนี้?':'Reject this submission?'))return;
+  if(window.supa)supa.from('testimonial_submissions').update({status:'rejected'}).eq('id',s.id).then(()=>{renderAdmin('voices');toast(lang==='th'?'ปฏิเสธแล้ว':'Rejected');});
 };
 window.admEditTesti=function(i){editIdx=i;const t=i>=0?TESTIMONIALS[i]:{q:'',qTh:'',name:'',role:'',roleTh:'',img:''};formImg=t.img||'';
   el('adminContent').innerHTML=`<span class="adm-back" onclick="renderAdmin('voices')">${icon('i-arrow')} Back</span>
@@ -2489,11 +2542,11 @@ window.admEditTesti=function(i){editIdx=i;const t=i>=0?TESTIMONIALS[i]:{q:'',qTh
   el('ts_e_name').value=t.name||'';el('ts_e_role').value=t.role||'';el('ts_e_roleth').value=t.roleTh||'';el('ts_e_q').value=t.q||'';el('ts_e_qth').value=t.qTh||'';
   refreshPhoto(false);};
 window.admSaveTesti=function(){const name=val('ts_e_name').trim();const q=val('ts_e_q').trim();if(!name||!q){toast(lang==='th'?'ต้องมีชื่อและข้อความ':'Name and quote required');return;}
-  const item={name,role:val('ts_e_role').trim(),roleTh:val('ts_e_roleth').trim(),q,qTh:val('ts_e_qth').trim(),img:formImg};
+  const prev=editIdx>=0?TESTIMONIALS[editIdx]:{};
+  const item={name,role:val('ts_e_role').trim(),roleTh:val('ts_e_roleth').trim(),q,qTh:val('ts_e_qth').trim(),img:formImg,hidden:!!prev.hidden};
   if(editIdx>=0)TESTIMONIALS[editIdx]=item;else TESTIMONIALS.push(item);
   saveStore();renderTesti();renderAdmin('voices');};
-window.admDelTesti=function(i){if(!confirm((lang==='th'?'ลบรีวิวของ ':'Delete ')+TESTIMONIALS[i].name+'?'))return;TESTIMONIALS.splice(i,1);saveStore();renderTesti();renderAdmin('voices');};
-/* --- TEAM --- */
+window.admDelTesti=function(i){if(!confirm((lang==='th'?'ลบรีวิวของ ':'Delete ')+TESTIMONIALS[i].name+'?'))return;TESTIMONIALS.splice(i,1);saveStore();renderTesti();renderAdmin('voices');};/* --- TEAM --- */
 function admTeamList(){return `<div class="adm-section-t">${MEMBERS.length} members · click to edit</div>`+
   MEMBERS.map((m,i)=>`<div class="adm-row">${m.img?`<img class="thumb" src="${m.img}">`:`<span class="mono-av" style="background:${hue(m.en)}">${initials(m.en)}</span>`}<div class="r-main"><h4>${esc(m.en)}</h4><div class="r-sub">${ROLE_EN[m.group]||m.group}${m.pi?' · locked photo':''}</div></div><div class="r-act"><button class="adm-ic" onclick="admEditMember(${i})">${icon('i-doc')}</button>${m.pi?'':`<button class="adm-ic del" onclick="admDelMember(${i})">${icon('i-close')}</button>`}</div></div>`).join('')+
   `<button class="adm-add" onclick="admEditMember(-1)">${icon('i-plus')} Add member</button>`;}
@@ -2640,10 +2693,10 @@ const supa = window.supabase.createClient(SUPA_URL, SUPA_KEY, {
     if (Array.isArray(s.taxa)         && s.taxa.length)         TAXA         = s.taxa;
     if (Array.isArray(s.collabs)      && s.collabs.length)      COLLABS      = s.collabs;
     if (Array.isArray(s.testimonials) && s.testimonials.length) TESTIMONIALS = s.testimonials;
-    if (Array.isArray(s.banners)      && s.banners.length)      BANNERS      = s.banners;
+if (Array.isArray(s.banners)      && s.banners.length)      BANNERS      = s.banners;
+    if (s.theme) applyAccent(s.theme);
 
-    if(typeof renderProjectTeam === 'function') renderProjectTeam(); 
-    if(typeof renderTeam === 'function') renderTeam(typeof teamCat !== 'undefined' ? teamCat : 'all'); 
+    if(typeof renderProjectTeam === 'function') renderProjectTeam();    if(typeof renderTeam === 'function') renderTeam(typeof teamCat !== 'undefined' ? teamCat : 'all'); 
     if(typeof renderNews === 'function') renderNews();
     if(typeof renderProducts === 'function') renderProducts(); 
     if(typeof renderVideos === 'function') renderVideos(); 
@@ -2660,10 +2713,9 @@ const supa = window.supabase.createClient(SUPA_URL, SUPA_KEY, {
     saveStore = function(silent){
       const ok = _saveStore(silent);
 supa.from('site_content').update({
-        data:{members:MEMBERS, news:NEWS, cpubs:CPUBS, products:PRODUCTS, videos:VIDEOS, taxa:TAXA, collabs:COLLABS, testimonials:TESTIMONIALS, banners:BANNERS},
+        data:{members:MEMBERS, news:NEWS, cpubs:CPUBS, products:PRODUCTS, videos:VIDEOS, taxa:TAXA, collabs:COLLABS, testimonials:TESTIMONIALS, banners:BANNERS, theme:SITE_ACCENT},
         updated_at: new Date()
-      }).eq('id',1).then(({error})=>{
-        if(error && typeof toast === 'function') toast('Cloud save failed — ล็อกอินหรือยัง?'); 
+      }).eq('id',1).then(({error})=>{        if(error && typeof toast === 'function') toast('Cloud save failed — ล็อกอินหรือยัง?'); 
       });
       return ok;
     };
