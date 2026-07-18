@@ -1849,18 +1849,7 @@ window.togglePubExpand=function(){
   const card=document.querySelector('.pub-tools');
   if(card)card.scrollIntoView({behavior:'smooth',block:'nearest'});
 };
-  const term=(el('pubSearch').value||'').toLowerCase();
-  let items=activePubs();
-  if(pubYear!=='all')items=items.filter(p=>String(p.year)===String(pubYear));
-  if(term)items=items.filter(p=>((p.title||'')+(p.authors||'')+(p.journal||'')+(p.year||'')).toLowerCase().includes(term));
-  const L=el('pubList');
-  if(!items.length){L.innerHTML='';el('pubEmpty').style.display='block';el('pubMore').style.display='none';L.classList.remove('pub-list--scroll');return;}
-  el('pubEmpty').style.display='none';el('pubMore').style.display='none';
-  const groups={};items.forEach(p=>{const y=p.year||'—';(groups[y]=groups[y]||[]).push(p);});
-  const years=Object.keys(groups).sort((a,b)=>(b==='—'?-1:(a==='—'?1:b-a)));
-  L.innerHTML=years.map(y=>`<div class="pub-year-h"><span>${y}</span><span class="mono">${groups[y].length}</span></div>`+groups[y].map(pubCard).join('')).join('');
-  L.classList.toggle('pub-list--scroll', items.length>9);
-};
+
 function renderFeature(){
   const list=activePubs();const feat=list.find(p=>p.feat)||list[0];if(!feat){el('pubFeature').innerHTML='';return;}
   const fe=enrich(feat);
