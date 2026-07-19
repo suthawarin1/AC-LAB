@@ -938,9 +938,9 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
       <a href="#pipeline" class="nav-scroll" data-i18n="nav_pipeline">Pipeline</a>
       <a href="#publications" class="nav-scroll" data-i18n="nav_pubs">Publications</a>
       <a href="#innovation" class="nav-scroll" data-i18n="nav_innov">Innovation</a>
-      <a href="#products" class="nav-scroll" data-i18n="nav_products">Products</a>
-      <a href="#team" class="nav-scroll" data-i18n="nav_team">Team</a>
-      <a href="#collaborations" class="nav-scroll" data-i18n="nav_collab">Partners</a>
+<a href="#products" class="nav-scroll" data-i18n="nav_products">Products</a>
+      <a href="shop/index.html" data-i18n="nav_shop">Shop</a>
+      <a href="#team" class="nav-scroll" data-i18n="nav_team">Team</a>      <a href="#collaborations" class="nav-scroll" data-i18n="nav_collab">Partners</a>
       <a href="#contact" class="nav-scroll" data-i18n="nav_contact">Contact</a>
     </nav>
     <div class="nav__actions">
@@ -961,9 +961,9 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
   <a href="#facilities" class="nav-scroll"><svg class="icon"><use href="#i-scope"/></svg> <span data-i18n="nav_facilities">Facilities</span></a>
   <a href="#videos" class="nav-scroll"><svg class="icon"><use href="#i-wave"/></svg> <span data-i18n="nav_videos">Videos</span></a>
   <a href="#innovation" class="nav-scroll"><svg class="icon"><use href="#i-spark"/></svg> <span data-i18n="nav_innov">Innovation</span></a>
-  <a href="#products" class="nav-scroll"><svg class="icon"><use href="#i-flask"/></svg> <span data-i18n="nav_products">Products</span></a>
-  <a href="#team" class="nav-scroll"><svg class="icon"><use href="#i-users"/></svg> <span data-i18n="nav_team">Team</span></a>
-  <a href="#members" class="nav-scroll"><svg class="icon"><use href="#i-users"/></svg> <span data-i18n="mem_title">Lab members</span></a>
+<a href="#products" class="nav-scroll"><svg class="icon"><use href="#i-flask"/></svg> <span data-i18n="nav_products">Products</span></a>
+  <a href="shop/index.html"><svg class="icon"><use href="#i-ext"/></svg> <span data-i18n="nav_shop">Shop</span></a>
+  <a href="#team" class="nav-scroll"><svg class="icon"><use href="#i-users"/></svg> <span data-i18n="nav_team">Team</span></a>  <a href="#members" class="nav-scroll"><svg class="icon"><use href="#i-users"/></svg> <span data-i18n="mem_title">Lab members</span></a>
   <a href="#collaborations" class="nav-scroll"><svg class="icon"><use href="#i-globe"/></svg> <span data-i18n="nav_collab">Partners</span></a>
   <a href="#join" class="nav-scroll"><svg class="icon"><use href="#i-spark"/></svg> <span data-i18n="nav_join">Join the lab</span></a>
   <a href="#contact" class="nav-scroll"><svg class="icon"><use href="#i-mail"/></svg> <span data-i18n="nav_contact">Contact</span></a>
@@ -1197,9 +1197,11 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
       <h2 class="h-sec" data-i18n="prod_title">Products from our research</h2>
       <p class="lede" data-i18n="prod_lede">Our research doesn't stop at papers. Under the SciSeelt · KKU-SCI brand, discoveries from the lab become real, registered health and cosmetic products.</p>
     </div>
-    <div class="prod-grid" id="prodGrid"></div>
-    <p class="prod-foot reveal" data-i18n="prod_foot">Developed by the SciSeelt Research Group, Khon Kaen University. Product images are illustrative and can be updated in the admin panel.</p>
-  </div>
+<div class="prod-grid" id="prodGrid"></div>
+    <div class="reveal" style="text-align:center;margin-top:28px">
+      <a href="shop/index.html" class="btn btn--primary" data-i18n="prod_shop_cta">Visit the shop <svg class="icon"><use href="#i-ext"/></svg></a>
+    </div>
+    <p class="prod-foot reveal" data-i18n="prod_foot">Developed by the SciSeelt Research Group, Khon Kaen University. Product images are illustrative and can be updated in the admin panel.</p>  </div>
 </section>
 
 <!-- RESEARCH TEAM (the 8 project researchers) -->
@@ -1385,11 +1387,11 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
           <li><a href="#collaborations" class="nav-scroll" data-i18n="nav_collab">Partners</a></li>
         </ul>
       </div>
-      <div>
+<div>
         <h5 data-i18n="foot_connect">Connect</h5>
         <ul>
-          <li><a href="#join" class="nav-scroll" data-i18n="nav_join">Join the lab</a></li>
-          <li><a href="mailto:arunrat@kku.ac.th">arunrat@kku.ac.th</a></li>
+          <li><a href="shop/index.html" data-i18n="nav_shop">Shop</a></li>
+          <li><a href="#join" class="nav-scroll" data-i18n="nav_join">Join the lab</a></li>          <li><a href="mailto:arunrat@kku.ac.th">arunrat@kku.ac.th</a></li>
           <li><a href="https://gs.kku.ac.th" target="_blank" rel="noopener" data-i18n="foot_grad">Graduate School</a></li>
           <li><a href="#contact" class="nav-scroll" data-i18n="nav_contact">Contact</a></li>
         </ul>
@@ -1492,7 +1494,8 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
       <p class="mm-bio" id="pmoBenefit"></p>
       <div class="prod-spec"><span class="prod-spec__l" data-i18n="prod_ing">Key ingredients</span><span id="pmoIng"></span></div>
       <div class="prod-spec"><span class="prod-spec__l" data-i18n="prod_size">Size</span><span id="pmoSize"></span></div>
-      <div class="prod-spec" id="pmoPriceRow"><span class="prod-spec__l" data-i18n="prod_price">Price</span><span id="pmoPrice"></span></div>
+    <div class="prod-spec" id="pmoPriceRow"><span class="prod-spec__l" data-i18n="prod_price">Price</span><span id="pmoPrice"></span></div>
+      <a href="shop/index.html" id="pmoShopLink" class="btn btn--primary" style="width:100%;justify-content:center;margin-top:10px" data-i18n="prod_buy">Buy in our shop <svg class="icon"><use href="#i-ext"/></svg></a>
     </div>
   </div>
 </div>
@@ -1742,8 +1745,7 @@ const FAQ={
 
 /* ============ i18n ============ */
 const I18N={en:{},th:{
-  nav_research:'งานวิจัย',nav_pipeline:'กระบวนการ',nav_pubs:'ผลงานตีพิมพ์',nav_innov:'นวัตกรรม',nav_products:'ผลิตภัณฑ์',nav_videos:'วิดีโอ',nav_team:'ทีมงาน',nav_collab:'เครือข่าย',nav_contact:'ติดต่อ',nav_join:'ร่วมงานกับเรา',nav_facilities:'เครื่องมือ',
-  hero_chip:'ศูนย์ความเป็นเลิศ · ตั้งแต่ 2010',
+nav_research:'งานวิจัย',nav_pipeline:'กระบวนการ',nav_pubs:'ผลงานตีพิมพ์',nav_innov:'นวัตกรรม',nav_products:'ผลิตภัณฑ์',nav_shop:'ร้านค้า',nav_videos:'วิดีโอ',nav_team:'ทีมงาน',nav_collab:'เครือข่าย',nav_contact:'ติดต่อ',nav_join:'ร่วมงานกับเรา',nav_facilities:'เครื่องมือ',  hero_chip:'ศูนย์ความเป็นเลิศ · ตั้งแต่ 2010',
   hero_title:'อ่านจีโนมพืช เพื่อค้นหา<span class="em">ยาแห่งอนาคต</span>',
   hero_lede:'ห้องปฏิบัติการวิจัย มหาวิทยาลัยขอนแก่น ที่ทำงานบนจุดบรรจบของจีโนมิกส์พืช เคมีผลิตภัณฑ์ธรรมชาติ และชีววิทยามะเร็ง',
   hero_cta1:'เราทำอะไร',hero_cta2:'อ่านผลงาน',
@@ -1771,8 +1773,7 @@ const I18N={en:{},th:{
   prod_eye:'จากแล็บสู่ชั้นวาง',prod_title:'ผลิตภัณฑ์จากงานวิจัยของเรา',
   prod_lede:'งานวิจัยของเราไม่ได้จบแค่บทความ ภายใต้แบรนด์ SciSeelt · KKU-SCI การค้นพบจากห้องแล็บถูกพัฒนาเป็นผลิตภัณฑ์สุขภาพและเครื่องสำอางที่ขึ้นทะเบียนจริง',
   prod_foot:'พัฒนาโดยกลุ่มวิจัย SciSeelt มหาวิทยาลัยขอนแก่น — ภาพผลิตภัณฑ์เป็นภาพประกอบ สามารถอัปเดตได้ในระบบหลังบ้าน',
-  prod_ing:'ส่วนประกอบสำคัญ',prod_size:'ขนาด',prod_price:'ราคา',
-  vid_eye:'รับชม',vid_title:'ทำความรู้จักแล็บ — และเรียนรู้ไปกับเรา',vid_lede:'วิดีโอแนะนำแล็บ พร้อมบทเรียนที่พาดูเทคนิคที่เราใช้งานจริงในทุกๆ วัน',
+prod_ing:'ส่วนประกอบสำคัญ',prod_size:'ขนาด',prod_price:'ราคา',prod_shop_cta:'ไปที่ร้านค้าของเรา',prod_buy:'ซื้อที่ร้านค้าของเรา',  vid_eye:'รับชม',vid_title:'ทำความรู้จักแล็บ — และเรียนรู้ไปกับเรา',vid_lede:'วิดีโอแนะนำแล็บ พร้อมบทเรียนที่พาดูเทคนิคที่เราใช้งานจริงในทุกๆ วัน',
   team_eye:'ทีมงานโครงการ',team_title:'นักวิจัยเบื้องหลังโครงการ',team_lede:'นักวิจัย 8 ท่านจากมหาวิทยาลัยขอนแก่นและสถาบันพันธมิตร ร่วมขับเคลื่อนโครงการวิจัยบูรณาการ ตั้งแต่ชีววิทยาโมเลกุลและมัลติโอมิกส์ ไปจนถึงการทดสอบฤทธิ์ทางชีวภาพและทรัพย์สินทางปัญญา',
   mem_eye:'ภายในแล็บ',mem_title:'สมาชิกในแล็บ',
   team_all:'ทั้งหมด',team_lead:'หัวหน้าโครงการ',team_co:'ผู้ร่วมวิจัย',team_intl:'ต่างประเทศ',
@@ -2007,6 +2008,7 @@ function prodVisual(p){
 function productCard(p,i){
   const type=lang==='th'?(p.typeTh||p.type):p.type;
   const ben=lang==='th'?(p.benefitTh||p.benefit):p.benefit;
+  const shopUrl='shop/index.html?q='+encodeURIComponent(p.name||'');
   return `<article class="prod" onclick="openProduct(${i})">
     <div class="prod__img" style="--c1:${p.c1||'#2f6b4f'};--c2:${p.c2||'#4f9d78'}">${prodVisual(p)}<span class="prod__badge">KKU-SCI</span></div>
     <div class="prod__b">
@@ -2014,10 +2016,10 @@ function productCard(p,i){
       <h3>${p.name}</h3>${p.nameTh?`<div class="prod__th">${p.nameTh}</div>`:''}
       <p class="prod__benefit">${ben}</p>
       <div class="prod__meta"><span>${p.size||''}</span>${p.price?`<span class="prod__price">${p.price}</span>`:''}</div>
+      <a href="${shopUrl}" class="btn btn--primary btn--sm" style="width:100%;justify-content:center;margin-top:12px" onclick="event.stopPropagation()" data-i18n="prod_buy">Buy in our shop <svg class="icon"><use href="#i-ext"/></svg></a>
     </div>
   </article>`;
-}
-function renderProducts(){
+}function renderProducts(){
   const g=el('prodGrid');if(!g)return;
   g.innerHTML=PRODUCTS.length?PRODUCTS.map(productCard).join(''):`<div class="pub-empty" style="grid-column:1/-1">${lang==='th'?'ยังไม่มีผลิตภัณฑ์ — เพิ่มได้ในระบบหลังบ้าน':'No products yet — add them in the admin panel.'}</div>`;
 }
@@ -2032,6 +2034,7 @@ window.openProduct=function(i){
   el('pmoType').textContent=type;el('pmoName').textContent=p.name;el('pmoTh').textContent=p.nameTh||'';
   el('pmoBenefit').textContent=ben;el('pmoIng').textContent=p.ingredients||'—';el('pmoSize').textContent=p.size||'—';
   el('pmoPrice').textContent=p.price||'—';el('pmoPriceRow').style.display=p.price?'':'none';
+  el('pmoShopLink').href='shop/index.html?q='+encodeURIComponent(p.name||'');
   openModal('prodModal');
 };
 
