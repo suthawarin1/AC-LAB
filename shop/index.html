@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Noto+Serif+Thai:wght@500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 <style>
 :root{
   --bg:#f7f6f1; --surface:#fff; --surface-2:#f0eee7; --ink:#181d19; --muted:#6a706a; --faint:#9aa09a;
@@ -572,7 +573,8 @@ body.lang-gate-open{overflow:hidden}
       <p class="lede center" data-i18n="success_lede">Thank you — we've received your order and will confirm your payment shortly.</p>
       <div class="order-code" id="successCode">—</div>
       <p class="r-sub" data-i18n="success_hint">Save this order number together with the phone number you used, so you can look up your order anytime.</p>
-      <div style="display:flex;gap:10px;justify-content:center;margin-top:20px;flex-wrap:wrap">
+     <div style="display:flex;gap:10px;justify-content:center;margin-top:20px;flex-wrap:wrap">
+        <a href="#" id="successInvoiceBtn" class="btn btn--gold" style="display:none" target="_blank" rel="noopener" data-i18n="success_invoice">Download receipt / tax invoice</a>
         <a href="#track" class="btn btn--primary" data-i18n="success_track">Track this order</a>
         <a href="#shop" class="btn btn--ghost" data-i18n="success_shop">Continue shopping</a>
       </div>
@@ -770,6 +772,19 @@ const BANK_ACCOUNT_NO='000-0-00000-0';
 const SHIPPING_FEE=50;
 const FREE_SHIP_THRESHOLD=1000;
 
+// ---- ใช้สำหรับพิมพ์บนใบเสร็จ/ใบกำกับภาษี ----
+const COMPANY_NAME_TH='บริษัท ไซสีอิฐ จำกัด';
+const COMPANY_NAME_EN='Sciseelt Co., Ltd.';
+const COMPANY_TAX_ID='0405563004127';
+const COMPANY_ADDRESS_TH='คณะวิทยาศาสตร์ มหาวิทยาลัยขอนแก่น 123 ถ.มิตรภาพ ขอนแก่น 40002';
+// ถ้าราคาสินค้าที่ตั้งไว้ "รวม VAT อยู่แล้ว" ใส่ 0.07 เพื่อแยกยอด VAT ออกมาแสดง / ถ้ายังไม่จด VAT ให้ใส่ 0
+const VAT_RATE=0;
+// ฟอนต์ไทยสำหรับ PDF (โหลดจาก Google Fonts ผ่าน jsDelivr) — ถ้าลิงก์นี้ใช้ไม่ได้ในอนาคต
+// ให้ดาวน์โหลด Sarabun-Regular.ttf / Sarabun-Bold.ttf จาก fonts.google.com แล้วอัปโหลดไว้ที่เว็บคุณเอง แล้วแก้ 2 บรรทัดนี้เป็น URL ของคุณ
+const INVOICE_FONT_REGULAR_URL='https://cdn.jsdelivr.net/gh/google/fonts/ofl/sarabun/Sarabun-Regular.ttf';
+const INVOICE_FONT_BOLD_URL='https://cdn.jsdelivr.net/gh/google/fonts/ofl/sarabun/Sarabun-Bold.ttf';
+
+
 const supa = (SUPA_URL.indexOf('xxxxx')<0 && window.supabase) ? window.supabase.createClient(SUPA_URL,SUPA_KEY,{auth:{persistSession:false}}) : null;
 
 /* ============================================================
@@ -788,7 +803,7 @@ f_name:'Full name',f_phone:'Phone number',f_email:'Email (optional)',f_addr:'Add
 apply:'Apply',pay_qr:'PromptPay QR',pay_bank:'Bank transfer',upload:'Upload',no_file:'No file selected',order_summary:'Order summary',place_order:'Place order',
 continue:'Continue',continue_payment:'Continue to payment',back:'Back',edit:'Edit',disc_label:'Discount code (optional)',disc_placeholder:'Enter code',
 co_note:"After ordering, our team confirms your payment manually and updates your order status — you can check progress any time on the Track order page.",
-success_title:'Order received',success_lede:"Thank you — we've received your order and will confirm your payment shortly.",success_hint:'Save this order number together with the phone number you used, so you can look up your order anytime.',success_track:'Track this order',success_shop:'Continue shopping',
+success_title:'Order received',success_lede:"Thank you — we've received your order and will confirm your payment shortly.",success_hint:'Save this order number together with the phone number you used, so you can look up your order anytime.',success_track:'Track this order',success_shop:'Continue shopping',success_invoice:'Download receipt / tax invoice',
 track_eye:'Order status',track_title:'Track your order',track_lede:'Enter the phone number and order number you used at checkout.',track_btn:'Check status',
 verify_eye:'Product authenticity',verify_title:'Verify a product',verify_lede:"Every genuine AC Lab X product carries an อย registration number. Enter it below to confirm the product is genuine and see what it's made of.",verify_btn:'Verify',
 about_eye:'About us',about_title:'Research you can hold in your hand',about_lede:'AC Lab X is the retail identity that carries science from the bench at Khon Kaen University to registered, everyday products — built and operated by Sciseelt Co., Ltd.',
@@ -808,7 +823,7 @@ f_name:'ชื่อ-นามสกุล',f_phone:'เบอร์โทรศ
 apply:'ใช้โค้ด',pay_qr:'คิวอาร์พร้อมเพย์',pay_bank:'โอนผ่านธนาคาร',upload:'อัปโหลด',no_file:'ยังไม่ได้เลือกไฟล์',order_summary:'สรุปคำสั่งซื้อ',place_order:'ยืนยันสั่งซื้อ',
 continue:'ดำเนินการต่อ',continue_payment:'ไปหน้าชำระเงิน',back:'ย้อนกลับ',edit:'แก้ไข',disc_label:'รหัสส่วนลด (ถ้ามี)',disc_placeholder:'กรอกรหัสส่วนลด',
 co_note:'หลังสั่งซื้อ ทีมงานจะตรวจสอบการชำระเงินและอัปเดตสถานะให้ คุณสามารถตรวจสอบความคืบหน้าได้ที่หน้า “ติดตามคำสั่งซื้อ”',
-success_title:'รับคำสั่งซื้อแล้ว',success_lede:'ขอบคุณค่ะ เราได้รับคำสั่งซื้อของคุณแล้ว และจะตรวจสอบการชำระเงินให้เร็วที่สุด',success_hint:'กรุณาบันทึกหมายเลขคำสั่งซื้อนี้พร้อมเบอร์โทรที่ใช้สั่งซื้อ เพื่อใช้ตรวจสอบสถานะภายหลัง',success_track:'ติดตามคำสั่งซื้อนี้',success_shop:'เลือกซื้อสินค้าต่อ',
+success_title:'รับคำสั่งซื้อแล้ว',success_lede:'ขอบคุณค่ะ เราได้รับคำสั่งซื้อของคุณแล้ว และจะตรวจสอบการชำระเงินให้เร็วที่สุด',success_hint:'กรุณาบันทึกหมายเลขคำสั่งซื้อนี้พร้อมเบอร์โทรที่ใช้สั่งซื้อ เพื่อใช้ตรวจสอบสถานะภายหลัง',success_track:'ติดตามคำสั่งซื้อนี้',success_shop:'เลือกซื้อสินค้าต่อ',success_invoice:'ดาวน์โหลดใบเสร็จ/ใบกำกับภาษี',
 track_eye:'สถานะคำสั่งซื้อ',track_title:'ติดตามคำสั่งซื้อของคุณ',track_lede:'กรอกเบอร์โทรศัพท์และหมายเลขคำสั่งซื้อที่ใช้ตอนสั่งซื้อ',track_btn:'ตรวจสอบสถานะ',
 verify_eye:'ตรวจสอบความแท้ของสินค้า',verify_title:'ตรวจสอบสินค้า',verify_lede:'สินค้า AC Lab x SciSeelt แท้ทุกชิ้นมีเลขทะเบียน อย. กรอกด้านล่างเพื่อยืนยันความแท้และดูรายละเอียดสินค้า',verify_btn:'ตรวจสอบ',
 about_eye:'เกี่ยวกับเรา',about_title:'งานวิจัยที่จับต้องได้',about_lede:'AC Lab X คือแบรนด์ค้าปลีกที่นำวิทยาศาสตร์จากห้องแล็บมหาวิทยาลัยขอนแก่น สู่ผลิตภัณฑ์ที่ขึ้นทะเบียนถูกต้อง ดำเนินงานโดยบริษัท ไซสีอิฐ จำกัด',
@@ -1078,7 +1093,113 @@ function goCheckout(){
   location.hash='#checkout';coShowPanel();
 }
 
+/* 
 /* ============================================================
+   INVOICE (PDF) + EMAIL NOTIFICATIONS
+   ============================================================ */
+let _thaiFontReady=false;
+async function ttfToBase64(url){
+  const buf=await fetch(url).then(r=>{if(!r.ok)throw new Error('font fetch failed: '+url);return r.arrayBuffer();});
+  const bytes=new Uint8Array(buf);
+  let bin='';for(let i=0;i<bytes.length;i++)bin+=String.fromCharCode(bytes[i]);
+  return btoa(bin);
+}
+async function ensureThaiFont(doc){
+  if(!_thaiFontReady){
+    const [reg,bold]=await Promise.all([ttfToBase64(INVOICE_FONT_REGULAR_URL),ttfToBase64(INVOICE_FONT_BOLD_URL)]);
+    doc.addFileToVFS('Sarabun-Regular.ttf',reg);doc.addFont('Sarabun-Regular.ttf','Sarabun','normal');
+    doc.addFileToVFS('Sarabun-Bold.ttf',bold);doc.addFont('Sarabun-Bold.ttf','Sarabun','bold');
+    _thaiFontReady=true;
+  }
+  doc.setFont('Sarabun','normal');
+}
+
+async function generateInvoicePdf(order,items){
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF({unit:'pt',format:'a4'});
+  await ensureThaiFont(doc);
+  const pageW=doc.internal.pageSize.getWidth();
+  let y=50;
+  doc.setFontSize(16);doc.setFont('Sarabun','bold');doc.text(COMPANY_NAME_TH,50,y);y+=20;
+  doc.setFontSize(10);doc.setFont('Sarabun','normal');
+  doc.text(COMPANY_NAME_EN,50,y);y+=16;
+  doc.text('เลขประจำตัวผู้เสียภาษี / Tax ID: '+COMPANY_TAX_ID,50,y);y+=16;
+  doc.text(COMPANY_ADDRESS_TH,50,y);y+=26;
+
+  doc.setFontSize(14);doc.setFont('Sarabun','bold');
+  doc.text('ใบเสร็จรับเงิน / ใบกำกับภาษีอย่างย่อ',50,y);
+  doc.text('Receipt / Tax Invoice',pageW-50,y,{align:'right'});
+  y+=22;
+  doc.setFontSize(10);doc.setFont('Sarabun','normal');
+  doc.text('เลขที่ / No.: '+order.order_no,50,y);
+  doc.text('วันที่ / Date: '+new Date(order.created_at||Date.now()).toLocaleDateString('th-TH'),pageW-50,y,{align:'right'});
+  y+=26;
+
+  doc.setFont('Sarabun','bold');doc.text('ลูกค้า / Customer',50,y);y+=16;
+  doc.setFont('Sarabun','normal');
+  doc.text(order.name,50,y);y+=14;
+  doc.text(order.phone+(order.email?'  ·  '+order.email:''),50,y);y+=14;
+  const addrLine=`${order.address}, ${order.district}, ${order.province} ${order.postal_code}`;
+  const addrWrapped=doc.splitTextToSize(addrLine,pageW-100);
+  doc.text(addrWrapped,50,y);y+=14*addrWrapped.length+12;
+
+  doc.setFont('Sarabun','bold');
+  doc.text('รายการ / Item',50,y);
+  doc.text('จำนวน',330,y,{align:'right'});
+  doc.text('ราคา/หน่วย',420,y,{align:'right'});
+  doc.text('รวม',pageW-50,y,{align:'right'});
+  y+=8;doc.setLineWidth(0.5);doc.line(50,y,pageW-50,y);y+=16;
+  doc.setFont('Sarabun','normal');
+  items.forEach(it=>{
+    const rows=doc.splitTextToSize(it.product_name,250);
+    doc.text(rows,50,y);
+    doc.text(String(it.qty),330,y,{align:'right'});
+    doc.text(baht(it.unit_price),420,y,{align:'right'});
+    doc.text(baht(it.unit_price*it.qty),pageW-50,y,{align:'right'});
+    y+=14*rows.length+6;
+  });
+  y+=6;doc.line(50,y,pageW-50,y);y+=18;
+
+  const sub=order.subtotal, disc=order.discount_amount||0, ship=order.shipping_fee||0, total=order.total;
+  const sumLine=(label,val,bold)=>{doc.setFont('Sarabun',bold?'bold':'normal');doc.text(label,pageW-220,y);doc.text(baht(val),pageW-50,y,{align:'right'});y+=16;};
+  sumLine('ยอดรวมสินค้า / Subtotal',sub,false);
+  if(disc>0)sumLine('ส่วนลด / Discount ('+(order.discount_code||'')+')', -disc, false);
+  sumLine('ค่าจัดส่ง / Shipping',ship,false);
+  if(VAT_RATE>0){
+    const vatBase=total/(1+VAT_RATE);const vat=total-vatBase;
+    sumLine('มูลค่าก่อน VAT',vatBase,false);
+    sumLine('ภาษีมูลค่าเพิ่ม 7% / VAT',vat,false);
+  }
+  sumLine('ยอดชำระทั้งสิ้น / Total',total,true);
+
+  y+=24;doc.setFontSize(9);doc.setFont('Sarabun','normal');
+  doc.text('เอกสารนี้ออกโดยระบบอัตโนมัติ / This document was generated automatically.',50,y);
+
+  return doc.output('blob');
+}
+
+// อัปโหลด PDF ขึ้น Storage แล้วเรียก Edge Function ให้ส่งอีเมล — เรียกใช้จาก placeOrder()
+async function issueInvoiceAndNotify(orderRow, items){
+  try{
+    const blob=await generateInvoicePdf(orderRow, items);
+    const path=`${orderRow.order_no}.pdf`;
+    const {error:upErr}=await supa.storage.from('invoices').upload(path,blob,{contentType:'application/pdf',upsert:true});
+    let invoiceUrl='';
+    if(!upErr){
+      const {data:pub}=supa.storage.from('invoices').getPublicUrl(path);
+      invoiceUrl=pub.publicUrl;
+      await supa.from('shop_orders').update({invoice_url:invoiceUrl}).eq('id',orderRow.id);
+    }else{
+      console.warn('invoice upload failed:',upErr);
+    }
+    await supa.functions.invoke('send-order-email',{body:{order_id:orderRow.id}});
+    return invoiceUrl;
+  }catch(e){
+    console.warn('issueInvoiceAndNotify failed (order was still placed successfully):',e);
+    return '';
+  }
+}
+============================================================
    CHECKOUT — 3-step wizard: shipping → summary/discount → payment
    ============================================================ */
 let coStep=1, coOrderNo='';
@@ -1204,10 +1325,21 @@ async function placeOrder(){
   const items=CART.map(it=>({order_id:orderRow.id,product_id:it.product_id,product_name:it.name,qty:it.qty,unit_price:it.price,image:it.image||null}));
   await supa.from('shop_order_items').insert(items);
   if(appliedDiscount&&appliedDiscount.id){await supa.from('shop_discounts').update({used_count:(appliedDiscount.used_count||0)+1}).eq('id',appliedDiscount.id);}
+
+  // สร้างใบเสร็จ/ใบกำกับภาษี + ส่งอีเมลแจ้งร้านและลูกค้า (ไม่ทำให้คำสั่งซื้อล้มเหลวถ้าขั้นตอนนี้มีปัญหา)
+  const invoiceUrl=await issueInvoiceAndNotify(orderRow, items);
+
   btn.disabled=false;
   CART=[];appliedDiscount=null;slipData='';coOrderNo='';coStep=1;renderCart();
   el('successCode').textContent=orderNo;
+  showSuccessInvoiceLink(invoiceUrl);
   location.hash='#success';
+}
+
+function showSuccessInvoiceLink(url){
+  const btn=el('successInvoiceBtn');
+  if(!btn)return;
+  if(url){btn.href=url;btn.style.display='';}else{btn.style.display='none';}
 }
 
 /* ============================================================
@@ -1240,6 +1372,7 @@ async function trackOrder(){
     ${data.tracking_number?`<div class="bank-box" style="margin-top:14px"><div class="r"><span>${lang==='th'?'ขนส่ง':'Carrier'}</span><b>${esc(data.tracking_carrier||'—')}</b></div><div class="r"><span>${lang==='th'?'เลขพัสดุ':'Tracking no.'}</span><b class="mono">${esc(data.tracking_number)}</b></div></div>`:''}
     <div class="r-items">${(items||[]).map(it=>`<div class="r-item"><span>${esc(it.product_name)} × ${it.qty}</span><span>${baht(it.unit_price*it.qty)}</span></div>`).join('')}</div>
     <div class="r-item" style="font-weight:600;color:var(--ink)"><span>${lang==='th'?'ยอดรวม':'Total'}</span><span>${baht(data.total)}</span></div>
+    ${data.invoice_url?`<a href="${data.invoice_url}" target="_blank" rel="noopener" class="btn btn--ghost btn--sm btn--block" style="margin-top:14px">${lang==='th'?'ดาวน์โหลดใบเสร็จ/ใบกำกับภาษี':'Download receipt / tax invoice'}</a>`:''}
   </div>`;
 }
 
