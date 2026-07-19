@@ -1372,32 +1372,73 @@ function admEditProduct(i){
   <div class="field"><label>อย. registration number</label><input id="ap_fda" value="${esc(p.fda_no)}" placeholder="20-1-01234-1-0001"></div>
   <div class="field"><label>Related research — one per line as "Title | URL"</label><textarea id="ap_research">${esc((p.research||[]).map(r=>r.title+' | '+r.url).join('\\n'))}</textarea></div>
   <label style="display:flex;align-items:center;gap:8px;font-size:.85rem;margin-bottom:12px"><input type="checkbox" id="ap_active" ${p.active!==false?'checked':''}> Active (visible in shop)</label>
-  <button class="btn btn--primary btn--block" onclick="admSaveProduct()">${icon('i-check')} Save product</button>`;
-  admRenderImgs();
+<button class="btn btn--primary btn--block" id="apSaveBtn" onclick="admSaveProduct()">${icon('i-check')} Save product</button>`;  admRenderImgs();
 }
 function admRenderImgs(){el('ap_imgs').innerHTML=admImgs.map((im,i)=>`<div style="position:relative"><img src="${im}" style="width:56px;height:56px;border-radius:8px;object-fit:cover"><button onclick="admImgs.splice(${i},1);admRenderImgs()" style="position:absolute;top:-6px;right:-6px;width:18px;height:18px;border-radius:50%;background:var(--danger);color:#fff;font-size:10px">✕</button></div>`).join('');}
-function admPickImage(){const inp=document.createElement('input');inp.type='file';inp.accept='image/*';inp.onchange=()=>{const f=inp.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{const img=new Image();img.onload=()=>{const max=900;const s=Math.min(1,max/Math.max(img.width,img.height));const cv=document.createElement('canvas');cv.width=img.width*s;cv.height=img.height*s;cv.getContext('2d').drawImage(img,0,0,cv.width,cv.height);admImgs.push(cv.toDataURL('image/jpeg',.85));admRenderImgs();};img.src=rd.result;};rd.readAsDataURL(f);};inp.click();}
-async function admSaveProduct(){
+function admPickImage(){
+  const inp=document.createElement('input');inp.type='file';inp.accept='image/*';
+  inp.onchange=()=>{
+    const f=inp.files[0];if(!f)return;
+    const rd=new FileReader();
+    rd.onerror=()=>toast(lang==='th'?'อ่านไฟล์ไม่สำเร็จ':'Could not read the file',true);
+    rd.onload=()=>{
+      const img=new Image();
+      img.onerror=()=>toast(lang==='th'?'ไฟล์รูปภาพเสียหายหรือไม่รองรับ':'This image file could not be read',true);
+      img.onload=()=>{
+        try{
+          const max=700; // ลดขนาดสูงสุดลง เพื่อไม่ให้ payload ใหญ่เกิน limit ของ Supabase
+          const s=Math.min(1,max/Math.max(img.width,img.height));
+          const cv=document.createElement('canvas');
+          cv.width=Math.round(img.width*s);
+          cv.height=Math.round(img.height*s);
+          cv.getContext('2d').drawImage(img,0,0,cv.width,cv.height);
+          const dataUrl=cv.toDataURL('image/jpeg',.7); // ลด quality ลงด้วย เพื่อลดขนาดไฟล์
+          admImgs.push(dataUrl);
+          admRenderImgs();
+          toast(lang==='th'?'เพิ่มรูปแล้ว — อย่าลืมกด "Save product"':'Image added — remember to click "Save product"');
+        }catch(e){
+          console.error('Image processing failed:',e);
+          toast(lang==='th'?'ประมวลผลรูปภาพไม่สำเร็จ':'Could not process this image',true);
+        }
+      };
+      img.src=rd.result;
+    };
+    rd.readAsDataURL(f);
+  };
+  inp.click();
+}async function admSaveProduct(){
   const name=el('ap_name').value.trim();if(!name){toast('Name required',true);return;}
-  const research=el('ap_research').value.split('\\n').map(l=>l.trim()).filter(Boolean).map(l=>{const [t,u]=l.split('|').map(s=>(s||'').trim());return {title:t,url:u||'#'};});
+  const research=el('ap_research').value.split('\n').map(l=>l.trim()).filter(Boolean).map(l=>{const [t,u]=l.split('|').map(s=>(s||'').trim());return {title:t,url:u||'#'};});
   const item={name,name_th:el('ap_nameth').value.trim(),category:el('ap_cat').value.trim()||'supplement',
     price:+el('ap_price').value||0,compare_price:+el('ap_compare').value||0,
     is_new:el('ap_new').checked,is_bestseller:el('ap_best').checked,images:admImgs,
     short_desc:el('ap_desc').value.trim(),short_desc_th:el('ap_descth').value.trim(),
-    benefits:el('ap_ben').value.split('\\n').map(s=>s.trim()).filter(Boolean),
-    benefits_th:el('ap_benth').value.split('\\n').map(s=>s.trim()).filter(Boolean),
+    benefits:el('ap_ben').value.split('\n').map(s=>s.trim()).filter(Boolean),
+    benefits_th:el('ap_benth').value.split('\n').map(s=>s.trim()).filter(Boolean),
     ingredients:el('ap_ing').value.trim(),ingredients_th:el('ap_ingth').value.trim(),
     size:el('ap_size').value.trim(),stock:+el('ap_stock').value||0,fda_no:el('ap_fda').value.trim(),
     research,active:el('ap_active').checked,c1:'#2f6b4f',c2:'#4f9d78',icon:'i-flask'};
   if(!supa){toast('Supabase not connected — cannot save',true);return;}
-  if(admEditIdx>=0 && PRODUCTS[admEditIdx].id && !String(PRODUCTS[admEditIdx].id).startsWith('demo-')){
-    const {error}=await supa.from('shop_products').update(item).eq('id',PRODUCTS[admEditIdx].id);
-    if(error){toast(error.message,true);return;}
-  }else{
-    const {error}=await supa.from('shop_products').insert(item);
-    if(error){toast(error.message,true);return;}
+  const btn=el('apSaveBtn');
+  if(btn){btn.disabled=true;btn.textContent=(lang==='th'?'กำลังบันทึก…':'Saving…');}
+  try{
+    let error;
+    if(admEditIdx>=0 && PRODUCTS[admEditIdx].id && !String(PRODUCTS[admEditIdx].id).startsWith('demo-')){
+      ({error}=await supa.from('shop_products').update(item).eq('id',PRODUCTS[admEditIdx].id));
+    }else{
+      ({error}=await supa.from('shop_products').insert(item));
+    }
+    if(error) throw error;
+    toast(lang==='th'?'บันทึกสินค้าสำเร็จ':'Product saved');
+    await loadShopData();
+    renderAdminTab('products');
+  }catch(err){
+    console.error('admSaveProduct failed:',err);
+    const msg=(err&&(err.message||err.error_description))||(lang==='th'?'บันทึกไม่สำเร็จ — รูปอาจมีขนาดใหญ่เกินไป ลองใช้รูปที่เล็กลง':'Save failed — image(s) may be too large. Try smaller images.');
+    toast(msg,true);
+  }finally{
+    if(btn){btn.disabled=false;btn.innerHTML=`${icon('i-check')} ${lang==='th'?'บันทึกสินค้า':'Save product'}`;}
   }
-  toast('Product saved');await loadShopData();renderAdminTab('products');
 }
 async function admDelProduct(i){
   const p=PRODUCTS[i];if(!confirm('Delete '+p.name+'?'))return;
