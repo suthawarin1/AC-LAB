@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AC Lab X — Sciseelt Co., Ltd. · Lab-verified natural products</title>
+<meta name="description" content="AC Lab X — the commercial storefront of Sciseelt Co., Ltd. (บริษัท ไซสีอิฐ จำกัด), bringing AC Lab's plant-genomics research to registered, verifiable health and cosmetic products.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23a9772a' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%232f6b4f'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Noto+Serif+Thai:wght@500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{
+  --bg:#f7f6f1; --surface:#fff; --surface-2:#f0eee7; --ink:#181d19; --muted:#6a706a; --faint:#9aa09a;
+  --line:#e6e3da; --line-2:#dcd8cc;
+  --accent:#2f6b4f; --accent-ink:#1e4a36; --accent-soft:#e9f0eb; --accent-bright:#3f8a66;
+  --gold:#a9772a; --gold-ink:#7f581d; --gold-soft:#f7ecd9; --gold-bright:#c69042;
+  --danger:#c0392b; --ok:#2f6b4f;
+  --serif:"Fraunces","Noto Serif Thai",Georgia,serif;
+  --sans:"Inter","IBM Plex Sans Thai",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+  --r:16px; --r-sm:10px; --wrap:1180px;
+  --hair:inset 0 0 0 1px var(--line);
+  --lift:0 2px 4px rgba(24,29,25,.04), 0 24px 46px -30px rgba(24,29,25,.3);
+  --ease:cubic-bezier(.22,.68,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;width:100%;max-width:100vw;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;width:100%;max-width:100vw;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+::selection{background:var(--gold);color:#fff}
+.icon{width:1em;height:1em;stroke:currentColor;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:clamp(18px,4vw,40px)}
+.section{padding-block:clamp(44px,7vw,88px)}
+.section--alt{background:var(--surface-2)}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.12;letter-spacing:-.01em;margin:0}
+.h1{font-size:clamp(2rem,4.6vw,3.4rem);font-weight:300}
+.h2{font-size:clamp(1.5rem,3vw,2.2rem)}
+.h3{font-size:1.25rem;font-weight:500}
+.lede{color:var(--muted);font-weight:400;max-width:58ch}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-ink);font-weight:600;display:inline-flex;align-items:center;gap:9px}
+.eyebrow::before{content:"";width:20px;height:1px;background:currentColor;opacity:.7}
+.mono{font-family:var(--mono)}
+.center{text-align:center;margin-inline:auto}
+.center .eyebrow{justify-content:center}
+.sec-head{max-width:64ch;margin-bottom:clamp(28px,4vw,44px)}
+.sec-head .h2{margin-top:12px}
+.sec-head .lede{margin-top:12px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:600;font-size:.92rem;padding:12px 22px;border-radius:100px;transition:.25s var(--ease);white-space:nowrap}
+.btn--gold{background:var(--gold);color:#fff}
+.btn--gold:hover{background:var(--gold-ink)}
+.btn--primary{background:var(--accent);color:#fff}
+.btn--primary:hover{background:var(--accent-ink)}
+.btn--ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.4px var(--line-2)}
+.btn--ghost:hover{box-shadow:inset 0 0 0 1.4px var(--ink)}
+.btn--sm{padding:9px 16px;font-size:.83rem}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn--block{width:100%}
+.chip{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;padding:5px 11px;border-radius:100px}
+.chip--new{background:var(--accent-soft);color:var(--accent-ink)}
+.chip--best{background:var(--gold-soft);color:var(--gold-ink)}
+.chip--stock{background:#fbeaea;color:var(--danger)}
+
+/* seal — signature motif used for verification everywhere */
+.seal{display:inline-flex;align-items:center;justify-content:center;position:relative;flex:none}
+.seal svg{width:100%;height:100%}
+.seal .ring1{fill:none;stroke:var(--gold);stroke-width:1.4}
+.seal .ring2{fill:none;stroke:var(--gold);stroke-width:1;stroke-dasharray:2 3;opacity:.65}
+.seal .core{fill:var(--gold)}
+.seal .check{stroke:#fff;stroke-width:2.2;fill:none}
+
+/* nav */
+#nav{position:sticky;top:0;z-index:900;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--line)}
+.nav__inner{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px}
+.brand{display:flex;align-items:center;gap:11px}
+.brand__mark{width:38px;height:38px;flex:none}
+.brand__name{font-family:var(--serif);font-weight:500;font-size:1.28rem;letter-spacing:-.01em;line-height:1}
+.brand__sub{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+.nav__links{display:flex;align-items:center;gap:3px}
+.nav__links a{font-size:.87rem;font-weight:600;color:var(--muted);padding:8px 13px;border-radius:100px;transition:.2s}
+.nav__links a:hover,.nav__links a.active{color:var(--ink);background:var(--surface-2)}
+.nav__actions{display:flex;align-items:center;gap:8px}
+.iconbtn{width:40px;height:40px;border-radius:100px;display:inline-flex;align-items:center;justify-content:center;color:var(--muted);box-shadow:inset 0 0 0 1px var(--line);font-size:16px;transition:.2s;position:relative}
+.iconbtn:hover{color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.cart-badge{position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;padding:0 4px;border-radius:100px;background:var(--gold);color:#fff;font-family:var(--mono);font-size:10px;display:flex;align-items:center;justify-content:center}
+.lang{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;font-weight:600;padding:8px 12px;border-radius:100px;box-shadow:inset 0 0 0 1px var(--line)}
+.burger{display:none}
+.mnav{display:none;border-top:1px solid var(--line);padding:10px 0}
+.mnav a{display:block;padding:11px 4px;font-weight:600;font-size:.95rem}
+@media(max-width:880px){.nav__links{display:none}.burger{display:inline-flex}.mnav.open{display:block}}
+
+/* hero */
+.shop-hero{background:linear-gradient(155deg,var(--accent-soft),var(--bg) 60%);border-bottom:1px solid var(--line)}
+.shop-hero__inner{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center;padding-block:clamp(40px,6vw,72px)}
+.shop-hero h1 .em{color:var(--gold);font-style:italic;font-weight:300}
+.shop-hero .lede{margin-top:16px}
+.shop-hero__cta{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}
+.trust-row{display:flex;gap:18px;flex-wrap:wrap;margin-top:26px}
+.trust-row .t{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--muted);font-weight:500}
+.trust-row .t .icon{color:var(--gold)}
+.hero-seal-card{background:var(--surface);border-radius:var(--r);box-shadow:var(--lift);padding:24px;display:flex;gap:16px;align-items:center}
+.hero-seal-card h4{font-size:1rem;font-weight:600;margin-bottom:4px}
+.hero-seal-card p{font-size:.82rem;color:var(--muted);margin:0}
+@media(max-width:820px){.shop-hero__inner{grid-template-columns:1fr}}
+
+/* filters */
+.filters-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:26px}
+.fchip{font-family:var(--mono);font-size:11px;letter-spacing:.03em;text-transform:uppercase;font-weight:600;padding:8px 15px;border-radius:100px;color:var(--muted);box-shadow:inset 0 0 0 1px var(--line);transition:.2s}
+.fchip.active{background:var(--accent);color:#fff;box-shadow:none}
+.psearch{margin-left:auto;position:relative}
+.psearch input{padding:10px 14px 10px 38px;border-radius:100px;background:var(--surface);box-shadow:var(--hair);font-size:.88rem;min-width:220px}
+.psearch .icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:15px}
+
+/* product grid */
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pcard{background:var(--surface);border-radius:var(--r);overflow:hidden;box-shadow:var(--hair);cursor:pointer;display:flex;flex-direction:column;transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.pcard:hover{transform:translateY(-4px);box-shadow:var(--lift)}
+.pcard__img{position:relative;aspect-ratio:1/1;overflow:hidden}
+.pcard__badges{position:absolute;top:10px;left:10px;display:flex;flex-direction:column;gap:6px;z-index:2}
+.pcard__seal{position:absolute;top:10px;right:10px;width:30px;height:30px;z-index:2}
+.pcard__b{padding:16px 16px 18px;display:flex;flex-direction:column;flex:1}
+.pcard__cat{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-ink);margin-bottom:6px}
+.pcard__b h3{font-size:1.05rem;font-weight:600;font-family:var(--sans);line-height:1.25}
+.pcard__th{font-size:.8rem;color:var(--muted);margin-top:2px}
+.pcard__rating{display:flex;align-items:center;gap:5px;margin-top:8px;font-size:.78rem;color:var(--muted)}
+.stars{color:var(--gold);letter-spacing:1px;font-size:.85rem}
+.pcard__price{display:flex;align-items:baseline;gap:8px;margin-top:auto;padding-top:12px}
+.pcard__price .now{font-family:var(--serif);font-size:1.3rem;color:var(--ink)}
+.pcard__price .was{font-family:var(--mono);font-size:.78rem;color:var(--faint);text-decoration:line-through}
+.pcard__add{margin-top:10px}
+.gv{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.gv .glyph{color:#fff;z-index:1}
+.gv .glyph .icon{width:36px;height:36px}
+.gv .wm{position:absolute;right:-6px;bottom:-14px;font-family:var(--serif);font-weight:600;font-size:3.4rem;color:rgba(255,255,255,.16);white-space:nowrap;letter-spacing:-.02em}
+.empty-note{grid-column:1/-1;text-align:center;padding:50px 20px;color:var(--muted);font-size:.92rem}
+
+/* product modal */
+.modal{position:fixed;inset:0;z-index:1200;display:none;align-items:center;justify-content:center;padding:16px}
+.modal.open{display:flex}
+.modal__scrim{position:absolute;inset:0;background:rgba(10,14,11,.55);backdrop-filter:blur(4px)}
+.modal__box{position:relative;background:var(--surface);border-radius:22px;max-width:920px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--lift)}
+.modal__close{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;background:var(--surface-2);color:var(--muted);display:flex;align-items:center;justify-content:center;font-size:16px;z-index:6;transition:.2s}
+.modal__close:hover{background:var(--danger);color:#fff}
+.pd-grid{display:grid;grid-template-columns:1fr 1fr}
+.pd-gallery{padding:22px;display:flex;flex-direction:column;gap:10px}
+.pd-main{aspect-ratio:1/1;border-radius:14px;overflow:hidden;background:var(--surface-2)}
+.pd-thumbs{display:flex;gap:8px}
+.pd-thumbs .th{width:56px;height:56px;border-radius:9px;overflow:hidden;cursor:pointer;box-shadow:inset 0 0 0 1px var(--line);flex:none}
+.pd-thumbs .th.active{box-shadow:inset 0 0 0 2px var(--gold)}
+.pd-info{padding:26px 26px 30px 8px}
+.pd-info .cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-ink)}
+.pd-info h2{margin-top:8px;font-size:1.6rem}
+.pd-info .th-name{color:var(--muted);font-size:.95rem;margin-top:2px}
+.pd-badges{display:flex;gap:7px;margin-top:10px}
+.pd-rating{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:.85rem;color:var(--muted)}
+.pd-price{display:flex;align-items:baseline;gap:10px;margin-top:16px}
+.pd-price .now{font-family:var(--serif);font-size:2rem}
+.pd-price .was{font-family:var(--mono);color:var(--faint);text-decoration:line-through}
+.pd-qty{display:flex;align-items:center;gap:10px;margin-top:18px}
+.qty-box{display:inline-flex;align-items:center;box-shadow:inset 0 0 0 1px var(--line);border-radius:100px;overflow:hidden}
+.qty-box button{width:34px;height:34px;font-size:16px}
+.qty-box span{min-width:32px;text-align:center;font-family:var(--mono)}
+.pd-actions{display:flex;gap:10px;margin-top:16px}
+.pd-fda{display:flex;align-items:center;gap:12px;margin-top:20px;padding:14px 16px;border-radius:12px;background:var(--gold-soft)}
+.pd-fda .seal{width:34px;height:34px}
+.pd-fda b{font-family:var(--mono);font-size:.85rem;color:var(--gold-ink);display:block}
+.pd-fda span{font-size:.76rem;color:var(--muted)}
+.pd-tabs{display:flex;gap:4px;margin-top:22px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.pd-tab{font-family:var(--mono);font-size:11px;letter-spacing:.03em;text-transform:uppercase;font-weight:600;padding:9px 3px;margin-right:16px;color:var(--muted);border-bottom:2px solid transparent}
+.pd-tab.active{color:var(--ink);border-color:var(--gold)}
+.pd-panel{padding-top:16px;font-size:.9rem;color:var(--muted);line-height:1.65}
+.pd-panel.hide{display:none}
+.pd-panel ul{margin:0;padding-left:18px}
+.pd-panel li{margin-bottom:5px}
+.research-item{display:flex;gap:10px;padding:11px 0;border-top:1px solid var(--line)}
+.research-item:first-child{border-top:none}
+.research-item .icon{color:var(--gold);margin-top:2px}
+.review-sum{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+.review-sum .n{font-family:var(--serif);font-size:2.2rem}
+.review-item{padding:13px 0;border-top:1px solid var(--line)}
+.review-item:first-child{border-top:none}
+.review-item .rh{display:flex;justify-content:space-between;align-items:center}
+.review-item .rh b{font-size:.86rem;color:var(--ink)}
+.review-item p{margin:5px 0 0;font-size:.86rem}
+.review-form{margin-top:14px;padding:14px;border-radius:12px;background:var(--surface-2)}
+.rf-stars{display:flex;gap:4px;font-size:1.3rem;color:var(--line-2);margin-bottom:10px}
+.rf-stars span{cursor:pointer}
+.rf-stars span.on{color:var(--gold)}
+.field{margin-bottom:12px}
+.field label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;padding:11px 13px;border-radius:10px;background:var(--surface);box-shadow:var(--hair);font-family:var(--sans);font-size:.9rem;color:var(--ink);outline:none}
+.field input:focus,.field select:focus,.field textarea:focus{box-shadow:inset 0 0 0 1.4px var(--accent)}
+.field textarea{min-height:80px;resize:vertical}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:760px){.pd-grid{grid-template-columns:1fr}.two,.three{grid-template-columns:1fr}}
+
+/* cart drawer */
+.scrim{position:fixed;inset:0;background:rgba(10,14,11,.4);backdrop-filter:blur(3px);z-index:1050;opacity:0;pointer-events:none;transition:opacity .3s}
+.scrim.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;inset:0 0 0 auto;width:min(92vw,420px);background:var(--surface);z-index:1100;transform:translateX(100%);transition:transform .4s var(--ease);display:flex;flex-direction:column}
+.drawer.open{transform:translateX(0)}
+.drawer__top{display:flex;justify-content:space-between;align-items:center;padding:20px 22px;border-bottom:1px solid var(--line)}
+.drawer__top h3{font-size:1.2rem}
+.drawer__body{flex:1;overflow-y:auto;padding:16px 22px}
+.cart-item{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.cart-item__img{width:64px;height:64px;border-radius:10px;overflow:hidden;flex:none}
+.cart-item__b{flex:1;min-width:0}
+.cart-item__b h4{font-size:.9rem;font-weight:600;line-height:1.25}
+.cart-item__price{font-family:var(--mono);font-size:.82rem;color:var(--gold-ink);margin-top:3px}
+.cart-item__ctrl{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
+.cart-item__rm{font-size:11px;color:var(--faint)}
+.cart-empty{text-align:center;padding:60px 10px;color:var(--muted)}
+.cart-empty .icon{width:40px;height:40px;color:var(--faint);margin-bottom:12px}
+.drawer__foot{padding:18px 22px 22px;border-top:1px solid var(--line)}
+.sum-row{display:flex;justify-content:space-between;font-size:.88rem;margin-bottom:7px;color:var(--muted)}
+.sum-row.total{font-size:1.1rem;color:var(--ink);font-weight:600;margin-top:8px;padding-top:10px;border-top:1px solid var(--line)}
+
+/* checkout view */
+.co-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:start}
+.co-card{background:var(--surface);border-radius:var(--r);padding:24px;box-shadow:var(--hair);margin-bottom:16px}
+.co-card h4{display:flex;align-items:center;gap:9px;font-size:1.05rem;margin-bottom:16px}
+.co-card h4 .n{width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--mono);font-size:11px;display:flex;align-items:center;justify-content:center;flex:none}
+.disc-row{display:flex;gap:8px}
+.disc-row input{flex:1}
+.co-sum-item{display:flex;justify-content:space-between;font-size:.85rem;padding:6px 0;color:var(--muted)}
+.pay-tabs{display:flex;gap:8px;margin-bottom:16px}
+.pay-tab{flex:1;padding:11px;border-radius:10px;text-align:center;font-size:.85rem;font-weight:600;box-shadow:inset 0 0 0 1px var(--line);color:var(--muted)}
+.pay-tab.active{box-shadow:inset 0 0 0 2px var(--gold);color:var(--ink);background:var(--gold-soft)}
+.qr-box{text-align:center;padding:18px;background:var(--surface-2);border-radius:14px}
+.qr-box img{width:200px;height:200px;margin:0 auto 12px;border-radius:10px;background:#fff}
+.bank-box{background:var(--surface-2);border-radius:14px;padding:16px 18px;font-size:.88rem}
+.bank-box .r{display:flex;justify-content:space-between;padding:6px 0;border-top:1px solid var(--line)}
+.bank-box .r:first-child{border-top:none}
+.upload-row{margin-top:14px}
+@media(max-width:900px){.co-grid{grid-template-columns:1fr}}
+.co-wizard{max-width:640px;margin:0 auto}
+.co-stepper{display:flex;justify-content:space-between;position:relative;margin:26px 0 30px}
+.co-stepper::before{content:"";position:absolute;top:14px;left:8%;right:8%;height:2px;background:var(--line-2);z-index:0}
+.co-stepper .cs{display:flex;flex-direction:column;align-items:center;gap:8px;flex:1;position:relative;z-index:1}
+.co-stepper .dot{width:28px;height:28px;border-radius:50%;background:var(--surface);box-shadow:0 0 0 2px var(--line-2);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--faint);font-family:var(--mono)}
+.co-stepper .cs.done .dot{background:var(--accent);box-shadow:none;color:#fff}
+.co-stepper .cs.now .dot{background:var(--gold);box-shadow:0 0 0 4px var(--gold-soft);color:#fff}
+.co-stepper .lab{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;color:var(--muted);text-align:center}
+.order-code-sm{font-family:var(--mono);font-size:1rem;background:var(--surface-2);padding:8px 14px;border-radius:10px;display:inline-block;margin-bottom:14px}
+.ship-recap{background:var(--surface-2);border-radius:12px;padding:12px 14px;font-size:.85rem;color:var(--muted);display:flex;justify-content:space-between;gap:10px;align-items:flex-start;line-height:1.55}
+.ship-recap b{color:var(--ink)}
+.co-nav{display:flex;gap:10px;margin-top:18px}
+.co-nav .btn{flex:1}
+
+/* success / track */
+.success-box{max-width:560px;margin:0 auto;text-align:center;background:var(--surface);border-radius:var(--r);box-shadow:var(--hair);padding:clamp(30px,5vw,48px)}
+.success-seal{width:64px;height:64px;margin:0 auto 18px}
+.order-code{font-family:var(--mono);font-size:1.3rem;letter-spacing:.04em;background:var(--surface-2);padding:10px 18px;border-radius:12px;display:inline-block;margin:14px 0}
+.status-track{display:flex;justify-content:space-between;position:relative;margin:30px 0 10px}
+.status-track::before{content:"";position:absolute;top:14px;left:6%;right:6%;height:2px;background:var(--line-2)}
+.status-track .step{display:flex;flex-direction:column;align-items:center;gap:8px;flex:1;position:relative;z-index:1}
+.status-track .dot{width:28px;height:28px;border-radius:50%;background:var(--surface);box-shadow:0 0 0 2px var(--line-2);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--faint)}
+.status-track .step.done .dot{background:var(--accent);box-shadow:none;color:#fff}
+.status-track .step.now .dot{background:var(--gold);box-shadow:0 0 0 4px var(--gold-soft);color:#fff}
+.status-track .lab{font-family:var(--mono);font-size:9.5px;text-align:center;color:var(--muted);letter-spacing:.02em}
+.track-form{max-width:460px;margin:0 auto}
+.result-card{background:var(--surface);border-radius:var(--r);box-shadow:var(--hair);padding:24px;margin-top:20px}
+.result-card .r-items{margin-top:14px}
+.result-card .r-item{display:flex;justify-content:space-between;font-size:.85rem;padding:6px 0;border-top:1px solid var(--line)}
+.result-card .r-item:first-child{border-top:none}
+.notfound{text-align:center;color:var(--muted);padding:30px;font-size:.9rem}
+
+/* verify page */
+.verify-hero{text-align:center;max-width:520px;margin:0 auto}
+.verify-seal-lg{width:96px;height:96px;margin:0 auto 18px}
+.verify-form{max-width:420px;margin:22px auto 0;display:flex;gap:8px}
+.verify-form input{flex:1}
+.verify-result{max-width:560px;margin:26px auto 0}
+.verify-card{display:flex;gap:16px;align-items:center;background:var(--surface);border-radius:var(--r);box-shadow:var(--hair);padding:20px}
+.verify-card .thumb{width:76px;height:76px;border-radius:12px;overflow:hidden;flex:none}
+.verify-ok{display:flex;align-items:center;gap:9px;color:var(--accent-ink);font-weight:600;font-size:.9rem;margin-bottom:6px}
+.verify-bad{background:#fbeaea;color:var(--danger);border-radius:14px;padding:20px;text-align:center;font-size:.9rem}
+
+/* about */
+.about-split{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start}
+.about-card{background:var(--surface);border-radius:var(--r);box-shadow:var(--hair);padding:26px}
+.about-card h4{margin-bottom:10px}
+.about-card p{color:var(--muted);font-size:.92rem;line-height:1.65}
+.timeline-mini{margin-top:18px}
+.tm-item{display:flex;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.tm-item:first-child{border-top:none}
+.tm-item b{font-family:var(--mono);font-size:11px;color:var(--gold-ink);flex:none;width:52px}
+@media(max-width:820px){.about-split{grid-template-columns:1fr}}
+
+/* footer */
+.foot{background:var(--ink);color:#c8ccc4;padding-block:44px 26px}
+.foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px;padding-bottom:30px;border-bottom:1px solid rgba(255,255,255,.12)}
+.foot h5{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-bright);margin-bottom:14px}
+.foot ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+.foot ul a{font-size:.85rem;opacity:.85}
+.foot ul a:hover{opacity:1}
+.foot-brand p{font-size:.85rem;opacity:.8;margin-top:12px;max-width:36ch;line-height:1.6}
+.foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-top:20px;font-family:var(--mono);font-size:11px;opacity:.7}
+@media(max-width:760px){.foot-top{grid-template-columns:1fr}}
+
+/* toasts */
+#toasts{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:1400;display:flex;flex-direction:column;gap:9px;align-items:center}
+.toast{background:var(--ink);color:#fff;padding:12px 20px;border-radius:100px;font-size:.85rem;font-weight:600;box-shadow:0 14px 34px -12px rgba(0,0,0,.5);display:flex;align-items:center;gap:9px;opacity:0;transform:translateY(16px);transition:.35s var(--ease)}
+.toast.show{opacity:1;transform:none}
+.toast .icon{color:var(--gold-bright)}
+.toast.err .icon{color:#e0685b}
+
+/* admin */
+.admin-fab{position:fixed;left:18px;bottom:18px;z-index:850;width:44px;height:44px;border-radius:13px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:var(--lift);opacity:.5}
+.admin-fab:hover{opacity:1}
+.admin{position:fixed;inset:0;z-index:1500;display:none}
+.admin.open{display:block}
+.admin__scrim{position:absolute;inset:0;background:rgba(10,14,11,.5)}
+.admin__panel{position:absolute;top:0;right:0;height:100%;width:min(580px,100%);background:var(--bg);box-shadow:-30px 0 60px -30px rgba(0,0,0,.5);display:flex;flex-direction:column}
+.admin__bar{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--line)}
+.admin__bar b{font-family:var(--serif)}
+.admin__lock{flex:1;display:flex;align-items:center;justify-content:center;padding:24px}
+.lock-card{max-width:320px;text-align:center}
+.lock-card input{width:100%;padding:12px 14px;border-radius:10px;background:var(--surface);box-shadow:var(--hair);margin-bottom:10px;text-align:center}
+.admin__tabs{display:flex;gap:4px;padding:12px 20px 0;border-bottom:1px solid var(--line);overflow-x:auto}
+.atab{font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;font-weight:600;padding:10px 12px;color:var(--muted);border-bottom:2px solid transparent;white-space:nowrap}
+.atab.active{color:var(--gold-ink);border-color:var(--gold)}
+.admin__content{flex:1;overflow-y:auto;padding:18px 20px}
+.adm-row{display:flex;gap:12px;align-items:center;padding:12px;border-radius:12px;box-shadow:var(--hair);margin-bottom:9px;background:var(--surface)}
+.adm-row .thumb{width:42px;height:42px;border-radius:9px;object-fit:cover;flex:none;background:var(--surface-2)}
+.adm-row .r-main{flex:1;min-width:0}
+.adm-row .r-main h4{font-size:.88rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.adm-row .r-sub{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:2px}
+.adm-ic{width:32px;height:32px;border-radius:9px;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--muted);flex:none}
+.adm-ic:hover{background:var(--accent);color:#fff}
+.adm-ic.del:hover{background:var(--danger)}
+.adm-add{width:100%;padding:12px;border-radius:12px;box-shadow:inset 0 0 0 1.5px var(--line-2);color:var(--accent);font-weight:600;font-size:.88rem;margin-top:6px}
+.adm-back{display:inline-flex;gap:7px;font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:14px}
+.badge-status{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;padding:3px 8px;border-radius:100px}
+.bs-pending{background:#fdf0d5;color:#8a6a1f}
+.bs-paid{background:var(--accent-soft);color:var(--accent-ink)}
+.bs-preparing{background:#e6eefb;color:#1f5fa8}
+.bs-shipped{background:var(--gold-soft);color:var(--gold-ink)}
+.bs-delivered{background:#e3f6e6;color:#1e7a34}
+.bs-cancelled{background:#fbeaea;color:var(--danger)}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.6L21 8H6"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"/></symbol>
+<symbol id="i-truck" viewBox="0 0 24 24"><rect x="1" y="6" width="14" height="11" rx="1.5"/><path d="M15 10h4l3 3v4h-7z"/><circle cx="6" cy="19" r="1.6"/><circle cx="17.5" cy="19" r="1.6"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.6-3 8.4-7 9-4-.6-7-4.4-7-9V6z"/></symbol>
+<symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6Z"/><path d="M14 3v4h4"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21c4-4.5 7-8 7-11a7 7 0 1 0-14 0c0 3 3 6.5 7 11Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.7 5.9 6.3.7-4.7 4.5 1.2 6.4L12 17.6 6.5 20.5l1.2-6.4L3 9.6l6.3-.7Z"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.5a3.2 3.2 0 0 1 0 6M17 15.5a5.5 5.5 0 0 1 3.5 4.5"/></symbol>
+<symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></symbol>
+<symbol id="i-lang" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+<symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></symbol>
+</defs></svg>
+
+<!-- NAV -->
+<header id="nav">
+  <div class="wrap nav__inner">
+    <a href="#shop" class="brand" onclick="closeMnav()">
+      <span class="brand__mark"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="17" stroke="var(--gold)" stroke-width="1.4"/><circle cx="20" cy="20" r="11" stroke="var(--gold)" stroke-width="1" stroke-dasharray="2 3" opacity=".6"/><circle cx="20" cy="20" r="5" fill="var(--accent)"/></svg></span>
+      <span><span class="brand__name">AC Lab <em style="color:var(--gold);font-style:normal">X</em></span><span class="brand__sub" data-i18n="brandsub">by Sciseelt Co., Ltd.</span></span>
+    </a>
+    <nav class="nav__links" id="navLinks">
+      <a href="#shop" data-route="shop" data-i18n="nav_shop">Shop</a>
+      <a href="#track" data-route="track" data-i18n="nav_track">Track order</a>
+      <a href="#verify" data-route="verify" data-i18n="nav_verify">Verify product</a>
+      <a href="#about" data-route="about" data-i18n="nav_about">About us</a>
+    </nav>
+    <div class="nav__actions">
+      <button class="lang" onclick="toggleLang()"><svg class="icon"><use href="#i-lang"/></svg><span id="langLabel">EN</span></button>
+      <button class="iconbtn" onclick="openCart()" aria-label="Cart"><svg class="icon"><use href="#i-cart"/></svg><span class="cart-badge" id="cartBadge" style="display:none">0</span></button>
+      <button class="iconbtn burger" onclick="toggleMnav()" aria-label="Menu"><svg class="icon"><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+  <div class="mnav wrap" id="mnav">
+    <a href="#shop" onclick="closeMnav()" data-i18n="nav_shop">Shop</a>
+    <a href="#track" onclick="closeMnav()" data-i18n="nav_track">Track order</a>
+    <a href="#verify" onclick="closeMnav()" data-i18n="nav_verify">Verify product</a>
+    <a href="#about" onclick="closeMnav()" data-i18n="nav_about">About us</a>
+  </div>
+</header>
+
+<main>
+
+<!-- ===== SHOP VIEW ===== -->
+<section class="view" id="view-shop">
+  <div class="shop-hero">
+    <div class="wrap shop-hero__inner">
+      <div class="reveal in">
+        <span class="eyebrow" data-i18n="hero_eye">AC Lab research · commercialised by Sciseelt</span>
+        <h1 class="h1" style="margin-top:14px" data-i18n-html="hero_title">Products born in the lab,<br><span class="em">verified before they ship.</span></h1>
+        <p class="lede" data-i18n="hero_lede">Every item here traces back to AC Lab's plant-genomics and phytochemistry research at Khon Kaen University — registered, batch-verifiable, and made by Sciseelt Co., Ltd.</p>
+        <div class="shop-hero__cta">
+          <a href="#browse" class="btn btn--gold" data-i18n="hero_cta1">Shop products <svg class="icon"><use href="#i-arrow"/></svg></a>
+          <a href="#verify" class="btn btn--ghost" data-i18n="hero_cta2">Verify a product</a>
+        </div>
+        <div class="trust-row">
+          <span class="t"><svg class="icon"><use href="#i-shield"/></svg><span data-i18n="trust1">อย.-registered products</span></span>
+          <span class="t"><svg class="icon"><use href="#i-flask"/></svg><span data-i18n="trust2">Backed by published research</span></span>
+          <span class="t"><svg class="icon"><use href="#i-truck"/></svg><span data-i18n="trust3">Tracked nationwide shipping</span></span>
+        </div>
+      </div>
+      <div class="hero-seal-card reveal in" data-d="1">
+        <span class="seal" style="width:52px;height:52px" id="heroSeal"></span>
+        <div><h4 data-i18n="trustcard_t">Every product carries a seal</h4><p data-i18n="trustcard_d">Look up any อย number on the Verify page to confirm it's a genuine AC Lab X product.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="browse">
+    <div class="wrap">
+      <div class="filters-row">
+        <button class="fchip active" data-cat="all" onclick="setCat('all',this)" data-i18n="cat_all">All</button>
+        <div id="catChips" style="display:contents"></div>
+        <div class="psearch"><svg class="icon"><use href="#i-search"/></svg><input id="pSearch" oninput="renderProducts()" placeholder="Search products…" data-i18n-ph="search_ph"></div>
+      </div>
+      <div class="pgrid" id="pgrid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHECKOUT VIEW ===== -->
+<section class="view" id="view-checkout" style="display:none">
+  <div class="section">
+    <div class="wrap co-wizard">
+      <div class="sec-head center"><span class="eyebrow" data-i18n="co_eye">Checkout</span><h2 class="h2" data-i18n="co_title">Complete your order</h2></div>
+      <div class="co-stepper" id="coStepper"></div>
+
+      <!-- STEP 1 — shipping -->
+      <div class="co-card" id="coPanel1">
+        <h4><span class="n">1</span><span data-i18n="co_step1">Shipping details</span></h4>
+        <div class="two">
+          <div class="field"><label data-i18n="f_name">Full name</label><input id="co_name" required></div>
+          <div class="field"><label data-i18n="f_phone">Phone number</label><input id="co_phone" required placeholder="08X-XXX-XXXX"></div>
+        </div>
+        <div class="field"><label data-i18n="f_email">Email (optional)</label><input id="co_email" type="email"></div>
+        <div class="field"><label data-i18n="f_addr">Address</label><textarea id="co_addr" required placeholder="House no., street, sub-district…"></textarea></div>
+        <div class="three">
+          <div class="field"><label data-i18n="f_district">District</label><input id="co_district" required></div>
+          <div class="field"><label data-i18n="f_province">Province</label><input id="co_province" required></div>
+          <div class="field"><label data-i18n="f_zip">Postal code</label><input id="co_zip" required></div>
+        </div>
+        <div class="field"><label data-i18n="f_note">Note (optional)</label><input id="co_note"></div>
+        <button class="btn btn--gold btn--block" id="coStep1Btn" onclick="coGoStep(2)" data-i18n="continue">Continue</button>
+      </div>
+
+      <!-- STEP 2 — order summary + discount -->
+      <div class="co-card" id="coPanel2" style="display:none">
+        <h4><span class="n">2</span><span data-i18n="co_step2">Order summary</span></h4>
+        <div class="order-code-sm" id="coOrderNoChip">—</div>
+        <div class="ship-recap" id="coShipRecap"></div>
+        <div id="coItems" style="margin-top:14px"></div>
+        <div class="r-sub" style="margin:16px 0 6px" data-i18n="disc_label">Discount code (optional)</div>
+        <div class="disc-row"><input id="co_discount" placeholder="Enter code" data-i18n-ph="disc_placeholder"><button class="btn btn--ghost btn--sm" onclick="applyDiscount()" data-i18n="apply">Apply</button></div>
+        <div id="discMsg" class="r-sub" style="margin-top:8px"></div>
+        <div style="margin-top:14px">
+          <div class="co-sum-item"><span data-i18n="subtotal">Subtotal</span><span id="co_subtotal">฿0</span></div>
+          <div class="co-sum-item" id="co_discount_row" style="display:none"><span data-i18n="discount">Discount</span><span id="co_discount_amt">−฿0</span></div>
+          <div class="co-sum-item"><span data-i18n="shipping">Shipping</span><span id="co_shipping">฿0</span></div>
+          <div class="sum-row total"><span data-i18n="total">Total</span><span id="co_total">฿0</span></div>
+        </div>
+        <div class="co-nav">
+          <button class="btn btn--ghost" onclick="coGoStep(1)" data-i18n="back">Back</button>
+          <button class="btn btn--gold" onclick="coGoStep(3)" data-i18n="continue_payment">Continue to payment</button>
+        </div>
+      </div>
+
+      <!-- STEP 3 — payment -->
+      <div class="co-card" id="coPanel3" style="display:none">
+        <h4><span class="n">3</span><span data-i18n="co_step3">Payment</span></h4>
+        <div class="sum-row total" style="margin-bottom:14px"><span data-i18n="total">Total</span><span id="co_total_pay">฿0</span></div>
+        <div class="pay-tabs">
+          <button class="pay-tab active" id="tab-qr" onclick="setPayTab('qr')" data-i18n="pay_qr">PromptPay QR</button>
+          <button class="pay-tab" id="tab-bank" onclick="setPayTab('bank')" data-i18n="pay_bank">Bank transfer</button>
+        </div>
+        <div id="payQr" class="qr-box"></div>
+        <div id="payBank" class="bank-box" style="display:none"></div>
+        <div class="upload-row field">
+          <label data-i18n="f_slip">Payment slip (optional — you can also send it after ordering)</label>
+          <div style="display:flex;gap:10px;align-items:center">
+            <button class="btn btn--ghost btn--sm" onclick="pickSlip()"><svg class="icon"><use href="#i-upload"/></svg> <span data-i18n="upload">Upload</span></button>
+            <span class="r-sub" id="slipName" data-i18n="no_file">No file selected</span>
+          </div>
+        </div>
+        <div class="co-nav">
+          <button class="btn btn--ghost" onclick="coGoStep(2)" data-i18n="back">Back</button>
+          <button class="btn btn--gold" onclick="placeOrder()" id="placeOrderBtn" data-i18n="place_order">Place order</button>
+        </div>
+        <p class="r-sub" style="margin-top:12px;line-height:1.5" data-i18n="co_note">After ordering, our team confirms your payment manually and updates your order status — you can check progress any time on the Track order page.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SUCCESS VIEW ===== -->
+<section class="view" id="view-success" style="display:none">
+  <div class="section">
+    <div class="wrap success-box">
+      <span class="seal success-seal" id="successSeal"></span>
+      <h2 class="h2" data-i18n="success_title">Order received</h2>
+      <p class="lede center" data-i18n="success_lede">Thank you — we've received your order and will confirm your payment shortly.</p>
+      <div class="order-code" id="successCode">—</div>
+      <p class="r-sub" data-i18n="success_hint">Save this order number together with the phone number you used, so you can look up your order anytime.</p>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:20px;flex-wrap:wrap">
+        <a href="#track" class="btn btn--primary" data-i18n="success_track">Track this order</a>
+        <a href="#shop" class="btn btn--ghost" data-i18n="success_shop">Continue shopping</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRACK VIEW ===== -->
+<section class="view" id="view-track" style="display:none">
+  <div class="section">
+    <div class="wrap">
+      <div class="sec-head center"><span class="eyebrow" data-i18n="track_eye">Order status</span><h2 class="h2" data-i18n="track_title">Track your order</h2><p class="lede center" data-i18n="track_lede">Enter the phone number and order number you used at checkout.</p></div>
+      <div class="track-form">
+        <div class="two">
+          <div class="field"><label data-i18n="f_phone">Phone number</label><input id="tr_phone" placeholder="08X-XXX-XXXX"></div>
+          <div class="field"><label data-i18n="f_orderno">Order number</label><input id="tr_order" placeholder="AC-XXXXXX-XXXX" style="text-transform:uppercase"></div>
+        </div>
+        <button class="btn btn--primary btn--block" onclick="trackOrder()" data-i18n="track_btn">Check status</button>
+      </div>
+      <div id="trackResult"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VERIFY VIEW ===== -->
+<section class="view" id="view-verify" style="display:none">
+  <div class="section">
+    <div class="wrap">
+      <div class="verify-hero">
+        <span class="seal verify-seal-lg" id="verifySealLg"></span>
+        <span class="eyebrow" data-i18n="verify_eye">Product authenticity</span>
+        <h2 class="h2" style="margin-top:10px" data-i18n="verify_title">Verify a product</h2>
+        <p class="lede center" data-i18n="verify_lede">Every genuine AC Lab X product carries an อย registration number. Enter it below to confirm the product is genuine and see what it's made of.</p>
+        <div class="verify-form">
+          <input id="vf_fda" placeholder="e.g. 20-1-01234-1-0001">
+          <button class="btn btn--gold" onclick="verifyProduct()" data-i18n="verify_btn">Verify</button>
+        </div>
+      </div>
+      <div class="verify-result" id="verifyResult"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT VIEW ===== -->
+<section class="view" id="view-about" style="display:none">
+  <div class="section">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow" data-i18n="about_eye">About us</span><h2 class="h2" data-i18n="about_title">Research you can hold in your hand</h2><p class="lede" data-i18n="about_lede">AC Lab X is the retail identity that carries science from the bench at Khon Kaen University to registered, everyday products — built and operated by Sciseelt Co., Ltd.</p></div>
+      <div class="about-split">
+        <div class="about-card reveal in">
+          <h4 data-i18n="about_c1_t">AC Lab — the research</h4>
+          <p data-i18n="about_c1_d">Since 2010, the AC Lab at the Faculty of Science, Khon Kaen University has sequenced plant genomes, profiled medicinal-plant chemistry, and tested plant compounds on human cells, led by Prof. Dr. Arunrat Chaveerach.</p>
+          <a href="../index.html" class="btn btn--ghost btn--sm" style="margin-top:14px" data-i18n="about_visit">Visit the AC Lab research site <svg class="icon"><use href="#i-arrow"/></svg></a>
+        </div>
+        <div class="about-card reveal in" data-d="1">
+          <h4 data-i18n="about_c2_t">Sciseelt Co., Ltd. — the company</h4>
+          <p><b data-i18n="about_company_th">บริษัท ไซสีอิฐ จำกัด</b><br><span data-i18n="about_c2_d">registers, manufactures and distributes the health and cosmetic products developed from AC Lab's findings, so that research results reach real people, safely and legally.</span></p>
+          <div class="timeline-mini">
+            <div class="tm-item"><b data-i18n="about_tl1_y">Research</b><span data-i18n="about_tl1_d">Compound discovery and testing at AC Lab</span></div>
+            <div class="tm-item"><b data-i18n="about_tl2_y">Registration</b><span data-i18n="about_tl2_d">อย. and intellectual-property filing</span></div>
+            <div class="tm-item"><b data-i18n="about_tl3_y">Product</b><span data-i18n="about_tl3_d">Manufactured and sold under Sciseelt</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="about-card reveal in" style="margin-top:16px" data-d="2">
+        <h4 data-i18n="about_contact_t">Company details</h4>
+        <div class="two" style="margin-top:8px">
+          <div><p style="margin:0" data-i18n="about_addr_l">Registered office</p><p style="color:var(--ink)"><span data-i18n="about_addr_v">Faculty of Science, Khon Kaen University, 123 Mittraphap Rd., Khon Kaen 40002, Thailand</span></p></div>
+          <div><p style="margin:0" data-i18n="about_contact_l">Contact</p><p style="color:var(--ink)">shop@sciseelt.co.th · 043-XXX-XXX</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="brand"><span class="brand__mark"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="17" stroke="var(--gold-bright)" stroke-width="1.4"/><circle cx="20" cy="20" r="5" fill="var(--accent-bright)"/></svg></span><span style="color:#fff"><span class="brand__name" style="color:#fff">AC Lab X</span><span class="brand__sub" style="color:#9aa39a">by Sciseelt Co., Ltd.</span></span></div>
+        <p data-i18n="foot_desc">The commercial arm of AC Lab's plant-genomics research — registered products from Sciseelt Co., Ltd. (บริษัท ไซสีอิฐ จำกัด).</p>
+      </div>
+      <div><h5 data-i18n="foot_shop">Shop</h5><ul>
+        <li><a href="#shop" data-i18n="nav_shop">Shop</a></li>
+        <li><a href="#track" data-i18n="nav_track">Track order</a></li>
+        <li><a href="#verify" data-i18n="nav_verify">Verify product</a></li>
+      </ul></div>
+      <div><h5 data-i18n="foot_company">Company</h5><ul>
+        <li><a href="#about" data-i18n="nav_about">About us</a></li>
+        <li><a href="../index.html" data-i18n="foot_aclab">AC Lab research site</a></li>
+        <li><a href="mailto:shop@sciseelt.co.th">shop@sciseelt.co.th</a></li>
+      </ul></div>
+    </div>
+    <div class="foot-bottom">
+      <p>© <span id="year"></span> Sciseelt Co., Ltd. · บริษัท ไซสีอิฐ จำกัด</p>
+      <p data-i18n="foot_reg">Company registration on file · อย.-registered products</p>
+    </div>
+  </div>
+</footer>
+
+<!-- PRODUCT MODAL -->
+<div class="modal" id="productModal">
+  <div class="modal__scrim" onclick="closeModal('productModal')"></div>
+  <div class="modal__box">
+    <button class="modal__close" onclick="closeModal('productModal')"><svg class="icon"><use href="#i-close"/></svg></button>
+    <div class="pd-grid">
+      <div class="pd-gallery">
+        <div class="pd-main" id="pdMain"></div>
+        <div class="pd-thumbs" id="pdThumbs"></div>
+      </div>
+      <div class="pd-info">
+        <div class="cat" id="pdCat"></div>
+        <h2 id="pdName"></h2>
+        <div class="th-name" id="pdNameTh"></div>
+        <div class="pd-badges" id="pdBadges"></div>
+        <div class="pd-rating" id="pdRating"></div>
+        <div class="pd-price"><span class="now" id="pdPriceNow"></span><span class="was" id="pdPriceWas"></span></div>
+        <div class="pd-qty">
+          <div class="qty-box"><button onclick="pdQty(-1)"><svg class="icon"><use href="#i-minus"/></svg></button><span id="pdQty">1</span><button onclick="pdQty(1)"><svg class="icon"><use href="#i-plus"/></svg></button></div>
+          <span class="r-sub" id="pdStock"></span>
+        </div>
+        <div class="pd-actions"><button class="btn btn--gold btn--block" onclick="addToCartFromModal()" data-i18n="add_to_cart">Add to cart</button></div>
+        <div class="pd-fda" id="pdFda"></div>
+        <div class="pd-tabs">
+          <button class="pd-tab active" data-tab="desc" onclick="pdTab('desc',this)" data-i18n="tab_desc">Description</button>
+          <button class="pd-tab" data-tab="ing" onclick="pdTab('ing',this)" data-i18n="tab_ing">Ingredients</button>
+          <button class="pd-tab" data-tab="research" onclick="pdTab('research',this)" data-i18n="tab_research">Research</button>
+          <button class="pd-tab" data-tab="reviews" onclick="pdTab('reviews',this)" data-i18n="tab_reviews">Reviews</button>
+        </div>
+        <div class="pd-panel" id="panel-desc"></div>
+        <div class="pd-panel hide" id="panel-ing"></div>
+        <div class="pd-panel hide" id="panel-research"></div>
+        <div class="pd-panel hide" id="panel-reviews"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CART DRAWER -->
+<div class="scrim" id="cartScrim" onclick="closeCart()"></div>
+<aside class="drawer" id="cartDrawer">
+  <div class="drawer__top"><h3 data-i18n="your_cart">Your cart</h3><button class="iconbtn" onclick="closeCart()"><svg class="icon"><use href="#i-close"/></svg></button></div>
+  <div class="drawer__body" id="cartBody"></div>
+  <div class="drawer__foot" id="cartFoot" style="display:none">
+    <div class="sum-row"><span data-i18n="subtotal">Subtotal</span><span id="cartSubtotal">฿0</span></div>
+    <div class="sum-row total"><span data-i18n="total">Total</span><span id="cartTotal">฿0</span></div>
+    <button class="btn btn--gold btn--block" style="margin-top:12px" onclick="goCheckout()" data-i18n="checkout">Checkout</button>
+  </div>
+</aside>
+
+<!-- ADMIN -->
+<button class="admin-fab" onclick="openAdmin()" title="Admin"><svg class="icon"><use href="#i-shield"/></svg></button>
+<div class="admin" id="admin">
+  <div class="admin__scrim" onclick="closeAdmin()"></div>
+  <div class="admin__panel">
+    <div class="admin__bar"><b>AC Lab X · Admin</b><div style="display:flex;gap:8px;align-items:center"><span id="admEmail" class="r-sub" style="display:none"></span><button class="btn btn--ghost btn--sm" id="admLogoutBtn" style="display:none" onclick="adminLogout()">Log out</button><button class="iconbtn" onclick="closeAdmin()"><svg class="icon"><use href="#i-close"/></svg></button></div></div>
+    <div class="admin__lock" id="adminLock">
+      <div class="lock-card">
+        <svg class="icon" style="width:30px;height:30px;color:var(--gold)"><use href="#i-shield"/></svg>
+        <h3 class="h3" style="margin:12px 0 4px">Admin sign in</h3>
+        <p class="r-sub" style="margin-bottom:14px">Same account as the AC Lab admin panel.</p>
+        <input id="admEmailInput" placeholder="Email">
+        <input id="admPassInput" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')adminLogin()">
+        <button class="btn btn--primary btn--block" onclick="adminLogin()">Sign in</button>
+      </div>
+    </div>
+    <div id="adminBody" style="display:none;flex:1;flex-direction:column;min-height:0">
+      <div class="admin__tabs">
+        <button class="atab active" data-tab="orders" onclick="admTab('orders',this)">Orders</button>
+        <button class="atab" data-tab="products" onclick="admTab('products',this)">Products</button>
+        <button class="atab" data-tab="discounts" onclick="admTab('discounts',this)">Discounts</button>
+        <button class="atab" data-tab="reviews" onclick="admTab('reviews',this)">Reviews</button>
+      </div>
+      <div class="admin__content" id="adminContent"></div>
+    </div>
+  </div>
+</div>
+
+<div id="toasts"></div>
+
+<script>
+/* ============================================================
+   CONFIG — edit these before going live
+   ============================================================ */
+const SUPA_URL='https://nmzwvxdegtfartbhoixx.supabase.co';
+const SUPA_KEY='sb_publishable_EsNS8St8xkIZgSqEGxp4yQ_y1BmeTDh';
+const PROMPTPAY_ID='0000000000';           // TODO: replace with the real PromptPay phone or tax ID (digits only)
+const BANK_NAME='Kasikornbank (ตัวอย่าง — โปรดแก้ไข)';
+const BANK_ACCOUNT_NAME='Sciseelt Co., Ltd.';
+const BANK_ACCOUNT_NO='000-0-00000-0';
+const SHIPPING_FEE=50;
+const FREE_SHIP_THRESHOLD=1000;
+
+const supa = (SUPA_URL.indexOf('xxxxx')<0 && window.supabase) ? window.supabase.createClient(SUPA_URL,SUPA_KEY,{auth:{persistSession:false}}) : null;
+
+/* ============================================================
+   i18n
+   ============================================================ */
+let lang='th';
+const I18N={
+en:{brandsub:'by Sciseelt Co., Ltd.',nav_shop:'Shop',nav_track:'Track order',nav_verify:'Verify product',nav_about:'About us',
+hero_eye:'AC Lab research · commercialised by Sciseelt',hero_title:'Products born in the lab,<br><span class="em">verified before they ship.</span>',
+hero_lede:"Every item here traces back to AC Lab's plant-genomics and phytochemistry research at Khon Kaen University — registered, batch-verifiable, and made by Sciseelt Co., Ltd.",
+hero_cta1:'Shop products',hero_cta2:'Verify a product',trust1:'อย.-registered products',trust2:'Backed by published research',trust3:'Tracked nationwide shipping',
+trustcard_t:'Every product carries a seal',trustcard_d:"Look up any อย number on the Verify page to confirm it's a genuine AC Lab X product.",
+cat_all:'All',search_ph:'Search products…',add_to_cart:'Add to cart',your_cart:'Your cart',subtotal:'Subtotal',discount:'Discount',shipping:'Shipping',total:'Total',checkout:'Checkout',
+tab_desc:'Description',tab_ing:'Ingredients & อย',tab_research:'Research',tab_reviews:'Reviews',
+co_eye:'Checkout',co_title:'Complete your order',co_step1:'Shipping details',co_step2:'Order summary',co_step3:'Payment',
+f_name:'Full name',f_phone:'Phone number',f_email:'Email (optional)',f_addr:'Address',f_district:'District',f_province:'Province',f_zip:'Postal code',f_note:'Note (optional)',f_slip:'Payment slip (optional — you can also send it after ordering)',f_orderno:'Order number',
+apply:'Apply',pay_qr:'PromptPay QR',pay_bank:'Bank transfer',upload:'Upload',no_file:'No file selected',order_summary:'Order summary',place_order:'Place order',
+continue:'Continue',continue_payment:'Continue to payment',back:'Back',edit:'Edit',disc_label:'Discount code (optional)',disc_placeholder:'Enter code',
+co_note:"After ordering, our team confirms your payment manually and updates your order status — you can check progress any time on the Track order page.",
+success_title:'Order received',success_lede:"Thank you — we've received your order and will confirm your payment shortly.",success_hint:'Save this order number together with the phone number you used, so you can look up your order anytime.',success_track:'Track this order',success_shop:'Continue shopping',
+track_eye:'Order status',track_title:'Track your order',track_lede:'Enter the phone number and order number you used at checkout.',track_btn:'Check status',
+verify_eye:'Product authenticity',verify_title:'Verify a product',verify_lede:"Every genuine AC Lab X product carries an อย registration number. Enter it below to confirm the product is genuine and see what it's made of.",verify_btn:'Verify',
+about_eye:'About us',about_title:'Research you can hold in your hand',about_lede:'AC Lab X is the retail identity that carries science from the bench at Khon Kaen University to registered, everyday products — built and operated by Sciseelt Co., Ltd.',
+about_c1_t:'AC Lab — the research',about_c1_d:'Since 2010, the AC Lab at the Faculty of Science, Khon Kaen University has sequenced plant genomes, profiled medicinal-plant chemistry, and tested plant compounds on human cells, led by Prof. Dr. Arunrat Chaveerach.',about_visit:'Visit the AC Lab research site',
+about_c2_t:'Sciseelt Co., Ltd. — the company',about_company_th:'บริษัท ไซสีอิฐ จำกัด',about_c2_d:'registers, manufactures and distributes the health and cosmetic products developed from AC Lab\u2019s findings, so that research results reach real people, safely and legally.',
+about_tl1_y:'Research',about_tl1_d:'Compound discovery and testing at AC Lab',about_tl2_y:'Registration',about_tl2_d:'อย. and intellectual-property filing',about_tl3_y:'Product',about_tl3_d:'Manufactured and sold under Sciseelt',
+about_contact_t:'Company details',about_addr_l:'Registered office',about_addr_v:'Faculty of Science, Khon Kaen University, 123 Mittraphap Rd., Khon Kaen 40002, Thailand',about_contact_l:'Contact',
+foot_desc:"The commercial arm of AC Lab's plant-genomics research — registered products from Sciseelt Co., Ltd. (บริษัท ไซสีอิฐ จำกัด).",foot_shop:'Shop',foot_company:'Company',foot_aclab:'AC Lab research site',foot_reg:'Company registration on file · อย.-registered products'},
+th:{brandsub:'โดย บริษัท ไซสีอิฐ จำกัด',nav_shop:'ร้านค้า',nav_track:'ติดตามคำสั่งซื้อ',nav_verify:'ตรวจสอบสินค้า',nav_about:'เกี่ยวกับเรา',
+hero_eye:'งานวิจัยจาก AC Lab · ผลิตโดย Sciseelt',hero_title:'ผลิตภัณฑ์จากห้องแล็บ<br><span class="em">ตรวจสอบได้ก่อนถึงมือคุณ</span>',
+hero_lede:'ทุกผลิตภัณฑ์ที่นี่สืบย้อนไปถึงงานวิจัยด้านจีโนมิกส์พืชและเคมีพฤกษศาสตร์ของ AC Lab มหาวิทยาลัยขอนแก่น — ขึ้นทะเบียนถูกต้อง ตรวจสอบได้ทุกล็อต ผลิตโดยบริษัท ไซสีอิฐ จำกัด',
+hero_cta1:'เลือกซื้อสินค้า',hero_cta2:'ตรวจสอบสินค้า',trust1:'สินค้าขึ้นทะเบียน อย.',trust2:'อ้างอิงงานวิจัยตีพิมพ์',trust3:'จัดส่งพร้อมเลขติดตาม',
+trustcard_t:'ทุกสินค้ามีตราประทับรับรอง',trustcard_d:'ตรวจสอบเลข อย. ได้ที่หน้าตรวจสอบสินค้า เพื่อยืนยันว่าเป็นสินค้าแท้จาก AC Lab X',
+cat_all:'ทั้งหมด',search_ph:'ค้นหาสินค้า…',add_to_cart:'เพิ่มลงตะกร้า',your_cart:'ตะกร้าของคุณ',subtotal:'ยอดรวมสินค้า',discount:'ส่วนลด',shipping:'ค่าจัดส่ง',total:'ยอดรวมทั้งหมด',checkout:'ชำระเงิน',
+tab_desc:'รายละเอียด',tab_ing:'ส่วนประกอบ & อย.',tab_research:'งานวิจัยที่เกี่ยวข้อง',tab_reviews:'รีวิว',
+co_eye:'ชำระเงิน',co_title:'ยืนยันคำสั่งซื้อของคุณ',co_step1:'ที่อยู่จัดส่ง',co_step2:'สรุปคำสั่งซื้อ',co_step3:'การชำระเงิน',
+f_name:'ชื่อ-นามสกุล',f_phone:'เบอร์โทรศัพท์',f_email:'อีเมล (ไม่บังคับ)',f_addr:'ที่อยู่จัดส่ง',f_district:'อำเภอ/เขต',f_province:'จังหวัด',f_zip:'รหัสไปรษณีย์',f_note:'หมายเหตุ (ไม่บังคับ)',f_slip:'สลิปการชำระเงิน (ไม่บังคับ — ส่งภายหลังได้)',f_orderno:'หมายเลขคำสั่งซื้อ',
+apply:'ใช้โค้ด',pay_qr:'คิวอาร์พร้อมเพย์',pay_bank:'โอนผ่านธนาคาร',upload:'อัปโหลด',no_file:'ยังไม่ได้เลือกไฟล์',order_summary:'สรุปคำสั่งซื้อ',place_order:'ยืนยันสั่งซื้อ',
+continue:'ดำเนินการต่อ',continue_payment:'ไปหน้าชำระเงิน',back:'ย้อนกลับ',edit:'แก้ไข',disc_label:'รหัสส่วนลด (ถ้ามี)',disc_placeholder:'กรอกรหัสส่วนลด',
+co_note:'หลังสั่งซื้อ ทีมงานจะตรวจสอบการชำระเงินและอัปเดตสถานะให้ คุณสามารถตรวจสอบความคืบหน้าได้ที่หน้า “ติดตามคำสั่งซื้อ”',
+success_title:'รับคำสั่งซื้อแล้ว',success_lede:'ขอบคุณค่ะ เราได้รับคำสั่งซื้อของคุณแล้ว และจะตรวจสอบการชำระเงินให้เร็วที่สุด',success_hint:'กรุณาบันทึกหมายเลขคำสั่งซื้อนี้พร้อมเบอร์โทรที่ใช้สั่งซื้อ เพื่อใช้ตรวจสอบสถานะภายหลัง',success_track:'ติดตามคำสั่งซื้อนี้',success_shop:'เลือกซื้อสินค้าต่อ',
+track_eye:'สถานะคำสั่งซื้อ',track_title:'ติดตามคำสั่งซื้อของคุณ',track_lede:'กรอกเบอร์โทรศัพท์และหมายเลขคำสั่งซื้อที่ใช้ตอนสั่งซื้อ',track_btn:'ตรวจสอบสถานะ',
+verify_eye:'ตรวจสอบความแท้ของสินค้า',verify_title:'ตรวจสอบสินค้า',verify_lede:'สินค้า AC Lab X แท้ทุกชิ้นมีเลขทะเบียน อย. กรอกด้านล่างเพื่อยืนยันความแท้และดูรายละเอียดสินค้า',verify_btn:'ตรวจสอบ',
+about_eye:'เกี่ยวกับเรา',about_title:'งานวิจัยที่จับต้องได้',about_lede:'AC Lab X คือแบรนด์ค้าปลีกที่นำวิทยาศาสตร์จากห้องแล็บมหาวิทยาลัยขอนแก่น สู่ผลิตภัณฑ์ที่ขึ้นทะเบียนถูกต้อง ดำเนินงานโดยบริษัท ไซสีอิฐ จำกัด',
+about_c1_t:'AC Lab — งานวิจัย',about_c1_d:'ตั้งแต่ปี 2010 AC Lab คณะวิทยาศาสตร์ มหาวิทยาลัยขอนแก่น ได้ถอดรหัสจีโนมพืช วิเคราะห์เคมีพืชสมุนไพร และทดสอบสารจากพืชต่อเซลล์มนุษย์ นำโดย ศ.ดร.อรุณรัตน์ ฉวีราช',about_visit:'เยี่ยมชมเว็บไซต์งานวิจัย AC Lab',
+about_c2_t:'บริษัท ไซสีอิฐ จำกัด — บริษัท',about_company_th:'บริษัท ไซสีอิฐ จำกัด',about_c2_d:'ดำเนินการขึ้นทะเบียน ผลิต และจัดจำหน่ายผลิตภัณฑ์สุขภาพและความงามที่พัฒนาจากผลงานวิจัยของ AC Lab เพื่อให้ผลวิจัยไปถึงผู้บริโภคจริงอย่างปลอดภัยและถูกกฎหมาย',
+about_tl1_y:'วิจัย',about_tl1_d:'ค้นพบและทดสอบสารสำคัญที่ AC Lab',about_tl2_y:'ขึ้นทะเบียน',about_tl2_d:'ยื่นเลข อย. และทรัพย์สินทางปัญญา',about_tl3_y:'ผลิตภัณฑ์',about_tl3_d:'ผลิตและจำหน่ายภายใต้ Sciseelt',
+about_contact_t:'ข้อมูลบริษัท',about_addr_l:'ที่ตั้งบริษัท',about_addr_v:'คณะวิทยาศาสตร์ มหาวิทยาลัยขอนแก่น 123 ถ.มิตรภาพ ขอนแก่น 40002',about_contact_l:'ติดต่อ',
+foot_desc:'แขนงธุรกิจของงานวิจัยจีโนมิกส์พืชจาก AC Lab — ผลิตภัณฑ์ขึ้นทะเบียนโดยบริษัท ไซสีอิฐ จำกัด',foot_shop:'ร้านค้า',foot_company:'บริษัท',foot_aclab:'เว็บไซต์งานวิจัย AC Lab',foot_reg:'จดทะเบียนบริษัทถูกต้อง · สินค้าขึ้นทะเบียน อย.'}
+};
+function T(k){return (I18N[lang]&&I18N[lang][k])!==undefined?I18N[lang][k]:k;}
+function applyLang(){
+  document.documentElement.lang=lang;
+  document.getElementById('langLabel').textContent=lang==='th'?'EN':'TH';
+  document.querySelectorAll('[data-i18n]').forEach(el=>{el.textContent=T(el.getAttribute('data-i18n'));});
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>{el.innerHTML=T(el.getAttribute('data-i18n-html'));});
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{el.placeholder=T(el.getAttribute('data-i18n-ph'));});
+  renderProducts();renderCatChips();renderCart();
+  if(typeof coStep!=='undefined'){
+    if(coStep===2 && coOrderNo)renderCoSummary();
+    if(coStep===3)renderPaymentQr(currentTotal());
+  }
+}
+function toggleLang(){lang=lang==='th'?'en':'th';applyLang();}
+
+/* ============================================================
+   helpers
+   ============================================================ */
+const el=id=>document.getElementById(id);
+function esc(s){return (s||'').toString().replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function baht(n){return '฿'+Number(n||0).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:2});}
+function icon(id){return `<svg class="icon"><use href="#${id}"/></svg>`;}
+function toast(msg,err){const t=document.createElement('div');t.className='toast'+(err?' err':'');t.innerHTML=icon(err?'i-close':'i-check')+'<span>'+msg+'</span>';el('toasts').appendChild(t);requestAnimationFrame(()=>t.classList.add('show'));setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),350);},3200);}
+function sealSVG(){return `<svg viewBox="0 0 60 60"><circle class="ring1" cx="30" cy="30" r="26"/><circle class="ring2" cx="30" cy="30" r="19"/><circle class="core" cx="30" cy="30" r="12"/><path class="check" d="M24 30l4 4 9-9"/></svg>`;}
+document.querySelectorAll('.seal').forEach(s=>s.innerHTML=sealSVG());
+function hue(n){let h=0;for(let i=0;i<(n||'').length;i++)h=n.charCodeAt(i)+((h<<5)-h);return `hsl(${Math.abs(h)%360},46%,42%)`;}
+function gv(name,icon_id,c1,c2){return `<div class="gv" style="background:linear-gradient(135deg,${c1||'#2f6b4f'},${c2||'#4f9d78'})"><span class="glyph">${icon(icon_id||'i-flask')}</span><span class="wm">${esc((name||'').split(' ')[0])}</span></div>`;}
+function stars(avg){avg=avg||0;let s='';for(let i=1;i<=5;i++)s+=(i<=Math.round(avg))?'★':'☆';return s;}
+
+/* ============================================================
+   demo product catalog (fallback shown until Supabase has rows)
+   ============================================================ */
+let PRODUCTS=[
+ {id:'demo-1',slug:'nat-rhynole',name:'Nat Rhynole',name_th:'แนท ไรนอลเอ',category:'supplement',price:390,compare_price:0,is_new:true,is_bestseller:false,
+  images:[],icon:'i-flask',c1:'#1e2f74',c2:'#3d5cd6',
+  short_desc:'A capsule supplement developed to help improve sleep quality.',short_desc_th:'ผลิตภัณฑ์เสริมอาหารชนิดแคปซูล ช่วยเพิ่มคุณภาพการนอนหลับ',
+  benefits:['Supports natural sleep quality','Plant-derived, non-habit-forming formula','Developed from AC Lab phytochemistry research'],
+  benefits_th:['ช่วยสนับสนุนคุณภาพการนอนหลับตามธรรมชาติ','สูตรจากพืช ไม่ก่อให้เกิดการเสพติด','พัฒนาจากงานวิจัยเคมีพฤกษศาสตร์ของ AC Lab'],
+  ingredients:'Ipomoea aquatica extract 250 mg · Mitragyna rotundifolia extract 250 mg',ingredients_th:'สารสกัดผักบุ้ง 250 มก. · สารสกัดกระท่อมขน 250 มก.',
+  size:'20 capsules · 500 mg',fda_no:'20-1-01234-1-0001',stock:40,
+  research:[{title:'A new source and large quantity of resveratrol in Cratoxylum species and their activities on normal human and cancer cells',url:'../index.html#publications'}]},
+ {id:'demo-2',slug:'nat-epa-sunscreen',name:'Nat EPA Sunscreen',name_th:'แนท อีพีเอ ซันสกรีน',category:'skincare',price:450,compare_price:520,is_new:false,is_bestseller:true,
+  images:[],icon:'i-shield',c1:'#2f7d43',c2:'#67bd78',
+  short_desc:'Broad-spectrum daily sun protection blended with plant-derived actives. SPF50+ PA++++.',short_desc_th:'ครีมกันแดดปกป้องผิวจากรังสี ผสมสารสกัดจากพืช SPF50+ PA++++',
+  benefits:['Broad-spectrum SPF50+ PA++++ protection','Lightweight, non-greasy finish','Contains plant antioxidant extracts'],
+  benefits_th:['ปกป้องรังสี SPF50+ PA++++ แบบครอบคลุม','เนื้อบางเบา ไม่เหนอะหนะ','มีสารสกัดต้านอนุมูลอิสระจากพืช'],
+  ingredients:'Zinc oxide · Titanium dioxide · Morinda citrifolia · Artocarpus lakoocha extract',ingredients_th:'ซิงค์ออกไซด์ · ไททาเนียมไดออกไซด์ · สารสกัดลูกยอ · สารสกัดมะหาด',
+  size:'50 ml',fda_no:'20-1-01234-5-0002',stock:65,
+  research:[]},
+ {id:'demo-3',slug:'nat-hair-serum',name:'Nat Hair Serum',name_th:'แนท แฮร์ เซรั่ม',category:'haircare',price:1190,compare_price:0,is_new:true,is_bestseller:true,
+  images:[],icon:'i-spark',c1:'#3a3f47',c2:'#6b7280',
+  short_desc:'A nourishing serum for hair and scalp, developed from KKU-SCI research.',short_desc_th:'เซรั่มบำรุงเส้นผมและหนังศีรษะ พัฒนาจากงานวิจัย KKU-SCI',
+  benefits:['Nourishes scalp and hair follicles','Lightweight, fast-absorbing formula'],benefits_th:['บำรุงหนังศีรษะและรากผม','เนื้อเบา ซึมซาบเร็ว'],
+  ingredients:'Plant-derived actives from lab research',ingredients_th:'สารสกัดจากพืชจากงานวิจัยในห้องแล็บ',
+  size:'50 ml',fda_no:'20-1-01234-5-0003',stock:22,research:[]},
+ {id:'demo-4',slug:'nat-epc-cleansing-gel',name:'Nat EPC Cleansing Gel',name_th:'แนท อีพีซี เจลล้างหน้า',category:'skincare',price:320,compare_price:0,is_new:false,is_bestseller:false,
+  images:[],icon:'i-flask',c1:'#1f7ab0',c2:'#63c2e6',
+  short_desc:'A gentle daily facial cleansing gel for all skin types.',short_desc_th:'เจลทำความสะอาดผิวหน้าสูตรอ่อนโยน ใช้ได้ทุกสภาพผิว',
+  benefits:['Suitable for all skin types','Free of harsh sulfates'],benefits_th:['เหมาะกับทุกสภาพผิว','ปราศจากซัลเฟตรุนแรง'],
+  ingredients:'Morinda citrifolia · Camellia sinensis · Aloe vera leaf extract',ingredients_th:'สารสกัดลูกยอ · ชาเขียว · ว่านหางจระเข้',
+  size:'100 ml',fda_no:'20-1-01234-5-0004',stock:50,research:[]},
+ {id:'demo-5',slug:'nat-onec',name:'Nat OneC',name_th:'แนท วันซี',category:'supplement',price:590,compare_price:0,is_new:false,is_bestseller:false,
+  images:[],icon:'i-flask',c1:'#2f5d3a',c2:'#5f9d5f',
+  short_desc:'A plant-based dietary supplement in capsule form.',short_desc_th:'ผลิตภัณฑ์เสริมอาหารจากพืชชนิดแคปซูล',
+  benefits:['Plant-based capsule blend','Made with standardized botanical extracts'],benefits_th:['สูตรแคปซูลจากพืช','ใช้สารสกัดพืชมาตรฐาน'],
+  ingredients:'Water spinach powder 200 mg · Tea powder 150 mg · Garcinia powder 150 mg',ingredients_th:'ผงผักบุ้ง 200 มก. · ผงชา 150 มก. · ผงส้มแขก 150 มก.',
+  size:'90 capsules · 54 g',fda_no:'20-1-01234-1-0005',stock:31,research:[]},
+ {id:'demo-6',slug:'nat-wonwi',name:'Nat WonWi',name_th:'แนท วันวิ',category:'supplement',price:590,compare_price:0,is_new:false,is_bestseller:false,
+  images:[],icon:'i-leaf',c1:'#c9971f',c2:'#e8c65a',
+  short_desc:'A plant-based dietary supplement in capsule form.',short_desc_th:'ผลิตภัณฑ์เสริมอาหารจากพืชชนิดแคปซูล',
+  benefits:['Plant-based capsule blend','Made with standardized botanical extracts'],benefits_th:['สูตรแคปซูลจากพืช','ใช้สารสกัดพืชมาตรฐาน'],
+  ingredients:'Noni powder 250 mg · Mulberry leaf powder 150 mg · Centella powder 100 mg',ingredients_th:'ผงลูกยอ 250 มก. · ผงใบหม่อน 150 มก. · ผงบัวบก 100 มก.',
+  size:'60 capsules · 36 g',fda_no:'20-1-01234-1-0006',stock:18,research:[]}
+];
+let REVIEWS=[]; // {product_id,name,rating,comment,status}
+let DISCOUNTS=[]; // {code,type,value,min_order,active,expires_at,max_uses,used_count}
+let SUPA_READY=false;
+
+async function loadShopData(){
+  if(!supa) return;
+  try{
+    const {data:prod,error:pe}=await supa.from('shop_products').select('*').eq('active',true).order('created_at',{ascending:false});
+    if(!pe && prod && prod.length){PRODUCTS=prod;SUPA_READY=true;}
+    const {data:rev}=await supa.from('shop_reviews').select('*').eq('status','approved');
+    if(rev)REVIEWS=rev;
+    const {data:disc}=await supa.from('shop_discounts').select('*').eq('active',true);
+    if(disc)DISCOUNTS=disc;
+  }catch(e){console.warn('Supabase not reachable — showing demo catalog.',e);}
+  renderProducts();renderCatChips();
+}
+
+/* ============================================================
+   ROUTER
+   ============================================================ */
+const VIEWS=['shop','checkout','success','track','verify','about'];
+function route(){
+  let h=(location.hash||'#shop').replace('#','');
+  if(!VIEWS.includes(h))h='shop';
+  VIEWS.forEach(v=>{const s=el('view-'+v);if(s)s.style.display=(v===h)?'':'none';});
+  document.querySelectorAll('.nav__links a,.mnav a').forEach(a=>a.classList.toggle('active',a.dataset.route===h));
+  window.scrollTo({top:0,behavior:'instant'in window?'instant':'auto'});
+  closeMnav();
+}
+window.addEventListener('hashchange',route);
+
+function toggleMnav(){el('mnav').classList.toggle('open');}
+function closeMnav(){el('mnav').classList.remove('open');}
+
+/* ============================================================
+   PRODUCT GRID
+   ============================================================ */
+let curCat='all',curSearch='';
+function catLabel(c){const m={supplement:{en:'Supplement',th:'ผลิตภัณฑ์เสริมอาหาร'},skincare:{en:'Skincare',th:'ผลิตภัณฑ์ผิว'},haircare:{en:'Haircare',th:'ผลิตภัณฑ์ผม'}};return (m[c]&&m[c][lang])||c;}
+function renderCatChips(){
+  const cats=[...new Set(PRODUCTS.map(p=>p.category).filter(Boolean))];
+  el('catChips').innerHTML=cats.map(c=>`<button class="fchip ${curCat===c?'active':''}" data-cat="${c}" onclick="setCat('${c}',this)">${catLabel(c)}</button>`).join('');
+  document.querySelector('[data-cat="all"]').classList.toggle('active',curCat==='all');
+}
+function setCat(c,btn){curCat=c;document.querySelectorAll('.fchip').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderProducts();}
+function productName(p){return lang==='th'&&p.name_th?p.name_th:p.name;}
+function productDesc(p){return lang==='th'&&p.short_desc_th?p.short_desc_th:p.short_desc;}
+function ratingFor(id){const rs=REVIEWS.filter(r=>r.product_id===id);if(!rs.length)return{avg:0,count:0};const avg=rs.reduce((a,r)=>a+ (+r.rating||0),0)/rs.length;return{avg,count:rs.length};}
+function firstImage(p){return (p.images&&p.images.length)?`<img src="${p.images[0]}" alt="${esc(productName(p))}" loading="lazy">`:gv(p.name,p.icon,p.c1,p.c2);}
+function renderProducts(){
+  curSearch=(el('pSearch')?el('pSearch').value:'').toLowerCase();
+  let items=PRODUCTS.filter(p=>p.active!==false);
+  if(curCat!=='all')items=items.filter(p=>p.category===curCat);
+  if(curSearch)items=items.filter(p=>((p.name||'')+(p.name_th||'')).toLowerCase().includes(curSearch));
+  const g=el('pgrid');
+  if(!items.length){g.innerHTML=`<div class="empty-note">${lang==='th'?'ไม่พบสินค้าที่ตรงกับการค้นหา':'No products match your search.'}</div>`;return;}
+  g.innerHTML=items.map(p=>{
+    const r=ratingFor(p.id);
+    return `<article class="pcard" onclick="openProduct('${p.id}')">
+      <div class="pcard__img">
+        <div class="pcard__badges">${p.is_new?`<span class="chip chip--new">${lang==='th'?'ใหม่':'New'}</span>`:''}${p.is_bestseller?`<span class="chip chip--best">${lang==='th'?'ขายดี':'Bestseller'}</span>`:''}</div>
+        ${p.fda_no?`<span class="pcard__seal">${sealSVG()}</span>`:''}
+        ${firstImage(p)}
+      </div>
+      <div class="pcard__b">
+        <div class="pcard__cat">${catLabel(p.category)}</div>
+        <h3>${esc(productName(p))}</h3>
+        ${lang==='en'&&p.name_th?`<div class="pcard__th">${esc(p.name_th)}</div>`:''}
+        <div class="pcard__rating"><span class="stars">${stars(r.avg)}</span><span>${r.count?('('+r.count+')'):(lang==='th'?'ยังไม่มีรีวิว':'No reviews yet')}</span></div>
+        <div class="pcard__price"><span class="now">${baht(p.price)}</span>${p.compare_price>p.price?`<span class="was">${baht(p.compare_price)}</span>`:''}</div>
+        <button class="btn btn--ghost btn--sm pcard__add" onclick="event.stopPropagation();quickAdd('${p.id}')">${icon('i-cart')} ${T('add_to_cart')}</button>
+      </div>
+    </article>`;
+  }).join('');
+}
+
+/* ============================================================
+   PRODUCT MODAL
+   ============================================================ */
+let pdProduct=null,pdImgIdx=0,pdQtyVal=1,pdTabActive='desc';
+function openProduct(id){
+  const p=PRODUCTS.find(x=>x.id===id);if(!p)return;
+  pdProduct=p;pdImgIdx=0;pdQtyVal=1;pdTabActive='desc';
+  const imgs=(p.images&&p.images.length)?p.images:null;
+  el('pdMain').innerHTML=imgs?`<img src="${imgs[0]}" style="width:100%;height:100%;object-fit:cover">`:gv(p.name,p.icon,p.c1,p.c2);
+  el('pdThumbs').innerHTML=imgs?imgs.map((im,i)=>`<div class="th ${i===0?'active':''}" onclick="pdSetImg(${i})"><img src="${im}" style="width:100%;height:100%;object-fit:cover"></div>`).join(''):'';
+  el('pdCat').textContent=catLabel(p.category);
+  el('pdName').textContent=productName(p);
+  el('pdNameTh').textContent=(lang==='en'&&p.name_th)?p.name_th:'';
+  el('pdBadges').innerHTML=(p.is_new?`<span class="chip chip--new">${lang==='th'?'ใหม่':'New'}</span>`:'')+(p.is_bestseller?`<span class="chip chip--best">${lang==='th'?'ขายดี':'Bestseller'}</span>`:'');
+  const r=ratingFor(p.id);
+  el('pdRating').innerHTML=`<span class="stars">${stars(r.avg)}</span><span>${r.avg?r.avg.toFixed(1):'—'} (${r.count} ${lang==='th'?'รีวิว':'reviews'})</span>`;
+  el('pdPriceNow').textContent=baht(p.price);
+  el('pdPriceWas').textContent=p.compare_price>p.price?baht(p.compare_price):'';
+  el('pdQty').textContent='1';
+  el('pdStock').textContent=(p.stock>0)?((lang==='th'?'คงเหลือ ':'In stock: ')+p.stock):(lang==='th'?'สินค้าหมด':'Out of stock');
+  el('pdFda').innerHTML=p.fda_no?`<span class="seal">${sealSVG()}</span><div><b>อย. ${esc(p.fda_no)}</b><span>${lang==='th'?'ตรวจสอบเลขนี้ได้ที่หน้า “ตรวจสอบสินค้า”':'Verify this number on the Verify product page'}</span></div>`:'';
+  const desc=lang==='th'&&p.short_desc_th?p.short_desc_th:p.short_desc;
+  const benefits=(lang==='th'&&p.benefits_th&&p.benefits_th.length?p.benefits_th:(p.benefits||[]));
+  el('panel-desc').innerHTML=`<p>${esc(desc||'')}</p>${benefits.length?`<ul>${benefits.map(b=>`<li>${esc(b)}</li>`).join('')}</ul>`:''}`;
+  const ing=lang==='th'&&p.ingredients_th?p.ingredients_th:p.ingredients;
+  el('panel-ing').innerHTML=`<p><b style="color:var(--ink)">${lang==='th'?'ส่วนประกอบสำคัญ':'Key ingredients'}:</b> ${esc(ing||'—')}</p><p><b style="color:var(--ink)">${lang==='th'?'ขนาด':'Size'}:</b> ${esc(p.size||'—')}</p>${p.fda_no?`<p><b style="color:var(--ink)">${lang==='th'?'เลขทะเบียน อย.':'อย. registration no.'}:</b> <span class="mono">${esc(p.fda_no)}</span></p>`:''}`;
+  const research=p.research||[];
+  el('panel-research').innerHTML=research.length?research.map(r=>`<div class="research-item">${icon('i-doc')}<div><div style="color:var(--ink);font-weight:500">${esc(lang==='th'&&r.title_th?r.title_th:r.title)}</div>${r.url?`<a href="${r.url}" target="_blank" rel="noopener" style="font-size:.8rem;color:var(--gold-ink)">${lang==='th'?'อ่านงานวิจัย':'Read the research'} →</a>`:''}</div></div>`).join(''):`<p>${lang==='th'?'ยังไม่มีงานวิจัยเชื่อมโยงกับสินค้านี้':'No linked research for this product yet.'}</p>`;
+  renderReviewsPanel(p.id);
+  pdTab('desc',document.querySelector('.pd-tab[data-tab="desc"]'));
+  openModal('productModal');
+}
+function pdSetImg(i){pdImgIdx=i;const imgs=pdProduct.images;el('pdMain').innerHTML=`<img src="${imgs[i]}" style="width:100%;height:100%;object-fit:cover">`;document.querySelectorAll('.pd-thumbs .th').forEach((t,idx)=>t.classList.toggle('active',idx===i));}
+function pdQty(d){pdQtyVal=Math.max(1,pdQtyVal+d);el('pdQty').textContent=pdQtyVal;}
+function pdTab(tab,btn){document.querySelectorAll('.pd-tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.pd-panel').forEach(p=>p.classList.add('hide'));el('panel-'+tab).classList.remove('hide');}
+function renderReviewsPanel(pid){
+  const rs=REVIEWS.filter(r=>r.product_id===pid);
+  const r=ratingFor(pid);
+  let h=`<div class="review-sum"><span class="n">${r.avg?r.avg.toFixed(1):'—'}</span><div><span class="stars">${stars(r.avg)}</span><div class="r-sub">${r.count} ${lang==='th'?'รีวิว':'reviews'}</div></div></div>`;
+  h+=rs.length?rs.map(rv=>`<div class="review-item"><div class="rh"><b>${esc(rv.name)}</b><span class="stars">${stars(rv.rating)}</span></div><p>${esc(rv.comment)}</p></div>`).join(''):`<p>${lang==='th'?'ยังไม่มีรีวิว เป็นคนแรกที่รีวิวสินค้านี้':'No reviews yet — be the first to review this product.'}</p>`;
+  h+=`<div class="review-form">
+    <div class="rf-stars" id="rfStars">${[1,2,3,4,5].map(i=>`<span data-v="${i}" onclick="setRfStar(${i})">★</span>`).join('')}</div>
+    <div class="field"><label>${lang==='th'?'ชื่อของคุณ':'Your name'}</label><input id="rf_name"></div>
+    <div class="field"><label>${lang==='th'?'ความคิดเห็น':'Comment'}</label><textarea id="rf_comment"></textarea></div>
+    <button class="btn btn--ghost btn--sm" onclick="submitReview('${pid}')">${lang==='th'?'ส่งรีวิว':'Submit review'}</button>
+  </div>`;
+  el('panel-reviews').innerHTML=h;
+  rfStarVal=0;
+}
+let rfStarVal=0;
+function setRfStar(v){rfStarVal=v;document.querySelectorAll('#rfStars span').forEach((s,i)=>s.classList.toggle('on',i<v));}
+async function submitReview(pid){
+  const name=el('rf_name').value.trim(),comment=el('rf_comment').value.trim();
+  if(!name||!rfStarVal||!comment){toast(lang==='th'?'กรุณาให้คะแนนและกรอกข้อมูลให้ครบ':'Please add a rating, name and comment',true);return;}
+  if(!supa){toast('Supabase not connected',true);return;}
+  const {error}=await supa.from('shop_reviews').insert({product_id:pid,name,rating:rfStarVal,comment,status:'pending'});
+  if(error){toast(lang==='th'?'ส่งรีวิวไม่สำเร็จ':'Could not submit review',true);return;}
+  toast(lang==='th'?'ขอบคุณสำหรับรีวิว! ทีมงานจะตรวจสอบก่อนเผยแพร่':'Thanks — your review will appear after moderation');
+  el('rf_name').value='';el('rf_comment').value='';setRfStar(0);
+}
+
+/* ============================================================
+   CART (in-memory for this session)
+   ============================================================ */
+let CART=[];
+function cartCount(){return CART.reduce((a,i)=>a+i.qty,0);}
+function cartSubtotal(){return CART.reduce((a,i)=>a+i.qty*i.price,0);}
+function addToCart(p,qty){
+  qty=qty||1;
+  const ex=CART.find(i=>i.product_id===p.id);
+  if(ex)ex.qty+=qty;else CART.push({product_id:p.id,name:p.name,name_th:p.name_th,price:p.price,image:(p.images&&p.images[0])||'',icon:p.icon,c1:p.c1,c2:p.c2,qty});
+  renderCart();toast((lang==='th'?'เพิ่มลงตะกร้าแล้ว: ':'Added to cart: ')+productName(p));
+}
+function quickAdd(id){const p=PRODUCTS.find(x=>x.id===id);if(p)addToCart(p,1);}
+function addToCartFromModal(){if(pdProduct)addToCart(pdProduct,pdQtyVal);closeModal('productModal');openCart();}
+function changeQty(pid,d){const it=CART.find(i=>i.product_id===pid);if(!it)return;it.qty+=d;if(it.qty<=0)CART=CART.filter(i=>i.product_id!==pid);renderCart();}
+function removeItem(pid){CART=CART.filter(i=>i.product_id!==pid);renderCart();}
+function renderCart(){
+  const badge=el('cartBadge');const c=cartCount();
+  badge.style.display=c?'flex':'none';badge.textContent=c;
+  const body=el('cartBody');
+  if(!CART.length){body.innerHTML=`<div class="cart-empty">${icon('i-cart')}<p>${lang==='th'?'ตะกร้าของคุณยังว่างอยู่':'Your cart is empty'}</p></div>`;el('cartFoot').style.display='none';return;}
+  body.innerHTML=CART.map(it=>`<div class="cart-item">
+    <div class="cart-item__img">${it.image?`<img src="${it.image}" style="width:100%;height:100%;object-fit:cover">`:gv(it.name,it.icon,it.c1,it.c2)}</div>
+    <div class="cart-item__b">
+      <h4>${esc(lang==='th'&&it.name_th?it.name_th:it.name)}</h4>
+      <div class="cart-item__price">${baht(it.price)}</div>
+      <div class="cart-item__ctrl">
+        <div class="qty-box"><button onclick="changeQty('${it.product_id}',-1)">${icon('i-minus')}</button><span>${it.qty}</span><button onclick="changeQty('${it.product_id}',1)">${icon('i-plus')}</button></div>
+        <button class="cart-item__rm" onclick="removeItem('${it.product_id}')">${lang==='th'?'ลบ':'Remove'}</button>
+      </div>
+    </div>
+  </div>`).join('');
+  el('cartFoot').style.display='block';
+  el('cartSubtotal').textContent=baht(cartSubtotal());
+  el('cartTotal').textContent=baht(cartSubtotal());
+}
+function openCart(){el('cartDrawer').classList.add('open');el('cartScrim').classList.add('open');document.body.style.overflow='hidden';}
+function closeCart(){el('cartDrawer').classList.remove('open');el('cartScrim').classList.remove('open');document.body.style.overflow='';}
+function goCheckout(){
+  if(!CART.length){toast(lang==='th'?'ตะกร้าว่างอยู่':'Your cart is empty',true);return;}
+  closeCart();coStep=1;coOrderNo='';appliedDiscount=null;slipData='';el('slipName').textContent=T('no_file');
+  location.hash='#checkout';coShowPanel();
+}
+
+/* ============================================================
+   CHECKOUT — 3-step wizard: shipping → summary/discount → payment
+   ============================================================ */
+let coStep=1, coOrderNo='';
+let appliedDiscount=null;
+const CO_LABELS={1:{en:'Shipping',th:'ที่อยู่'},2:{en:'Summary',th:'สรุป'},3:{en:'Payment',th:'ชำระเงิน'}};
+
+function shippingFee(){return cartSubtotal()>=FREE_SHIP_THRESHOLD?0:SHIPPING_FEE;}
+function discountAmount(){
+  if(!appliedDiscount)return 0;
+  const sub=cartSubtotal();
+  if(sub<(appliedDiscount.min_order||0))return 0;
+  return appliedDiscount.type==='percent'?Math.round(sub*(appliedDiscount.value/100)):Math.min(appliedDiscount.value,sub);
+}
+function currentTotal(){return Math.max(0,cartSubtotal()-discountAmount())+shippingFee();}
+
+function renderCoStepper(){
+  el('coStepper').innerHTML=[1,2,3].map(i=>{
+    const cls=i<coStep?'done':(i===coStep?'now':'');
+    return `<div class="cs ${cls}"><span class="dot">${i<coStep?icon('i-check'):i}</span><span class="lab">${CO_LABELS[i][lang]}</span></div>`;
+  }).join('');
+}
+function coShowPanel(){
+  el('coPanel1').style.display=coStep===1?'block':'none';
+  el('coPanel2').style.display=coStep===2?'block':'none';
+  el('coPanel3').style.display=coStep===3?'block':'none';
+  renderCoStepper();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function coValidateStep1(){
+  const req=['co_name','co_phone','co_addr','co_district','co_province','co_zip'];
+  for(const id of req){if(!el(id).value.trim()){toast(lang==='th'?'กรุณากรอกข้อมูลที่จำเป็นให้ครบ':'Please fill in all required fields',true);el(id).focus();return false;}}
+  return true;
+}
+async function ensureUniqueOrderNo(){
+  for(let i=0;i<5;i++){
+    const code=genOrderNo();
+    if(!supa)return code;
+    try{const {data}=await supa.from('shop_orders').select('id').eq('order_no',code).maybeSingle();if(!data)return code;}catch(e){return code;}
+  }
+  return genOrderNo()+Math.floor(10+Math.random()*89);
+}
+function genOrderNo(){
+  const d=new Date();const ymd=d.getFullYear().toString().slice(2)+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0');
+  const rand=Math.random().toString(36).slice(2,6).toUpperCase();
+  return `AC-${ymd}-${rand}`;
+}
+function coShipRecapHtml(){
+  return `<div><b>${esc(el('co_name').value)}</b> · ${esc(el('co_phone').value)}<br>${esc(el('co_addr').value)}, ${esc(el('co_district').value)}, ${esc(el('co_province').value)} ${esc(el('co_zip').value)}</div><button class="btn btn--ghost btn--sm" onclick="coGoStep(1)" data-i18n="edit">${T('edit')}</button>`;
+}
+function updateCoTotals(){
+  const sub=cartSubtotal(),disc=discountAmount(),ship=shippingFee(),total=Math.max(0,sub-disc)+ship;
+  el('co_subtotal').textContent=baht(sub);
+  el('co_shipping').textContent=ship?baht(ship):(lang==='th'?'ฟรี':'Free');
+  if(disc>0){el('co_discount_row').style.display='flex';el('co_discount_amt').textContent='−'+baht(disc);}else{el('co_discount_row').style.display='none';}
+  el('co_total').textContent=baht(total);
+  return total;
+}
+function renderCoSummary(){
+  el('coOrderNoChip').textContent=(lang==='th'?'หมายเลขคำสั่งซื้อ: ':'Order number: ')+coOrderNo;
+  el('coShipRecap').innerHTML=coShipRecapHtml();
+  el('coItems').innerHTML=CART.map(it=>`<div class="co-sum-item"><span>${esc(lang==='th'&&it.name_th?it.name_th:it.name)} × ${it.qty}</span><span>${baht(it.price*it.qty)}</span></div>`).join('');
+  updateCoTotals();
+}
+async function coGoStep(step){
+  if(step===2){
+    if(!coValidateStep1())return;
+    const btn=el('coStep1Btn');btn.disabled=true;btn.textContent=lang==='th'?'กำลังสร้างหมายเลข…':'Generating order number…';
+    if(!coOrderNo)coOrderNo=await ensureUniqueOrderNo();
+    btn.disabled=false;btn.textContent=T('continue');
+    renderCoSummary();
+  }
+  if(step===3){
+    const total=updateCoTotals();
+    el('co_total_pay').textContent=baht(total);
+    renderPaymentQr(total);
+  }
+  coStep=step;coShowPanel();
+}
+async function applyDiscount(){
+  const code=el('co_discount').value.trim().toUpperCase();
+  if(!code)return;
+  let d=DISCOUNTS.find(x=>(x.code||'').toUpperCase()===code);
+  if(!d && supa){const {data}=await supa.from('shop_discounts').select('*').ilike('code',code).eq('active',true).maybeSingle();if(data)d=data;}
+  if(!d){el('discMsg').innerHTML=`<span style="color:var(--danger)">${lang==='th'?'ไม่พบโค้ดนี้ หรือหมดอายุแล้ว':'Code not found or expired'}</span>`;appliedDiscount=null;updateCoTotals();return;}
+  if(d.expires_at && new Date(d.expires_at)<new Date()){el('discMsg').innerHTML=`<span style="color:var(--danger)">${lang==='th'?'โค้ดหมดอายุแล้ว':'This code has expired'}</span>`;appliedDiscount=null;updateCoTotals();return;}
+  if(d.max_uses && d.used_count>=d.max_uses){el('discMsg').innerHTML=`<span style="color:var(--danger)">${lang==='th'?'โค้ดถูกใช้ครบจำนวนแล้ว':'This code has reached its usage limit'}</span>`;appliedDiscount=null;updateCoTotals();return;}
+  if((d.min_order||0)>cartSubtotal()){el('discMsg').innerHTML=`<span style="color:var(--danger)">${lang==='th'?'ยอดสั่งซื้อยังไม่ถึงขั้นต่ำสำหรับโค้ดนี้ (':'Order does not meet the minimum for this code ('}${baht(d.min_order)})</span>`;appliedDiscount=null;updateCoTotals();return;}
+  appliedDiscount=d;
+  el('discMsg').innerHTML=`<span style="color:var(--accent-ink)">${lang==='th'?'ใช้โค้ดสำเร็จ: ':'Code applied: '}${esc(d.code)}</span> · <button style="color:var(--danger);text-decoration:underline;font-size:.8rem" onclick="removeDiscount()">${lang==='th'?'ลบโค้ด':'remove'}</button>`;
+  updateCoTotals();
+}
+function removeDiscount(){appliedDiscount=null;el('co_discount').value='';el('discMsg').innerHTML='';updateCoTotals();}
+let payTab='qr';
+function setPayTab(t){payTab=t;document.getElementById('tab-qr').classList.toggle('active',t==='qr');document.getElementById('tab-bank').classList.toggle('active',t==='bank');document.getElementById('payQr').style.display=t==='qr'?'block':'none';document.getElementById('payBank').style.display=t==='bank'?'block':'none';}
+function renderPaymentQr(total){
+  const qrUrl=`https://promptpay.io/${PROMPTPAY_ID}/${Math.max(1,total).toFixed(2)}.png`;
+  el('payQr').innerHTML=`<img src="${qrUrl}" alt="PromptPay QR"><div class="r-sub">${lang==='th'?'สแกนเพื่อชำระ ':'Scan to pay '}${baht(total)} ${lang==='th'?'ผ่านพร้อมเพย์':'via PromptPay'}</div>`;
+  el('payBank').innerHTML=`<div class="r"><span>${lang==='th'?'ธนาคาร':'Bank'}</span><b>${esc(BANK_NAME)}</b></div><div class="r"><span>${lang==='th'?'ชื่อบัญชี':'Account name'}</span><b>${esc(BANK_ACCOUNT_NAME)}</b></div><div class="r"><span>${lang==='th'?'เลขบัญชี':'Account no.'}</span><b class="mono">${esc(BANK_ACCOUNT_NO)}</b></div><div class="r"><span>${lang==='th'?'ยอดโอน':'Amount'}</span><b>${baht(total)}</b></div>`;
+  setPayTab(payTab);
+}
+let slipData='';
+function pickSlip(){
+  const inp=document.createElement('input');inp.type='file';inp.accept='image/*';
+  inp.onchange=()=>{const f=inp.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{slipData=rd.result;el('slipName').textContent=f.name;};rd.readAsDataURL(f);};
+  inp.click();
+}
+async function placeOrder(){
+  if(!CART.length){toast(lang==='th'?'ตะกร้าว่างอยู่':'Your cart is empty',true);return;}
+  if(!supa){toast('Supabase not connected — cannot place a real order',true);return;}
+  if(!coOrderNo)coOrderNo=await ensureUniqueOrderNo();
+  const name=el('co_name').value.trim(),phone=el('co_phone').value.trim(),email=el('co_email').value.trim(),
+        addr=el('co_addr').value.trim(),district=el('co_district').value.trim(),province=el('co_province').value.trim(),
+        zip=el('co_zip').value.trim(),note=el('co_note').value.trim();
+  const sub=cartSubtotal(),disc=discountAmount(),ship=shippingFee(),total=Math.max(0,sub-disc)+ship;
+  const orderNo=coOrderNo;
+  const btn=el('placeOrderBtn');btn.disabled=true;
+  const {data:orderRow,error:oe}=await supa.from('shop_orders').insert({
+    order_no:orderNo,name,phone,email:email||null,address:addr,district,province,postal_code:zip,note:note||null,
+    subtotal:sub,discount_code:appliedDiscount?appliedDiscount.code:null,discount_amount:disc,shipping_fee:ship,total,
+    payment_method:payTab,payment_slip:slipData||null,status:'pending'
+  }).select().single();
+  if(oe){btn.disabled=false;toast((lang==='th'?'สั่งซื้อไม่สำเร็จ: ':'Could not place order: ')+oe.message,true);return;}
+  const items=CART.map(it=>({order_id:orderRow.id,product_id:it.product_id,product_name:it.name,qty:it.qty,unit_price:it.price,image:it.image||null}));
+  await supa.from('shop_order_items').insert(items);
+  if(appliedDiscount&&appliedDiscount.id){await supa.from('shop_discounts').update({used_count:(appliedDiscount.used_count||0)+1}).eq('id',appliedDiscount.id);}
+  btn.disabled=false;
+  CART=[];appliedDiscount=null;slipData='';coOrderNo='';coStep=1;renderCart();
+  el('successCode').textContent=orderNo;
+  location.hash='#success';
+}
+
+/* ============================================================
+   TRACK ORDER
+   ============================================================ */
+const STATUS_STEPS=['pending','paid','preparing','shipped','delivered'];
+function statusLabel(s){const m={
+  pending:{en:'Awaiting payment',th:'รอตรวจสอบการชำระเงิน'},paid:{en:'Payment confirmed',th:'ยืนยันการชำระเงินแล้ว'},
+  preparing:{en:'Preparing order',th:'กำลังจัดเตรียมสินค้า'},shipped:{en:'Shipped',th:'จัดส่งแล้ว'},delivered:{en:'Delivered',th:'ส่งถึงแล้ว'},cancelled:{en:'Cancelled',th:'ยกเลิกคำสั่งซื้อ'}};
+  return (m[s]&&m[s][lang])||s;
+}
+async function trackOrder(){
+  const phone=el('tr_phone').value.trim(),orderNo=el('tr_order').value.trim().toUpperCase();
+  if(!phone||!orderNo){toast(lang==='th'?'กรอกเบอร์โทรและหมายเลขคำสั่งซื้อ':'Enter your phone and order number',true);return;}
+  if(!supa){el('trackResult').innerHTML=`<div class="notfound">Supabase not connected.</div>`;return;}
+  const {data,error}=await supa.from('shop_orders').select('*').eq('order_no',orderNo).eq('phone',phone).maybeSingle();
+  if(error||!data){el('trackResult').innerHTML=`<div class="notfound">${lang==='th'?'ไม่พบคำสั่งซื้อนี้ กรุณาตรวจสอบเบอร์โทรและหมายเลขคำสั่งซื้ออีกครั้ง':'Order not found — please check your phone number and order number.'}</div>`;return;}
+  const {data:items}=await supa.from('shop_order_items').select('*').eq('order_id',data.id);
+  const stepIdx=STATUS_STEPS.indexOf(data.status);
+  let stepsHtml=STATUS_STEPS.map((s,i)=>{
+    const cls=data.status==='cancelled'?'':(i<stepIdx?'done':(i===stepIdx?'now':''));
+    return `<div class="step ${cls}"><span class="dot">${i<stepIdx?icon('i-check'):(i+1)}</span><span class="lab">${statusLabel(s)}</span></div>`;
+  }).join('');
+  el('trackResult').innerHTML=`<div class="result-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+      <div><div class="mono" style="font-size:1.1rem">${esc(data.order_no)}</div><div class="r-sub">${new Date(data.created_at).toLocaleString()}</div></div>
+      <span class="badge-status bs-${data.status}">${statusLabel(data.status)}</span>
+    </div>
+    ${data.status==='cancelled'?'':`<div class="status-track">${stepsHtml}</div>`}
+    ${data.tracking_number?`<div class="bank-box" style="margin-top:14px"><div class="r"><span>${lang==='th'?'ขนส่ง':'Carrier'}</span><b>${esc(data.tracking_carrier||'—')}</b></div><div class="r"><span>${lang==='th'?'เลขพัสดุ':'Tracking no.'}</span><b class="mono">${esc(data.tracking_number)}</b></div></div>`:''}
+    <div class="r-items">${(items||[]).map(it=>`<div class="r-item"><span>${esc(it.product_name)} × ${it.qty}</span><span>${baht(it.unit_price*it.qty)}</span></div>`).join('')}</div>
+    <div class="r-item" style="font-weight:600;color:var(--ink)"><span>${lang==='th'?'ยอดรวม':'Total'}</span><span>${baht(data.total)}</span></div>
+  </div>`;
+}
+
+/* ============================================================
+   VERIFY PRODUCT
+   ============================================================ */
+async function verifyProduct(){
+  const fda=el('vf_fda').value.trim();
+  if(!fda){toast(lang==='th'?'กรอกเลข อย.':'Enter an อย. number',true);return;}
+  let p=PRODUCTS.find(x=>(x.fda_no||'').replace(/\\s/g,'')===fda.replace(/\\s/g,''));
+  if(!p&&supa){const {data}=await supa.from('shop_products').select('*').eq('fda_no',fda).maybeSingle();if(data)p=data;}
+  const box=el('verifyResult');
+  if(!p){box.innerHTML=`<div class="verify-bad">${icon('i-close')} ${lang==='th'?'ไม่พบเลข อย. นี้ในระบบของเรา หากคุณซื้อสินค้าที่แสดงเลขนี้ กรุณาติดต่อเราทันที':'This อย. number was not found in our records. If a product shows this number, please contact us right away.'}</div>`;return;}
+  box.innerHTML=`<div class="verify-card">
+    <div class="thumb">${firstImage(p)}</div>
+    <div>
+      <div class="verify-ok">${icon('i-check')} ${lang==='th'?'สินค้าแท้จาก AC Lab X':'Genuine AC Lab X product'}</div>
+      <div style="font-weight:600">${esc(productName(p))}</div>
+      <div class="r-sub mono" style="margin-top:4px">อย. ${esc(p.fda_no)}</div>
+      <div class="r-sub" style="margin-top:2px">${lang==='th'?'ผลิตโดยบริษัท ไซสีอิฐ จำกัด':'Manufactured by Sciseelt Co., Ltd.'}</div>
+      <button class="btn btn--ghost btn--sm" style="margin-top:10px" onclick="location.hash='#shop';setTimeout(()=>openProduct('${p.id}'),150)">${lang==='th'?'ดูสินค้านี้':'View this product'}</button>
+    </div>
+  </div>`;
+}
+
+/* ============================================================
+   MODAL / MISC UI
+   ============================================================ */
+function openModal(id){el(id).classList.add('open');document.body.style.overflow='hidden';}
+function closeModal(id){el(id).classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelectorAll('.modal.open').forEach(m=>m.classList.remove('open'));closeCart();closeMnav();document.body.style.overflow='';}});
+el('year').textContent=new Date().getFullYear();
+
+const io=new IntersectionObserver(ents=>{ents.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(r=>io.observe(r));
+
+/* ============================================================
+   ADMIN
+   ============================================================ */
+let adminUnlocked=false, adminTabCur='orders';
+function openAdmin(){el('admin').classList.add('open');document.body.style.overflow='hidden';el('adminLock').style.display=adminUnlocked?'none':'flex';el('adminBody').style.display=adminUnlocked?'flex':'none';if(adminUnlocked)renderAdminTab('orders');}
+function closeAdmin(){el('admin').classList.remove('open');document.body.style.overflow='';}
+async function adminLogin(){
+  if(!supa){toast('Supabase not connected',true);return;}
+  const email=el('admEmailInput').value.trim(),pass=el('admPassInput').value;
+  if(!email||!pass){toast(lang==='th'?'กรอกอีเมลและรหัสผ่าน':'Enter email and password',true);return;}
+  const {error}=await supa.auth.signInWithPassword({email,password:pass});
+  if(error){toast(error.message,true);return;}
+  adminUnlocked=true;el('adminLock').style.display='none';el('adminBody').style.display='flex';
+  el('admEmail').textContent=email;el('admEmail').style.display='inline';el('admLogoutBtn').style.display='inline-flex';
+  renderAdminTab('orders');
+}
+async function adminLogout(){adminUnlocked=false;el('adminLock').style.display='flex';el('adminBody').style.display='none';el('admLogoutBtn').style.display='none';el('admEmail').style.display='none';if(supa)await supa.auth.signOut().catch(()=>{});}
+function admTab(t,btn){adminTabCur=t;document.querySelectorAll('.atab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderAdminTab(t);}
+
+async function renderAdminTab(t){
+  const c=el('adminContent');c.innerHTML=`<p class="r-sub">Loading…</p>`;
+  if(t==='orders')await admOrders();
+  else if(t==='products')admProducts();
+  else if(t==='discounts')await admDiscounts();
+  else if(t==='reviews')await admReviews();
+}
+
+/* --- Orders --- */
+let ADM_ORDERS=[];
+async function admOrders(){
+  if(!supa){el('adminContent').innerHTML='<p class="r-sub">Supabase not connected.</p>';return;}
+  const {data,error}=await supa.from('shop_orders').select('*').order('created_at',{ascending:false});
+  if(error){el('adminContent').innerHTML=`<p class="r-sub" style="color:var(--danger)">${esc(error.message)}</p>`;return;}
+  ADM_ORDERS=data||[];
+  el('adminContent').innerHTML=ADM_ORDERS.length?ADM_ORDERS.map((o,i)=>`<div class="adm-row" style="align-items:flex-start;cursor:pointer" onclick="admOrderDetail(${i})">
+      <span class="mono-av" style="width:42px;height:42px;border-radius:9px;background:${hue(o.name)};display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;flex:none">${(o.name||'?')[0]}</span>
+      <div class="r-main"><h4>${esc(o.order_no)} · ${esc(o.name)}</h4><div class="r-sub">${baht(o.total)} · ${new Date(o.created_at).toLocaleDateString()}</div></div>
+      <span class="badge-status bs-${o.status}">${statusLabel(o.status)}</span>
+    </div>`).join('') : '<p class="r-sub">No orders yet.</p>';
+}
+function admOrderDetail(i){
+  const o=ADM_ORDERS[i];
+  supa.from('shop_order_items').select('*').eq('order_id',o.id).then(({data:items})=>{
+    el('adminContent').innerHTML=`<span class="adm-back" onclick="renderAdminTab('orders')">${icon('i-arrow')} Back</span>
+    <div class="co-card">
+      <h4 class="mono">${esc(o.order_no)}</h4>
+      <p class="r-sub">${esc(o.name)} · ${esc(o.phone)} ${o.email?('· '+esc(o.email)):''}</p>
+      <p class="r-sub">${esc(o.address)}, ${esc(o.district)}, ${esc(o.province)} ${esc(o.postal_code)}</p>
+      ${o.note?`<p class="r-sub">Note: ${esc(o.note)}</p>`:''}
+      <div class="r-items" style="margin-top:10px">${(items||[]).map(it=>`<div class="r-item"><span>${esc(it.product_name)} × ${it.qty}</span><span>${baht(it.unit_price*it.qty)}</span></div>`).join('')}</div>
+      <div class="r-item"><span>Shipping</span><span>${baht(o.shipping_fee)}</span></div>
+      ${o.discount_amount?`<div class="r-item"><span>Discount (${esc(o.discount_code||'')})</span><span>−${baht(o.discount_amount)}</span></div>`:''}
+      <div class="r-item" style="font-weight:700"><span>Total</span><span>${baht(o.total)}</span></div>
+      ${o.payment_slip?`<div style="margin-top:10px"><p class="r-sub">Payment slip:</p><img src="${o.payment_slip}" style="max-width:220px;border-radius:10px;box-shadow:var(--hair)"></div>`:''}
+      <div class="field" style="margin-top:16px"><label>Status</label>
+        <select id="adm_status">${['pending','paid','preparing','shipped','delivered','cancelled'].map(s=>`<option value="${s}" ${o.status===s?'selected':''}>${s}</option>`).join('')}</select>
+      </div>
+      <div class="two">
+        <div class="field"><label>Tracking carrier</label><input id="adm_carrier" value="${esc(o.tracking_carrier||'')}"></div>
+        <div class="field"><label>Tracking number</label><input id="adm_tracking" value="${esc(o.tracking_number||'')}"></div>
+      </div>
+      <button class="btn btn--primary btn--block" onclick="admSaveOrder('${o.id}')">${icon('i-check')} Save</button>
+    </div>`;
+  });
+}
+async function admSaveOrder(id){
+  const status=el('adm_status').value,carrier=el('adm_carrier').value.trim(),tracking=el('adm_tracking').value.trim();
+  const {error}=await supa.from('shop_orders').update({status,tracking_carrier:carrier||null,tracking_number:tracking||null,updated_at:new Date()}).eq('id',id);
+  if(error){toast(error.message,true);return;}
+  toast('Order updated');renderAdminTab('orders');
+}
+
+/* --- Products --- */
+let admEditIdx=-1,admImgs=[];
+function admProducts(){
+  el('adminContent').innerHTML=`<div class="r-sub" style="margin-bottom:10px">${PRODUCTS.length} products${SUPA_READY?'':' (demo data — connect shop_products table)'}
+  </div>`+PRODUCTS.map((p,i)=>`<div class="adm-row">${(p.images&&p.images[0])?`<img class="thumb" src="${p.images[0]}">`:`<span class="thumb" style="background:linear-gradient(135deg,${p.c1||'#2f6b4f'},${p.c2||'#4f9d78'})"></span>`}<div class="r-main"><h4>${esc(p.name)}</h4><div class="r-sub">${baht(p.price)} · ${esc(p.category||'')}</div></div><div style="display:flex;gap:6px"><button class="adm-ic" onclick="admEditProduct(${i})">${icon('i-doc')}</button><button class="adm-ic del" onclick="admDelProduct(${i})">${icon('i-close')}</button></div></div>`).join('')+
+  `<button class="adm-add" onclick="admEditProduct(-1)">${icon('i-plus')} Add product</button>`;
+}
+function admEditProduct(i){
+  admEditIdx=i;const p=i>=0?PRODUCTS[i]:{name:'',name_th:'',category:'supplement',price:0,compare_price:0,is_new:false,is_bestseller:false,images:[],short_desc:'',short_desc_th:'',benefits:[],benefits_th:[],ingredients:'',ingredients_th:'',size:'',fda_no:'',stock:0,research:[],c1:'#2f6b4f',c2:'#4f9d78',icon:'i-flask',active:true};
+  admImgs=(p.images||[]).slice();
+  el('adminContent').innerHTML=`<span class="adm-back" onclick="renderAdminTab('products')">${icon('i-arrow')} Back</span>
+  <div class="two"><div class="field"><label>Name (English)</label><input id="ap_name" value="${esc(p.name)}"></div><div class="field"><label>Name (Thai)</label><input id="ap_nameth" value="${esc(p.name_th)}"></div></div>
+  <div class="three"><div class="field"><label>Category</label><input id="ap_cat" value="${esc(p.category)}" placeholder="supplement / skincare / haircare"></div><div class="field"><label>Price (฿)</label><input id="ap_price" type="number" value="${p.price}"></div><div class="field"><label>Compare-at price (฿, optional)</label><input id="ap_compare" type="number" value="${p.compare_price||''}"></div></div>
+  <div class="two"><label style="display:flex;align-items:center;gap:8px;font-size:.85rem"><input type="checkbox" id="ap_new" ${p.is_new?'checked':''}> New</label><label style="display:flex;align-items:center;gap:8px;font-size:.85rem"><input type="checkbox" id="ap_best" ${p.is_bestseller?'checked':''}> Bestseller</label></div>
+  <div class="field"><label>Images</label><div id="ap_imgs" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px"></div><button class="btn btn--ghost btn--sm" onclick="admPickImage()">${icon('i-upload')} Upload image</button></div>
+  <div class="field"><label>Short description (English)</label><textarea id="ap_desc">${esc(p.short_desc)}</textarea></div>
+  <div class="field"><label>Short description (Thai)</label><textarea id="ap_descth">${esc(p.short_desc_th)}</textarea></div>
+  <div class="field"><label>Benefits — one per line (English)</label><textarea id="ap_ben">${esc((p.benefits||[]).join('\\n'))}</textarea></div>
+  <div class="field"><label>Benefits — one per line (Thai)</label><textarea id="ap_benth">${esc((p.benefits_th||[]).join('\\n'))}</textarea></div>
+  <div class="two"><div class="field"><label>Ingredients (English)</label><input id="ap_ing" value="${esc(p.ingredients)}"></div><div class="field"><label>Ingredients (Thai)</label><input id="ap_ingth" value="${esc(p.ingredients_th)}"></div></div>
+  <div class="two"><div class="field"><label>Size</label><input id="ap_size" value="${esc(p.size)}"></div><div class="field"><label>Stock</label><input id="ap_stock" type="number" value="${p.stock||0}"></div></div>
+  <div class="field"><label>อย. registration number</label><input id="ap_fda" value="${esc(p.fda_no)}" placeholder="20-1-01234-1-0001"></div>
+  <div class="field"><label>Related research — one per line as "Title | URL"</label><textarea id="ap_research">${esc((p.research||[]).map(r=>r.title+' | '+r.url).join('\\n'))}</textarea></div>
+  <label style="display:flex;align-items:center;gap:8px;font-size:.85rem;margin-bottom:12px"><input type="checkbox" id="ap_active" ${p.active!==false?'checked':''}> Active (visible in shop)</label>
+  <button class="btn btn--primary btn--block" onclick="admSaveProduct()">${icon('i-check')} Save product</button>`;
+  admRenderImgs();
+}
+function admRenderImgs(){el('ap_imgs').innerHTML=admImgs.map((im,i)=>`<div style="position:relative"><img src="${im}" style="width:56px;height:56px;border-radius:8px;object-fit:cover"><button onclick="admImgs.splice(${i},1);admRenderImgs()" style="position:absolute;top:-6px;right:-6px;width:18px;height:18px;border-radius:50%;background:var(--danger);color:#fff;font-size:10px">✕</button></div>`).join('');}
+function admPickImage(){const inp=document.createElement('input');inp.type='file';inp.accept='image/*';inp.onchange=()=>{const f=inp.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{const img=new Image();img.onload=()=>{const max=900;const s=Math.min(1,max/Math.max(img.width,img.height));const cv=document.createElement('canvas');cv.width=img.width*s;cv.height=img.height*s;cv.getContext('2d').drawImage(img,0,0,cv.width,cv.height);admImgs.push(cv.toDataURL('image/jpeg',.85));admRenderImgs();};img.src=rd.result;};rd.readAsDataURL(f);};inp.click();}
+async function admSaveProduct(){
+  const name=el('ap_name').value.trim();if(!name){toast('Name required',true);return;}
+  const research=el('ap_research').value.split('\\n').map(l=>l.trim()).filter(Boolean).map(l=>{const [t,u]=l.split('|').map(s=>(s||'').trim());return {title:t,url:u||'#'};});
+  const item={name,name_th:el('ap_nameth').value.trim(),category:el('ap_cat').value.trim()||'supplement',
+    price:+el('ap_price').value||0,compare_price:+el('ap_compare').value||0,
+    is_new:el('ap_new').checked,is_bestseller:el('ap_best').checked,images:admImgs,
+    short_desc:el('ap_desc').value.trim(),short_desc_th:el('ap_descth').value.trim(),
+    benefits:el('ap_ben').value.split('\\n').map(s=>s.trim()).filter(Boolean),
+    benefits_th:el('ap_benth').value.split('\\n').map(s=>s.trim()).filter(Boolean),
+    ingredients:el('ap_ing').value.trim(),ingredients_th:el('ap_ingth').value.trim(),
+    size:el('ap_size').value.trim(),stock:+el('ap_stock').value||0,fda_no:el('ap_fda').value.trim(),
+    research,active:el('ap_active').checked,c1:'#2f6b4f',c2:'#4f9d78',icon:'i-flask'};
+  if(!supa){toast('Supabase not connected — cannot save',true);return;}
+  if(admEditIdx>=0 && PRODUCTS[admEditIdx].id && !String(PRODUCTS[admEditIdx].id).startsWith('demo-')){
+    const {error}=await supa.from('shop_products').update(item).eq('id',PRODUCTS[admEditIdx].id);
+    if(error){toast(error.message,true);return;}
+  }else{
+    const {error}=await supa.from('shop_products').insert(item);
+    if(error){toast(error.message,true);return;}
+  }
+  toast('Product saved');await loadShopData();renderAdminTab('products');
+}
+async function admDelProduct(i){
+  const p=PRODUCTS[i];if(!confirm('Delete '+p.name+'?'))return;
+  if(supa && p.id && !String(p.id).startsWith('demo-')){await supa.from('shop_products').delete().eq('id',p.id);}
+  PRODUCTS.splice(i,1);renderProducts();renderAdminTab('products');
+}
+
+/* --- Discounts --- */
+async function admDiscounts(){
+  if(!supa){el('adminContent').innerHTML='<p class="r-sub">Supabase not connected.</p>';return;}
+  const {data}=await supa.from('shop_discounts').select('*').order('code');
+  DISCOUNTS=data||[];
+  el('adminContent').innerHTML=DISCOUNTS.map((d,i)=>`<div class="adm-row"><span class="mono-av" style="width:42px;height:42px;border-radius:9px;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;flex:none">%</span><div class="r-main"><h4 class="mono">${esc(d.code)}</h4><div class="r-sub">${d.type==='percent'?d.value+'%':baht(d.value)} off · used ${d.used_count||0}${d.max_uses?'/'+d.max_uses:''}</div></div><div style="display:flex;gap:6px"><button class="adm-ic" onclick="admEditDiscount(${i})">${icon('i-doc')}</button><button class="adm-ic del" onclick="admDelDiscount(${i})">${icon('i-close')}</button></div></div>`).join('')+
+  `<button class="adm-add" onclick="admEditDiscount(-1)">${icon('i-plus')} Add discount code</button>`;
+}
+function admEditDiscount(i){
+  const d=i>=0?DISCOUNTS[i]:{code:'',type:'percent',value:10,min_order:0,max_uses:'',expires_at:'',active:true};
+  el('adminContent').innerHTML=`<span class="adm-back" onclick="renderAdminTab('discounts')">${icon('i-arrow')} Back</span>
+  <div class="field"><label>Code</label><input id="ad_code" value="${esc(d.code)}" style="text-transform:uppercase"></div>
+  <div class="two"><div class="field"><label>Type</label><select id="ad_type"><option value="percent" ${d.type==='percent'?'selected':''}>Percent %</option><option value="fixed" ${d.type==='fixed'?'selected':''}>Fixed ฿</option></select></div><div class="field"><label>Value</label><input id="ad_value" type="number" value="${d.value}"></div></div>
+  <div class="two"><div class="field"><label>Minimum order (฿)</label><input id="ad_min" type="number" value="${d.min_order||0}"></div><div class="field"><label>Max uses (optional)</label><input id="ad_max" type="number" value="${d.max_uses||''}"></div></div>
+  <div class="field"><label>Expires on (optional)</label><input id="ad_exp" type="date" value="${d.expires_at||''}"></div>
+  <label style="display:flex;align-items:center;gap:8px;font-size:.85rem;margin-bottom:12px"><input type="checkbox" id="ad_active" ${d.active!==false?'checked':''}> Active</label>
+  <button class="btn btn--primary btn--block" onclick="admSaveDiscount(${i})">${icon('i-check')} Save</button>`;
+}
+async function admSaveDiscount(i){
+  const code=el('ad_code').value.trim().toUpperCase();if(!code){toast('Code required',true);return;}
+  const item={code,type:el('ad_type').value,value:+el('ad_value').value||0,min_order:+el('ad_min').value||0,max_uses:el('ad_max').value?+el('ad_max').value:null,expires_at:el('ad_exp').value||null,active:el('ad_active').checked};
+  if(i>=0){const {error}=await supa.from('shop_discounts').update(item).eq('id',DISCOUNTS[i].id);if(error){toast(error.message,true);return;}}
+  else{const {error}=await supa.from('shop_discounts').insert(item);if(error){toast(error.message,true);return;}}
+  toast('Discount saved');renderAdminTab('discounts');
+}
+async function admDelDiscount(i){if(!confirm('Delete this code?'))return;await supa.from('shop_discounts').delete().eq('id',DISCOUNTS[i].id);renderAdminTab('discounts');}
+
+/* --- Reviews --- */
+async function admReviews(){
+  if(!supa){el('adminContent').innerHTML='<p class="r-sub">Supabase not connected.</p>';return;}
+  const {data}=await supa.from('shop_reviews').select('*').order('created_at',{ascending:false});
+  const rows=data||[];
+  el('adminContent').innerHTML=rows.length?rows.map(r=>`<div class="adm-row" style="align-items:flex-start"><span class="mono-av" style="width:42px;height:42px;border-radius:9px;background:${hue(r.name)};display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;flex:none">${(r.name||'?')[0]}</span><div class="r-main"><h4>${esc(r.name)} · <span class="stars">${stars(r.rating)}</span></h4><div class="r-sub">${esc(r.comment)}</div><div class="r-sub" style="margin-top:3px">status: ${r.status}</div></div><div style="display:flex;flex-direction:column;gap:6px">${r.status!=='approved'?`<button class="adm-ic" onclick="admReviewStatus('${r.id}','approved')">${icon('i-check')}</button>`:''}${r.status!=='rejected'?`<button class="adm-ic del" onclick="admReviewStatus('${r.id}','rejected')">${icon('i-close')}</button>`:''}</div></div>`).join(''):'<p class="r-sub">No reviews yet.</p>';
+}
+async function admReviewStatus(id,status){await supa.from('shop_reviews').update({status}).eq('id',id);toast('Review '+status);renderAdminTab('reviews');await loadShopData();}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+applyLang();route();renderCart();coShowPanel();
+if(supa){
+  supa.auth.getSession().then(({data})=>{if(data&&data.session){adminUnlocked=true;el('admEmail').textContent=data.session.user.email;el('admEmail').style.display='inline';el('admLogoutBtn').style.display='inline-flex';}});
+}
+loadShopData();
+</script>
+</body>
+</html>
