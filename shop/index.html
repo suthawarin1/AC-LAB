@@ -1349,6 +1349,13 @@ async function admSaveOrder(id){
 }
 
 /* --- Products --- */
+function withTimeout(promise, ms, label){
+  return Promise.race([
+    promise,
+    new Promise((_,reject)=>setTimeout(()=>reject(new Error((label||'Request')+' timed out after '+(ms/1000)+'s')),ms))
+  ]);
+}
+let admEditIdx=-1,admImgs=[];
 let admEditIdx=-1,admImgs=[];
 function admProducts(){
   el('adminContent').innerHTML=`<div class="r-sub" style="margin-bottom:10px">${PRODUCTS.length} products${SUPA_READY?'':' (demo data — connect shop_products table)'}
@@ -1421,19 +1428,23 @@ function admPickImage(){
   if(!supa){toast('Supabase not connected — cannot save',true);return;}
   const btn=el('apSaveBtn');
   if(btn){btn.disabled=true;btn.textContent=(lang==='th'?'กำลังบันทึก…':'Saving…');}
+console.log('[admSaveProduct] start, payload size (chars):', JSON.stringify(item).length, item);
   try{
     let error;
     if(admEditIdx>=0 && PRODUCTS[admEditIdx].id && !String(PRODUCTS[admEditIdx].id).startsWith('demo-')){
-      ({error}=await supa.from('shop_products').update(item).eq('id',PRODUCTS[admEditIdx].id));
+      console.log('[admSaveProduct] mode: UPDATE id=',PRODUCTS[admEditIdx].id);
+      ({error}=await withTimeout(supa.from('shop_products').update(item).eq('id',PRODUCTS[admEditIdx].id),15000,'Save (update)'));
     }else{
-      ({error}=await supa.from('shop_products').insert(item));
+      console.log('[admSaveProduct] mode: INSERT');
+      ({error}=await withTimeout(supa.from('shop_products').insert(item),15000,'Save (insert)'));
     }
+    console.log('[admSaveProduct] supabase responded, error=',error);
     if(error) throw error;
     toast(lang==='th'?'บันทึกสินค้าสำเร็จ':'Product saved');
-    await loadShopData();
+    await withTimeout(loadShopData(),15000,'Reload products').catch(e=>console.warn('[admSaveProduct] reload failed:',e));
     renderAdminTab('products');
   }catch(err){
-    console.error('admSaveProduct failed:',err);
+    console.error('[admSaveProduct] failed:',err);
     const msg=(err&&(err.message||err.error_description))||(lang==='th'?'บันทึกไม่สำเร็จ — รูปอาจมีขนาดใหญ่เกินไป ลองใช้รูปที่เล็กลง':'Save failed — image(s) may be too large. Try smaller images.');
     toast(msg,true);
   }finally{
