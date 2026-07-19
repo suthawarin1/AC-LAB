@@ -1356,7 +1356,6 @@ function withTimeout(promise, ms, label){
   ]);
 }
 let admEditIdx=-1,admImgs=[];
-let admEditIdx=-1,admImgs=[];
 function admProducts(){
   el('adminContent').innerHTML=`<div class="r-sub" style="margin-bottom:10px">${PRODUCTS.length} products${SUPA_READY?'':' (demo data — connect shop_products table)'}
   </div>`+PRODUCTS.map((p,i)=>`<div class="adm-row">${(p.images&&p.images[0])?`<img class="thumb" src="${p.images[0]}">`:`<span class="thumb" style="background:linear-gradient(135deg,${p.c1||'#2f6b4f'},${p.c2||'#4f9d78'})"></span>`}<div class="r-main"><h4>${esc(p.name)}</h4><div class="r-sub">${baht(p.price)} · ${esc(p.category||'')}</div></div><div style="display:flex;gap:6px"><button class="adm-ic" onclick="admEditProduct(${i})">${icon('i-doc')}</button><button class="adm-ic del" onclick="admDelProduct(${i})">${icon('i-close')}</button></div></div>`).join('')+
