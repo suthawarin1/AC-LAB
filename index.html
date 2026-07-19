@@ -712,8 +712,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 /* ===== member bio modal ===== */
 .member-modal .modal__box{max-width:660px;display:grid;grid-template-columns:4fr 6fr;overflow:hidden}
 .member-modal .mm-photo{position:relative;min-height:100%;background:var(--surface-2);display:flex;align-items:center;justify-content:center}
-.member-modal .mm-photo img{width:100%;height:100%;object-fit:cover;object-position:center 12%;position:absolute;inset:0}
-.member-modal .mm-photo .mono-av{width:120px;height:120px;font-size:2.4rem}
+.member-modal .mm-photo img{width:100%;height:100%;object-fit:cover;object-position:center 22%;position:absolute;inset:0}.member-modal .mm-photo .mono-av{width:120px;height:120px;font-size:2.4rem}
 .member-modal .mm-info{padding:clamp(26px,3.4vw,40px)}
 .member-modal .role{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:5px 11px;border-radius:100px;margin-bottom:14px}
 .member-modal .role.intl{color:var(--ochre);background:color-mix(in srgb,var(--ochre) 14%,transparent)}
@@ -792,8 +791,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 .data-card p{font-size:.82rem;color:var(--muted);font-weight:300;line-height:1.55;margin-bottom:14px}
 .data-card .btn{width:100%;justify-content:center}
 .data-card.danger h4 .icon{color:#e05656}
-@media(max-width:520px){.member-modal .modal__box{grid-template-columns:1fr}.member-modal .mm-photo{height:200px;min-height:200px}}
-
+@media(max-width:520px){.member-modal .modal__box{grid-template-columns:1fr}.member-modal .mm-photo{height:280px;min-height:280px}.member-modal .mm-photo img{object-position:center 18%}}
 /* ===== research team (project 8) ===== */
 .rteam{margin-top:38px}
 .pi-banner{display:grid;grid-template-columns:auto 1fr;gap:34px;align-items:center;background:var(--surface);border-radius:20px;padding:32px;box-shadow:var(--hair)}
@@ -1290,13 +1288,10 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
         <div style="margin-top:24px" class="reveal"><button class="btn btn--ghost" onclick="openListModal('news')" data-i18n="news_all">Browse the archive <svg class="icon"><use href="#i-arrow"/></svg></button></div>
       </div>
       <aside>
-        <div class="aside-card reveal" data-d="1">
+<div class="aside-card reveal" data-d="1">
           <h3><span class="ic"><svg class="icon"><use href="#i-cal"/></svg></span> <span data-i18n="upcoming">Upcoming</span></h3>
-          <div class="event" onclick="toast(T('ev_toast'))"><div class="cal"><span class="mo">Feb</span><span class="dy">14</span></div><div><h4 data-i18n="ev1">PhD dissertation defense</h4><div class="who">Ms. Suda C. · Room 3201</div></div></div>
-          <div class="event" onclick="toast(T('ev_toast'))"><div class="cal"><span class="mo">Feb</span><span class="dy">28</span></div><div><h4 data-i18n="ev2">Monthly lab meeting</h4><div class="who">Progress updates · 13:00</div></div></div>
-          <div class="event" onclick="toast(T('ev_toast'))"><div class="cal"><span class="mo">Mar</span><span class="dy">09</span></div><div><h4 data-i18n="ev3">Field trip — Phu Kradueng</h4><div class="who">Sample collection · all members</div></div></div>
-        </div>
-        <div class="aside-card reveal" data-d="2">
+          <div id="eventsList"></div>
+        </div>        <div class="aside-card reveal" data-d="2">
           <h3><span class="ic"><svg class="icon"><use href="#i-scope"/></svg></span> <span data-i18n="gallery">Gallery</span></h3>
           <div class="gallery" id="gallery"></div>
         </div>
@@ -1571,8 +1566,10 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
         <button class="atab" data-tab="collabs" onclick="adminTab('collabs',this)">Partners</button>
 <button class="atab" data-tab="voices" onclick="adminTab('voices',this)">Voices</button>
 <button class="atab" data-tab="messages" onclick="adminTab('messages',this)">Messages</button>
-<button class="atab" data-tab="banner" onclick="adminTab('banner',this)">Banner</button>        <button class="atab" data-tab="data" onclick="adminTab('data',this)">Data</button>      </div>
-            <div class="admin__content" id="adminContent"></div>
+<button class="atab" data-tab="banner" onclick="adminTab('banner',this)">Banner</button>
+<button class="atab" data-tab="events" onclick="adminTab('events',this)">Events</button>
+<button class="atab" data-tab="gallery" onclick="adminTab('gallery',this)">Gallery</button>
+        <button class="atab" data-tab="data" onclick="adminTab('data',this)">Data</button>      </div>            <div class="admin__content" id="adminContent"></div>
     </div>
   </div>
 </div>
@@ -1704,13 +1701,17 @@ let VIDEOS=[
   {cat:'tutorial',title:'From plant to plastome',titleTh:'จากพืชสู่จีโนมคลอโรพลาสต์',desc:'How a field sample becomes an assembled, annotated chloroplast genome.',descTh:'ตัวอย่างภาคสนามกลายเป็นจีโนมคลอโรพลาสต์ที่ประกอบและใส่คำอธิบายได้อย่างไร',yt:'',c1:'#8a5f1f',c2:'#c69a3e'},
   {cat:'tutorial',title:'Phytochemistry: HPLC basics',titleTh:'เคมีพฤกษ์: พื้นฐาน HPLC',desc:'A quick walkthrough of our compound extraction and HPLC analysis workflow.',descTh:'อธิบายขั้นตอนการสกัดสารและการวิเคราะห์ด้วย HPLC แบบรวบรัด',yt:'',c1:'#1e4f96',c2:'#4f8fd6'}
 ];
-const GALLERY=[
+let GALLERY=[
   'https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=800&auto=format&fit=crop',
   'https://images.unsplash.com/photo-1530026405186-ed1f139313f8?q=80&w=800&auto=format&fit=crop',
   'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=800&auto=format&fit=crop',
   'https://images.unsplash.com/photo-1554475900-0a0350e3fc7b?q=80&w=800&auto=format&fit=crop'
 ];
-let TESTIMONIALS=[
+let EVENTS=[
+  {month:'Feb',day:'14',title:'PhD dissertation defense',titleTh:'สอบป้องกันวิทยานิพนธ์ ป.เอก',who:'Ms. Suda C. · Room 3201',whoTh:'นางสาวสุดา ซี. · ห้อง 3201'},
+  {month:'Feb',day:'28',title:'Monthly lab meeting',titleTh:'ประชุมกลุ่มประจำเดือน',who:'Progress updates · 13:00',whoTh:'รายงานความคืบหน้า · 13:00 น.'},
+  {month:'Mar',day:'09',title:'Field trip — Phu Kradueng',titleTh:'ออกภาคสนาม — ภูกระดึง',who:'Sample collection · all members',whoTh:'เก็บตัวอย่าง · สมาชิกทุกคน'}
+];let TESTIMONIALS=[
   {q:'Studying at AC Lab taught me to think systematically. The NGS skills I gained went straight into my job, and the atmosphere was supportive throughout.',
    qTh:'การเรียนที่ AC Lab สอนให้คิดเป็นระบบ ความรู้ด้าน NGS นำไปใช้ทำงานจริงได้ทันที บรรยากาศในแล็บสนับสนุนกันดีมาก',
    name:'Dr. Somchai T.',role:'Researcher · Dept. of Agriculture',roleTh:'นักวิจัย · กรมวิชาการเกษตร',
@@ -1846,9 +1847,8 @@ let SITE_ACCENT='forest';
 function applyAccent(id){SITE_ACCENT=id;document.documentElement.setAttribute('data-preset',id);}
 const LS_KEY='aclab_cms_v1';
 function loadStore(){try{return JSON.parse(localStorage.getItem(LS_KEY))||{};}catch(e){return {};}}
-function saveStore(silent){try{localStorage.setItem(LS_KEY,JSON.stringify({members:MEMBERS,news:NEWS,cpubs:CPUBS,products:PRODUCTS,videos:VIDEOS,taxa:TAXA,collabs:COLLABS,testimonials:TESTIMONIALS,banners:BANNERS,theme:SITE_ACCENT}));if(!silent)toast(T('saved_toast'));return true;}catch(e){toast('Save failed — storage full');return false;}}
-(function(){const s=loadStore();if(s.members&&s.members.length)MEMBERS=s.members;if(s.news&&s.news.length)NEWS=s.news;if(s.cpubs)CPUBS=s.cpubs;if(s.products&&s.products.length)PRODUCTS=s.products;if(s.videos&&s.videos.length)VIDEOS=s.videos;if(s.taxa&&s.taxa.length)TAXA=s.taxa;if(s.collabs&&s.collabs.length)COLLABS=s.collabs;if(s.testimonials&&s.testimonials.length)TESTIMONIALS=s.testimonials;if(s.banners&&s.banners.length)BANNERS=s.banners;if(s.theme)SITE_ACCENT=s.theme;applyAccent(SITE_ACCENT);})();/* ============ RENDER STATIC ============ */
-el('rgrid').innerHTML=THEMES.map((t,i)=>`
+function saveStore(silent){try{localStorage.setItem(LS_KEY,JSON.stringify({members:MEMBERS,news:NEWS,cpubs:CPUBS,products:PRODUCTS,videos:VIDEOS,taxa:TAXA,collabs:COLLABS,testimonials:TESTIMONIALS,banners:BANNERS,events:EVENTS,gallery:GALLERY,theme:SITE_ACCENT}));if(!silent)toast(T('saved_toast'));return true;}catch(e){toast('Save failed — storage full');return false;}}
+(function(){const s=loadStore();if(s.members&&s.members.length)MEMBERS=s.members;if(s.news&&s.news.length)NEWS=s.news;if(s.cpubs)CPUBS=s.cpubs;if(s.products&&s.products.length)PRODUCTS=s.products;if(s.videos&&s.videos.length)VIDEOS=s.videos;if(s.taxa&&s.taxa.length)TAXA=s.taxa;if(s.collabs&&s.collabs.length)COLLABS=s.collabs;if(s.testimonials&&s.testimonials.length)TESTIMONIALS=s.testimonials;if(s.banners&&s.banners.length)BANNERS=s.banners;if(s.events&&s.events.length)EVENTS=s.events;if(s.gallery&&s.gallery.length)GALLERY=s.gallery;if(s.theme)SITE_ACCENT=s.theme;applyAccent(SITE_ACCENT);})();el('rgrid').innerHTML=THEMES.map((t,i)=>`
   <article class="rcard reveal" data-d="${i}"><span class="rcard__no mono">0${i+1}</span><span class="rcard__ic">${icon(t.icon)}</span><h3>${t.title}</h3><p>${t.desc}</p><div class="rcard__tags">${t.tags.map(x=>`<span class="t">${x}</span>`).join('')}</div></article>`).join('');
 
 el('pipe').innerHTML=PIPE.map((p,i)=>`
@@ -1867,7 +1867,18 @@ function renderCollabs(){
 }
 renderCollabs();
 el('road').innerHTML=ROAD.map(s=>`<div class="step"><span class="step__no">${s.no}</span><div class="step__b"><h4>${s.title}</h4><p>${s.desc}</p></div></div>`).join('');
-el('gallery').innerHTML=GALLERY.map(src=>`<div class="g" onclick="openLightbox('${src}')"><img src="${src}" alt="Lab" loading="lazy"></div>`).join('');
+function renderGallery(){
+  const g=el('gallery');if(!g)return;
+  if(!GALLERY.length){g.innerHTML=`<p style="font-size:.8rem;color:var(--muted)">${lang==='th'?'ยังไม่มีรูปภาพ':'No photos yet.'}</p>`;return;}
+  g.innerHTML=GALLERY.map(src=>`<div class="g" onclick="openLightbox('${src}')"><img src="${src}" alt="Lab" loading="lazy"></div>`).join('');
+}
+renderGallery();
+function renderEvents(){
+  const w=el('eventsList');if(!w)return;
+  if(!EVENTS.length){w.innerHTML=`<p style="font-size:.85rem;color:var(--muted);padding:14px 0">${lang==='th'?'ยังไม่มีกิจกรรม':'No upcoming events yet.'}</p>`;return;}
+  w.innerHTML=EVENTS.map(ev=>`<div class="event" onclick="toast(T('ev_toast'))"><div class="cal"><span class="mo">${esc(ev.month)}</span><span class="dy">${esc(ev.day)}</span></div><div><h4>${esc(lang==='th'&&ev.titleTh?ev.titleTh:ev.title)}</h4><div class="who">${esc(lang==='th'&&ev.whoTh?ev.whoTh:ev.who)}</div></div></div>`).join('');
+}
+renderEvents();
 function renderNews(){el('newsGrid').innerHTML=NEWS.slice(0,2).map(n=>`<article class="news-card reveal in" onclick="openNews(${n.id})"><div class="news-card__img"><img src="${n.img}" alt="${n.title}" loading="lazy" onerror="this.style.opacity=.15"></div><div class="news-card__b"><div class="news-card__date">${n.date}</div><h4>${n.title}</h4><div class="news-card__more" data-more>Read more ${icon('i-arrow')}</div></div></article>`).join('');}
 renderNews();
 
@@ -2317,8 +2328,7 @@ document.querySelectorAll('.nav-scroll').forEach(a=>{
 function refreshDynamicText(){
   document.querySelectorAll('[data-more]').forEach(n=>{n.innerHTML=(lang==='th'?'อ่านต่อ':'Read more')+' '+icon('i-arrow');});
 }
-const _applyLang=applyLang;applyLang=function(){_applyLang();refreshDynamicText();renderPubAll();renderInnov();renderProducts();renderVideos();renderProjectTeam();renderTeam(teamCat);renderNews();renderTaxa();renderCollabs();renderBanner();};
-/* nav bg + progress + totop + scrollspy */
+const _applyLang=applyLang;applyLang=function(){_applyLang();refreshDynamicText();renderPubAll();renderInnov();renderProducts();renderVideos();renderProjectTeam();renderTeam(teamCat);renderNews();renderTaxa();renderCollabs();renderBanner();renderEvents();renderGallery();};/* nav bg + progress + totop + scrollspy */
 const nav=el('nav'),totop=el('totop'),bar=el('progress');
 const spy=[...document.querySelectorAll('section[id]')];
 const links=[...document.querySelectorAll('#navLinks a')];
@@ -2430,10 +2440,11 @@ function renderAdmin(tab){adminCurrentTab=tab;const c=el('adminContent');
 else if(tab==='voices')admVoicesList();
   else if(tab==='messages')admMessagesList();
   else if(tab==='banner')c.innerHTML=admBannerList();
+  else if(tab==='events')c.innerHTML=admEventsList();
+  else if(tab==='gallery')c.innerHTML=admGalleryList();
     else if(tab==='theme')c.innerHTML=admThemeList();
   else c.innerHTML=admData();
 }
-
 function admThemeList(){
   return `<div class="data-card"><h4>${icon('i-spark')} Site theme</h4><p>${lang==='th'?'เลือกโทนสีของทั้งเว็บไซต์ ใช้กับผู้เข้าชมทุกคน (บันทึกขึ้นคลาวด์) แยกจากปุ่มมืด/สว่างที่แต่ละคนเลือกเองได้':'Pick a color theme for the whole site — applied for every visitor (saved to the cloud), separate from each visitor\u2019s own light/dark switch.'}</p></div>
   <div class="adm-section-t">${lang==='th'?'เลือกธีม':'Choose a theme'}</div>
@@ -2516,6 +2527,40 @@ window.admSaveBanner=function(){if(!formImg){toast(lang==='th'?'ต้องม�
   saveStore();renderBanner();renderAdmin('banner');};
 window.admDelBanner=function(i){if(!confirm(lang==='th'?'ลบแบนเนอร์นี้?':'Delete this banner?'))return;BANNERS.splice(i,1);saveStore();renderBanner();renderAdmin('banner');};
 
+/* --- EVENTS admin --- */
+function admEventsList(){return `<div class="adm-section-t">${EVENTS.length} upcoming events · click to edit</div>`+
+  EVENTS.map((e,i)=>`<div class="adm-row"><span class="mono-av" style="background:${hue(e.title)}">${esc(e.day||'?')}</span><div class="r-main"><h4>${esc(e.title)}</h4><div class="r-sub">${esc(e.month)} ${esc(e.day)} · ${esc(e.who||'')}</div></div><div class="r-act"><button class="adm-ic" onclick="admEditEvent(${i})">${icon('i-doc')}</button><button class="adm-ic del" onclick="admDelEvent(${i})">${icon('i-close')}</button></div></div>`).join('')+
+  `<button class="adm-add" onclick="admEditEvent(-1)">${icon('i-plus')} Add event</button>`;}
+window.admEditEvent=function(i){editIdx=i;const e=i>=0?EVENTS[i]:{month:'',day:'',title:'',titleTh:'',who:'',whoTh:''};
+  el('adminContent').innerHTML=`<span class="adm-back" onclick="renderAdmin('events')">${icon('i-arrow')} Back</span>
+  <div class="adm-form">
+    <div class="adm-2"><div class="adm-field"><label>Month (e.g. Feb)</label><input id="ev_month"></div><div class="adm-field"><label>Day (e.g. 14)</label><input id="ev_day"></div></div>
+    <div class="adm-2"><div class="adm-field"><label>Title (English)</label><input id="ev_title"></div><div class="adm-field"><label>Title (Thai)</label><input id="ev_titleth"></div></div>
+    <div class="adm-2"><div class="adm-field"><label>Details (English)</label><input id="ev_who" placeholder="Room, time, presenter…"></div><div class="adm-field"><label>Details (Thai)</label><input id="ev_whoth"></div></div>
+    <div class="adm-actions"><button class="btn btn--ghost" onclick="renderAdmin('events')">Cancel</button><button class="btn btn--primary" onclick="admSaveEvent()">${icon('i-check')} Save</button></div>
+  </div>`;
+  el('ev_month').value=e.month||'';el('ev_day').value=e.day||'';el('ev_title').value=e.title||'';el('ev_titleth').value=e.titleTh||'';el('ev_who').value=e.who||'';el('ev_whoth').value=e.whoTh||'';};
+window.admSaveEvent=function(){const t=val('ev_title').trim();if(!t){toast(lang==='th'?'ต้องมีชื่อกิจกรรม':'Title required');return;}
+  const item={month:val('ev_month').trim(),day:val('ev_day').trim(),title:t,titleTh:val('ev_titleth').trim(),who:val('ev_who').trim(),whoTh:val('ev_whoth').trim()};
+  if(editIdx>=0)EVENTS[editIdx]=item;else EVENTS.push(item);
+  saveStore();renderEvents();renderAdmin('events');};
+window.admDelEvent=function(i){if(!confirm((lang==='th'?'ลบกิจกรรม ':'Delete ')+EVENTS[i].title+'?'))return;EVENTS.splice(i,1);saveStore();renderEvents();renderAdmin('events');};
+
+/* --- GALLERY admin --- */
+function admGalleryList(){return `<div class="adm-section-t">${GALLERY.length} photos · click to edit</div>`+
+  GALLERY.map((src,i)=>`<div class="adm-row"><img class="thumb" src="${src}"><div class="r-main"><h4>Photo ${i+1}</h4></div><div class="r-act"><button class="adm-ic" onclick="admEditGalleryPhoto(${i})">${icon('i-doc')}</button><button class="adm-ic del" onclick="admDelGalleryPhoto(${i})">${icon('i-close')}</button></div></div>`).join('')+
+  `<button class="adm-add" onclick="admEditGalleryPhoto(-1)">${icon('i-plus')} Add photo</button>`;}
+window.admEditGalleryPhoto=function(i){editIdx=i;formImg=i>=0?GALLERY[i]:'';
+  el('adminContent').innerHTML=`<span class="adm-back" onclick="renderAdmin('gallery')">${icon('i-arrow')} Back</span>
+  <div class="adm-form">
+    <div class="adm-field"><label>Photo</label><div class="adm-photo-row" id="n_photowrap"></div></div>
+    <div class="adm-actions"><button class="btn btn--ghost" onclick="renderAdmin('gallery')">Cancel</button><button class="btn btn--primary" onclick="admSaveGalleryPhoto()">${icon('i-check')} Save</button></div>
+  </div>`;
+  refreshPhoto(true);};
+window.admSaveGalleryPhoto=function(){if(!formImg){toast(lang==='th'?'ต้องมีรูปภาพ':'Image required');return;}
+  if(editIdx>=0)GALLERY[editIdx]=formImg;else GALLERY.push(formImg);
+  saveStore();renderGallery();renderAdmin('gallery');};
+window.admDelGalleryPhoto=function(i){if(!confirm(lang==='th'?'ลบรูปนี้?':'Delete this photo?'))return;GALLERY.splice(i,1);saveStore();renderGallery();renderAdmin('gallery');};
 /* --- VOICES admin (published + pending public submissions) --- */
 let PENDING_TESTI=[];
 async function admVoicesList(){
@@ -2717,8 +2762,7 @@ function admData(){return `
   <div class="data-card danger"><h4>${icon('i-close')} Reset</h4><p>Remove all saved edits from this browser and restore the original built-in content.</p><button class="btn btn--ghost" onclick="admReset()">Reset to defaults</button></div>
   <div class="data-card"><h4>${icon('i-spark')} How this works</h4><p>Edits are saved in this browser's local storage — they persist for you here, but other visitors won't see them until you export the JSON and paste it into the site's source, or host the edited file. Change the passcode by editing <code>ADMIN_PASS</code> in the code.</p></div>`;}
 function download(name,text){const b=new Blob([text],{type:'application/json'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1200);}
-window.admExport=function(){download('ac-lab-content.json',JSON.stringify({members:MEMBERS,news:NEWS,cpubs:CPUBS,products:PRODUCTS,videos:VIDEOS,taxa:TAXA,collabs:COLLABS,testimonials:TESTIMONIALS,banners:BANNERS},null,2));toast(lang==='th'?'ดาวน์โหลดแล้ว':'Downloaded');};
-window.admImport=function(){const inp=document.createElement('input');inp.type='file';inp.accept='application/json,.json';inp.onchange=()=>{const f=inp.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const d=JSON.parse(rd.result);if(Array.isArray(d.members))MEMBERS=d.members;if(Array.isArray(d.news))NEWS=d.news;if(Array.isArray(d.cpubs))CPUBS=d.cpubs;if(Array.isArray(d.products))PRODUCTS=d.products;if(Array.isArray(d.videos))VIDEOS=d.videos;if(Array.isArray(d.taxa))TAXA=d.taxa;if(Array.isArray(d.collabs))COLLABS=d.collabs;if(Array.isArray(d.testimonials))TESTIMONIALS=d.testimonials;if(Array.isArray(d.banners))BANNERS=d.banners;saveStore(true);renderProjectTeam();renderTeam(teamCat);renderNews();renderProducts();renderVideos();renderPubAll();renderTaxa();renderCollabs();renderTesti();renderBanner();renderAdmin('data');toast(lang==='th'?'นำเข้าแล้ว':'Imported');}catch(e){toast('Invalid file');}};rd.readAsText(f);};inp.click();};window.admReset=function(){if(!confirm(lang==='th'?'ลบข้อมูลที่บันทึกไว้ทั้งหมด?':'Remove all saved edits and restore defaults?'))return;try{localStorage.removeItem(LS_KEY);}catch(e){}location.reload();};
+window.admExport=function(){download('ac-lab-content.json',JSON.stringify({members:MEMBERS,news:NEWS,cpubs:CPUBS,products:PRODUCTS,videos:VIDEOS,taxa:TAXA,collabs:COLLABS,testimonials:TESTIMONIALS,banners:BANNERS,events:EVENTS,gallery:GALLERY},null,2));toast(lang==='th'?'ดาวน์โหลดแล้ว':'Downloaded');};window.admImport=function(){const inp=document.createElement('input');inp.type='file';inp.accept='application/json,.json';inp.onchange=()=>{const f=inp.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const d=JSON.parse(rd.result);if(Array.isArray(d.members))MEMBERS=d.members;if(Array.isArray(d.news))NEWS=d.news;if(Array.isArray(d.cpubs))CPUBS=d.cpubs;if(Array.isArray(d.products))PRODUCTS=d.products;if(Array.isArray(d.videos))VIDEOS=d.videos;if(Array.isArray(d.taxa))TAXA=d.taxa;if(Array.isArray(d.collabs))COLLABS=d.collabs;if(Array.isArray(d.testimonials))TESTIMONIALS=d.testimonials;if(Array.isArray(d.banners))BANNERS=d.banners;saveStore(true);renderProjectTeam();renderTeam(teamCat);renderNews();renderProducts();renderVideos();renderPubAll();renderTaxa();renderCollabs();renderTesti();renderBanner();renderAdmin('data');toast(lang==='th'?'นำเข้าแล้ว':'Imported');}catch(e){toast('Invalid file');}};rd.readAsText(f);};inp.click();};window.admReset=function(){if(!confirm(lang==='th'?'ลบข้อมูลที่บันทึกไว้ทั้งหมด?':'Remove all saved edits and restore defaults?'))return;try{localStorage.removeItem(LS_KEY);}catch(e){}location.reload();};
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&el('admin').classList.contains('open'))closeAdmin();});
 if(location.hash==='#admin')setTimeout(openAdmin,300);
 window.addEventListener('hashchange',()=>{if(location.hash==='#admin')openAdmin();});
