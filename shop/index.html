@@ -1442,9 +1442,10 @@ console.log('[admSaveProduct] start, payload size (chars):', JSON.stringify(item
     toast(lang==='th'?'บันทึกสินค้าสำเร็จ':'Product saved');
     await withTimeout(loadShopData(),15000,'Reload products').catch(e=>console.warn('[admSaveProduct] reload failed:',e));
     renderAdminTab('products');
-  }catch(err){
+}catch(err){
     console.error('[admSaveProduct] failed:',err);
     const msg=(err&&(err.message||err.error_description))||(lang==='th'?'บันทึกไม่สำเร็จ — รูปอาจมีขนาดใหญ่เกินไป ลองใช้รูปที่เล็กลง':'Save failed — image(s) may be too large. Try smaller images.');
+    alert('SAVE ERROR:\n'+JSON.stringify(err,null,2));
     toast(msg,true);
   }finally{
     if(btn){btn.disabled=false;btn.innerHTML=`${icon('i-check')} ${lang==='th'?'บันทึกสินค้า':'Save product'}`;}
