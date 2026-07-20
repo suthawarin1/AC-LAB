@@ -3072,55 +3072,27 @@ data:{members:MEMBERS, news:NEWS, cpubs:CPUBS, products:PRODUCTS, videos:VIDEOS,
 window.tryUnlock = async function(){
     const emailVal = document.getElementById('adminEmail') ? document.getElementById('adminEmail').value.trim() : '';
     const passVal  = typeof val === 'function' ? val('adminPass') : document.getElementById('adminPass').value;
-    
+
     if (!emailVal || !passVal){
       if(typeof toast === 'function') toast(typeof lang !== 'undefined' && lang==='th'?'กรอกอีเมลและรหัสผ่าน':'Enter email and password');
       return;
     }
-    if (!turnstileToken){
-      if(typeof toast === 'function') toast(typeof lang !== 'undefined' && lang==='th'?'กรุณาติ๊กยืนยันตัวตนก่อน':'Please complete the verification check above');
-      return;
-    }
 
-    // 1) เช็ค token กับ Worker (Cloudflare) ก่อน
-    let verified = false;
-    try {
-      const r = await fetch(TURNSTILE_VERIFY_URL, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ token: turnstileToken })
-      });
-      const j = await r.json();
-      verified = j && j.ok === true;
-    } catch(e) {
-      console.error('Turnstile verify request failed:', e);
-    }
-    
-    if (!verified){
-      if(typeof toast === 'function') toast(typeof lang !== 'undefined' && lang==='th'?'ยืนยันตัวตนไม่ผ่าน ลองใหม่':'Verification failed — please try again');
-      if (window.turnstile) window.turnstile.reset();
-      turnstileToken = '';
-      return;
-    }
-
-    // 2) ผ่านแล้วค่อยล็อกอินจริงกับ Supabase
-    supa.auth.signInWithPassword({ email: emailVal, password: passVal }).then(({error, data})=>{
-      if (error){ 
+    // ล็อกอินตรงกับ Supabase (ไม่ต้องเช็ค Turnstile)
+    supa.auth.signInWithPassword({ email: emailVal, password: passVal }).then(({error})=>{
+      if (error){
         if(typeof toast === 'function') toast(error.message);
         console.error('Admin login error:', error);
-        if (window.turnstile) window.turnstile.reset();
-        turnstileToken = '';
-        return; 
+        return;
       }
       if(typeof adminUnlocked !== 'undefined') adminUnlocked = true;
       document.getElementById('adminLock').style.display = 'none';
       document.getElementById('adminBody').style.display = 'flex';
-      const lb = document.getElementById('adminLogoutBtn'); 
+      const lb = document.getElementById('adminLogoutBtn');
       if(lb) lb.style.display = 'inline-flex';
       if(typeof renderAdmin === 'function') renderAdmin('team');
     });
 };
-
 supa.auth.getSession().then(({data})=>{ 
     if(data && data.session){
       if(typeof adminUnlocked !== 'undefined') adminUnlocked = true;
