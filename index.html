@@ -731,7 +731,10 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 /* ===== ADMIN PANEL ===== */
 .admin-fab{position:fixed;left:20px;bottom:20px;z-index:850;width:46px;height:46px;border-radius:14px;background:var(--ink);color:var(--bg);display:flex;align-items:center;justify-content:center;font-size:19px;box-shadow:var(--lift);opacity:.5;transition:.3s}
 .admin-fab:hover{opacity:1;transform:translateY(-2px)}
-.admin{position:fixed;inset:0;z-index:1500;display:none}
+.tgl{width:44px;height:24px;border-radius:100px;background:var(--line-2);position:relative;flex:none;cursor:pointer;transition:.25s}
+.tgl::after{content:"";position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:.25s}
+.tgl.on{background:var(--accent)}
+.tgl.on::after{left:22px}.admin{position:fixed;inset:0;z-index:1500;display:none}
 .admin.open{display:block}
 .admin__scrim{position:absolute;inset:0;background:rgba(10,14,11,.5);backdrop-filter:blur(4px)}
 .admin__panel{position:absolute;top:0;right:0;height:100%;width:min(560px,100%);max-width:100%;background:var(--bg);box-shadow:-30px 0 80px -30px rgba(0,0,0,.5);display:flex;flex-direction:column;animation:slideIn .4s var(--ease);overflow:hidden}@keyframes slideIn{from{transform:translateX(40px);opacity:0}to{transform:none;opacity:1}}
@@ -1074,7 +1077,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 </section>
 
 <!-- FOCAL TAXA -->
-<section class="section">
+<section id="taxa" class="section">
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow" data-i18n="taxa_eye">Focal taxa</span>
@@ -1086,7 +1089,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 </section>
 
 <!-- IMPACT -->
-<section class="section section--alt">
+<section id="impact" class="section section--alt">
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow" data-i18n="fig_eye">The lab in figures</span>
@@ -1311,7 +1314,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 </section>
 
 <!-- VOICES + FAQ -->
-<section class="section">
+<section id="voices-faq" class="section">
   <div class="wrap vf-split">
     <div class="reveal">
       <div class="mini-head"><svg class="icon"><use href="#i-quote"/></svg> <span data-i18n="voices">Alumni voices</span></div>
@@ -1360,8 +1363,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 </section>
 
 <!-- NEWSLETTER -->
-<section class="section" style="padding-block:clamp(40px,6vw,72px)">
-  <div class="wrap">
+<section id="newsletter" class="section" style="padding-block:clamp(40px,6vw,72px)">  <div class="wrap">
     <div class="nl-strip reveal">
       <svg class="icon"><use href="#i-send"/></svg>
       <h3 data-i18n="nl_title">Stay in the loop</h3>
@@ -1581,7 +1583,12 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 <button class="atab" data-tab="events" onclick="adminTab('events',this)">Events</button>
  <button class="atab" data-tab="gallery" onclick="adminTab('gallery',this)">Gallery</button>
 <button class="atab" data-tab="resources" onclick="adminTab('resources',this)">Resources</button>
-<button class="atab" data-tab="data" onclick="adminTab('data',this)">Data</button>      </div>
+<button class="atab" data-tab="sections" onclick="adminTab('sections',this)">Sections</button>
+        <button class="atab" data-tab="data" onclick="adminTab('data',this)">Data</button>      </div>
+      <div class="admin__content" id="adminContent"></div>
+    </div>
+  </div>
+</div>
       <div class="admin__content" id="adminContent"></div>
     </div>
   </div>
@@ -1855,6 +1862,31 @@ window.toggleTheme=function(){
 const el=(id)=>document.getElementById(id);
 function icon(id){return `<svg class="icon"><use href="#${id}"/></svg>`;}
 
+/* ============ SECTION VISIBILITY ============ */
+const SECTIONS=[
+  {id:'research',label:'Research',labelTh:'งานวิจัย'},
+  {id:'pipeline',label:'Pipeline',labelTh:'กระบวนการ'},
+  {id:'taxa',label:'Focal taxa',labelTh:'พืชเป้าหมาย'},
+  {id:'impact',label:'Lab in figures',labelTh:'ตัวเลขของแล็บ'},
+  {id:'publications',label:'Publications',labelTh:'ผลงานตีพิมพ์'},
+  {id:'facilities',label:'Facilities & timeline',labelTh:'เครื่องมือและไทม์ไลน์'},
+  {id:'videos',label:'Videos',labelTh:'วิดีโอ'},
+  {id:'innovation',label:'Future innovations',labelTh:'นวัตกรรมในอนาคต'},
+  {id:'products',label:'Products',labelTh:'ผลิตภัณฑ์'},
+  {id:'team',label:'Programme team',labelTh:'ทีมงานโครงการ'},
+  {id:'grant-team',label:'Grant proposal team',labelTh:'ทีมวิจัย (ยื่นทุน)'},
+  {id:'members',label:'Lab members',labelTh:'สมาชิกในแล็บ'},
+  {id:'collaborations',label:'Partners',labelTh:'เครือข่ายพันธมิตร'},
+  {id:'join',label:'Join the lab',labelTh:'ร่วมงานกับเรา'},
+  {id:'news',label:'News',labelTh:'ข่าวสาร'},
+  {id:'voices-faq',label:'Voices & FAQ',labelTh:'รีวิวและคำถามที่พบบ่อย'},
+  {id:'contact',label:'Contact',labelTh:'ติดต่อเรา'},
+  {id:'newsletter',label:'Newsletter strip',labelTh:'แถบสมัครรับข่าว'}
+];
+function applySectionVisibility(){
+  SECTIONS.forEach(s=>{const node=document.getElementById(s.id);if(node)node.style.display=HIDDEN_SECTIONS.has(s.id)?'none':'';});
+}
+
 /* set professor photo everywhere */
 document.querySelectorAll('[data-prof]').forEach(i=>{i.src=PROF_IMG;});
 
@@ -1867,11 +1899,12 @@ const THEME_PRESETS=[
   {id:'slate', name:'Slate', nameTh:'สเลท',c1:'#3a4a5c',c2:'#f6f7f8'}
 ];
 let SITE_ACCENT='forest';
+let HIDDEN_SECTIONS=new Set();
 function applyAccent(id){SITE_ACCENT=id;document.documentElement.setAttribute('data-preset',id);}
 const LS_KEY='aclab_cms_v1';
 function loadStore(){try{return JSON.parse(localStorage.getItem(LS_KEY))||{};}catch(e){return {};}}
-function saveStore(silent){try{localStorage.setItem(LS_KEY,JSON.stringify({members:MEMBERS,news:NEWS,cpubs:CPUBS,products:PRODUCTS,videos:VIDEOS,taxa:TAXA,collabs:COLLABS,testimonials:TESTIMONIALS,banners:BANNERS,events:EVENTS,gallery:GALLERY,resources:RESOURCES,grantTeam:GRANT_TEAM,theme:SITE_ACCENT}));if(!silent)toast(T('saved_toast'));return true;}catch(e){toast('Save failed — storage full');return false;}}
-(function(){const s=loadStore();if(s.members&&s.members.length)MEMBERS=s.members;if(s.news&&s.news.length)NEWS=s.news;if(s.cpubs)CPUBS=s.cpubs;if(s.products&&s.products.length)PRODUCTS=s.products;if(s.videos&&s.videos.length)VIDEOS=s.videos;if(s.taxa&&s.taxa.length)TAXA=s.taxa;if(s.collabs&&s.collabs.length)COLLABS=s.collabs;if(s.testimonials&&s.testimonials.length)TESTIMONIALS=s.testimonials;if(s.banners&&s.banners.length)BANNERS=s.banners;if(s.events&&s.events.length)EVENTS=s.events;if(s.gallery&&s.gallery.length)GALLERY=s.gallery;if(s.resources&&s.resources.length)RESOURCES=s.resources;if(s.grantTeam&&s.grantTeam.length)GRANT_TEAM=s.grantTeam;if(s.theme)SITE_ACCENT=s.theme;applyAccent(SITE_ACCENT);})();el('rgrid').innerHTML=THEMES.map((t,i)=>`
+function saveStore(silent){try{localStorage.setItem(LS_KEY,JSON.stringify({members:MEMBERS,news:NEWS,cpubs:CPUBS,products:PRODUCTS,videos:VIDEOS,taxa:TAXA,collabs:COLLABS,testimonials:TESTIMONIALS,banners:BANNERS,events:EVENTS,gallery:GALLERY,resources:RESOURCES,grantTeam:GRANT_TEAM,theme:SITE_ACCENT,hiddenSections:[...HIDDEN_SECTIONS]}));if(!silent)toast(T('saved_toast'));return true;}catch(e){toast('Save failed — storage full');return false;}}
+(function(){const s=loadStore();if(s.members&&s.members.length)MEMBERS=s.members;if(s.news&&s.news.length)NEWS=s.news;if(s.cpubs)CPUBS=s.cpubs;if(s.products&&s.products.length)PRODUCTS=s.products;if(s.videos&&s.videos.length)VIDEOS=s.videos;if(s.taxa&&s.taxa.length)TAXA=s.taxa;if(s.collabs&&s.collabs.length)COLLABS=s.collabs;if(s.testimonials&&s.testimonials.length)TESTIMONIALS=s.testimonials;if(s.banners&&s.banners.length)BANNERS=s.banners;if(s.events&&s.events.length)EVENTS=s.events;if(s.gallery&&s.gallery.length)GALLERY=s.gallery;if(s.resources&&s.resources.length)RESOURCES=s.resources;if(s.grantTeam&&s.grantTeam.length)GRANT_TEAM=s.grantTeam;if(s.theme)SITE_ACCENT=s.theme;if(Array.isArray(s.hiddenSections))HIDDEN_SECTIONS=new Set(s.hiddenSections);applyAccent(SITE_ACCENT);applySectionVisibility();})();el('rgrid').innerHTML=THEMES.map((t,i)=>`
   <article class="rcard reveal" data-d="${i}"><span class="rcard__no mono">0${i+1}</span><span class="rcard__ic">${icon(t.icon)}</span><h3>${t.title}</h3><p>${t.desc}</p><div class="rcard__tags">${t.tags.map(x=>`<span class="t">${x}</span>`).join('')}</div></article>`).join('');
 
 el('pipe').innerHTML=PIPE.map((p,i)=>`
@@ -2133,8 +2166,7 @@ window.openVideo=function(i){
 };
 
 /* ============ TEAM ROSTER ============ */
-const ROLE_EN={lead:'Project leader · PI',co:'Co-researcher',intl:'International co-researcher',postdoc:'Postdoctoral researcher',phd:'PhD student',master:'Master\u2019s student',intern:'Research intern'};
-const ROLE_TH={lead:'หัวหน้าโครงการ',co:'ผู้ร่วมวิจัย',intl:'ผู้ร่วมวิจัย (ต่างประเทศ)',postdoc:'นักวิจัยหลังปริญญาเอก',phd:'นักศึกษาปริญญาเอก',master:'นักศึกษาปริญญาโท',intern:'นักศึกษาฝึกงาน'};
+const ROLE_EN={lead:'Project leader · PI',co:'Co-Investigator',intl:'International co-researcher',postdoc:'Postdoctoral researcher',phd:'PhD student',master:'Master\u2019s student',intern:'Research intern'};const ROLE_TH={lead:'หัวหน้าโครงการ',co:'ผู้ร่วมวิจัย',intl:'ผู้ร่วมวิจัย (ต่างประเทศ)',postdoc:'นักวิจัยหลังปริญญาเอก',phd:'นักศึกษาปริญญาเอก',master:'นักศึกษาปริญญาโท',intern:'นักศึกษาฝึกงาน'};
 function initials(n){return (n||'').replace(/\(.*?\)/g,'').trim().split(/\s+/).filter(w=>!/^(prof|dr|assoc|asst|ms|mr|mrs|professor)\.?$/i.test(w)).slice(0,2).map(w=>w[0]).join('').toUpperCase()||'?';}
 function hue(n){let h=0;for(let i=0;i<(n||'').length;i++)h=n.charCodeAt(i)+((h<<5)-h);return `hsl(${Math.abs(h)%360},34%,52%)`;}
 function avatar(m,big){return m.img?`<img src="${m.img}" alt="${m.en}" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('noimg')">`:`<span class="mono-av" style="background:${hue(m.en)}">${initials(m.en)}</span>`;}
@@ -2173,7 +2205,7 @@ function renderProjectTeam(){
       </div>
     </div>`;
   }
-  if(co.length)   h+=`<div class="rteam-sub"><span class="rteam-sub__l">${TT('Co-researchers','ผู้ร่วมวิจัย')}</span></div><div class="team-grid">${co.map(memberCard).join('')}</div>`;
+  if(co.length)   h+=`<div class="rteam-sub"><span class="rteam-sub__l">${TT('Co-Investigators','ผู้ร่วมวิจัย')}</span></div><div class="team-grid">${co.map(memberCard).join('')}</div>`;
   if(intl.length) h+=`<div class="rteam-sub"><span class="rteam-sub__l">${TT('International co-researchers','ผู้ร่วมวิจัยต่างประเทศ')}</span></div><div class="team-grid">${intl.map(memberCard).join('')}</div>`;
   el('rteam').innerHTML=h;
 }
@@ -2574,9 +2606,9 @@ else if(tab==='collabs')c.innerHTML=admCollabList();
   else if(tab==='gallery')c.innerHTML=admGalleryList();
   else if(tab==='resources')c.innerHTML=admResourcesList();
     else if(tab==='theme')c.innerHTML=admThemeList();
+  else if(tab==='sections')c.innerHTML=admSectionsList();
   else c.innerHTML=admData();
-}
-function admThemeList(){
+}function admThemeList(){
   return `<div class="data-card"><h4>${icon('i-spark')} Site theme</h4><p>${lang==='th'?'เลือกโทนสีของทั้งเว็บไซต์ ใช้กับผู้เข้าชมทุกคน (บันทึกขึ้นคลาวด์) แยกจากปุ่มมืด/สว่างที่แต่ละคนเลือกเองได้':'Pick a color theme for the whole site — applied for every visitor (saved to the cloud), separate from each visitor\u2019s own light/dark switch.'}</p></div>
   <div class="adm-section-t">${lang==='th'?'เลือกธีม':'Choose a theme'}</div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
@@ -2592,6 +2624,16 @@ window.admSetTheme=function(id){
   saveStore();
   renderAdmin('theme');
   toast(lang==='th'?'เปลี่ยนธีมแล้ว':'Theme updated');
+};
+function admSectionsList(){
+  return `<div class="data-card"><h4>${icon('i-spark')} Section visibility</h4><p>${lang==='th'?'ปิดสวิตช์เพื่อซ่อนเซกชันนั้นจากเว็บไซต์ — มีผลกับผู้เข้าชมทุกคนและบันทึกขึ้นคลาวด์':'Turn a switch off to hide that section from the live site — applies to every visitor and is saved to the cloud.'}</p></div>`+
+  SECTIONS.map(s=>`<div class="adm-row"><div class="r-main"><h4>${lang==='th'?s.labelTh:s.label}</h4><div class="r-sub">#${s.id}${HIDDEN_SECTIONS.has(s.id)?(lang==='th'?' · ซ่อนอยู่':' · hidden'):''}</div></div><div class="tgl ${HIDDEN_SECTIONS.has(s.id)?'':'on'}" onclick="admToggleSection('${s.id}')"></div></div>`).join('');
+}
+window.admToggleSection=function(id){
+  if(HIDDEN_SECTIONS.has(id))HIDDEN_SECTIONS.delete(id);else HIDDEN_SECTIONS.add(id);
+  applySectionVisibility();
+  saveStore();
+  renderAdmin('sections');
 };
 /* --- TAXA admin --- */
 function admTaxaList(){return `<div class="adm-section-t">${TAXA.length} plants · click to edit</div>`+
@@ -2983,10 +3025,11 @@ const supa = window.supabase.createClient(SUPA_URL, SUPA_KEY, {
 if (Array.isArray(s.banners)      && s.banners.length)      BANNERS      = s.banners;
     if (Array.isArray(s.grantTeam) && s.grantTeam.length) GRANT_TEAM = s.grantTeam;
     if (Array.isArray(s.resources) && s.resources.length) RESOURCES  = s.resources;
-    if (s.theme) applyAccent(s.theme);
+if (s.theme) applyAccent(s.theme);
+    if (Array.isArray(s.hiddenSections)) HIDDEN_SECTIONS = new Set(s.hiddenSections);
+    if (typeof applySectionVisibility === 'function') applySectionVisibility();
 
-    if(typeof renderProjectTeam === 'function') renderProjectTeam();    if(typeof renderTeam === 'function') renderTeam(typeof teamCat !== 'undefined' ? teamCat : 'all'); 
-    if(typeof renderNews === 'function') renderNews();
+    if(typeof renderProjectTeam === 'function') renderProjectTeam();    if(typeof renderTeam === 'function') renderTeam(typeof teamCat !== 'undefined' ? teamCat : 'all');    if(typeof renderNews === 'function') renderNews();
     if(typeof renderProducts === 'function') renderProducts(); 
     if(typeof renderVideos === 'function') renderVideos(); 
     if(typeof renderPubAll === 'function') renderPubAll();
@@ -3004,8 +3047,7 @@ if(typeof saveStore !== 'undefined') {
     saveStore = function(silent){
       const ok = _saveStore(true);
       supa.from('site_content').update({
-        data:{members:MEMBERS, news:NEWS, cpubs:CPUBS, products:PRODUCTS, videos:VIDEOS, taxa:TAXA, collabs:COLLABS, testimonials:TESTIMONIALS, banners:BANNERS, resources:RESOURCES, grantTeam:GRANT_TEAM, theme:SITE_ACCENT},
-        updated_at: new Date()
+data:{members:MEMBERS, news:NEWS, cpubs:CPUBS, products:PRODUCTS, videos:VIDEOS, taxa:TAXA, collabs:COLLABS, testimonials:TESTIMONIALS, banners:BANNERS, resources:RESOURCES, grantTeam:GRANT_TEAM, theme:SITE_ACCENT, hiddenSections:[...HIDDEN_SECTIONS]},        updated_at: new Date()
       }).eq('id',1).then(({error})=>{
         if(!silent){
           if(error && typeof toast === 'function'){toast('⚠️ Cloud save FAILED — เช็คว่าล็อกอินอยู่ไหม');console.error('Supabase save error:',error);}
