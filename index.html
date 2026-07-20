@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AC Lab — Plant Genomics to Medicine · Khon Kaen University</title>
+<title>The AC Lab — Plant Genomics to Medicine · Khon Kaen University</title>
 <meta name="description" content="The AC Lab at Khon Kaen University sequences plant genomes, profiles medicinal-plant chemistry, and tests plant compounds on human cancer cells. Led by Prof. Dr. Arunrat Chaveerach.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%232f6b4f' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%232f6b4f'/%3E%3C/svg%3E">
 
@@ -919,7 +919,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 
 <div id="pre">
   <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="21" stroke="var(--line-2)" stroke-width="3"/><circle class="rot" cx="24" cy="24" r="21" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-dasharray="30 110"/><circle cx="24" cy="24" r="6" fill="var(--accent)"/></svg>
-  <div class="lb">AC&nbsp;Lab</div>
+  <div class="lb">The&nbsp;AC&nbsp;Lab</div>
 </div>
 
 <div id="progress"></div>
@@ -929,7 +929,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
   <div class="wrap nav__inner">
     <a href="#hero" class="brand nav-scroll">
       <span class="brand__mark"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="var(--accent)" stroke-width="1.4"/><circle cx="20" cy="20" r="11.5" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="2.5 3" opacity=".6"/><circle cx="20" cy="20" r="5" fill="var(--accent)"/><circle cx="20" cy="2" r="1.8" fill="var(--ochre)"/></svg></span>
-      <span><span class="brand__name">AC Lab</span><span class="brand__sub">Genomics · KKU</span></span>
+      <span><span class="brand__name">The AC Lab</span><span class="brand__sub">Genomics · KKU</span></span>
     </a>
     <nav class="nav__links" id="navLinks">
       <a href="#research" class="nav-scroll" data-i18n="nav_research">Research</a>
@@ -1214,6 +1214,18 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
   </div>
 </section>
 
+<!-- GRANT PROPOSAL RESEARCH TEAM -->
+<section id="grant-team" class="section section--alt">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow" data-i18n="grant_eye">Research group</span>
+      <h2 class="h-sec" data-i18n="grant_title">Research Team</h2>
+      <p class="lede" data-i18n="grant_lede">A dedicated research group used for grant and funding proposals, led by Prof. Dr. Arunrat Chaveerach. Co-researchers are added from the admin panel.</p>
+    </div>
+    <div class="rteam reveal" id="grantTeam"></div>
+  </div>
+</section>
+
 <!-- LAB MEMBERS (students) -->
 <section id="members" class="section">
   <div class="wrap">
@@ -1265,11 +1277,9 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
       <a href="https://gs.kku.ac.th" target="_blank" rel="noopener" class="btn btn--primary" style="margin-top:32px" data-i18n="join_cta">Visit the Graduate School <svg class="icon"><use href="#i-ext"/></svg></a>
     </div>
     <div class="reveal" data-d="1">
-      <div class="res-card">
+ <div class="res-card">
         <h3 data-i18n="res_title">Student resources</h3>
-        <a href="#" class="res" onclick="toast(T('res_toast'));return false"><span class="ic"><svg class="icon"><use href="#i-doc"/></svg></span><div><h4 data-i18n="res_1">Lab safety manual</h4><div class="m">Updated 2024 · PDF</div></div><span class="go"><svg class="icon"><use href="#i-arrow"/></svg></span></a>
-        <a href="#" class="res" onclick="toast(T('res_toast'));return false"><span class="ic"><svg class="icon"><use href="#i-doc"/></svg></span><div><h4 data-i18n="res_2">Equipment request form</h4><div class="m">Form 01-B · DOCX</div></div><span class="go"><svg class="icon"><use href="#i-arrow"/></svg></span></a>
-        <a href="#" class="res" onclick="toast(T('res_toast'));return false"><span class="ic"><svg class="icon"><use href="#i-book"/></svg></span><div><h4 data-i18n="res_3">Thesis template</h4><div class="m">KKU format · DOCX</div></div><span class="go"><svg class="icon"><use href="#i-arrow"/></svg></span></a>
+        <div id="resList"></div>
       </div>
     </div>
   </div>
@@ -1370,7 +1380,8 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
   <div class="wrap">
     <div class="foot-top">
       <div class="foot-brand">
-        <div class="brand"><span class="brand__mark"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="var(--accent-bright)" stroke-width="1.4"/><circle cx="20" cy="20" r="5" fill="var(--accent-bright)"/></svg></span><span><span class="brand__name">AC Lab</span><span class="brand__sub">Khon Kaen University</span></span></div>
+        <div class="brand"><span class="brand__mark"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="var(--accent-bright)" stroke-width="1.4"/><circle cx="20" cy="20" r="5" fill="var(--accent-bright)"/></svg></span><span><span class="brand__name">The AC Lab</span><span class="brand__sub">Khon Kaen University</span>
+</span></div>
         <p data-i18n="foot_desc">Plant genomics, phytochemistry and biomedical research at the Faculty of Science, Khon Kaen University.</p>
       </div>
       <div>
@@ -1533,7 +1544,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
   <div class="admin__scrim" onclick="closeAdmin()"></div>
   <div class="admin__panel">
 <div class="admin__bar">
-  <div class="admin__brand"><svg class="icon"><use href="#i-spark"/></svg> <b>AC Lab</b> <span>Content manager</span></div>
+<div class="admin__brand"><svg class="icon"><use href="#i-spark"/></svg> <b>The AC Lab</b> <span>Content manager</span></div>
   <div style="display:flex;align-items:center;gap:8px">
     <span id="adminUserEmail" class="mono" style="font-size:11px;color:var(--muted);display:none"></span>
     <button class="btn btn--ghost btn--sm" id="adminLogoutBtn" onclick="adminLogout()" style="display:none">
@@ -1557,8 +1568,8 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 
     <div class="admin__body" id="adminBody" style="display:none">
 <div class="admin__tabs">
-        <button class="atab active" data-tab="team" onclick="adminTab('team',this)">Team</button>
-        <button class="atab" data-tab="news" onclick="adminTab('news',this)">News</button>
+  <button class="atab active" data-tab="team" onclick="adminTab('team',this)">Team</button>
+        <button class="atab" data-tab="grantteam" onclick="adminTab('grantteam',this)">Grant Team</button>        <button class="atab" data-tab="news" onclick="adminTab('news',this)">News</button>
         <button class="atab" data-tab="pubs" onclick="adminTab('pubs',this)">Publications</button>
         <button class="atab" data-tab="products" onclick="adminTab('products',this)">Products</button>
         <button class="atab" data-tab="videos" onclick="adminTab('videos',this)">Videos</button>
@@ -1568,9 +1579,9 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 <button class="atab" data-tab="messages" onclick="adminTab('messages',this)">Messages</button>
 <button class="atab" data-tab="banner" onclick="adminTab('banner',this)">Banner</button>
 <button class="atab" data-tab="events" onclick="adminTab('events',this)">Events</button>
-<button class="atab" data-tab="gallery" onclick="adminTab('gallery',this)">Gallery</button>
-        <button class="atab" data-tab="data" onclick="adminTab('data',this)">Data</button>      </div>            <div class="admin__content" id="adminContent"></div>
-    </div>
+ <button class="atab" data-tab="gallery" onclick="adminTab('gallery',this)">Gallery</button>
+<button class="atab" data-tab="resources" onclick="adminTab('resources',this)">Resources</button>
+        <button class="atab" data-tab="data" onclick="adminTab('data',this)">Data</button>      </div>    </div>
   </div>
 </div>
 
@@ -1654,6 +1665,11 @@ MEMBERS.push(
  {group:'intern',en:'Research Intern (1)',th:'นักศึกษาฝึกงาน',img:'',tags:['Lab techniques'],bio:'Placeholder intern. Editable via the admin panel.'},
  {group:'intern',en:'Research Intern (2)',th:'นักศึกษาฝึกงาน',img:'',tags:['Field sampling'],bio:'Placeholder intern. Editable via the admin panel.'}
 );
+let GRANT_TEAM=[
+  {en:'Prof. Dr. Arunrat Chaveerach',th:'ศ. ดร. อรุณรัตน์ ฉวีราช',img:PROF_IMG,role:'Team leader',roleTh:'หัวหน้าโครงการ',lead:true,
+   bio:'Directs this research group and its funding proposals — molecular systematics, phytochemistry, toxicity testing, green nanotechnology and drug delivery.',
+   tags:['Molecular systematics','Phytochemistry','Toxicity testing','Green nanotech','Drug delivery']}
+];
 const INNOV=[
   {no:'01',icon:'i-dna',title:'Molecular biology',titleTh:'ชีววิทยาโมเลกุล',desc:'Gene-expression analysis, qRT-PCR and enzyme assays to read plant bioactivity at the level of the gene.',descTh:'การวิเคราะห์การแสดงออกของยีน qRT-PCR และเอนไซม์แอสเซย์ เพื่ออ่านฤทธิ์ทางชีวภาพของพืชในระดับยีน'},
   {no:'02',icon:'i-scholar',title:'Multi-omics technology',titleTh:'เทคโนโลยีมัลติโอมิกส์',desc:'Integrating genomics, transcriptomics, proteomics and metabolomics into one high-resolution picture of each plant.',descTh:'ผสานจีโนมิกส์ ทรานสคริปโตมิกส์ โปรตีโอมิกส์ และเมตาโบโลมิกส์ เป็นภาพความละเอียดสูงของพืชแต่ละชนิด'},
@@ -1670,6 +1686,11 @@ const ROAD=[
   {no:'1',title:'Reach out to the PI',desc:'Send your CV and a short statement of research interests to Prof. Dr. Arunrat to discuss possible topics.'},
   {no:'2',title:'Apply formally',desc:'Submit through the KKU Graduate School portal and check which scholarships you qualify for.'},
   {no:'3',title:'Interview',desc:'Meet the faculty committee — online or in person — and get to know the current lab members.'}
+];
+let RESOURCES=[
+  {icon:'i-doc',title:'Lab safety manual',titleTh:'คู่มือความปลอดภัยในแล็บ',meta:'Updated 2024 · PDF',metaTh:'อัปเดต 2024 · PDF',link:''},
+  {icon:'i-doc',title:'Equipment request form',titleTh:'แบบฟอร์มขอใช้เครื่องมือ',meta:'Form 01-B · DOCX',metaTh:'แบบฟอร์ม 01-B · DOCX',link:''},
+  {icon:'i-book',title:'Thesis template',titleTh:'เทมเพลตวิทยานิพนธ์',meta:'KKU format · DOCX',metaTh:'รูปแบบ มข. · DOCX',link:''}
 ];
 let NEWS=[
   {id:1,title:'Best presentation award 2024',date:'15 Jan 2024',img:'https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1200&auto=format&fit=crop',body:'<p>We are proud to share that <strong>Ms. Suda</strong> received the Best Oral Presentation Award at the International Conference on Biodiversity. Her work on <em>Barleria</em> genomics impressed the judges with its depth and clarity.</p><p>The award recognises months of careful sequencing and analysis, and a talk that made a complex genome accessible to a broad audience.</p>'},
@@ -1778,8 +1799,8 @@ prod_ing:'ส่วนประกอบสำคัญ',prod_size:'ขนาด
   team_eye:'ทีมงานโครงการ',team_title:'นักวิจัยเบื้องหลังโครงการ',team_lede:'นักวิจัย 8 ท่านจากมหาวิทยาลัยขอนแก่นและสถาบันพันธมิตร ร่วมขับเคลื่อนโครงการวิจัยบูรณาการ ตั้งแต่ชีววิทยาโมเลกุลและมัลติโอมิกส์ ไปจนถึงการทดสอบฤทธิ์ทางชีวภาพและทรัพย์สินทางปัญญา',
   mem_eye:'ภายในแล็บ',mem_title:'สมาชิกในแล็บ',
   team_all:'ทั้งหมด',team_lead:'หัวหน้าโครงการ',team_co:'ผู้ร่วมวิจัย',team_intl:'ต่างประเทศ',
-  team_postdoc:'หลังปริญญาเอก',team_phd:'ป.เอก',team_master:'ป.โท',team_intern:'ฝึกงาน',pub_chart_t:'ผลงานต่อปี',saved_toast:'บันทึกแล้ว',
-voices_share:'ร่วมเขียนรีวิว',voices_share_chip:'เรื่องราวจากศิษย์เก่า',voices_share_title:'แบ่งปันประสบการณ์ของคุณ',
+team_postdoc:'หลังปริญญาเอก',team_phd:'ป.เอก',team_master:'ป.โท',team_intern:'ฝึกงาน',pub_chart_t:'ผลงานต่อปี',saved_toast:'บันทึกแล้ว',
+  grant_eye:'กลุ่มวิจัยเฉพาะกิจ',grant_title:'ทีมวิจัย (สำหรับยื่นข้อเสนอโครงการ)',grant_lede:'ทีมวิจัยที่แยกออกมาต่างหาก ใช้สำหรับยื่นข้อเสนอขอทุนวิจัยโดยเฉพาะ นำโดย ศ.ดร.อรุณรัตน์ ฉวีราช เพิ่มผู้ร่วมวิจัยได้ภายหลังจากระบบหลังบ้าน',voices_share:'ร่วมเขียนรีวิว',voices_share_chip:'เรื่องราวจากศิษย์เก่า',voices_share_title:'แบ่งปันประสบการณ์ของคุณ',
 voices_role:'ตำแหน่ง/ที่ทำงานปัจจุบันของคุณ',voices_quote:'เรื่องราวของคุณ',voices_submit:'ส่งเพื่อตรวจสอบ',
 voices_note:'ทีมงานจะตรวจสอบก่อนเผยแพร่บนเว็บไซต์',voices_photo:'รูปถ่ายของคุณ (ไม่บังคับ)',  collab_eye:'เครือข่ายระดับโลก',collab_title:'ทำงานข้ามพรมแดน',
   collab_lede:'ความร่วมมือเชื่อมขอนแก่นกับสถาบันชั้นนำในสามทวีป สนับสนุนการแลกเปลี่ยนนักศึกษาและผลงานตีพิมพ์ร่วม',
@@ -1847,8 +1868,8 @@ let SITE_ACCENT='forest';
 function applyAccent(id){SITE_ACCENT=id;document.documentElement.setAttribute('data-preset',id);}
 const LS_KEY='aclab_cms_v1';
 function loadStore(){try{return JSON.parse(localStorage.getItem(LS_KEY))||{};}catch(e){return {};}}
-function saveStore(silent){try{localStorage.setItem(LS_KEY,JSON.stringify({members:MEMBERS,news:NEWS,cpubs:CPUBS,products:PRODUCTS,videos:VIDEOS,taxa:TAXA,collabs:COLLABS,testimonials:TESTIMONIALS,banners:BANNERS,events:EVENTS,gallery:GALLERY,theme:SITE_ACCENT}));if(!silent)toast(T('saved_toast'));return true;}catch(e){toast('Save failed — storage full');return false;}}
-(function(){const s=loadStore();if(s.members&&s.members.length)MEMBERS=s.members;if(s.news&&s.news.length)NEWS=s.news;if(s.cpubs)CPUBS=s.cpubs;if(s.products&&s.products.length)PRODUCTS=s.products;if(s.videos&&s.videos.length)VIDEOS=s.videos;if(s.taxa&&s.taxa.length)TAXA=s.taxa;if(s.collabs&&s.collabs.length)COLLABS=s.collabs;if(s.testimonials&&s.testimonials.length)TESTIMONIALS=s.testimonials;if(s.banners&&s.banners.length)BANNERS=s.banners;if(s.events&&s.events.length)EVENTS=s.events;if(s.gallery&&s.gallery.length)GALLERY=s.gallery;if(s.theme)SITE_ACCENT=s.theme;applyAccent(SITE_ACCENT);})();el('rgrid').innerHTML=THEMES.map((t,i)=>`
+function saveStore(silent){try{localStorage.setItem(LS_KEY,JSON.stringify({members:MEMBERS,news:NEWS,cpubs:CPUBS,products:PRODUCTS,videos:VIDEOS,taxa:TAXA,collabs:COLLABS,testimonials:TESTIMONIALS,banners:BANNERS,events:EVENTS,gallery:GALLERY,resources:RESOURCES,grantTeam:GRANT_TEAM,theme:SITE_ACCENT}));if(!silent)toast(T('saved_toast'));return true;}catch(e){toast('Save failed — storage full');return false;}}
+(function(){const s=loadStore();if(s.members&&s.members.length)MEMBERS=s.members;if(s.news&&s.news.length)NEWS=s.news;if(s.cpubs)CPUBS=s.cpubs;if(s.products&&s.products.length)PRODUCTS=s.products;if(s.videos&&s.videos.length)VIDEOS=s.videos;if(s.taxa&&s.taxa.length)TAXA=s.taxa;if(s.collabs&&s.collabs.length)COLLABS=s.collabs;if(s.testimonials&&s.testimonials.length)TESTIMONIALS=s.testimonials;if(s.banners&&s.banners.length)BANNERS=s.banners;if(s.events&&s.events.length)EVENTS=s.events;if(s.gallery&&s.gallery.length)GALLERY=s.gallery;if(s.resources&&s.resources.length)RESOURCES=s.resources;if(s.grantTeam&&s.grantTeam.length)GRANT_TEAM=s.grantTeam;if(s.theme)SITE_ACCENT=s.theme;applyAccent(SITE_ACCENT);})();el('rgrid').innerHTML=THEMES.map((t,i)=>`
   <article class="rcard reveal" data-d="${i}"><span class="rcard__no mono">0${i+1}</span><span class="rcard__ic">${icon(t.icon)}</span><h3>${t.title}</h3><p>${t.desc}</p><div class="rcard__tags">${t.tags.map(x=>`<span class="t">${x}</span>`).join('')}</div></article>`).join('');
 
 el('pipe').innerHTML=PIPE.map((p,i)=>`
@@ -1867,7 +1888,18 @@ function renderCollabs(){
 }
 renderCollabs();
 el('road').innerHTML=ROAD.map(s=>`<div class="step"><span class="step__no">${s.no}</span><div class="step__b"><h4>${s.title}</h4><p>${s.desc}</p></div></div>`).join('');
-function renderGallery(){
+function renderResources(){
+  const w=el('resList');if(!w)return;
+  if(!RESOURCES.length){w.innerHTML=`<p style="font-size:.85rem;color:var(--muted);padding:10px 0">${lang==='th'?'ยังไม่มีเอกสาร':'No resources yet.'}</p>`;return;}
+  w.innerHTML=RESOURCES.map(r=>{
+    const title=lang==='th'&&r.titleTh?r.titleTh:r.title;
+    const meta=lang==='th'&&r.metaTh?r.metaTh:r.meta;
+    const hasLink=r.link&&r.link.trim();
+    const attrs=hasLink?`href="${esc(r.link)}" target="_blank" rel="noopener"`:`href="#" onclick="toast(T('res_toast'));return false"`;
+    return `<a class="res" ${attrs}><span class="ic">${icon(r.icon||'i-doc')}</span><div><h4>${esc(title)}</h4><div class="m">${esc(meta||'')}</div></div><span class="go">${icon('i-arrow')}</span></a>`;
+  }).join('');
+}
+renderResources();function renderGallery(){
   const g=el('gallery');if(!g)return;
   if(!GALLERY.length){g.innerHTML=`<p style="font-size:.8rem;color:var(--muted)">${lang==='th'?'ยังไม่มีรูปภาพ':'No photos yet.'}</p>`;return;}
   g.innerHTML=GALLERY.map(src=>`<div class="g" onclick="openLightbox('${src}')"><img src="${src}" alt="Lab" loading="lazy"></div>`).join('');
@@ -2051,9 +2083,10 @@ window.openProduct=function(i){
 
 /* ============ VIDEOS ============ */
 function ytId(u){
-  if(!u)return'';u=u.trim();
+  if(!u)return'';
+  u=u.trim().replace(/\s+/g,'');
   if(/^[A-Za-z0-9_-]{11}$/.test(u))return u;
-  const m=u.match(/(?:youtu\.be\/|v=|\/embed\/|\/shorts\/)([A-Za-z0-9_-]{11})/);
+  const m=u.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/)|v=)([A-Za-z0-9_-]{11})/);
   return m?m[1]:'';
 }
 function vidThumb(v){
@@ -2142,7 +2175,101 @@ function renderProjectTeam(){
   if(intl.length) h+=`<div class="rteam-sub"><span class="rteam-sub__l">${TT('International co-researchers','ผู้ร่วมวิจัยต่างประเทศ')}</span></div><div class="team-grid">${intl.map(memberCard).join('')}</div>`;
   el('rteam').innerHTML=h;
 }
+
+
+function grantAvatar(m){return m.img?`<img src="${m.img}" alt="${esc(m.en)}" loading="lazy" onerror="this.style.display='none'">`:`<span class="mono-av" style="background:${hue(m.en)}">${initials(m.en)}</span>`;}
+
+function grantMemberCard(m){
+
+  const role=lang==='th'?(m.roleTh||m.role||''):(m.role||'');
+
+  return `<article class="member clickable" onclick="openGrantMember(${GRANT_TEAM.indexOf(m)})">
+
+    <div class="member__head">
+
+      <div class="member__ph">${grantAvatar(m)}</div>
+
+      <div class="member__id"><h4>${esc(m.en)}</h4>${m.th?`<div class="th">${esc(m.th)}</div>`:''}</div>
+
+    </div>
+
+    ${role?`<span class="role">${esc(role)}</span>`:''}
+
+    <div class="tags">${(m.tags||[]).map(t=>`<span class="t">${esc(t)}</span>`).join('')}</div>
+
+  </article>`;
+
+}
+
+function renderGrantTeam(){
+
+  const TT=(en,th)=>lang==='th'?th:en;
+
+  const w=el('grantTeam');if(!w)return;
+
+  const lead=GRANT_TEAM.find(m=>m.lead)||GRANT_TEAM[0];
+
+  const co=GRANT_TEAM.filter(m=>m!==lead);
+
+  let h='';
+
+  if(lead){
+
+    h+=`<div class="pi-banner">
+
+      <div class="pi-banner__ph" onclick="openGrantMember(${GRANT_TEAM.indexOf(lead)})">${grantAvatar(lead)}</div>
+
+      <div class="pi-banner__info">
+
+        <span class="rteam-tag">${TT('Team leader','หัวหน้าโครงการ')}</span>
+
+        <h3>${esc(lead.en)}</h3>${lead.th?`<div class="th">${esc(lead.th)}</div>`:''}
+
+        <p>${esc(lead.bio||'')}</p>
+
+        <div class="tags">${(lead.tags||[]).map(t=>`<span class="t">${esc(t)}</span>`).join('')}</div>
+
+      </div>
+
+    </div>`;
+
+  }
+
+  h+=`<div class="rteam-sub"><span class="rteam-sub__l">${TT('Co-researchers','ผู้ร่วมวิจัย')}</span></div>`;
+
+  h+= co.length ? `<div class="team-grid">${co.map(grantMemberCard).join('')}</div>` :
+
+    `<p style="font-size:.85rem;color:var(--muted)">${TT('Co-researchers will be added soon — use the admin panel.','จะเพิ่มผู้ร่วมวิจัยเร็วๆ นี้ — เพิ่มได้จากระบบหลังบ้าน')}</p>`;
+
+  w.innerHTML=h;
+
+}
+
+window.openGrantMember=function(idx){
+
+  const m=GRANT_TEAM[idx];if(!m)return;
+
+  const role=lang==='th'?(m.roleTh||m.role||''):(m.role||'');
+
+  el('mmPhoto').innerHTML=grantAvatar(m);el('mmPhoto').className='mm-photo'+(m.img?'':' noimg');
+
+  el('mmRole').textContent=role;el('mmRole').className='role';
+
+  el('mmName').textContent=m.en;el('mmTh').textContent=m.th||'';el('mmTh').style.display=m.th?'block':'none';
+
+  el('mmAff').innerHTML=icon('i-pin')+(lang==='th'?'มหาวิทยาลัยขอนแก่น':'Khon Kaen University');
+
+  el('mmBio').textContent=m.bio||(lang==='th'?'ยังไม่มีประวัติ':'No bio yet.');
+
+  el('mmTags').innerHTML=(m.tags||[]).map(t=>`<span class="t">${esc(t)}</span>`).join('');
+
+  openModal('memberModal');
+
+};
+
 renderProjectTeam();
+
+renderGrantTeam();
 
 let teamCat='postdoc';
 function renderTeam(cat){
@@ -2328,7 +2455,8 @@ document.querySelectorAll('.nav-scroll').forEach(a=>{
 function refreshDynamicText(){
   document.querySelectorAll('[data-more]').forEach(n=>{n.innerHTML=(lang==='th'?'อ่านต่อ':'Read more')+' '+icon('i-arrow');});
 }
-const _applyLang=applyLang;applyLang=function(){_applyLang();refreshDynamicText();renderPubAll();renderInnov();renderProducts();renderVideos();renderProjectTeam();renderTeam(teamCat);renderNews();renderTaxa();renderCollabs();renderBanner();renderEvents();renderGallery();};/* nav bg + progress + totop + scrollspy */
+const _applyLang=applyLang;applyLang=function(){_applyLang();refreshDynamicText();renderPubAll();renderInnov();renderProducts();renderVideos();renderProjectTeam();renderGrantTeam();renderTeam(teamCat);renderNews();renderTaxa();renderCollabs();renderBanner();renderEvents();renderGallery();renderResources();};
+/* nav bg + progress + totop + scrollspy */
 const nav=el('nav'),totop=el('totop'),bar=el('progress');
 const spy=[...document.querySelectorAll('section[id]')];
 const links=[...document.querySelectorAll('#navLinks a')];
@@ -2436,12 +2564,13 @@ function renderAdmin(tab){adminCurrentTab=tab;const c=el('adminContent');
   else if(tab==='products')c.innerHTML=admProdList();
   else if(tab==='videos')c.innerHTML=admVidList();
   else if(tab==='taxa')c.innerHTML=admTaxaList();
-  else if(tab==='collabs')c.innerHTML=admCollabList();
-else if(tab==='voices')admVoicesList();
+else if(tab==='collabs')c.innerHTML=admCollabList();
+  else if(tab==='grantteam')c.innerHTML=admGrantList();else if(tab==='voices')admVoicesList();
   else if(tab==='messages')admMessagesList();
   else if(tab==='banner')c.innerHTML=admBannerList();
   else if(tab==='events')c.innerHTML=admEventsList();
   else if(tab==='gallery')c.innerHTML=admGalleryList();
+  else if(tab==='resources')c.innerHTML=admResourcesList();
     else if(tab==='theme')c.innerHTML=admThemeList();
   else c.innerHTML=admData();
 }
@@ -2560,8 +2689,54 @@ window.admEditGalleryPhoto=function(i){editIdx=i;formImg=i>=0?GALLERY[i]:'';
 window.admSaveGalleryPhoto=function(){if(!formImg){toast(lang==='th'?'ต้องมีรูปภาพ':'Image required');return;}
   if(editIdx>=0)GALLERY[editIdx]=formImg;else GALLERY.push(formImg);
   saveStore();renderGallery();renderAdmin('gallery');};
-window.admDelGalleryPhoto=function(i){if(!confirm(lang==='th'?'ลบรูปนี้?':'Delete this photo?'))return;GALLERY.splice(i,1);saveStore();renderGallery();renderAdmin('gallery');};
-/* --- VOICES admin (published + pending public submissions) --- */
+/* --- STUDENT RESOURCES admin --- */
+function admResourcesList(){return `<div class="adm-section-t">${RESOURCES.length} resources · click to edit</div>`+
+  RESOURCES.map((r,i)=>`<div class="adm-row"><span class="mono-av" style="background:${hue(r.title)}">${icon(r.icon||'i-doc')}</span><div class="r-main"><h4>${esc(r.title)}</h4><div class="r-sub">${esc(r.meta||'')}</div></div><div class="r-act"><button class="adm-ic" onclick="admEditResource(${i})">${icon('i-doc')}</button><button class="adm-ic del" onclick="admDelResource(${i})">${icon('i-close')}</button></div></div>`).join('')+
+  `<button class="adm-add" onclick="admEditResource(-1)">${icon('i-plus')} Add resource</button>`;}
+window.admEditResource=function(i){editIdx=i;const r=i>=0?RESOURCES[i]:{icon:'i-doc',title:'',titleTh:'',meta:'',metaTh:'',link:''};
+  el('adminContent').innerHTML=`<span class="adm-back" onclick="renderAdmin('resources')">${icon('i-arrow')} Back</span>
+  <div class="adm-form">
+    <div class="adm-2"><div class="adm-field"><label>Title (English)</label><input id="rs_title"></div><div class="adm-field"><label>Title (Thai)</label><input id="rs_titleth"></div></div>
+    <div class="adm-2"><div class="adm-field"><label>Meta / file info (English)</label><input id="rs_meta" placeholder="Updated 2024 · PDF"></div><div class="adm-field"><label>Meta / file info (Thai)</label><input id="rs_metath"></div></div>
+    <div class="adm-field"><label>File link (Google Drive / PDF URL — leave empty for "coming soon")</label><input id="rs_link" placeholder="https://..."></div>
+    <div class="adm-field"><label>Icon</label><select id="rs_icon"><option value="i-doc">Document</option><option value="i-book">Book</option></select></div>
+    <div class="adm-actions"><button class="btn btn--ghost" onclick="renderAdmin('resources')">Cancel</button><button class="btn btn--primary" onclick="admSaveResource()">${icon('i-check')} Save</button></div>
+  </div>`;
+  el('rs_title').value=r.title||'';el('rs_titleth').value=r.titleTh||'';el('rs_meta').value=r.meta||'';el('rs_metath').value=r.metaTh||'';el('rs_link').value=r.link||'';el('rs_icon').value=r.icon||'i-doc';};
+window.admSaveResource=function(){const t=val('rs_title').trim();if(!t){toast(lang==='th'?'ต้องมีชื่อเอกสาร':'Title required');return;}
+  const item={title:t,titleTh:val('rs_titleth').trim(),meta:val('rs_meta').trim(),metaTh:val('rs_metath').trim(),link:val('rs_link').trim(),icon:val('rs_icon')};
+  if(editIdx>=0)RESOURCES[editIdx]=item;else RESOURCES.push(item);
+  saveStore();renderResources();renderAdmin('resources');};
+
+window.admDelResource=function(i){if(!confirm((lang==='th'?'ลบเอกสาร ':'Delete ')+RESOURCES[i].title+'?'))return;RESOURCES.splice(i,1);saveStore();renderResources();renderAdmin('resources');};
+
+/* --- GRANT PROPOSAL TEAM admin --- */
+function admGrantList(){return `<div class="data-card"><h4>${icon('i-spark')} About this team</h4><p>${lang==='th'?'ทีมนี้แยกจาก "ทีมงานโครงการ" ด้านบน ใช้ยื่นข้อเสนอทุนวิจัยโดยเฉพาะ หัวหน้าทีม (อ.อรุณรัตน์) ล็อกไว้ เพิ่ม/ลบผู้ร่วมวิจัยได้ด้านล่าง':'This team is separate from the "Programme team" above — used for grant proposals. The leader is fixed; add/remove co-researchers below.'}</p></div>`+
+  `<div class="adm-section-t">${GRANT_TEAM.length} member(s) · click to edit</div>`+
+  GRANT_TEAM.map((m,i)=>`<div class="adm-row">${m.img?`<img class="thumb" src="${m.img}">`:`<span class="mono-av" style="background:${hue(m.en)}">${initials(m.en)}</span>`}<div class="r-main"><h4>${esc(m.en)}</h4><div class="r-sub">${m.lead?(lang==='th'?'หัวหน้าทีม':'Team leader'):esc(m.role||'')}</div></div><div class="r-act"><button class="adm-ic" onclick="admEditGrant(${i})">${icon('i-doc')}</button>${m.lead?'':`<button class="adm-ic del" onclick="admDelGrant(${i})">${icon('i-close')}</button>`}</div></div>`).join('')+
+  `<button class="adm-add" onclick="admEditGrant(-1)">${icon('i-plus')} Add co-researcher</button>`;}
+window.admEditGrant=function(i){editIdx=i;const m=i>=0?GRANT_TEAM[i]:{en:'',th:'',role:'Co-researcher',roleTh:'ผู้ร่วมวิจัย',tags:[],bio:'',lead:false};formImg=m.img||'';
+  el('adminContent').innerHTML=`<span class="adm-back" onclick="renderAdmin('grantteam')">${icon('i-arrow')} Back</span>
+  <div class="adm-form">
+    <div class="adm-field"><label>Photo</label><div class="adm-photo-row" id="f_photowrap"></div></div>
+    <div class="adm-2"><div class="adm-field"><label>Name (English)</label><input id="f_en" ${m.lead?'disabled':''}></div><div class="adm-field"><label>Name (Thai)</label><input id="f_th" ${m.lead?'disabled':''}></div></div>
+    <div class="adm-2"><div class="adm-field"><label>Role (English)</label><input id="g_role" placeholder="Co-researcher"></div><div class="adm-field"><label>Role (Thai)</label><input id="g_roleth" placeholder="ผู้ร่วมวิจัย"></div></div>
+    <div class="adm-field"><label>Tags (comma-separated)</label><input id="g_tags"></div>
+    <div class="adm-field"><label>Bio</label><textarea id="g_bio"></textarea></div>
+    <div class="adm-actions"><button class="btn btn--ghost" onclick="renderAdmin('grantteam')">Cancel</button><button class="btn btn--primary" onclick="admSaveGrant()">${icon('i-check')} Save</button></div>
+  </div>`;
+  el('f_en').value=m.en||'';el('f_th').value=m.th||'';el('g_role').value=m.role||'';el('g_roleth').value=m.roleTh||'';el('g_tags').value=(m.tags||[]).join(', ');el('g_bio').value=m.bio||'';
+  refreshPhoto(false);el('f_en').addEventListener('input',()=>{if(!formImg)refreshPhoto(false);});
+};
+window.admSaveGrant=function(){
+  const isLead=editIdx>=0&&GRANT_TEAM[editIdx].lead;
+  const en=isLead?GRANT_TEAM[editIdx].en:val('f_en').trim();
+  if(!en){toast(lang==='th'?'ต้องมีชื่อ':'Name required');return;}
+  const item={en,th:isLead?GRANT_TEAM[editIdx].th:val('f_th').trim(),role:val('g_role').trim(),roleTh:val('g_roleth').trim(),tags:val('g_tags').split(',').map(s=>s.trim()).filter(Boolean),bio:val('g_bio').trim(),img:formImg,lead:!!isLead};
+  if(editIdx>=0)GRANT_TEAM[editIdx]=item;else GRANT_TEAM.push(item);
+  saveStore();renderGrantTeam();renderAdmin('grantteam');
+};
+window.admDelGrant=function(i){if(GRANT_TEAM[i].lead){toast(lang==='th'?'ลบหัวหน้าทีมไม่ได้':'Cannot delete the team leader');return;}if(!confirm((lang==='th'?'ลบ ':'Delete ')+GRANT_TEAM[i].en+'?'))return;GRANT_TEAM.splice(i,1);saveStore();renderGrantTeam();renderAdmin('grantteam');};/* --- VOICES admin (published + pending public submissions) --- */
 let PENDING_TESTI=[];
 async function admVoicesList(){
   const c=el('adminContent');
@@ -2741,15 +2916,21 @@ function admVidList(){return `<div class="data-card"><h4>${icon('i-wave')} How v
 window.admEditVideo=function(i){editIdx=i;const v=i>=0?VIDEOS[i]:{cat:'tutorial',title:'',titleTh:'',desc:'',descTh:'',yt:'',c1:'#2f6b4f',c2:'#4f9d78'};
   el('adminContent').innerHTML=`<span class="adm-back" onclick="renderAdmin('videos')">${icon('i-arrow')} Back</span>
   <div class="adm-form">
-    <div class="adm-field"><label>YouTube link</label><input id="v_yt" placeholder="https://youtu.be/..."></div>
-    <div class="adm-2"><div class="adm-field"><label>Category</label><select id="v_cat"><option value="intro">Lab intro</option><option value="tutorial">Tutorial / teaching</option></select></div><div class="adm-field"><label>&nbsp;</label><input id="v_dummy" disabled style="opacity:.4" value="thumbnail auto from link"></div></div>
+    <div class="adm-field"><label>YouTube link</label><input id="v_yt" placeholder="https://youtu.be/..." oninput="admPreviewYt()"></div>
+    <div id="v_ytPreview" style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:-8px"></div>
+    <div class="adm-field"><label>Category</label><select id="v_cat"><option value="intro">Lab intro</option><option value="tutorial">Tutorial / teaching</option></select></div>
     <div class="adm-2"><div class="adm-field"><label>Title (English)</label><input id="v_title"></div><div class="adm-field"><label>Title (Thai)</label><input id="v_titleth"></div></div>
     <div class="adm-field"><label>Description (English)</label><textarea id="v_desc"></textarea></div>
     <div class="adm-field"><label>Description (Thai)</label><textarea id="v_descth"></textarea></div>
     <div class="adm-actions"><button class="btn btn--ghost" onclick="renderAdmin('videos')">Cancel</button><button class="btn btn--primary" onclick="admSaveVideo()">${icon('i-check')} Save</button></div>
   </div>`;
-  el('v_yt').value=v.yt||'';el('v_cat').value=v.cat||'tutorial';el('v_title').value=v.title||'';el('v_titleth').value=v.titleTh||'';el('v_desc').value=v.desc||'';el('v_descth').value=v.descTh||'';};
-window.admSaveVideo=function(){const t=val('v_title').trim();if(!t){toast(lang==='th'?'ต้องมีชื่อ':'Title required');return;}
+  el('v_yt').value=v.yt||'';el('v_cat').value=v.cat||'tutorial';el('v_title').value=v.title||'';el('v_titleth').value=v.titleTh||'';el('v_desc').value=v.desc||'';el('v_descth').value=v.descTh||'';
+  admPreviewYt();};
+window.admPreviewYt=function(){
+  const w=el('v_ytPreview');if(!w)return;
+  const link=val('v_yt').trim();const id=ytId(link);
+  w.innerHTML=id?`✅ ${lang==='th'?'อ่านลิงก์สำเร็จ':'Link recognized'}<img src="https://img.youtube.com/vi/${id}/mqdefault.jpg" style="width:160px;border-radius:8px;margin-top:6px;display:block">`:(link?`⚠️ ${lang==='th'?'ยังจับรหัสวิดีโอไม่ได้ ลองวางลิงก์แบบเต็มจาก YouTube อีกครั้ง':'Could not read a video ID — try pasting the full YouTube link again'}`:'');
+};window.admSaveVideo=function(){const t=val('v_title').trim();if(!t){toast(lang==='th'?'ต้องมีชื่อ':'Title required');return;}
   const base=editIdx>=0?VIDEOS[editIdx]:{c1:'#2f6b4f',c2:'#4f9d78'};
   const item=Object.assign({},base,{cat:val('v_cat'),title:t,titleTh:val('v_titleth').trim(),desc:val('v_desc').trim(),descTh:val('v_descth').trim(),yt:val('v_yt').trim()});
   if(editIdx>=0)VIDEOS[editIdx]=item;else VIDEOS.push(item);
@@ -2762,7 +2943,8 @@ function admData(){return `
   <div class="data-card danger"><h4>${icon('i-close')} Reset</h4><p>Remove all saved edits from this browser and restore the original built-in content.</p><button class="btn btn--ghost" onclick="admReset()">Reset to defaults</button></div>
   <div class="data-card"><h4>${icon('i-spark')} How this works</h4><p>Edits are saved in this browser's local storage — they persist for you here, but other visitors won't see them until you export the JSON and paste it into the site's source, or host the edited file. Change the passcode by editing <code>ADMIN_PASS</code> in the code.</p></div>`;}
 function download(name,text){const b=new Blob([text],{type:'application/json'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1200);}
-window.admExport=function(){download('ac-lab-content.json',JSON.stringify({members:MEMBERS,news:NEWS,cpubs:CPUBS,products:PRODUCTS,videos:VIDEOS,taxa:TAXA,collabs:COLLABS,testimonials:TESTIMONIALS,banners:BANNERS,events:EVENTS,gallery:GALLERY},null,2));toast(lang==='th'?'ดาวน์โหลดแล้ว':'Downloaded');};window.admImport=function(){const inp=document.createElement('input');inp.type='file';inp.accept='application/json,.json';inp.onchange=()=>{const f=inp.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const d=JSON.parse(rd.result);if(Array.isArray(d.members))MEMBERS=d.members;if(Array.isArray(d.news))NEWS=d.news;if(Array.isArray(d.cpubs))CPUBS=d.cpubs;if(Array.isArray(d.products))PRODUCTS=d.products;if(Array.isArray(d.videos))VIDEOS=d.videos;if(Array.isArray(d.taxa))TAXA=d.taxa;if(Array.isArray(d.collabs))COLLABS=d.collabs;if(Array.isArray(d.testimonials))TESTIMONIALS=d.testimonials;if(Array.isArray(d.banners))BANNERS=d.banners;saveStore(true);renderProjectTeam();renderTeam(teamCat);renderNews();renderProducts();renderVideos();renderPubAll();renderTaxa();renderCollabs();renderTesti();renderBanner();renderAdmin('data');toast(lang==='th'?'นำเข้าแล้ว':'Imported');}catch(e){toast('Invalid file');}};rd.readAsText(f);};inp.click();};window.admReset=function(){if(!confirm(lang==='th'?'ลบข้อมูลที่บันทึกไว้ทั้งหมด?':'Remove all saved edits and restore defaults?'))return;try{localStorage.removeItem(LS_KEY);}catch(e){}location.reload();};
+window.admExport=function(){download('ac-lab-content.json',JSON.stringify({members:MEMBERS,news:NEWS,cpubs:CPUBS,products:PRODUCTS,videos:VIDEOS,taxa:TAXA,collabs:COLLABS,testimonials:TESTIMONIALS,banners:BANNERS,events:EVENTS,gallery:GALLERY,resources:RESOURCES,grantTeam:GRANT_TEAM},null,2));toast(lang==='th'?'ดาวน์โหลดแล้ว':'Downloaded');};window.admImport=function(){const inp=document.createElement('input');inp.type='file';inp.accept='application/json,.json';inp.onchange=()=>{const f=inp.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const d=JSON.parse(rd.result);if(Array.isArray(d.members))MEMBERS=d.members;if(Array.isArray(d.news))NEWS=d.news;if(Array.isArray(d.cpubs))CPUBS=d.cpubs;if(Array.isArray(d.products))PRODUCTS=d.products;if(Array.isArray(d.videos))VIDEOS=d.videos;if(Array.isArray(d.taxa))TAXA=d.taxa;if(Array.isArray(d.collabs))COLLABS=d.collabs;if(Array.isArray(d.testimonials))TESTIMONIALS=d.testimonials;if(Array.isArray(d.banners))BANNERS=d.banners;if(Array.isArray(d.resources))RESOURCES=d.resources;if(Array.isArray(d.grantTeam))GRANT_TEAM=d.grantTeam;saveStore(true);renderProjectTeam();renderGrantTeam();renderTeam(teamCat);renderNews();renderProducts();renderVideos();renderPubAll();renderTaxa();renderCollabs();renderTesti();renderBanner();renderResources();renderAdmin('data');toast(lang==='th'?'นำเข้าแล้ว':'Imported');}catch(e){toast('Invalid file');}};rd.readAsText(f);};inp.click();};
+window.admReset=function(){if(!confirm(lang==='th'?'ลบข้อมูลที่บันทึกไว้ทั้งหมด?':'Remove all saved edits and restore defaults?'))return;try{localStorage.removeItem(LS_KEY);}catch(e){}location.reload();};
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&el('admin').classList.contains('open'))closeAdmin();});
 if(location.hash==='#admin')setTimeout(openAdmin,300);
 window.addEventListener('hashchange',()=>{if(location.hash==='#admin')openAdmin();});
@@ -2797,6 +2979,8 @@ const supa = window.supabase.createClient(SUPA_URL, SUPA_KEY, {
     if (Array.isArray(s.collabs)      && s.collabs.length)      COLLABS      = s.collabs;
     if (Array.isArray(s.testimonials) && s.testimonials.length) TESTIMONIALS = s.testimonials;
 if (Array.isArray(s.banners)      && s.banners.length)      BANNERS      = s.banners;
+    if (Array.isArray(s.grantTeam) && s.grantTeam.length) GRANT_TEAM = s.grantTeam;
+    if (Array.isArray(s.resources) && s.resources.length) RESOURCES  = s.resources;
     if (s.theme) applyAccent(s.theme);
 
     if(typeof renderProjectTeam === 'function') renderProjectTeam();    if(typeof renderTeam === 'function') renderTeam(typeof teamCat !== 'undefined' ? teamCat : 'all'); 
@@ -2807,23 +2991,28 @@ if (Array.isArray(s.banners)      && s.banners.length)      BANNERS      = s.ban
     if(typeof renderTaxa === 'function') renderTaxa();
     if(typeof renderCollabs === 'function') renderCollabs();
     if(typeof renderTesti === 'function') renderTesti();
-    if(typeof renderBanner === 'function') renderBanner();
+   if(typeof renderBanner === 'function') renderBanner();
+    if(typeof renderGrantTeam === 'function') renderGrantTeam();
+    if(typeof renderResources === 'function') renderResources();
   });
 
   // (2) ทุกครั้งที่กด Save ในหลังบ้าน ให้เขียนขึ้นคลาวด์ด้วย
-  if(typeof saveStore !== 'undefined') {
+if(typeof saveStore !== 'undefined') {
     const _saveStore = saveStore;
     saveStore = function(silent){
-      const ok = _saveStore(silent);
-supa.from('site_content').update({
-        data:{members:MEMBERS, news:NEWS, cpubs:CPUBS, products:PRODUCTS, videos:VIDEOS, taxa:TAXA, collabs:COLLABS, testimonials:TESTIMONIALS, banners:BANNERS, theme:SITE_ACCENT},
+      const ok = _saveStore(true);
+      supa.from('site_content').update({
+        data:{members:MEMBERS, news:NEWS, cpubs:CPUBS, products:PRODUCTS, videos:VIDEOS, taxa:TAXA, collabs:COLLABS, testimonials:TESTIMONIALS, banners:BANNERS, resources:RESOURCES, grantTeam:GRANT_TEAM, theme:SITE_ACCENT},
         updated_at: new Date()
-      }).eq('id',1).then(({error})=>{        if(error && typeof toast === 'function') toast('Cloud save failed — ล็อกอินหรือยัง?'); 
+      }).eq('id',1).then(({error})=>{
+        if(!silent){
+          if(error && typeof toast === 'function'){toast('⚠️ Cloud save FAILED — เช็คว่าล็อกอินอยู่ไหม');console.error('Supabase save error:',error);}
+          else if(typeof toast === 'function'){toast('✅ Saved to cloud — ผู้เข้าชมทุกคนจะเห็นการเปลี่ยนแปลง');}
+        }
       });
       return ok;
     };
   }
-
 // (3) ใช้บัญชี Supabase ล็อกอิน — รองรับแอดมินหลายบัญชี (คนละอีเมล/รหัสผ่าน)
 window.tryUnlock = function(){
     const emailVal = document.getElementById('adminEmail') ? document.getElementById('adminEmail').value.trim() : '';
