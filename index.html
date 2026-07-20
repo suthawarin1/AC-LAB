@@ -78,6 +78,12 @@ body{
   font-family:var(--sans);font-weight:400;font-size:16px;line-height:1.6;
   -webkit-font-smoothing:antialiased;overflow-x:hidden;overflow-x:clip;overscroll-behavior-x:none;width:100%;max-width:100vw;
   transition:background .5s var(--ease),color .5s var(--ease);
+} body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-weight:400;font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;overflow-x:clip;overscroll-behavior-x:none;width:100%;max-width:100vw;
+  transition:background .5s var(--ease),color .5s var(--ease);
+  overflow-wrap:break-word;word-break:break-word;
 }
 main{display:block;overflow-x:hidden;overflow-x:clip;width:100%;max-width:100vw}
 
@@ -634,6 +640,8 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
   .team-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:760px){
+  .innov-flow{flex-direction:column;align-items:center;text-align:center;gap:10px}
+  .if-line{flex:none;width:2px;height:18px}
   .rgrid,.taxa-grid,.collab-grid,.pipe{grid-template-columns:1fr}
   .innov-grid{grid-template-columns:repeat(2,1fr)}
   .team-grid{grid-template-columns:repeat(2,1fr)}
@@ -649,8 +657,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
   .pi-modal .pic{height:240px;min-height:240px}
   .cw-figs{gap:22px}
   #hero{padding-top:96px}
-} .innov-flow{flex-direction:column;align-items:center;text-align:center;gap:10px}
-  .if-line{flex:none;width:2px;height:18px}
+} 
 @media(max-width:440px){
   .figs{grid-template-columns:1fr}
   .fig--6{grid-column:span 1}
@@ -882,6 +889,11 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 .vid-modal__b p{color:var(--muted);font-weight:300;line-height:1.55;font-size:.92rem}
 @media(max-width:1024px){.vid-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.vid-grid{grid-template-columns:1fr}}
+.bento>*, .rgrid>*, .taxa-grid>*, .figs>*, .innov-grid>*, .team-grid>*,
+.collab-grid>*, .fac-grid>*, .pub-layout>*, .pub-side>*, .news-layout>*,
+.vf-split>*, .contact-split>*, .fac-split>*, .join-split>* {
+  min-width: 0;
+}
 </style>
 </head>
 <body>
