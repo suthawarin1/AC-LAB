@@ -2555,9 +2555,13 @@ el('year').textContent=new Date().getFullYear();
 window.addEventListener('load',()=>{setTimeout(()=>{const p=el('pre');p.style.opacity='0';setTimeout(()=>p.style.display='none',600);},400);});
 
 /* ============ ADMIN / CMS ============ */
-const ADMIN_PASS='aclab2010';
+
 let adminUnlocked=false, adminCurrentTab='team', editIdx=-1, formImg='';
 function esc(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function safeImgSrc(s){
+     s=(s||'').trim();
+     return /^(data:image\/(png|jpe?g|webp|gif);base64,|https:\/\/)/i.test(s)?esc(s):'';
+   }
 function val(id){const e=el(id);return e?e.value:'';}
 window.openAdmin=function(){
   el('admin').classList.add('open');document.body.style.overflow='hidden';
@@ -2575,6 +2579,8 @@ window.openAdmin=function(){
 };
 window.closeAdmin=function(){el('admin').classList.remove('open');document.body.style.overflow='';};
 window.tryUnlock=function(){
+  toast(lang==='th'?'ระบบยืนยันตัวตนยังไม่พร้อมใช้งาน กรุณาโหลดหน้าใหม่':'Sign-in is not ready');
+};
   if(val('adminPass')===ADMIN_PASS){
     adminUnlocked=true;
     el('adminLock').style.display='none';
@@ -2803,7 +2809,7 @@ async function admVoicesList(){
     if(error){pw.innerHTML=`<p style="font-size:.85rem;color:var(--muted)">Could not load submissions.</p>`;return;}
     PENDING_TESTI=data||[];
     if(!PENDING_TESTI.length){pw.innerHTML=`<p style="font-size:.85rem;color:var(--muted)">${lang==='th'?'ไม่มีรีวิวรอตรวจสอบ':'No pending submissions.'}</p>`;return;}
-    pw.innerHTML=PENDING_TESTI.map((s,i)=>`<div class="adm-row">${s.img?`<img class="thumb" src="${s.img}">`:`<span class="mono-av" style="background:${hue(s.name)}">${initials(s.name)}</span>`}<div class="r-main"><h4>${esc(s.name)}</h4><div class="r-sub">${esc(s.role||'')} · ${esc((s.quote||'').slice(0,60))}${(s.quote||'').length>60?'…':''}</div></div><div class="r-act"><button class="adm-ic" title="${lang==='th'?'อนุมัติ':'Approve'}" onclick="admApproveTesti(${i})">${icon('i-check')}</button><button class="adm-ic del" title="${lang==='th'?'ปฏิเสธ':'Reject'}" onclick="admRejectTesti(${i})">${icon('i-close')}</button></div></div>`).join('');
+    pw.innerHTML=PENDING_TESTI.map((s,i)=>`<div class="adm-row">${s.img?`<img class="thumb"src="${safeImgSrc(s.img)}">`:`<span class="mono-av" style="background:${hue(s.name)}">${initials(s.name)}</span>`}<div class="r-main"><h4>${esc(s.name)}</h4><div class="r-sub">${esc(s.role||'')} · ${esc((s.quote||'').slice(0,60))}${(s.quote||'').length>60?'…':''}</div></div><div class="r-act"><button class="adm-ic" title="${lang==='th'?'อนุมัติ':'Approve'}" onclick="admApproveTesti(${i})">${icon('i-check')}</button><button class="adm-ic del" title="${lang==='th'?'ปฏิเสธ':'Reject'}" onclick="admRejectTesti(${i})">${icon('i-close')}</button></div></div>`).join('');
   } else {
     el('admPendingWrap').innerHTML=`<p style="font-size:.85rem;color:var(--muted)">Connect Supabase to receive public submissions.</p>`;
   }
