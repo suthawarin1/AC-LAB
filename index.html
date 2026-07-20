@@ -2581,16 +2581,7 @@ window.closeAdmin=function(){el('admin').classList.remove('open');document.body.
 window.tryUnlock=function(){
   toast(lang==='th'?'ระบบยืนยันตัวตนยังไม่พร้อมใช้งาน กรุณาโหลดหน้าใหม่':'Sign-in is not ready');
 };
-  if(val('adminPass')===ADMIN_PASS){
-    adminUnlocked=true;
-    el('adminLock').style.display='none';
-    el('adminBody').style.display='flex';
-    const lb=el('adminLogoutBtn'); if(lb) lb.style.display='inline-flex';
-    renderAdmin('team');
-  }else{
-    toast(lang==='th'?'รหัสไม่ถูกต้อง':'Wrong passcode');
-  }
-};window.adminTab=function(t,btn){adminCurrentTab=t;document.querySelectorAll('.atab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderAdmin(t);};
+window.adminTab=function(t,btn){adminCurrentTab=t;document.querySelectorAll('.atab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderAdmin(t);};
 window.adminLogout=function(){
   adminUnlocked=false;
   const p=el('adminPass'); if(p) p.value='';
