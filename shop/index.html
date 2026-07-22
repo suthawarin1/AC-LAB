@@ -64,6 +64,8 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.12;letter-spa
 .chip--new{background:var(--accent-soft);color:var(--accent-ink)}
 .chip--best{background:var(--gold-soft);color:var(--gold-ink)}
 .chip--stock{background:#fbeaea;color:var(--danger)}
+.chip--low{background:#fdf0d5;color:#8a6a1f}
+.chip--member{background:var(--accent-ink);color:#fff}
 
 /* seal — signature motif used for verification everywhere */
 .seal{display:inline-flex;align-items:center;justify-content:center;position:relative;flex:none}
@@ -291,6 +293,30 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.12;letter-spa
 .verify-bad .icon{width:26px;height:26px}
 @media(max-width:480px){.verify-card{flex-direction:column;text-align:center}.verify-card .thumb{width:96px;height:96px}}
 
+/* membership card */
+.mcard{position:relative;background:linear-gradient(135deg,var(--accent-ink),var(--accent) 62%,var(--accent-bright));border-radius:20px;padding:28px 26px 26px;color:#fff;overflow:hidden;box-shadow:var(--lift);max-width:440px;margin:0 auto}
+.mcard::before{content:"";position:absolute;top:-46px;right:-46px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.07)}
+.mcard::after{content:"";position:absolute;bottom:-64px;left:-34px;width:190px;height:190px;border-radius:50%;background:rgba(255,255,255,.05)}
+.mcard__top{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:1}
+.mcard__brand{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.mcard__seal{width:34px;height:34px}
+.mcard__seal .ring1,.mcard__seal .ring2{stroke:#fff}
+.mcard__seal .core{fill:#fff}
+.mcard__seal .check{stroke:var(--accent-ink)}
+.mcard__name{font-family:var(--serif);font-size:1.4rem;margin-top:20px;position:relative;z-index:1}
+.mcard__phone{font-family:var(--mono);font-size:.83rem;opacity:.8;letter-spacing:.05em;margin-top:2px;position:relative;z-index:1}
+.mcard__progress{margin-top:24px;position:relative;z-index:1}
+.mcard__progress .row{display:flex;justify-content:space-between;font-size:.76rem;opacity:.9;margin-bottom:7px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.03em}
+.mcard__bar{height:8px;border-radius:100px;background:rgba(255,255,255,.2);overflow:hidden}
+.mcard__bar span{display:block;height:100%;background:var(--gold-bright);border-radius:100px;transition:width .6s var(--ease)}
+.mcard__foot{display:flex;justify-content:space-between;gap:10px;margin-top:22px;font-size:.7rem;opacity:.8;position:relative;z-index:1;font-family:var(--mono);text-transform:uppercase;letter-spacing:.03em}
+.mreward{max-width:440px;margin:16px auto 0;background:var(--gold-soft);border-radius:16px;padding:16px 18px;box-shadow:var(--hair);display:flex;align-items:center;gap:14px}
+.mreward .code{font-family:var(--mono);font-size:1.02rem;font-weight:600;color:var(--gold-ink);background:#fff;padding:8px 14px;border-radius:10px;letter-spacing:.03em;flex:none;cursor:pointer}
+.co-member-banner{display:none;align-items:center;gap:12px;background:var(--accent-soft);border-radius:14px;padding:12px 14px;margin-top:12px;font-size:.83rem;color:var(--accent-ink)}
+.co-member-banner .seal{width:26px;height:26px;flex:none}
+.co-member-banner b{display:block;font-size:.85rem}
+.co-member-banner .r-sub{color:var(--accent-ink);opacity:.8}
+
 /* about */
 .about-split{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start}
 .about-card{background:var(--surface);border-radius:var(--r);box-shadow:var(--hair);padding:26px}
@@ -435,6 +461,7 @@ body.lang-gate-open{overflow:hidden}
       <a href="#shop" data-route="shop" data-i18n="nav_shop">Shop</a>
       <a href="#track" data-route="track" data-i18n="nav_track">Track order</a>
       <a href="#verify" data-route="verify" data-i18n="nav_verify">Verify product</a>
+      <a href="#membership" data-route="membership" data-i18n="nav_membership">Membership</a>
       <a href="#about" data-route="about" data-i18n="nav_about">About us</a>
     </nav>
     <div class="nav__actions">
@@ -447,6 +474,7 @@ body.lang-gate-open{overflow:hidden}
     <a href="#shop" onclick="closeMnav()" data-i18n="nav_shop">Shop</a>
     <a href="#track" onclick="closeMnav()" data-i18n="nav_track">Track order</a>
     <a href="#verify" onclick="closeMnav()" data-i18n="nav_verify">Verify product</a>
+    <a href="#membership" onclick="closeMnav()" data-i18n="nav_membership">Membership</a>
     <a href="#about" onclick="closeMnav()" data-i18n="nav_about">About us</a>
   </div>
 </header>
@@ -502,8 +530,9 @@ body.lang-gate-open{overflow:hidden}
         <h4><span class="n">1</span><span data-i18n="co_step1">Shipping details</span></h4>
         <div class="two">
           <div class="field"><label data-i18n="f_name">Full name</label><input id="co_name" required></div>
-          <div class="field"><label data-i18n="f_phone">Phone number</label><input id="co_phone" required placeholder="08X-XXX-XXXX"></div>
+          <div class="field"><label data-i18n="f_phone">Phone number</label><input id="co_phone" required placeholder="08X-XXX-XXXX" onblur="checkPhoneMembership()"></div>
         </div>
+        <div class="co-member-banner" id="coMemberBanner"></div>
         <div class="field"><label data-i18n="f_email">Email (optional)</label><input id="co_email" type="email"></div>
         <div class="field"><label data-i18n="f_addr">Address</label><textarea id="co_addr" required placeholder="House no., street, sub-district…"></textarea></div>
         <div class="three">
@@ -571,6 +600,7 @@ body.lang-gate-open{overflow:hidden}
       <h2 class="h2" data-i18n="success_title">Order received</h2>
       <p class="lede center" data-i18n="success_lede">Thank you — we've received your order and will confirm your payment shortly.</p>
       <div class="order-code" id="successCode">—</div>
+      <div id="successLoyalty"></div>
       <p class="r-sub" data-i18n="success_hint">Save this order number together with the phone number you used, so you can look up your order anytime.</p>
       <div style="display:flex;gap:10px;justify-content:center;margin-top:20px;flex-wrap:wrap">
         <a href="#track" class="btn btn--primary" data-i18n="success_track">Track this order</a>
@@ -615,6 +645,28 @@ body.lang-gate-open{overflow:hidden}
         </div>
       </div>
       <div class="verify-result" id="verifyResult"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MEMBERSHIP VIEW ===== -->
+<section class="view" id="view-membership" style="display:none">
+  <div class="section">
+    <div class="wrap">
+      <div class="verify-hero">
+        <span class="seal verify-seal-lg" id="memberSealLg"></span>
+        <span class="eyebrow" data-i18n="member_eye">Loyalty program</span>
+        <h2 class="h2" style="margin-top:10px" data-i18n="member_title">Your membership card</h2>
+        <p class="lede center" data-i18n="member_lede">Every order counts toward your rewards. Enter the phone number you order with to view your card.</p>
+        <div class="verify-form">
+          <div class="verify-form__wrap">
+            <svg class="icon verify-form__icon"><use href="#i-search"/></svg>
+            <input id="mem_phone" placeholder="08X-XXX-XXXX" onkeydown="if(event.key==='Enter')lookupMemberCard()">
+          </div>
+          <button class="btn btn--gold" onclick="lookupMemberCard()" data-i18n="member_btn">View card</button>
+        </div>
+      </div>
+      <div class="verify-result" id="memberResult"></div>
     </div>
   </div>
 </section>
@@ -748,6 +800,7 @@ body.lang-gate-open{overflow:hidden}
         <button class="atab active" data-tab="orders" onclick="admTab('orders',this)">Orders</button>
         <button class="atab" data-tab="products" onclick="admTab('products',this)">Products</button>
         <button class="atab" data-tab="discounts" onclick="admTab('discounts',this)">Discounts</button>
+        <button class="atab" data-tab="loyalty" onclick="admTab('loyalty',this)">Loyalty</button>
         <button class="atab" data-tab="reviews" onclick="admTab('reviews',this)">Reviews</button>
       </div>
       <div class="admin__content" id="adminContent"></div>
@@ -771,6 +824,7 @@ const SHIPPING_FEE=50;
 const FREE_SHIP_THRESHOLD=1000;
 
 const supa = (SUPA_URL.indexOf('xxxxx')<0 && window.supabase) ? window.supabase.createClient(SUPA_URL,SUPA_KEY,{auth:{persistSession:false}}) : null;
+function normPhone(p){return (p||'').toString().replace(/\D/g,'');}
 
 /* ============================================================
    i18n
@@ -796,7 +850,9 @@ about_c1_t:'AC Lab — the research',about_c1_d:'Since 2010, the AC Lab at the F
 about_c2_t:'Sciseelt Co., Ltd. — the company',about_company_th:'บริษัท ไซสีอิฐ จำกัด',about_c2_d:'registers, manufactures and distributes the health and cosmetic products developed from AC Lab\u2019s findings, so that research results reach real people, safely and legally.',
 about_tl1_y:'Research',about_tl1_d:'Compound discovery and testing at AC Lab',about_tl2_y:'Registration',about_tl2_d:'อย. and intellectual-property filing',about_tl3_y:'Product',about_tl3_d:'Manufactured and sold under Sciseelt',
 about_contact_t:'Company details',about_addr_l:'Registered office',about_addr_v:'Faculty of Science, Khon Kaen University, 123 Mittraphap Rd., Khon Kaen 40002, Thailand',about_contact_l:'Contact',
-foot_desc:"The commercial arm of AC Lab's plant-genomics research — registered products from Sciseelt Co., Ltd. (บริษัท ไซสีอิฐ จำกัด).",foot_shop:'Shop',foot_company:'Company',foot_aclab:'AC Lab research site',foot_reg:'Company registration no. 0405563004127 · อย.-registered products',foot_copy_name:'AC Lab KKU × Sciseelt Co., Ltd.',page_title:'AC Lab x SciSeelt — Lab-verified natural products',about_legal_l:'Legal entity',about_legal_v:'Sciseelt Co., Ltd.<br>(บริษัท ไซสีอิฐ จำกัด)<br>Company reg. no. 0405563004127'},th:{brandsub:'โดย บริษัท ไซสีอิฐ จำกัด',nav_shop:'ร้านค้า',nav_track:'ติดตามคำสั่งซื้อ',nav_verify:'ตรวจสอบสินค้า',nav_about:'เกี่ยวกับเรา',
+foot_desc:"The commercial arm of AC Lab's plant-genomics research — registered products from Sciseelt Co., Ltd. (บริษัท ไซสีอิฐ จำกัด).",foot_shop:'Shop',foot_company:'Company',foot_aclab:'AC Lab research site',foot_reg:'Company registration no. 0405563004127 · อย.-registered products',foot_copy_name:'AC Lab KKU × Sciseelt Co., Ltd.',page_title:'AC Lab x SciSeelt — Lab-verified natural products',about_legal_l:'Legal entity',about_legal_v:'Sciseelt Co., Ltd.<br>(บริษัท ไซสีอิฐ จำกัด)<br>Company reg. no. 0405563004127',
+nav_membership:'Membership',member_eye:'Loyalty program',member_title:'Your membership card',member_lede:'Every order counts toward your rewards. Enter the phone number you order with to view your card.',member_btn:'View card',
+stock_out:'Sold out',stock_low:'Low stock'},th:{brandsub:'โดย บริษัท ไซสีอิฐ จำกัด',nav_shop:'ร้านค้า',nav_track:'ติดตามคำสั่งซื้อ',nav_verify:'ตรวจสอบสินค้า',nav_about:'เกี่ยวกับเรา',
 hero_eye:'งานวิจัยจาก AC Lab · ผลิตโดย Sciseelt',hero_title:'ผลิตภัณฑ์จากห้องแล็บ<br><span class="em">ตรวจสอบได้ก่อนถึงมือคุณ</span>',
 hero_lede:'ทุกผลิตภัณฑ์ที่นี่สืบย้อนไปถึงงานวิจัยด้านจีโนมิกส์พืชและเคมีพฤกษศาสตร์ของ AC Lab มหาวิทยาลัยขอนแก่น — ขึ้นทะเบียนถูกต้อง ตรวจสอบได้ทุกล็อต ผลิตโดยบริษัท ไซสีอิฐ จำกัด',
 hero_cta1:'เลือกซื้อสินค้า',hero_cta2:'ตรวจสอบสินค้า',trust1:'สินค้าขึ้นทะเบียน อย.',trust2:'อ้างอิงงานวิจัยตีพิมพ์',trust3:'จัดส่งพร้อมเลขติดตาม',
@@ -816,7 +872,9 @@ about_c1_t:'AC Lab — งานวิจัย',about_c1_d:'ตั้งแต�
 about_c2_t:'บริษัท ไซสีอิฐ จำกัด — บริษัท',about_company_th:'บริษัท ไซสีอิฐ จำกัด',about_c2_d:'ดำเนินการขึ้นทะเบียน ผลิต และจัดจำหน่ายผลิตภัณฑ์สุขภาพและความงามที่พัฒนาจากผลงานวิจัยของ AC Lab เพื่อให้ผลวิจัยไปถึงผู้บริโภคจริงอย่างปลอดภัยและถูกกฎหมาย',
 about_tl1_y:'วิจัย',about_tl1_d:'ค้นพบและทดสอบสารสำคัญที่ AC Lab',about_tl2_y:'ขึ้นทะเบียน',about_tl2_d:'ยื่นเลข อย. และทรัพย์สินทางปัญญา',about_tl3_y:'ผลิตภัณฑ์',about_tl3_d:'ผลิตและจำหน่ายภายใต้ Sciseelt',
 about_contact_t:'ข้อมูลบริษัท',about_addr_l:'ที่ตั้งบริษัท',about_addr_v:'คณะวิทยาศาสตร์ มหาวิทยาลัยขอนแก่น 123 ถ.มิตรภาพ ขอนแก่น 40002',about_contact_l:'ติดต่อ',
-foot_desc:'แขนงธุรกิจของงานวิจัยจีโนมิกส์พืชจาก AC Lab — ผลิตภัณฑ์ขึ้นทะเบียนโดยบริษัท ไซสีอิฐ จำกัด',foot_shop:'ร้านค้า',foot_company:'บริษัท',foot_aclab:'เว็บไซต์งานวิจัย AC Lab',foot_reg:'เลขทะเบียนนิติบุคคล 0405563004127 · สินค้าขึ้นทะเบียน อย.',foot_copy_name:'AC Lab KKU × บริษัท ไซสีอิฐ จำกัด',page_title:'AC Lab x SciSeelt — ผลิตภัณฑ์จากงานวิจัย ตรวจสอบได้ทุกล็อต',about_legal_l:'นิติบุคคล',about_legal_v:'บริษัท ไซสีอิฐ จำกัด<br>(Sciseelt Co., Ltd.)<br>เลขทะเบียนนิติบุคคล 0405563004127'}};
+foot_desc:'แขนงธุรกิจของงานวิจัยจีโนมิกส์พืชจาก AC Lab — ผลิตภัณฑ์ขึ้นทะเบียนโดยบริษัท ไซสีอิฐ จำกัด',foot_shop:'ร้านค้า',foot_company:'บริษัท',foot_aclab:'เว็บไซต์งานวิจัย AC Lab',foot_reg:'เลขทะเบียนนิติบุคคล 0405563004127 · สินค้าขึ้นทะเบียน อย.',foot_copy_name:'AC Lab KKU × บริษัท ไซสีอิฐ จำกัด',page_title:'AC Lab x SciSeelt — ผลิตภัณฑ์จากงานวิจัย ตรวจสอบได้ทุกล็อต',about_legal_l:'นิติบุคคล',about_legal_v:'บริษัท ไซสีอิฐ จำกัด<br>(Sciseelt Co., Ltd.)<br>เลขทะเบียนนิติบุคคล 0405563004127',
+nav_membership:'สมาชิก',member_eye:'โปรแกรมสะสมแต้ม',member_title:'บัตรสมาชิกของคุณ',member_lede:'ทุกคำสั่งซื้อนับสะสมแต้มให้คุณ กรอกเบอร์โทรที่ใช้สั่งซื้อเพื่อดูบัตรสมาชิก',member_btn:'ดูบัตรสมาชิก',
+stock_out:'สินค้าหมด',stock_low:'เหลือน้อย'}};
 function T(k){return (I18N[lang]&&I18N[lang][k])!==undefined?I18N[lang][k]:k;}
 function applyLang(){
   document.documentElement.lang=lang;
@@ -908,8 +966,9 @@ async function loadShopData(){
     if(!pe && prod && prod.length){PRODUCTS=prod;SUPA_READY=true;}
     const {data:rev}=await supa.from('shop_reviews').select('*').eq('status','approved');
     if(rev)REVIEWS=rev;
-    const {data:disc}=await supa.from('shop_discounts').select('*').eq('active',true);
-    if(disc)DISCOUNTS=disc;
+    // Note: discount codes are no longer bulk-fetched here — codes tied to a
+    // specific member (member_phone) shouldn't be broadcast to every visitor.
+    // applyDiscount() validates codes one at a time via the validate_discount_code RPC instead.
   }catch(e){console.warn('Supabase not reachable — showing demo catalog.',e);}
   renderProducts();renderCatChips();
 }
@@ -917,7 +976,7 @@ async function loadShopData(){
 /* ============================================================
    ROUTER
    ============================================================ */
-const VIEWS=['shop','checkout','success','track','verify','about'];
+const VIEWS=['shop','checkout','success','track','verify','membership','about'];
 function route(){
   let h=(location.hash||'#shop').replace('#','');
   if(!VIEWS.includes(h))h='shop';
@@ -955,9 +1014,11 @@ function renderProducts(){
   if(!items.length){g.innerHTML=`<div class="empty-note">${lang==='th'?'ไม่พบสินค้าที่ตรงกับการค้นหา':'No products match your search.'}</div>`;return;}
   g.innerHTML=items.map(p=>{
     const r=ratingFor(p.id);
+    const stock=Number(p.stock||0);
+    const soldOut=stock<=0, lowStock=!soldOut&&stock<=5;
     return `<article class="pcard" onclick="openProduct('${p.id}')">
       <div class="pcard__img">
-        <div class="pcard__badges">${p.is_new?`<span class="chip chip--new">${lang==='th'?'ใหม่':'New'}</span>`:''}${p.is_bestseller?`<span class="chip chip--best">${lang==='th'?'ขายดี':'Bestseller'}</span>`:''}</div>
+        <div class="pcard__badges">${p.is_new?`<span class="chip chip--new">${lang==='th'?'ใหม่':'New'}</span>`:''}${p.is_bestseller?`<span class="chip chip--best">${lang==='th'?'ขายดี':'Bestseller'}</span>`:''}${soldOut?`<span class="chip chip--stock">${T('stock_out')}</span>`:(lowStock?`<span class="chip chip--low">${T('stock_low')}</span>`:'')}</div>
         ${p.fda_no?`<span class="pcard__seal">${sealSVG()}</span>`:''}
         ${firstImage(p)}
       </div>
@@ -967,7 +1028,7 @@ function renderProducts(){
         ${lang==='en'&&p.name_th?`<div class="pcard__th">${esc(p.name_th)}</div>`:''}
         <div class="pcard__rating"><span class="stars">${stars(r.avg)}</span><span>${r.count?('('+r.count+')'):(lang==='th'?'ยังไม่มีรีวิว':'No reviews yet')}</span></div>
         <div class="pcard__price"><span class="now">${baht(p.price)}</span>${p.compare_price>p.price?`<span class="was">${baht(p.compare_price)}</span>`:''}</div>
-        <button class="btn btn--ghost btn--sm pcard__add" onclick="event.stopPropagation();quickAdd('${p.id}')">${icon('i-cart')} ${T('add_to_cart')}</button>
+        <button class="btn btn--ghost btn--sm pcard__add" ${soldOut?'disabled':''} onclick="event.stopPropagation();quickAdd('${p.id}')">${icon('i-cart')} ${soldOut?T('stock_out'):T('add_to_cart')}</button>
       </div>
     </article>`;
   }).join('');
@@ -993,6 +1054,8 @@ function openProduct(id){
   el('pdPriceWas').textContent=p.compare_price>p.price?baht(p.compare_price):'';
   el('pdQty').textContent='1';
   el('pdStock').textContent=(p.stock>0)?((lang==='th'?'คงเหลือ ':'In stock: ')+p.stock):(lang==='th'?'สินค้าหมด':'Out of stock');
+  const pdAddBtn=document.querySelector('.pd-actions .btn');
+  if(pdAddBtn){pdAddBtn.disabled=(p.stock||0)<=0;pdAddBtn.textContent=(p.stock||0)<=0?T('stock_out'):T('add_to_cart');}
   el('pdFda').innerHTML=p.fda_no?`<span class="seal">${sealSVG()}</span><div><b>อย. ${esc(p.fda_no)}</b><span>${lang==='th'?'ตรวจสอบเลขนี้ได้ที่หน้า “ตรวจสอบสินค้า”':'Verify this number on the Verify product page'}</span></div>`:'';
   const desc=lang==='th'&&p.short_desc_th?p.short_desc_th:p.short_desc;
   const benefits=(lang==='th'&&p.benefits_th&&p.benefits_th.length?p.benefits_th:(p.benefits||[]));
@@ -1006,7 +1069,7 @@ function openProduct(id){
   openModal('productModal');
 }
 function pdSetImg(i){pdImgIdx=i;const imgs=pdProduct.images;el('pdMain').innerHTML=`<img src="${imgs[i]}" style="width:100%;height:100%;object-fit:cover">`;document.querySelectorAll('.pd-thumbs .th').forEach((t,idx)=>t.classList.toggle('active',idx===i));}
-function pdQty(d){pdQtyVal=Math.max(1,pdQtyVal+d);el('pdQty').textContent=pdQtyVal;}
+function pdQty(d){const max=(pdProduct&&pdProduct.stock)||99;pdQtyVal=Math.max(1,Math.min(max,pdQtyVal+d));el('pdQty').textContent=pdQtyVal;}
 function pdTab(tab,btn){document.querySelectorAll('.pd-tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.pd-panel').forEach(p=>p.classList.add('hide'));el('panel-'+tab).classList.remove('hide');}
 function renderReviewsPanel(pid){
   const rs=REVIEWS.filter(r=>r.product_id===pid);
@@ -1042,13 +1105,27 @@ function cartCount(){return CART.reduce((a,i)=>a+i.qty,0);}
 function cartSubtotal(){return CART.reduce((a,i)=>a+i.qty*i.price,0);}
 function addToCart(p,qty){
   qty=qty||1;
+  const stock=Number(p.stock||0);
   const ex=CART.find(i=>i.product_id===p.id);
-  if(ex)ex.qty+=qty;else CART.push({product_id:p.id,name:p.name,name_th:p.name_th,price:p.price,image:(p.images&&p.images[0])||'',icon:p.icon,c1:p.c1,c2:p.c2,qty});
-  renderCart();toast((lang==='th'?'เพิ่มลงตะกร้าแล้ว: ':'Added to cart: ')+productName(p));
+  const already=ex?ex.qty:0;
+  const allowed=Math.max(0,stock-already);
+  if(allowed<=0){toast(lang==='th'?'สินค้าไม่เพียงพอในสต็อก':'Not enough stock available',true);return;}
+  const addQty=Math.min(qty,allowed);
+  if(ex)ex.qty+=addQty;else CART.push({product_id:p.id,name:p.name,name_th:p.name_th,price:p.price,image:(p.images&&p.images[0])||'',icon:p.icon,c1:p.c1,c2:p.c2,qty:addQty});
+  renderCart();
+  if(addQty<qty)toast(lang==='th'?`มีสินค้าเหลือให้เพิ่มได้อีก ${allowed} ชิ้นเท่านั้น`:`Only ${allowed} more in stock — added the maximum available`,true);
+  else toast((lang==='th'?'เพิ่มลงตะกร้าแล้ว: ':'Added to cart: ')+productName(p));
 }
 function quickAdd(id){const p=PRODUCTS.find(x=>x.id===id);if(p)addToCart(p,1);}
 function addToCartFromModal(){if(pdProduct)addToCart(pdProduct,pdQtyVal);closeModal('productModal');openCart();}
-function changeQty(pid,d){const it=CART.find(i=>i.product_id===pid);if(!it)return;it.qty+=d;if(it.qty<=0)CART=CART.filter(i=>i.product_id!==pid);renderCart();}
+function changeQty(pid,d){
+  const it=CART.find(i=>i.product_id===pid);if(!it)return;
+  const prod=PRODUCTS.find(p=>p.id===pid);
+  const max=prod?Number(prod.stock||0):999;
+  it.qty=Math.min(max,it.qty+d);
+  if(it.qty<=0)CART=CART.filter(i=>i.product_id!==pid);
+  renderCart();
+}
 function removeItem(pid){CART=CART.filter(i=>i.product_id!==pid);renderCart();}
 function renderCart(){
   const badge=el('cartBadge');const c=cartCount();
@@ -1112,6 +1189,34 @@ function coValidateStep1(){
   for(const id of req){if(!el(id).value.trim()){toast(lang==='th'?'กรุณากรอกข้อมูลที่จำเป็นให้ครบ':'Please fill in all required fields',true);el(id).focus();return false;}}
   return true;
 }
+let coMemberInfo=null;
+async function checkPhoneMembership(){
+  const phone=el('co_phone').value.trim();
+  coMemberInfo=null;renderMemberBanner();
+  if(!phone||!supa||normPhone(phone).length<9)return;
+  try{
+    const {data,error}=await supa.rpc('get_member_status',{p_phone:phone});
+    if(!error&&data&&data.exists){coMemberInfo=data;}
+  }catch(e){}
+  renderMemberBanner();
+}
+function renderMemberBanner(){
+  const box=el('coMemberBanner');if(!box)return;
+  if(!coMemberInfo){box.style.display='none';box.innerHTML='';return;}
+  const unit=coMemberInfo.mode==='items'?(lang==='th'?'ชิ้น':'items'):(lang==='th'?'ครั้ง':'orders');
+  const reward=(coMemberInfo.unused_rewards||[])[0];
+  box.style.display='flex';
+  box.innerHTML=`<span class="seal" style="width:26px;height:26px">${sealSVG()}</span>
+    <div style="flex:1"><b>${lang==='th'?'ยินดีต้อนรับกลับมา':'Welcome back'}${coMemberInfo.name?', '+esc(coMemberInfo.name):''}!</b>
+    <span class="r-sub">${lang==='th'?'สะสมแล้ว ':'Progress: '}${coMemberInfo.active_progress}/${coMemberInfo.threshold} ${unit}${reward?(lang==='th'?' · คุณมีส่วนลดที่ยังไม่ได้ใช้':' · you have an unused reward'):''}</span></div>
+    ${reward?`<button type="button" class="btn btn--gold btn--sm" onclick="useRewardCode('${esc(reward.code)}')">${lang==='th'?'ใช้ส่วนลด':'Use reward'}</button>`:''}`;
+}
+async function useRewardCode(code){
+  if(!coValidateStep1())return;
+  await coGoStep(2);
+  el('co_discount').value=code;
+  applyDiscount();
+}
 async function ensureUniqueOrderNo(){
   for(let i=0;i<5;i++){
     const code=genOrderNo();
@@ -1160,14 +1265,25 @@ async function coGoStep(step){
 async function applyDiscount(){
   const code=el('co_discount').value.trim().toUpperCase();
   if(!code)return;
-  let d=DISCOUNTS.find(x=>(x.code||'').toUpperCase()===code);
-  if(!d && supa){const {data}=await supa.from('shop_discounts').select('*').ilike('code',code).eq('active',true).maybeSingle();if(data)d=data;}
-  if(!d){el('discMsg').innerHTML=`<span style="color:var(--danger)">${lang==='th'?'ไม่พบโค้ดนี้ หรือหมดอายุแล้ว':'Code not found or expired'}</span>`;appliedDiscount=null;updateCoTotals();return;}
-  if(d.expires_at && new Date(d.expires_at)<new Date()){el('discMsg').innerHTML=`<span style="color:var(--danger)">${lang==='th'?'โค้ดหมดอายุแล้ว':'This code has expired'}</span>`;appliedDiscount=null;updateCoTotals();return;}
-  if(d.max_uses && d.used_count>=d.max_uses){el('discMsg').innerHTML=`<span style="color:var(--danger)">${lang==='th'?'โค้ดถูกใช้ครบจำนวนแล้ว':'This code has reached its usage limit'}</span>`;appliedDiscount=null;updateCoTotals();return;}
-  if((d.min_order||0)>cartSubtotal()){el('discMsg').innerHTML=`<span style="color:var(--danger)">${lang==='th'?'ยอดสั่งซื้อยังไม่ถึงขั้นต่ำสำหรับโค้ดนี้ (':'Order does not meet the minimum for this code ('}${baht(d.min_order)})</span>`;appliedDiscount=null;updateCoTotals();return;}
-  appliedDiscount=d;
-  el('discMsg').innerHTML=`<span style="color:var(--accent-ink)">${lang==='th'?'ใช้โค้ดสำเร็จ: ':'Code applied: '}${esc(d.code)}</span> · <button style="color:var(--danger);text-decoration:underline;font-size:.8rem" onclick="removeDiscount()">${lang==='th'?'ลบโค้ด':'remove'}</button>`;
+  if(!supa){el('discMsg').innerHTML=`<span style="color:var(--danger)">Supabase not connected</span>`;return;}
+  const {data,error}=await supa.rpc('validate_discount_code',{p_code:code,p_phone:el('co_phone').value.trim()});
+  if(error||!data||!data.valid){
+    const reasonMsg={
+      not_found:lang==='th'?'ไม่พบโค้ดนี้ หรือหมดอายุแล้ว':'Code not found or expired',
+      expired:lang==='th'?'โค้ดหมดอายุแล้ว':'This code has expired',
+      limit_reached:lang==='th'?'โค้ดถูกใช้ครบจำนวนแล้ว':'This code has reached its usage limit',
+      wrong_member:lang==='th'?'รหัสนี้ใช้ได้เฉพาะเบอร์สมาชิกที่ได้รับสิทธิ์เท่านั้น กรุณากรอกเบอร์โทรของคุณในขั้นตอนที่ 1 ก่อน':'This code is only valid for the member phone it was issued to — make sure your phone number in step 1 matches'
+    };
+    const reason=(data&&data.reason)||'not_found';
+    el('discMsg').innerHTML=`<span style="color:var(--danger)">${reasonMsg[reason]||reasonMsg.not_found}</span>`;
+    appliedDiscount=null;updateCoTotals();return;
+  }
+  if((data.min_order||0)>cartSubtotal()){
+    el('discMsg').innerHTML=`<span style="color:var(--danger)">${lang==='th'?'ยอดสั่งซื้อยังไม่ถึงขั้นต่ำสำหรับโค้ดนี้ (':'Order does not meet the minimum for this code ('}${baht(data.min_order)})</span>`;
+    appliedDiscount=null;updateCoTotals();return;
+  }
+  appliedDiscount={code:data.code,type:data.type,value:data.value,min_order:data.min_order};
+  el('discMsg').innerHTML=`<span style="color:var(--accent-ink)">${lang==='th'?'ใช้โค้ดสำเร็จ: ':'Code applied: '}${esc(data.code)}</span> · <button style="color:var(--danger);text-decoration:underline;font-size:.8rem" onclick="removeDiscount()">${lang==='th'?'ลบโค้ด':'remove'}</button>`;
   updateCoTotals();
 }
 function removeDiscount(){appliedDiscount=null;el('co_discount').value='';el('discMsg').innerHTML='';updateCoTotals();}
@@ -1194,20 +1310,40 @@ async function placeOrder(){
         zip=el('co_zip').value.trim(),note=el('co_note').value.trim();
   const sub=cartSubtotal(),disc=discountAmount(),ship=shippingFee(),total=Math.max(0,sub-disc)+ship;
   const orderNo=coOrderNo;
-  const btn=el('placeOrderBtn');btn.disabled=true;
-  const {data:orderRow,error:oe}=await supa.from('shop_orders').insert({
-    order_no:orderNo,name,phone,email:email||null,address:addr,district,province,postal_code:zip,note:note||null,
+  const btn=el('placeOrderBtn');btn.disabled=true;const btnOrigText=btn.textContent;btn.textContent=lang==='th'?'กำลังดำเนินการ…':'Placing order…';
+  const orderPayload={order_no:orderNo,name,phone,email:email||null,address:addr,district,province,postal_code:zip,note:note||null,
     subtotal:sub,discount_code:appliedDiscount?appliedDiscount.code:null,discount_amount:disc,shipping_fee:ship,total,
-    payment_method:payTab,payment_slip:slipData||null,status:'pending'
-  }).select().single();
-  if(oe){btn.disabled=false;toast((lang==='th'?'สั่งซื้อไม่สำเร็จ: ':'Could not place order: ')+oe.message,true);return;}
-  const items=CART.map(it=>({order_id:orderRow.id,product_id:it.product_id,product_name:it.name,qty:it.qty,unit_price:it.price,image:it.image||null}));
-  await supa.from('shop_order_items').insert(items);
-  if(appliedDiscount&&appliedDiscount.id){await supa.from('shop_discounts').update({used_count:(appliedDiscount.used_count||0)+1}).eq('id',appliedDiscount.id);}
-  btn.disabled=false;
+    payment_method:payTab,payment_slip:slipData||null};
+  const itemsPayload=CART.map(it=>({product_id:it.product_id,product_name:(lang==='th'&&it.name_th?it.name_th:it.name),qty:it.qty,unit_price:it.price,image:it.image||null}));
+  const {data,error}=await supa.rpc('checkout_create_order',{p_order:orderPayload,p_items:itemsPayload});
+  btn.disabled=false;btn.textContent=btnOrigText;
+  if(error){
+    const msg=error.message||'';
+    if(msg.indexOf('OUT_OF_STOCK')===0){
+      toast(lang==='th'?'สินค้าบางรายการมีไม่พอในสต็อก กรุณาปรับจำนวนในตะกร้า':'Some items no longer have enough stock — please adjust your cart',true);
+    }else if(msg.indexOf('DISCOUNT')===0){
+      toast(lang==='th'?'โค้ดส่วนลดใช้ไม่ได้แล้ว กรุณาลองใหม่':'This discount code is no longer valid — please re-check it',true);
+    }else{
+      toast((lang==='th'?'สั่งซื้อไม่สำเร็จ: ':'Could not place order: ')+msg,true);
+    }
+    return;
+  }
+  const result=data||{};
   CART=[];appliedDiscount=null;slipData='';coOrderNo='';coStep=1;renderCart();
-  el('successCode').textContent=orderNo;
+  el('successCode').textContent=result.order_no||orderNo;
+  renderSuccessLoyalty(result.loyalty);
+  loadShopData(); // refresh product stock counts shown in the shop
   location.hash='#success';
+}
+function renderSuccessLoyalty(loy){
+  const box=el('successLoyalty');if(!box)return;
+  if(!loy||!loy.threshold){box.innerHTML='';return;}
+  const unit=loy.mode==='items'?(lang==='th'?'ชิ้น':'items'):(lang==='th'?'ครั้ง':'orders');
+  if(loy.new_reward){
+    box.innerHTML=`<div class="mreward" style="margin-top:18px"><span style="font-size:1.4rem">🎉</span><div style="flex:1;text-align:left"><div style="font-weight:600;color:var(--gold-ink)">${lang==='th'?`ยินดีด้วย! คุณได้รับส่วนลด ${loy.new_reward.percent}%`:`Congratulations! You earned a ${loy.new_reward.percent}% discount`}</div><div class="r-sub">${lang==='th'?'ใช้รหัสนี้ในการสั่งซื้อครั้งถัดไป':'Use this code on your next order'}</div></div><span class="code">${esc(loy.new_reward.code)}</span></div>`;
+  }else{
+    box.innerHTML=`<p class="r-sub" style="margin-top:10px">${lang==='th'?`สะสมแล้ว ${loy.active_progress}/${loy.threshold} ${unit} — ดูบัตรสมาชิกได้ที่หน้า “สมาชิก”`:`Loyalty progress: ${loy.active_progress}/${loy.threshold} ${unit} — view your card on the Membership page`}</p>`;
+  }
 }
 
 /* ============================================================
@@ -1266,6 +1402,41 @@ async function verifyProduct(){
 }
 
 /* ============================================================
+   MEMBERSHIP CARD
+   ============================================================ */
+function maskPhone(p){p=(p||'').toString();return p.length>=5?p.slice(0,3)+'-XXX-'+p.slice(-2):p;}
+function fmtDate(d){if(!d)return '—';const dt=new Date(d);if(isNaN(dt))return '—';return dt.toLocaleDateString(lang==='th'?'th-TH':'en-GB',{year:'numeric',month:'short',day:'numeric'});}
+async function lookupMemberCard(){
+  const phone=el('mem_phone').value.trim();
+  const box=el('memberResult');
+  if(!phone){toast(lang==='th'?'กรอกเบอร์โทรศัพท์':'Enter your phone number',true);return;}
+  if(!supa){box.innerHTML='<div class="notfound">Supabase not connected.</div>';return;}
+  box.innerHTML=`<p class="r-sub center">${lang==='th'?'กำลังค้นหา…':'Looking up…'}</p>`;
+  const {data,error}=await supa.rpc('get_member_status',{p_phone:phone});
+  if(error||!data||!data.exists){
+    box.innerHTML=`<div class="notfound">${lang==='th'?'ยังไม่พบข้อมูลสมาชิกสำหรับเบอร์นี้ — สั่งซื้อครั้งแรกเพื่อเริ่มสะสมแต้มได้เลย':'No membership found for this number yet — place your first order to start earning points.'}</div>`;
+    return;
+  }
+  const pct=Math.min(100,Math.round((data.active_progress/data.threshold)*100));
+  const unit=data.mode==='items'?(lang==='th'?'ชิ้น':'items'):(lang==='th'?'ครั้ง':'orders');
+  const rewards=data.unused_rewards||[];
+  box.innerHTML=`
+  <div class="mcard">
+    <div class="mcard__top"><span class="mcard__brand">AC Lab x SciSeelt · Member</span><span class="seal mcard__seal">${sealSVG()}</span></div>
+    <div class="mcard__name">${esc(data.name||(lang==='th'?'สมาชิก':'Member'))}</div>
+    <div class="mcard__phone">${esc(maskPhone(data.phone))}</div>
+    <div class="mcard__progress">
+      <div class="row"><span>${lang==='th'?'ความคืบหน้าสะสมแต้ม':'Points progress'}</span><span>${data.active_progress}/${data.threshold} ${unit}</span></div>
+      <div class="mcard__bar"><span style="width:${pct}%"></span></div>
+    </div>
+    <div class="mcard__foot"><span>${lang==='th'?'สมาชิกตั้งแต่ ':'Member since '}${fmtDate(data.member_since)}</span><span>${data.next_points_expiry?((lang==='th'?'แต้มหมดอายุ ':'Points expire ')+fmtDate(data.next_points_expiry)):''}</span></div>
+  </div>
+  ${rewards.length?rewards.map(r=>`<div class="mreward">${icon('i-star')}<div style="flex:1"><div style="font-weight:600;color:var(--gold-ink)">${lang==='th'?`คุณได้รับส่วนลด ${r.percent}% 🎉`:`You earned a ${r.percent}% discount 🎉`}</div><div class="r-sub">${lang==='th'?'ใช้รหัสนี้ตอนชำระเงิน · หมดอายุ ':'Use this code at checkout · expires '}${fmtDate(r.expires_at)}</div></div><span class="code" onclick="navigator.clipboard&&navigator.clipboard.writeText('${esc(r.code)}');toast(lang==='th'?'คัดลอกรหัสแล้ว':'Code copied')">${esc(r.code)}</span></div>`).join(''):
+  `<div class="mreward" style="background:var(--surface-2)"><div class="r-sub">${lang==='th'?`สะสมให้ครบ ${data.threshold} ${unit} เพื่อรับส่วนลด ${data.reward_percent}%`:`Collect ${data.threshold} ${unit} to earn a ${data.reward_percent}% discount`}</div></div>`}
+  `;
+}
+
+/* ============================================================
    MODAL / MISC UI
    ============================================================ */
 function openModal(id){el(id).classList.add('open');document.body.style.overflow='hidden';}
@@ -1300,6 +1471,7 @@ async function renderAdminTab(t){
   if(t==='orders')await admOrders();
   else if(t==='products')admProducts();
   else if(t==='discounts')await admDiscounts();
+  else if(t==='loyalty')await admLoyalty();
   else if(t==='reviews')await admReviews();
 }
 
@@ -1358,7 +1530,7 @@ function withTimeout(promise, ms, label){
 let admEditIdx=-1,admImgs=[];
 function admProducts(){
   el('adminContent').innerHTML=`<div class="r-sub" style="margin-bottom:10px">${PRODUCTS.length} products${SUPA_READY?'':' (demo data — connect shop_products table)'}
-  </div>`+PRODUCTS.map((p,i)=>`<div class="adm-row">${(p.images&&p.images[0])?`<img class="thumb" src="${p.images[0]}">`:`<span class="thumb" style="background:linear-gradient(135deg,${p.c1||'#2f6b4f'},${p.c2||'#4f9d78'})"></span>`}<div class="r-main"><h4>${esc(p.name)}</h4><div class="r-sub">${baht(p.price)} · ${esc(p.category||'')}</div></div><div style="display:flex;gap:6px"><button class="adm-ic" onclick="admEditProduct(${i})">${icon('i-doc')}</button><button class="adm-ic del" onclick="admDelProduct(${i})">${icon('i-close')}</button></div></div>`).join('')+
+  </div>`+PRODUCTS.map((p,i)=>{const stock=Number(p.stock||0);const stockColor=stock<=0?'var(--danger)':(stock<=5?'#8a6a1f':'var(--muted)');return `<div class="adm-row">${(p.images&&p.images[0])?`<img class="thumb" src="${p.images[0]}">`:`<span class="thumb" style="background:linear-gradient(135deg,${p.c1||'#2f6b4f'},${p.c2||'#4f9d78'})"></span>`}<div class="r-main"><h4>${esc(p.name)}</h4><div class="r-sub">${baht(p.price)} · ${esc(p.category||'')} · <span style="color:${stockColor}">stock: ${stock}${stock<=0?' (sold out)':(stock<=5?' (low)':'')}</span></div></div><div style="display:flex;gap:6px"><button class="adm-ic" onclick="admEditProduct(${i})">${icon('i-doc')}</button><button class="adm-ic del" onclick="admDelProduct(${i})">${icon('i-close')}</button></div></div>`;}).join('')+
   `<button class="adm-add" onclick="admEditProduct(-1)">${icon('i-plus')} Add product</button>`;
 }
 function admEditProduct(i){
@@ -1462,7 +1634,7 @@ async function admDiscounts(){
   if(!supa){el('adminContent').innerHTML='<p class="r-sub">Supabase not connected.</p>';return;}
   const {data}=await supa.from('shop_discounts').select('*').order('code');
   DISCOUNTS=data||[];
-  el('adminContent').innerHTML=DISCOUNTS.map((d,i)=>`<div class="adm-row"><span class="mono-av" style="width:42px;height:42px;border-radius:9px;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;flex:none">%</span><div class="r-main"><h4 class="mono">${esc(d.code)}</h4><div class="r-sub">${d.type==='percent'?d.value+'%':baht(d.value)} off · used ${d.used_count||0}${d.max_uses?'/'+d.max_uses:''}</div></div><div style="display:flex;gap:6px"><button class="adm-ic" onclick="admEditDiscount(${i})">${icon('i-doc')}</button><button class="adm-ic del" onclick="admDelDiscount(${i})">${icon('i-close')}</button></div></div>`).join('')+
+  el('adminContent').innerHTML=DISCOUNTS.map((d,i)=>`<div class="adm-row"><span class="mono-av" style="width:42px;height:42px;border-radius:9px;background:${d.is_loyalty_reward?'var(--accent-ink)':'var(--gold)'};color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;flex:none">${d.is_loyalty_reward?'🎖️':'%'}</span><div class="r-main"><h4 class="mono">${esc(d.code)}</h4><div class="r-sub">${d.type==='percent'?d.value+'%':baht(d.value)} off · used ${d.used_count||0}${d.max_uses?'/'+d.max_uses:''}${d.is_loyalty_reward?(' · member reward'+(d.member_phone?' ('+esc(d.member_phone)+')':'')):''}</div></div><div style="display:flex;gap:6px"><button class="adm-ic" onclick="admEditDiscount(${i})">${icon('i-doc')}</button><button class="adm-ic del" onclick="admDelDiscount(${i})">${icon('i-close')}</button></div></div>`).join('')+
   `<button class="adm-add" onclick="admEditDiscount(-1)">${icon('i-plus')} Add discount code</button>`;
 }
 function admEditDiscount(i){
@@ -1483,6 +1655,78 @@ async function admSaveDiscount(i){
   toast('Discount saved');renderAdminTab('discounts');
 }
 async function admDelDiscount(i){if(!confirm('Delete this code?'))return;await supa.from('shop_discounts').delete().eq('id',DISCOUNTS[i].id);renderAdminTab('discounts');}
+
+/* --- Loyalty --- */
+let LOYALTY_SETTINGS=null, ADM_MEMBERS=[];
+async function admLoyalty(){
+  if(!supa){el('adminContent').innerHTML='<p class="r-sub">Supabase not connected.</p>';return;}
+  const {data:s}=await supa.from('shop_loyalty_settings').select('*').eq('id',1).maybeSingle();
+  LOYALTY_SETTINGS=s||{mode:'orders',threshold:10,reward_percent:10,points_expiry_months:12,reward_expiry_months:3};
+  const {data:members}=await supa.from('shop_members').select('*').order('lifetime_orders',{ascending:false}).limit(300);
+  ADM_MEMBERS=members||[];
+  const unitLabel=LOYALTY_SETTINGS.mode==='items'?'items':'orders';
+  el('adminContent').innerHTML=`
+  <div class="co-card">
+    <h4>🎖️ Loyalty settings</h4>
+    <div class="field"><label>Count by</label>
+      <select id="ls_mode">
+        <option value="orders" ${LOYALTY_SETTINGS.mode==='orders'?'selected':''}>Number of orders</option>
+        <option value="items" ${LOYALTY_SETTINGS.mode==='items'?'selected':''}>Number of items</option>
+      </select>
+    </div>
+    <div class="three">
+      <div class="field"><label>Threshold</label><input id="ls_threshold" type="number" min="1" value="${LOYALTY_SETTINGS.threshold}"></div>
+      <div class="field"><label>Reward %</label><input id="ls_percent" type="number" min="1" max="100" value="${LOYALTY_SETTINGS.reward_percent}"></div>
+      <div class="field"><label>Points expiry (months)</label><input id="ls_pexp" type="number" min="1" value="${LOYALTY_SETTINGS.points_expiry_months}"></div>
+    </div>
+    <div class="field"><label>Reward code validity after issued (months)</label><input id="ls_rexp" type="number" min="1" value="${LOYALTY_SETTINGS.reward_expiry_months}"></div>
+    <button class="btn btn--primary btn--block" onclick="admSaveLoyaltySettings()">${icon('i-check')} Save settings</button>
+    <p class="r-sub" style="margin-top:10px;line-height:1.6">Example with current settings: every <b style="color:var(--ink)">${LOYALTY_SETTINGS.threshold} ${unitLabel}</b> → customer automatically gets a <b style="color:var(--ink)">${LOYALTY_SETTINGS.reward_percent}%</b> discount code, valid for <b style="color:var(--ink)">${LOYALTY_SETTINGS.reward_expiry_months} month(s)</b> after it's issued. Points not used within <b style="color:var(--ink)">${LOYALTY_SETTINGS.points_expiry_months} month(s)</b> of being earned expire automatically.</p>
+  </div>
+  <div class="co-card">
+    <h4>👥 Members (${ADM_MEMBERS.length})</h4>
+    ${ADM_MEMBERS.length?ADM_MEMBERS.map((m,i)=>`<div class="adm-row" style="cursor:pointer" onclick="admMemberDetail(${i})">
+      <span class="mono-av" style="width:42px;height:42px;border-radius:9px;background:${hue(m.phone)};display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;flex:none">${((m.name||'?')[0]||'?').toUpperCase()}</span>
+      <div class="r-main"><h4>${esc(m.name||'—')} · ${esc(m.phone)}</h4><div class="r-sub">${m.lifetime_orders||0} orders · ${m.lifetime_items||0} items · since ${fmtDate(m.created_at)}</div></div>
+    </div>`).join(''):'<p class="r-sub">No members yet — members are created automatically from customers\' phone numbers the first time they order.</p>'}
+  </div>`;
+}
+async function admSaveLoyaltySettings(){
+  const item={id:1,mode:el('ls_mode').value,threshold:Math.max(1,+el('ls_threshold').value||10),reward_percent:Math.max(1,+el('ls_percent').value||10),points_expiry_months:Math.max(1,+el('ls_pexp').value||12),reward_expiry_months:Math.max(1,+el('ls_rexp').value||3),updated_at:new Date()};
+  const {error}=await supa.from('shop_loyalty_settings').upsert(item);
+  if(error){toast(error.message,true);return;}
+  toast('Loyalty settings saved');admLoyalty();
+}
+async function admMemberDetail(i){
+  const m=ADM_MEMBERS[i];
+  const [{data:ledger},{data:rewards}]=await Promise.all([
+    supa.from('shop_loyalty_ledger').select('*').eq('member_phone',m.phone).order('earned_at',{ascending:false}),
+    supa.from('shop_discounts').select('*').eq('member_phone',m.phone).eq('is_loyalty_reward',true).order('expires_at',{ascending:false})
+  ]);
+  el('adminContent').innerHTML=`<span class="adm-back" onclick="renderAdminTab('loyalty')">${icon('i-arrow')} Back</span>
+  <div class="co-card">
+    <h4>${esc(m.name||'—')}</h4>
+    <p class="r-sub mono">${esc(m.phone)}</p>
+    <p class="r-sub">${m.lifetime_orders||0} orders · ${m.lifetime_items||0} items · member since ${fmtDate(m.created_at)}</p>
+  </div>
+  <div class="co-card"><h4>Reward codes</h4>
+  ${(rewards&&rewards.length)?rewards.map(r=>`<div class="adm-row"><div class="r-main"><h4 class="mono">${esc(r.code)}</h4><div class="r-sub">${r.value}% off · ${(r.used_count||0)>=1?'used':'unused'} · expires ${fmtDate(r.expires_at)}</div></div></div>`).join(''):'<p class="r-sub">No reward codes yet.</p>'}
+  <div class="field" style="margin-top:14px"><label>Issue bonus reward manually</label>
+    <div class="two"><input id="mr_percent" type="number" placeholder="Percent %" value="10"><input id="mr_months" type="number" placeholder="Valid months" value="3"></div>
+    <button class="btn btn--ghost btn--sm" style="margin-top:8px" onclick="admIssueReward('${esc(m.phone)}')">${icon('i-plus')} Issue reward code</button>
+  </div></div>
+  <div class="co-card"><h4>Points history</h4>
+  ${(ledger&&ledger.length)?ledger.map(l=>{const expired=new Date(l.expires_at)<new Date();const st=l.consumed?'used toward a reward':(expired?'expired':'active');return `<div class="r-item"><span>${esc(l.order_no||'—')} · ${new Date(l.earned_at).toLocaleDateString()}</span><span>${st}</span></div>`;}).join(''):'<p class="r-sub">No history yet.</p>'}
+  </div>`;
+}
+async function admIssueReward(phone){
+  const percent=+el('mr_percent').value||10,months=+el('mr_months').value||3;
+  const {data,error}=await supa.rpc('admin_issue_reward',{p_phone:phone,p_percent:percent,p_valid_months:months});
+  if(error){toast(error.message,true);return;}
+  toast('Reward code issued: '+(data&&data.code));
+  const idx=ADM_MEMBERS.findIndex(m=>m.phone===phone);
+  if(idx>=0)admMemberDetail(idx);
+}
 
 /* --- Reviews --- */
 async function admReviews(){
