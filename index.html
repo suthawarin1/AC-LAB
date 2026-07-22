@@ -1403,7 +1403,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
         <h5 data-i18n="foot_connect">Connect</h5>
         <ul>
           <li><a href="shop/index.html" data-i18n="nav_shop">Shop</a></li>
-          <li><a href="#join" class="nav-scroll" data-i18n="nav_join">Join the lab</a></li>          <li><a href="mailto:arunrat@kku.ac.th">arunrat@kku.ac.th</a></li>
+          <li><a href="#join" class="nav-scroll" data-i18n="nav_join">Join the lab</a></li>          <li><a href="mailto:raccha@kku.ac.th">raccha@kku.ac.th</a></li>
           <li><a href="https://gs.kku.ac.th" target="_blank" rel="noopener" data-i18n="foot_grad">Graduate School</a></li>
           <li><a href="#contact" class="nav-scroll" data-i18n="nav_contact">Contact</a></li>
         </ul>
@@ -1453,7 +1453,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
       <div class="title" data-i18n="pi_title">Professor of Biology · Founder, AC Lab (2010)</div>
       <div class="pi-block"><h4><svg class="icon"><use href="#i-scope"/></svg> <span data-i18n="pi_interests">Research interests</span></h4><p data-i18n="pi_interests_t">Plant cytogenetics, genomics and DNA barcoding; the chemistry of medicinal plants; and the biomedical activity of plant-derived compounds against cancer cells.</p></div>
       <div class="pi-block"><h4><svg class="icon"><use href="#i-book"/></svg> <span data-i18n="pi_focus">Current focus</span></h4><p data-i18n="pi_focus_t">Bridging chloroplast genomics with phytochemistry — linking the evolutionary story of a plant to the molecules it makes and what they do in human cells.</p></div>
-      <div class="pi-block"><h4><svg class="icon"><use href="#i-mail"/></svg> <span data-i18n="pi_contact">Contact</span></h4><p><a href="mailto:arunrat@kku.ac.th" style="color:var(--accent);font-family:var(--mono);font-size:.88rem">arunrat@kku.ac.th</a></p></div>
+      <div class="pi-block"><h4><svg class="icon"><use href="#i-mail"/></svg> <span data-i18n="pi_contact">Contact</span></h4><p><a href="mailto:raccha@kku.ac.th" style="color:var(--accent);font-family:var(--mono);font-size:.88rem">raccha@kku.ac.th</a></p></div>
       <a href="https://scholar.google.com" target="_blank" rel="noopener" class="btn btn--ghost btn--sm" style="margin-top:4px"><svg class="icon"><use href="#i-scholar"/></svg> Google Scholar</a>
     </div>
   </div>
@@ -2475,7 +2475,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelec
 
 /* ============ UTILS ============ */
 window.toast=function(msg){const t=document.createElement('div');t.className='toast';t.innerHTML=icon('i-check')+'<span>'+msg+'</span>';el('toasts').appendChild(t);requestAnimationFrame(()=>t.classList.add('show'));setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),400);},2600);};
-window.copyEmail=function(){const txt='arunrat@kku.ac.th';const done=()=>toast(T('email_toast'));if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(done);}else{const a=document.createElement('textarea');a.value=txt;document.body.appendChild(a);a.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(a);done();}};
+window.copyEmail=function(){const txt='raccha@kku.ac.th';const done=()=>toast(T('email_toast'));if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(done);}else{const a=document.createElement('textarea');a.value=txt;document.body.appendChild(a);a.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(a);done();}};
 window.submitForm=async function(e){
   e.preventDefault();
   const name=val('cf_name').trim(),email=val('cf_email').trim(),subject=val('cf_subject'),message=val('cf_message').trim();
