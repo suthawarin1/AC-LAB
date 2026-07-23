@@ -1969,9 +1969,12 @@ const SECTIONS=[
   {id:'newsletter',label:'Newsletter strip',labelTh:'แถบสมัครรับข่าว'}
 ];
 function applySectionVisibility(){
-  SECTIONS.forEach(s=>{const node=document.getElementById(s.id);if(node)node.style.display=HIDDEN_SECTIONS.has(s.id)?'none':'';});
+  allSectionMetas().forEach(s=>{const node=document.getElementById(s.id);if(node)node.style.display=HIDDEN_SECTIONS.has(s.id)?'none':'';});
 }
 let SECTION_ORDER=SECTIONS.map(s=>s.id);
+let CUSTOM_SECTIONS=[];
+function customSectionMeta(cs){return {id:cs.id,label:cs.title||'Custom section',labelTh:cs.titleTh||cs.title||'เซกชันที่กำหนดเอง'};}
+function allSectionMetas(){return [...SECTIONS,...CUSTOM_SECTIONS.map(customSectionMeta)];}
 function applySectionOrder(){
   const main=document.querySelector('main');if(!main)return;
   SECTION_ORDER.forEach(id=>{
@@ -1979,7 +1982,7 @@ function applySectionOrder(){
     if(node&&node.parentNode===main)main.appendChild(node);
   });
 }
-function sectionLabel(id){return SECTIONS.find(x=>x.id===id)||{id,label:id,labelTh:id};}
+function sectionLabel(id){return allSectionMetas().find(x=>x.id===id)||{id,label:id,labelTh:id};}
 window.admMoveSection=function(id,dir){
   const i=SECTION_ORDER.indexOf(id);if(i<0)return;
   const j=i+dir;if(j<0||j>=SECTION_ORDER.length)return;
@@ -1987,6 +1990,41 @@ window.admMoveSection=function(id,dir){
   applySectionOrder();saveStore();renderAdmin('sections');
 };
 
+function customSectionHTML(cs){
+  const TT=(en,th)=>(lang==='th'&&th)?th:(en||'');
+  let body='';
+  const items=cs.items||[];
+  if(cs.template==='cards'){
+    body=`<div class="rgrid">${items.map((it,i)=>`<article class="rcard reveal in"><span class="rcard__no mono">0${i+1}</span><span class="rcard__ic">${icon(it.icon||'i-spark')}</span><h3>${TT(it.title,it.titleTh)}</h3><p>${TT(it.desc,it.descTh)}</p></article>`).join('')}</div>`;
+  }else if(cs.template==='stats'){
+    body=`<div class="figs">${items.map(it=>{const num=parseFloat(it.value)||0;const suf=(it.value||'').replace(/^[\d.\s]+/,'');return `<div class="fig fig--4 reveal in"><div class="num"><span class="count" data-to="${num}">0</span><small>${suf}</small></div><div class="lab">${TT(it.label,it.labelTh)}</div></div>`;}).join('')}</div>`;
+  }else if(cs.template==='timeline'){
+    body=`<div class="timeline">${items.map(it=>`<div class="tl reveal in"><div class="yr">${it.yr||''}</div><h4>${TT(it.title,it.titleTh)}</h4><p>${TT(it.desc,it.descTh)}</p></div>`).join('')}</div>`;
+  }else{
+    body=cs.cta?`<div style="text-align:center;margin-top:8px"><a href="${cs.ctaLink||'#'}" class="btn btn--primary">${TT(cs.cta,cs.ctaTh)} ${icon('i-arrow')}</a></div>`:'';
+  }
+  return `<div class="wrap"><div class="sec-head${cs.template==='text'?' center':''} reveal in">${cs.eyebrow?`<span class="eyebrow">${TT(cs.eyebrow,cs.eyebrowTh)}</span>`:''}<h2 class="h-sec">${TT(cs.title,cs.titleTh)}</h2>${cs.lede?`<p class="lede">${TT(cs.lede,cs.ledeTh)}</p>`:''}</div>${body}</div>`;
+}
+function renderCustomSections(){
+  const main=document.querySelector('main');if(!main)return;
+  CUSTOM_SECTIONS.forEach(cs=>{
+    let node=document.getElementById(cs.id);
+    if(!node){
+      node=document.createElement('section');
+      node.id=cs.id;
+      node.dataset.custom='1';
+      main.appendChild(node);
+    }
+    node.className='section'+(cs.alt?' section--alt':'');
+    node.innerHTML=customSectionHTML(cs);
+  });
+  document.querySelectorAll('main > section[data-custom="1"]').forEach(node=>{
+    if(!CUSTOM_SECTIONS.find(cs=>cs.id===node.id))node.remove();
+  });
+  try{
+    document.querySelectorAll('.count:not([data-observed])').forEach(c=>{c.dataset.observed='1';const p=c.closest('.cell,.fig,.cw-figs')||c;cio.observe(p);});
+  }catch(e){/* cio ยังไม่ถูกประกาศตอนโหลดหน้าครั้งแรก — ระบบนับเลขของเว็บที่มีอยู่แล้วจะจับ .count ตัวใหม่ให้เองอัตโนมัติ */}
+}
 let admCardsSub='themes';
 function admCardsList(){
   const TT=(en,th)=>lang==='th'?th:en;
@@ -2182,8 +2220,7 @@ let HIDDEN_SECTIONS=new Set();
 function applyAccent(id){SITE_ACCENT=id;document.documentElement.setAttribute('data-preset',id);}
 const LS_KEY='aclab_cms_v1';
 function loadStore(){try{return JSON.parse(localStorage.getItem(LS_KEY))||{};}catch(e){return {};}}
-function saveStore(silent){try{localStorage.setItem(LS_KEY,JSON.stringify({members:MEMBERS,news:NEWS,cpubs:CPUBS,products:PRODUCTS,videos:VIDEOS,taxa:TAXA,collabs:COLLABS,testimonials:TESTIMONIALS,banners:BANNERS,events:EVENTS,gallery:GALLERY,resources:RESOURCES,grantTeam:GRANT_TEAM,theme:SITE_ACCENT,hiddenSections:[...HIDDEN_SECTIONS],themes:THEMES,pipe:PIPE,facilities:FACILITIES,timeline:TIMELINE,road:ROAD,innov:INNOV,textOverrides:TEXT_OVERRIDES,sectionOrder:SECTION_ORDER}));if(!silent)toast(T('saved_toast'));return true;}catch(e){toast('Save failed — storage full');return false;}}
-(function(){const s=loadStore();if(s.members&&s.members.length)MEMBERS=s.members;if(s.news&&s.news.length)NEWS=s.news;if(s.cpubs)CPUBS=s.cpubs;if(s.products&&s.products.length)PRODUCTS=s.products;if(s.videos&&s.videos.length)VIDEOS=s.videos;if(s.taxa&&s.taxa.length)TAXA=s.taxa;if(s.collabs&&s.collabs.length)COLLABS=s.collabs;if(s.testimonials&&s.testimonials.length)TESTIMONIALS=s.testimonials;if(s.banners&&s.banners.length)BANNERS=s.banners;if(s.events&&s.events.length)EVENTS=s.events;if(s.gallery&&s.gallery.length)GALLERY=s.gallery;if(s.resources&&s.resources.length)RESOURCES=s.resources;if(s.grantTeam&&s.grantTeam.length)GRANT_TEAM=s.grantTeam;if(s.theme)SITE_ACCENT=s.theme;if(Array.isArray(s.hiddenSections))HIDDEN_SECTIONS=new Set(s.hiddenSections);if(s.themes&&s.themes.length)THEMES=s.themes;if(s.pipe&&s.pipe.length)PIPE=s.pipe;if(s.facilities&&s.facilities.length)FACILITIES=s.facilities;if(s.timeline&&s.timeline.length)TIMELINE=s.timeline;if(s.road&&s.road.length)ROAD=s.road;if(s.innov&&s.innov.length)INNOV=s.innov;if(s.textOverrides)TEXT_OVERRIDES=s.textOverrides;if(Array.isArray(s.sectionOrder)&&s.sectionOrder.length)SECTION_ORDER=s.sectionOrder;
+function saveStore(silent){try{localStorage.setItem(LS_KEY,JSON.stringify({members:MEMBERS,news:NEWS,cpubs:CPUBS,products:PRODUCTS,videos:VIDEOS,taxa:TAXA,collabs:COLLABS,testimonials:TESTIMONIALS,banners:BANNERS,events:EVENTS,gallery:GALLERY,resources:RESOURCES,grantTeam:GRANT_TEAM,theme:SITE_ACCENT,hiddenSections:[...HIDDEN_SECTIONS],themes:THEMES,pipe:PIPE,facilities:FACILITIES,timeline:TIMELINE,road:ROAD,innov:INNOV,textOverrides:TEXT_OVERRIDES,sectionOrder:SECTION_ORDER,customSections:CUSTOM_SECTIONS}));if(!silent)toast(T('saved_toast'));return true;}catch(e){toast('Save failed — storage full');return false;}}(function(){const s=loadStore();if(s.members&&s.members.length)MEMBERS=s.members;if(s.news&&s.news.length)NEWS=s.news;if(s.cpubs)CPUBS=s.cpubs;if(s.products&&s.products.length)PRODUCTS=s.products;if(s.videos&&s.videos.length)VIDEOS=s.videos;if(s.taxa&&s.taxa.length)TAXA=s.taxa;if(s.collabs&&s.collabs.length)COLLABS=s.collabs;if(s.testimonials&&s.testimonials.length)TESTIMONIALS=s.testimonials;if(s.banners&&s.banners.length)BANNERS=s.banners;if(s.events&&s.events.length)EVENTS=s.events;if(s.gallery&&s.gallery.length)GALLERY=s.gallery;if(s.resources&&s.resources.length)RESOURCES=s.resources;if(s.grantTeam&&s.grantTeam.length)GRANT_TEAM=s.grantTeam;if(s.theme)SITE_ACCENT=s.theme;if(Array.isArray(s.hiddenSections))HIDDEN_SECTIONS=new Set(s.hiddenSections);if(s.themes&&s.themes.length)THEMES=s.themes;if(s.pipe&&s.pipe.length)PIPE=s.pipe;if(s.facilities&&s.facilities.length)FACILITIES=s.facilities;if(s.timeline&&s.timeline.length)TIMELINE=s.timeline;if(s.road&&s.road.length)ROAD=s.road;if(s.innov&&s.innov.length)INNOV=s.innov;if(s.textOverrides)TEXT_OVERRIDES=s.textOverrides;if(Array.isArray(s.sectionOrder)&&s.sectionOrder.length)SECTION_ORDER=s.sectionOrder;
 applyAccent(SITE_ACCENT);applySectionVisibility();applySectionOrder();})();
 function renderThemes(){
   el('rgrid').innerHTML=THEMES.map((t,i)=>`
@@ -2792,8 +2829,7 @@ document.querySelectorAll('.nav-scroll').forEach(a=>{
 function refreshDynamicText(){
   document.querySelectorAll('[data-more]').forEach(n=>{n.innerHTML=(lang==='th'?'อ่านต่อ':'Read more')+' '+icon('i-arrow');});
 }
-const _applyLang=applyLang;applyLang=function(){_applyLang();refreshDynamicText();renderPubAll();renderInnov();renderProducts();renderVideos();renderProjectTeam();renderGrantTeam();renderTeam(teamCat);renderNews();renderTaxa();renderCollabs();renderBanner();renderEvents();renderGallery();renderResources();renderThemes();renderPipe();renderFacilities();renderTimeline();renderRoad();};/* nav bg + progress + totop + scrollspy */
-const nav=el('nav'),totop=el('totop'),bar=el('progress');
+const _applyLang=applyLang;applyLang=function(){_applyLang();refreshDynamicText();renderPubAll();renderInnov();renderProducts();renderVideos();renderProjectTeam();renderGrantTeam();renderTeam(teamCat);renderNews();renderTaxa();renderCollabs();renderBanner();renderEvents();renderGallery();renderResources();renderThemes();renderPipe();renderFacilities();renderTimeline();renderRoad();renderCustomSections();};const nav=el('nav'),totop=el('totop'),bar=el('progress');
 const spy=[...document.querySelectorAll('section[id]')];
 const links=[...document.querySelectorAll('#navLinks a')];
 window.addEventListener('scroll',()=>{
@@ -2927,20 +2963,28 @@ window.admSetTheme=function(id){
   toast(lang==='th'?'เปลี่ยนธีมแล้ว':'Theme updated');
 };
 function admSectionsList(){
-  const rows=SECTION_ORDER.map((id,i)=>{
+  const order=SECTION_ORDER;
+  const rows=order.map((id,i)=>{
     const meta=sectionLabel(id);
     const label=lang==='th'?meta.labelTh:meta.label;
     const hidden=HIDDEN_SECTIONS.has(id);
+    const isCustom=CUSTOM_SECTIONS.some(cs=>cs.id===id);
     return `<div class="adm-row">
       <div class="r-act" style="flex-direction:column;gap:2px">
         <button class="adm-ic" style="width:26px;height:22px" ${i===0?'disabled':''} onclick="admMoveSection('${id}',-1)">${icon('i-up')}</button>
-        <button class="adm-ic" style="width:26px;height:22px;transform:rotate(180deg)" ${i===SECTION_ORDER.length-1?'disabled':''} onclick="admMoveSection('${id}',1)">${icon('i-up')}</button>
+        <button class="adm-ic" style="width:26px;height:22px;transform:rotate(180deg)" ${i===order.length-1?'disabled':''} onclick="admMoveSection('${id}',1)">${icon('i-up')}</button>
       </div>
-      <div class="r-main"><h4>${label}</h4><div class="r-sub">#${id}${hidden?(lang==='th'?' · ซ่อนอยู่':' · hidden'):''}</div></div>
-      <div class="tgl ${hidden?'':'on'}" onclick="admToggleSection('${id}')"></div>
+      <div class="r-main"><h4>${label}${isCustom?` <span class="mono" style="font-size:9px;color:var(--accent)">CUSTOM</span>`:''}</h4><div class="r-sub">#${id}${hidden?(lang==='th'?' · ซ่อนอยู่':' · hidden'):''}</div></div>
+      <div class="r-act">
+        ${isCustom?`<button class="adm-ic" onclick="admEditCustomSection('${id}')">${icon('i-doc')}</button><button class="adm-ic del" onclick="admDelCustomSection('${id}')">${icon('i-close')}</button>`:''}
+        <div class="tgl ${hidden?'':'on'}" onclick="admToggleSection('${id}')"></div>
+      </div>
     </div>`;
   }).join('');
-  return `<div class="data-card"><h4>${icon('i-spark')} ${lang==='th'?'ลำดับและการมองเห็นของเซกชัน':'Sections — order & visibility'}</h4><p>${lang==='th'?'ใช้ลูกศรขึ้น/ลงเพื่อสลับตำแหน่งเซกชันบนหน้าเว็บ และปิดสวิตช์เพื่อซ่อนเซกชันนั้น':'Use the arrows to move a section up or down the page, and use the switch to hide it.'}</p></div>${rows}`;
+  return `<div class="data-card"><h4>${icon('i-spark')} ${lang==='th'?'ลำดับและการมองเห็นของเซกชัน':'Sections — order & visibility'}</h4><p>${lang==='th'?'ใช้ลูกศรขึ้น/ลงเพื่อสลับตำแหน่งเซกชันบนหน้าเว็บ และปิดสวิตช์เพื่อซ่อนเซกชันนั้น':'Use the arrows to move a section up or down the page, and use the switch to hide it.'}</p></div>
+  <button class="adm-add" onclick="admNewSectionPicker()">${icon('i-plus')} ${lang==='th'?'เพิ่มเซกชันใหม่':'Add new section'}</button>
+  <div class="adm-section-t" style="margin-top:18px">${lang==='th'?'เซกชันทั้งหมด':'All sections'}</div>
+  ${rows}`;
 }
 window.admToggleSection=function(id){
   if(HIDDEN_SECTIONS.has(id))HIDDEN_SECTIONS.delete(id);else HIDDEN_SECTIONS.add(id);
@@ -2948,7 +2992,115 @@ window.admToggleSection=function(id){
   saveStore();
   renderAdmin('sections');
 };
-/* --- TAXA admin --- */
+
+function admNewSectionPicker(){
+  const TT=(en,th)=>lang==='th'?th:en;
+  const templates=[
+    {id:'cards',icon:'i-spark',name:TT('Card grid','การ์ดหลายใบ'),desc:TT('Icon + title + description cards in a grid — like "What we study".','การ์ดไอคอน+หัวข้อ+คำอธิบาย เรียงเป็นกริด')},
+    {id:'stats',icon:'i-scholar',name:TT('Stat / figures','ตัวเลขสถิติ'),desc:TT('Big animated numbers with labels — like "The lab in figures".','ตัวเลขขนาดใหญ่พร้อมคำอธิบาย')},
+    {id:'timeline',icon:'i-cal',name:TT('Timeline','เส้นเวลา'),desc:TT('A vertical list of dated milestones — like "How we got here".','รายการเหตุการณ์เรียงตามเวลา')},
+    {id:'text',icon:'i-doc',name:TT('Text / call-to-action','ข้อความ/ปุ่มเรียกร้อง'),desc:TT('A simple centered heading, paragraph and optional button.','หัวข้อ ย่อหน้า และปุ่มเรียกร้อง')}
+  ];
+  el('adminContent').innerHTML=`<span class="adm-back" onclick="renderAdmin('sections')">${icon('i-arrow')} Back</span>
+  <div class="data-card"><h4>${icon('i-spark')} ${TT('Choose a layout','เลือกรูปแบบ')}</h4><p>${TT('Pick a starting layout — you can fully edit the text and items afterward.','เลือกรูปแบบเริ่มต้น — แก้ไขได้เต็มที่ภายหลัง')}</p></div>
+  ${templates.map(t=>`<div class="adm-row" style="cursor:pointer" onclick="admCreateSection('${t.id}')"><span class="mono-av" style="background:var(--accent)">${icon(t.icon)}</span><div class="r-main"><h4>${t.name}</h4><div class="r-sub">${t.desc}</div></div><span class="go">${icon('i-arrow')}</span></div>`).join('')}
+  `;
+}
+window.admCreateSection=function(template){
+  const id='custom-'+Date.now().toString(36);
+  const cs={id,template,eyebrow:'',eyebrowTh:'',title:'',titleTh:'',lede:'',ledeTh:'',alt:false,items:[],cta:'',ctaTh:'',ctaLink:''};
+  CUSTOM_SECTIONS.push(cs);
+  SECTION_ORDER.push(id);
+  renderCustomSections();applySectionVisibility();applySectionOrder();saveStore();
+  admEditCustomSection(id);
+};
+
+window.admEditCustomSection=function(id){
+  const cs=CUSTOM_SECTIONS.find(x=>x.id===id);if(!cs)return;
+  const TT=(en,th)=>lang==='th'?th:en;
+  const itemsLabel={cards:TT('Cards','การ์ด'),stats:TT('Stats','ตัวเลข'),timeline:TT('Milestones','เหตุการณ์'),text:''}[cs.template];
+  let itemsHtml='';
+  if(cs.template!=='text'){
+    itemsHtml=`<div class="adm-section-t">${itemsLabel} (${(cs.items||[]).length})</div>`+
+      (cs.items||[]).map((it,i)=>`<div class="adm-row"><div class="r-main"><h4>${esc(it.title||it.label||it.yr||('#'+(i+1)))}</h4></div><div class="r-act"><button class="adm-ic" onclick="admEditSectionItem('${id}',${i})">${icon('i-doc')}</button><button class="adm-ic del" onclick="admDelSectionItem('${id}',${i})">${icon('i-close')}</button></div></div>`).join('')+
+      `<button class="adm-add" onclick="admEditSectionItem('${id}',-1)">${icon('i-plus')} ${TT('Add item','เพิ่มรายการ')}</button>`;
+  }
+  el('adminContent').innerHTML=`<span class="adm-back" onclick="renderAdmin('sections')">${icon('i-arrow')} Back</span>
+  <div class="adm-form">
+    <div class="adm-2"><div class="adm-field"><label>Eyebrow (English)</label><input id="cs_eye"></div><div class="adm-field"><label>Eyebrow (Thai)</label><input id="cs_eyeth"></div></div>
+    <div class="adm-2"><div class="adm-field"><label>Title (English)</label><input id="cs_title"></div><div class="adm-field"><label>Title (Thai)</label><input id="cs_titleth"></div></div>
+    <div class="adm-field"><label>Lede (English)</label><textarea id="cs_lede"></textarea></div>
+    <div class="adm-field"><label>Lede (Thai)</label><textarea id="cs_ledeth"></textarea></div>
+    ${cs.template==='text'?`
+    <div class="adm-2"><div class="adm-field"><label>Button text (English)</label><input id="cs_cta"></div><div class="adm-field"><label>Button text (Thai)</label><input id="cs_ctath"></div></div>
+    <div class="adm-field"><label>Button link</label><input id="cs_ctalink" placeholder="#join or https://..."></div>`:''}
+    <div class="adm-row"><div class="r-main"><h4>${TT('Alternate background','พื้นหลังสลับสี')}</h4></div><div class="tgl ${cs.alt?'on':''}" onclick="this.classList.toggle('on')" id="cs_alt"></div></div>
+    <div class="adm-actions"><button class="btn btn--primary" onclick="admSaveSectionMeta('${id}')">${icon('i-check')} Save</button></div>
+  </div>
+  ${itemsHtml}`;
+  el('cs_eye').value=cs.eyebrow||'';el('cs_eyeth').value=cs.eyebrowTh||'';el('cs_title').value=cs.title||'';el('cs_titleth').value=cs.titleTh||'';el('cs_lede').value=cs.lede||'';el('cs_ledeth').value=cs.ledeTh||'';
+  if(cs.template==='text'){el('cs_cta').value=cs.cta||'';el('cs_ctath').value=cs.ctaTh||'';el('cs_ctalink').value=cs.ctaLink||'';}
+};
+window.admSaveSectionMeta=function(id){
+  const cs=CUSTOM_SECTIONS.find(x=>x.id===id);if(!cs)return;
+  cs.eyebrow=val('cs_eye').trim();cs.eyebrowTh=val('cs_eyeth').trim();
+  cs.title=val('cs_title').trim();cs.titleTh=val('cs_titleth').trim();
+  cs.lede=val('cs_lede').trim();cs.ledeTh=val('cs_ledeth').trim();
+  cs.alt=el('cs_alt').classList.contains('on');
+  if(cs.template==='text'){cs.cta=val('cs_cta').trim();cs.ctaTh=val('cs_ctath').trim();cs.ctaLink=val('cs_ctalink').trim();}
+  if(!cs.title){toast(lang==='th'?'ต้องมีหัวข้อ':'Title required');return;}
+  renderCustomSections();saveStore();toast(T('saved_toast'));admEditCustomSection(id);
+};
+window.admDelCustomSection=function(id){
+  if(!confirm(lang==='th'?'ลบเซกชันนี้ทั้งหมด?':'Delete this whole section?'))return;
+  CUSTOM_SECTIONS=CUSTOM_SECTIONS.filter(x=>x.id!==id);
+  SECTION_ORDER=SECTION_ORDER.filter(x=>x!==id);
+  HIDDEN_SECTIONS.delete(id);
+  const node=document.getElementById(id);if(node)node.remove();
+  saveStore();renderAdmin('sections');
+};
+
+window.admEditSectionItem=function(secId,idx){
+  const cs=CUSTOM_SECTIONS.find(x=>x.id===secId);if(!cs)return;
+  const it=idx>=0?cs.items[idx]:{};
+  let fields='';
+  if(cs.template==='cards'){
+    fields=`<div class="adm-field"><label>Icon</label><select id="it_icon"><option value="i-spark">Spark</option><option value="i-leaf">Leaf</option><option value="i-flask">Flask</option><option value="i-cell">Cell</option><option value="i-dna">DNA</option><option value="i-scope">Scope</option><option value="i-doc">Document</option></select></div>
+    <div class="adm-2"><div class="adm-field"><label>Title (English)</label><input id="it_title"></div><div class="adm-field"><label>Title (Thai)</label><input id="it_titleth"></div></div>
+    <div class="adm-field"><label>Description (English)</label><textarea id="it_desc"></textarea></div>
+    <div class="adm-field"><label>Description (Thai)</label><textarea id="it_descth"></textarea></div>`;
+  }else if(cs.template==='stats'){
+    fields=`<div class="adm-field"><label>Value (e.g. "50+", "14")</label><input id="it_value"></div>
+    <div class="adm-2"><div class="adm-field"><label>Label (English)</label><input id="it_label"></div><div class="adm-field"><label>Label (Thai)</label><input id="it_labelth"></div></div>`;
+  }else if(cs.template==='timeline'){
+    fields=`<div class="adm-field"><label>Year / date</label><input id="it_yr"></div>
+    <div class="adm-2"><div class="adm-field"><label>Title (English)</label><input id="it_title"></div><div class="adm-field"><label>Title (Thai)</label><input id="it_titleth"></div></div>
+    <div class="adm-field"><label>Description (English)</label><textarea id="it_desc"></textarea></div>
+    <div class="adm-field"><label>Description (Thai)</label><textarea id="it_descth"></textarea></div>`;
+  }
+  el('adminContent').innerHTML=`<span class="adm-back" onclick="admEditCustomSection('${secId}')">${icon('i-arrow')} Back</span>
+  <div class="adm-form">${fields}
+    <div class="adm-actions"><button class="btn btn--ghost" onclick="admEditCustomSection('${secId}')">Cancel</button><button class="btn btn--primary" onclick="admSaveSectionItem('${secId}',${idx})">${icon('i-check')} Save</button></div>
+  </div>`;
+  if(cs.template==='cards'){el('it_icon').value=it.icon||'i-spark';el('it_title').value=it.title||'';el('it_titleth').value=it.titleTh||'';el('it_desc').value=it.desc||'';el('it_descth').value=it.descTh||'';}
+  else if(cs.template==='stats'){el('it_value').value=it.value||'';el('it_label').value=it.label||'';el('it_labelth').value=it.labelTh||'';}
+  else if(cs.template==='timeline'){el('it_yr').value=it.yr||'';el('it_title').value=it.title||'';el('it_titleth').value=it.titleTh||'';el('it_desc').value=it.desc||'';el('it_descth').value=it.descTh||'';}
+};
+window.admSaveSectionItem=function(secId,idx){
+  const cs=CUSTOM_SECTIONS.find(x=>x.id===secId);if(!cs)return;
+  let item={};
+  if(cs.template==='cards'){item={icon:val('it_icon'),title:val('it_title').trim(),titleTh:val('it_titleth').trim(),desc:val('it_desc').trim(),descTh:val('it_descth').trim()};if(!item.title){toast('Title required');return;}}
+  else if(cs.template==='stats'){item={value:val('it_value').trim(),label:val('it_label').trim(),labelTh:val('it_labelth').trim()};if(!item.value){toast('Value required');return;}}
+  else if(cs.template==='timeline'){item={yr:val('it_yr').trim(),title:val('it_title').trim(),titleTh:val('it_titleth').trim(),desc:val('it_desc').trim(),descTh:val('it_descth').trim()};if(!item.title){toast('Title required');return;}}
+  if(!cs.items)cs.items=[];
+  if(idx>=0)cs.items[idx]=item;else cs.items.push(item);
+  renderCustomSections();saveStore();admEditCustomSection(secId);
+};
+window.admDelSectionItem=function(secId,idx){
+  const cs=CUSTOM_SECTIONS.find(x=>x.id===secId);if(!cs)return;
+  if(!confirm(lang==='th'?'ลบรายการนี้?':'Delete this item?'))return;
+  cs.items.splice(idx,1);renderCustomSections();saveStore();admEditCustomSection(secId);
+};/* --- TAXA admin --- */
 function admTaxaList(){return `<div class="adm-section-t">${TAXA.length} plants · click to edit</div>`+
   TAXA.map((t,i)=>`<div class="adm-row">${t.img?`<img class="thumb" src="${t.img}">`:`<span class="mono-av" style="background:${hue(t.sp)}">${icon('i-leaf')}</span>`}<div class="r-main"><h4>${esc(t.sp)}</h4><div class="r-sub">${esc(t.en||'')}</div></div><div class="r-act"><button class="adm-ic" onclick="admEditTaxa(${i})">${icon('i-doc')}</button><button class="adm-ic del" onclick="admDelTaxa(${i})">${icon('i-close')}</button></div></div>`).join('')+
   `<button class="adm-add" onclick="admEditTaxa(-1)">${icon('i-plus')} Add plant</button>`;}
@@ -3300,8 +3452,7 @@ function admData(){return `
   <div class="data-card danger"><h4>${icon('i-close')} Reset</h4><p>Remove all saved edits from this browser and restore the original built-in content.</p><button class="btn btn--ghost" onclick="admReset()">Reset to defaults</button></div>
   <div class="data-card"><h4>${icon('i-spark')} How this works</h4><p>Edits are saved in this browser's local storage — they persist for you here, but other visitors won't see them until you export the JSON and paste it into the site's source, or host the edited file. Change the passcode by editing <code>ADMIN_PASS</code> in the code.</p></div>`;}
 function download(name,text){const b=new Blob([text],{type:'application/json'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1200);}
-window.admExport=function(){download('ac-lab-content.json',JSON.stringify({members:MEMBERS,news:NEWS,cpubs:CPUBS,products:PRODUCTS,videos:VIDEOS,taxa:TAXA,collabs:COLLABS,testimonials:TESTIMONIALS,banners:BANNERS,events:EVENTS,gallery:GALLERY,resources:RESOURCES,grantTeam:GRANT_TEAM,themes:THEMES,pipe:PIPE,facilities:FACILITIES,timeline:TIMELINE,road:ROAD,innov:INNOV,textOverrides:TEXT_OVERRIDES,sectionOrder:SECTION_ORDER,hiddenSections:[...HIDDEN_SECTIONS],theme:SITE_ACCENT},null,2));toast(lang==='th'?'ดาวน์โหลดแล้ว':'Downloaded');};
-window.admImport=function(){const inp=document.createElement('input');inp.type='file';inp.accept='application/json,.json';inp.onchange=()=>{const f=inp.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const d=JSON.parse(rd.result);if(Array.isArray(d.members))MEMBERS=d.members;if(Array.isArray(d.news))NEWS=d.news;if(Array.isArray(d.cpubs))CPUBS=d.cpubs;if(Array.isArray(d.products))PRODUCTS=d.products;if(Array.isArray(d.videos))VIDEOS=d.videos;if(Array.isArray(d.taxa))TAXA=d.taxa;if(Array.isArray(d.collabs))COLLABS=d.collabs;if(Array.isArray(d.testimonials))TESTIMONIALS=d.testimonials;if(Array.isArray(d.banners))BANNERS=d.banners;if(Array.isArray(d.resources))RESOURCES=d.resources;if(Array.isArray(d.grantTeam))GRANT_TEAM=d.grantTeam;if(Array.isArray(d.themes))THEMES=d.themes;if(Array.isArray(d.pipe))PIPE=d.pipe;if(Array.isArray(d.facilities))FACILITIES=d.facilities;if(Array.isArray(d.timeline))TIMELINE=d.timeline;if(Array.isArray(d.road))ROAD=d.road;if(Array.isArray(d.innov))INNOV=d.innov;if(d.textOverrides)TEXT_OVERRIDES=d.textOverrides;if(Array.isArray(d.sectionOrder))SECTION_ORDER=d.sectionOrder;if(Array.isArray(d.hiddenSections))HIDDEN_SECTIONS=new Set(d.hiddenSections);if(d.theme)applyAccent(d.theme);saveStore(true);applySectionVisibility();applySectionOrder();renderProjectTeam();renderGrantTeam();renderTeam(teamCat);renderNews();renderProducts();renderVideos();renderPubAll();renderTaxa();renderCollabs();renderTesti();renderBanner();renderResources();renderThemes();renderPipe();renderFacilities();renderTimeline();renderRoad();renderInnov();applyLang();renderAdmin('data');toast(lang==='th'?'นำเข้าแล้ว':'Imported');}catch(e){toast('Invalid file');}};rd.readAsText(f);};inp.click();};window.admReset=function(){if(!confirm(lang==='th'?'ลบข้อมูลที่บันทึกไว้ทั้งหมด?':'Remove all saved edits and restore defaults?'))return;try{localStorage.removeItem(LS_KEY);}catch(e){}location.reload();};
+window.admExport=function(){download('ac-lab-content.json',JSON.stringify({members:MEMBERS,news:NEWS,cpubs:CPUBS,products:PRODUCTS,videos:VIDEOS,taxa:TAXA,collabs:COLLABS,testimonials:TESTIMONIALS,banners:BANNERS,events:EVENTS,gallery:GALLERY,resources:RESOURCES,grantTeam:GRANT_TEAM,themes:THEMES,pipe:PIPE,facilities:FACILITIES,timeline:TIMELINE,road:ROAD,innov:INNOV,textOverrides:TEXT_OVERRIDES,sectionOrder:SECTION_ORDER,hiddenSections:[...HIDDEN_SECTIONS],theme:SITE_ACCENT,customSections:CUSTOM_SECTIONS},null,2));toast(lang==='th'?'ดาวน์โหลดแล้ว':'Downloaded');};window.admImport=function(){const inp=document.createElement('input');inp.type='file';inp.accept='application/json,.json';inp.onchange=()=>{const f=inp.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const d=JSON.parse(rd.result);if(Array.isArray(d.members))MEMBERS=d.members;if(Array.isArray(d.news))NEWS=d.news;if(Array.isArray(d.cpubs))CPUBS=d.cpubs;if(Array.isArray(d.products))PRODUCTS=d.products;if(Array.isArray(d.videos))VIDEOS=d.videos;if(Array.isArray(d.taxa))TAXA=d.taxa;if(Array.isArray(d.collabs))COLLABS=d.collabs;if(Array.isArray(d.testimonials))TESTIMONIALS=d.testimonials;if(Array.isArray(d.banners))BANNERS=d.banners;if(Array.isArray(d.resources))RESOURCES=d.resources;if(Array.isArray(d.grantTeam))GRANT_TEAM=d.grantTeam;if(Array.isArray(d.themes))THEMES=d.themes;if(Array.isArray(d.pipe))PIPE=d.pipe;if(Array.isArray(d.facilities))FACILITIES=d.facilities;if(Array.isArray(d.timeline))TIMELINE=d.timeline;if(Array.isArray(d.road))ROAD=d.road;if(Array.isArray(d.innov))INNOV=d.innov;if(d.textOverrides)TEXT_OVERRIDES=d.textOverrides;if(Array.isArray(d.sectionOrder))SECTION_ORDER=d.sectionOrder;if(Array.isArray(d.hiddenSections))HIDDEN_SECTIONS=new Set(d.hiddenSections);if(d.theme)applyAccent(d.theme);saveStore(true);applySectionVisibility();applySectionOrder();renderProjectTeam();renderGrantTeam();renderTeam(teamCat);renderNews();renderProducts();renderVideos();renderPubAll();renderTaxa();renderCollabs();renderTesti();renderBanner();renderResources();renderThemes();renderPipe();renderFacilities();renderTimeline();renderRoad();renderInnov();applyLang();renderAdmin('data');toast(lang==='th'?'นำเข้าแล้ว':'Imported');}catch(e){toast('Invalid file');}};rd.readAsText(f);};inp.click();};window.admReset=function(){if(!confirm(lang==='th'?'ลบข้อมูลที่บันทึกไว้ทั้งหมด?':'Remove all saved edits and restore defaults?'))return;try{localStorage.removeItem(LS_KEY);}catch(e){}location.reload();};
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&el('admin').classList.contains('open'))closeAdmin();});
 if(location.hash==='#admin')setTimeout(openAdmin,300);
 window.addEventListener('hashchange',()=>{if(location.hash==='#admin')openAdmin();});
@@ -3348,8 +3499,9 @@ if (Array.isArray(s.themes)     && s.themes.length)     THEMES     = s.themes;
     if (Array.isArray(s.road)       && s.road.length)       ROAD       = s.road;
     if (Array.isArray(s.innov)      && s.innov.length)      INNOV      = s.innov;
     if (s.textOverrides) TEXT_OVERRIDES = s.textOverrides;
-    if (Array.isArray(s.sectionOrder) && s.sectionOrder.length) SECTION_ORDER = s.sectionOrder;
-    if (s.theme) applyAccent(s.theme);    if (Array.isArray(s.hiddenSections)) HIDDEN_SECTIONS = new Set(s.hiddenSections);
+if (Array.isArray(s.sectionOrder) && s.sectionOrder.length) SECTION_ORDER = s.sectionOrder;
+    if (s.customSections && s.customSections.length) CUSTOM_SECTIONS = s.customSections;
+    CUSTOM_SECTIONS.forEach(cs=>{if(!SECTION_ORDER.includes(cs.id))SECTION_ORDER.push(cs.id);});    if (s.theme) applyAccent(s.theme);    if (Array.isArray(s.hiddenSections)) HIDDEN_SECTIONS = new Set(s.hiddenSections);
 if (typeof applySectionVisibility === 'function') applySectionVisibility();
     if (typeof applySectionOrder === 'function') applySectionOrder();    if (typeof applySectionOrder === 'function') applySectionOrder();
 
@@ -3368,8 +3520,8 @@ if(typeof renderResources === 'function') renderResources();
     if(typeof renderFacilities === 'function') renderFacilities();
     if(typeof renderTimeline === 'function') renderTimeline();
     if(typeof renderRoad === 'function') renderRoad();
-    if(typeof renderInnov === 'function') renderInnov();
-    if(typeof applyLang === 'function') applyLang();  });
+if(typeof renderInnov === 'function') renderInnov();
+    if(typeof renderCustomSections === 'function') renderCustomSections();    if(typeof applyLang === 'function') applyLang();  });
 
   // (2) ทุกครั้งที่กด Save ในหลังบ้าน ให้เขียนขึ้นคลาวด์ด้วย
 if(typeof saveStore !== 'undefined') {
@@ -3377,7 +3529,7 @@ if(typeof saveStore !== 'undefined') {
     saveStore = function(silent){
       const ok = _saveStore(true);
       supa.from('site_content').update({
-data:{members:MEMBERS, news:NEWS, cpubs:CPUBS, products:PRODUCTS, videos:VIDEOS, taxa:TAXA, collabs:COLLABS, testimonials:TESTIMONIALS, banners:BANNERS, resources:RESOURCES, grantTeam:GRANT_TEAM, theme:SITE_ACCENT, hiddenSections:[...HIDDEN_SECTIONS], themes:THEMES, pipe:PIPE, facilities:FACILITIES, timeline:TIMELINE, road:ROAD, innov:INNOV, textOverrides:TEXT_OVERRIDES, sectionOrder:SECTION_ORDER},        updated_at: new Date()      }).eq('id',1).then(({error})=>{
+data:{members:MEMBERS, news:NEWS, cpubs:CPUBS, products:PRODUCTS, videos:VIDEOS, taxa:TAXA, collabs:COLLABS, testimonials:TESTIMONIALS, banners:BANNERS, resources:RESOURCES, grantTeam:GRANT_TEAM, theme:SITE_ACCENT, hiddenSections:[...HIDDEN_SECTIONS], themes:THEMES, pipe:PIPE, facilities:FACILITIES, timeline:TIMELINE, road:ROAD, innov:INNOV, textOverrides:TEXT_OVERRIDES, sectionOrder:SECTION_ORDER, customSections:CUSTOM_SECTIONS},        updated_at: new Date()      }).eq('id',1).then(({error})=>{
         if(!silent){
           if(error && typeof toast === 'function'){toast('⚠️ Cloud save FAILED — เช็คว่าล็อกอินอยู่ไหม');console.error('Supabase save error:',error);}
           else if(typeof toast === 'function'){toast('✅ Saved to cloud — ผู้เข้าชมทุกคนจะเห็นการเปลี่ยนแปลง');}
