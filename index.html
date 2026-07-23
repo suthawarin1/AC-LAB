@@ -343,7 +343,8 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 .filters{display:inline-flex;gap:3px;padding:5px;border-radius:100px;background:var(--surface);box-shadow:var(--hair);margin-top:24px;flex-wrap:wrap}
 .filter{font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;text-transform:uppercase;font-weight:500;padding:9px 17px;border-radius:100px;color:var(--muted);transition:.3s}
 .filter.active{background:var(--accent);color:#fff}
-.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px;transition:opacity .3s}
+.filters--sub{margin-top:12px;background:var(--surface-2);box-shadow:none}
+.filters--sub .filter{padding:7px 14px;font-size:10.5px}.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px;transition:opacity .3s}
 .member{background:var(--surface);border-radius:var(--r);padding:26px 24px;box-shadow:var(--hair);transition:transform .4s var(--ease),box-shadow .4s var(--ease);display:flex;flex-direction:column;text-align:left}
 .member:hover{transform:translateY(-4px);box-shadow:var(--lift)}
 .member.clickable{cursor:pointer}
@@ -365,7 +366,10 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 .member .tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto;padding-top:15px;border-top:1px solid var(--line)}
 .member .tags .t{font-family:var(--mono);font-size:9.5px;letter-spacing:.02em;color:var(--muted);padding:3px 8px;border-radius:6px;background:var(--surface-2)}
 .member.lead .member__desc{font-size:.86rem;color:var(--muted);font-weight:300;line-height:1.55;margin-bottom:2px}
-
+.contact-line{display:flex;flex-direction:column;gap:5px;margin:2px 0 4px;padding-top:10px;border-top:1px solid var(--line)}
+.contact-line a{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:10px;color:var(--muted);transition:.2s;word-break:break-all}
+.contact-line a:hover{color:var(--accent)}
+.contact-line .icon{font-size:12px;color:var(--accent);flex:none}
 /* ===== future innovations ===== */
 .section--innov{background:var(--accent-soft)}
 [data-theme="dark"] .section--innov{background:var(--surface-2)}
@@ -721,6 +725,10 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 .member-modal h3{font-size:1.5rem;font-weight:500;margin-bottom:4px}
 .member-modal .mm-th{font-size:.9rem;color:var(--muted);margin-bottom:12px}
 .member-modal .mm-aff{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:10.5px;color:var(--faint);padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid var(--line)}
+.member-modal .mm-contact{display:flex;flex-direction:column;gap:7px;font-family:var(--mono);font-size:11px;color:var(--muted);margin:-6px 0 16px}
+.member-modal .mm-contact a{display:flex;align-items:center;gap:8px;transition:.2s}
+.member-modal .mm-contact a:hover{color:var(--accent)}
+.member-modal .mm-contact .icon{font-size:13px;color:var(--accent);flex:none}
 .member-modal .mm-aff .icon{font-size:13px;color:var(--accent)}
 .member-modal .mm-bio{font-size:.92rem;color:var(--muted);font-weight:300;line-height:1.65;margin-bottom:18px}
 .member-modal .mm-tags{display:flex;flex-wrap:wrap;gap:6px}
@@ -922,6 +930,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.2 4.2l1.5 1.5M18.3 18.3l1.5 1.5M2 12h2M20 12h2M4.2 19.8l1.5-1.5M18.3 5.7l1.5-1.5"/></symbol>
 <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14A8 8 0 1 1 10 4a6 6 0 0 0 10 10Z"/></symbol>
 <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M8 4H5a1 1 0 0 0-1 1c0 8 6 14 14 14a1 1 0 0 0 1-1v-3l-4-1-2 2c-2-1-4-3-5-5l2-2-1-4Z"/></symbol>
 </defs></svg>
 
 <div id="pre">
@@ -1237,15 +1246,20 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 <section id="members" class="section">
   <div class="wrap">
     <div class="sec-head center reveal">
-      <span class="eyebrow" data-i18n="mem_eye">In the lab</span>
+<span class="eyebrow" data-i18n="mem_eye">In the lab</span>
       <h2 class="h-sec" data-i18n="mem_title">Lab members</h2>
+      <p class="lede" data-i18n="mem_lede">Current students, interns, and lab alumni.</p>
       <div class="filters" id="filters">
-        <button class="filter active" data-cat="postdoc" onclick="filterTeam('postdoc',this)" data-i18n="team_postdoc">Post-doc</button>
-        <button class="filter" data-cat="phd" onclick="filterTeam('phd',this)" data-i18n="team_phd">PhD</button>
+        <button class="filter active" data-cat="phd" onclick="filterTeam('phd',this)" data-i18n="team_phd">PhD</button>
         <button class="filter" data-cat="master" onclick="filterTeam('master',this)" data-i18n="team_master">Master's</button>
         <button class="filter" data-cat="intern" onclick="filterTeam('intern',this)" data-i18n="team_intern">Interns</button>
+        <button class="filter" data-cat="alumni" onclick="filterTeam('alumni',this)" data-i18n="team_alumni">Alumni</button>
       </div>
-    </div>
+      <div class="filters filters--sub" id="alumniSub" style="display:none">
+        <button class="filter active" data-cat="alumni-phd" onclick="filterAlumniSub('alumni-phd',this)" data-i18n="team_alumni_sub_phd">PhD</button>
+        <button class="filter" data-cat="alumni-master" onclick="filterAlumniSub('alumni-master',this)" data-i18n="team_alumni_sub_master">Master's</button>
+      </div>
+        </div>
     <div class="team-grid" id="teamGrid"></div>
   </div>
 </section>
@@ -1485,10 +1499,11 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
     <div class="mm-info">
       <span class="role" id="mmRole"></span>
       <h3 id="mmName"></h3>
-      <div class="mm-th" id="mmTh"></div>
+<div class="mm-th" id="mmTh"></div>
       <div class="mm-aff" id="mmAff"></div>
+      <div class="mm-contact" id="mmContact"></div>
       <p class="mm-bio" id="mmBio"></p>
-      <div class="mm-tags" id="mmTags"></div>
+            <div class="mm-tags" id="mmTags"></div>
     </div>
   </div>
 </div>
@@ -1731,14 +1746,13 @@ MEMBERS.push(
  {group:'master',en:'Master\u2019s Student (1)',th:'นักศึกษาปริญญาโท',img:'',tags:['Cell culture'],bio:'Placeholder MSc student. Editable via the admin panel.'},
  {group:'master',en:'Master\u2019s Student (2)',th:'นักศึกษาปริญญาโท',img:'',tags:['Molecular biology'],bio:'Placeholder MSc student. Editable via the admin panel.'},
  {group:'intern',en:'Research Intern (1)',th:'นักศึกษาฝึกงาน',img:'',tags:['Lab techniques'],bio:'Placeholder intern. Editable via the admin panel.'},
- {group:'intern',en:'Research Intern (2)',th:'นักศึกษาฝึกงาน',img:'',tags:['Field sampling'],bio:'Placeholder intern. Editable via the admin panel.'}
-);
-let GRANT_TEAM=[
-  {en:'Prof. Dr. Arunrat Chaveerach',th:'ศ. ดร. อรุณรัตน์ ฉวีราช',img:PROF_IMG,role:'Team leader',roleTh:'หัวหน้าโครงการ',lead:true,
-   bio:'Directs this research group and its funding proposals — molecular systematics, phytochemistry, toxicity testing, green nanotechnology and drug delivery.',
-   tags:['Molecular systematics','Phytochemistry','Toxicity testing','Green nanotech','Drug delivery']}
-];
-let INNOV=[
+{group:'intern',en:'Research Intern (2)',th:'นักศึกษาฝึกงาน',img:'',tags:['Field sampling'],bio:'Placeholder intern. Editable via the admin panel.'},
+ {group:'alumni-phd',en:'PhD Alumnus (2023)',th:'ศิษย์เก่า ปริญญาเอก (2566)',img:'',tags:['Now: Researcher, Dept. of Agriculture'],bio:'Placeholder alumni profile — open the admin panel to add the graduate\u2019s name, current position and story.'},
+ {group:'alumni-master',en:'Master\u2019s Alumnus (2022)',th:'ศิษย์เก่า ปริญญาโท (2565)',img:'',tags:['Now: QC Scientist, CPF'],bio:'Placeholder alumni profile — open the admin panel to add the graduate\u2019s name, current position and story.'}
+);let GRANT_TEAM=[
+  // นำโดย ศ.ดร.อรุณรัตน์ (ดูประวัติเต็มได้ใน "The researchers behind the programme" ด้านบนแล้ว)
+  // เพิ่มผู้ร่วมวิจัยไทย (intl:false) หรือต่างประเทศ (intl:true) ได้จากแผงแอดมิน
+];let INNOV=[
   {no:'01',icon:'i-dna',title:'Molecular biology',titleTh:'ชีววิทยาโมเลกุล',desc:'Gene-expression analysis, qRT-PCR and enzyme assays to read plant bioactivity at the level of the gene.',descTh:'การวิเคราะห์การแสดงออกของยีน qRT-PCR และเอนไซม์แอสเซย์ เพื่ออ่านฤทธิ์ทางชีวภาพของพืชในระดับยีน'},
   {no:'02',icon:'i-scholar',title:'Multi-omics technology',titleTh:'เทคโนโลยีมัลติโอมิกส์',desc:'Integrating genomics, transcriptomics, proteomics and metabolomics into one high-resolution picture of each plant.',descTh:'ผสานจีโนมิกส์ ทรานสคริปโตมิกส์ โปรตีโอมิกส์ และเมตาโบโลมิกส์ เป็นภาพความละเอียดสูงของพืชแต่ละชนิด'},
   {no:'03',icon:'i-spark',title:'Green nano-delivery',titleTh:'นาโนระบบนำส่งสีเขียว',desc:'Eco-friendly nanoparticle carriers and encapsulation that deliver plant compounds safely and effectively.',descTh:'ตัวพาอนุภาคนาโนที่เป็นมิตรกับสิ่งแวดล้อมและการเอนแคปซูเลต เพื่อนำส่งสารจากพืชอย่างปลอดภัยและได้ผล'},
@@ -1867,8 +1881,7 @@ prod_ing:'ส่วนประกอบสำคัญ',prod_size:'ขนาด
   team_eye:'ทีมงานโครงการ',team_title:'นักวิจัยเบื้องหลังโครงการ',team_lede:'นักวิจัย 8 ท่านจากมหาวิทยาลัยขอนแก่นและสถาบันพันธมิตร ร่วมขับเคลื่อนโครงการวิจัยบูรณาการ ตั้งแต่ชีววิทยาโมเลกุลและมัลติโอมิกส์ ไปจนถึงการทดสอบฤทธิ์ทางชีวภาพและทรัพย์สินทางปัญญา',
   mem_eye:'ภายในแล็บ',mem_title:'สมาชิกในแล็บ',
   team_all:'ทั้งหมด',team_lead:'หัวหน้าโครงการ',team_co:'ผู้ร่วมวิจัย',team_intl:'ต่างประเทศ',
-team_postdoc:'หลังปริญญาเอก',team_phd:'ป.เอก',team_master:'ป.โท',team_intern:'ฝึกงาน',pub_chart_t:'ผลงานต่อปี',saved_toast:'บันทึกแล้ว',
-  grant_eye:'กลุ่มวิจัยเฉพาะกิจ',grant_title:'ทีมวิจัย (สำหรับยื่นข้อเสนอโครงการ)',grant_lede:'ทีมวิจัยที่แยกออกมาต่างหาก ใช้สำหรับยื่นข้อเสนอขอทุนวิจัยโดยเฉพาะ นำโดย ศ.ดร.อรุณรัตน์ ฉวีราช เพิ่มผู้ร่วมวิจัยได้ภายหลังจากระบบหลังบ้าน',voices_share:'ร่วมเขียนรีวิว',voices_share_chip:'เรื่องราวจากศิษย์เก่า',voices_share_title:'แบ่งปันประสบการณ์ของคุณ',
+team_postdoc:'หลังปริญญาเอก',team_phd:'ป.เอก',team_master:'ป.โท',team_intern:'ฝึกงาน',team_alumni:'ศิษย์เก่า',team_alumni_sub_phd:'ปริญญาเอก',team_alumni_sub_master:'ปริญญาโท',mem_lede:'นักศึกษาปัจจุบัน นักศึกษาฝึกงาน และศิษย์เก่าของแล็บ',pub_chart_t:'ผลงานต่อปี',saved_toast:'บันทึกแล้ว',  grant_eye:'กลุ่มวิจัยเฉพาะกิจ',grant_title:'ทีมวิจัย (สำหรับยื่นข้อเสนอโครงการ)',grant_lede:'ทีมวิจัยที่แยกออกมาต่างหาก ใช้สำหรับยื่นข้อเสนอขอทุนวิจัยโดยเฉพาะ นำโดย ศ.ดร.อรุณรัตน์ ฉวีราช เพิ่มผู้ร่วมวิจัยได้ภายหลังจากระบบหลังบ้าน',voices_share:'ร่วมเขียนรีวิว',voices_share_chip:'เรื่องราวจากศิษย์เก่า',voices_share_title:'แบ่งปันประสบการณ์ของคุณ',
 voices_role:'ตำแหน่ง/ที่ทำงานปัจจุบันของคุณ',voices_quote:'เรื่องราวของคุณ',voices_submit:'ส่งเพื่อตรวจสอบ',
 voices_note:'ทีมงานจะตรวจสอบก่อนเผยแพร่บนเว็บไซต์',voices_photo:'รูปถ่ายของคุณ (ไม่บังคับ)',  collab_eye:'เครือข่ายระดับโลก',collab_title:'ทำงานข้ามพรมแดน',
   collab_lede:'ความร่วมมือเชื่อมขอนแก่นกับสถาบันชั้นนำในสามทวีป สนับสนุนการแลกเปลี่ยนนักศึกษาและผลงานตีพิมพ์ร่วม',
@@ -2506,12 +2519,17 @@ window.openVideo=function(i){
 };
 
 /* ============ TEAM ROSTER ============ */
-const ROLE_EN={lead:'Project leader · PI',co:'Co-Investigator',intl:'International co-researcher',postdoc:'Postdoctoral researcher',phd:'PhD student',master:'Master\u2019s student',intern:'Research intern'};const ROLE_TH={lead:'หัวหน้าโครงการ',co:'ผู้ร่วมวิจัย',intl:'ผู้ร่วมวิจัย (ต่างประเทศ)',postdoc:'นักวิจัยหลังปริญญาเอก',phd:'นักศึกษาปริญญาเอก',master:'นักศึกษาปริญญาโท',intern:'นักศึกษาฝึกงาน'};
-function initials(n){return (n||'').replace(/\(.*?\)/g,'').trim().split(/\s+/).filter(w=>!/^(prof|dr|assoc|asst|ms|mr|mrs|professor)\.?$/i.test(w)).slice(0,2).map(w=>w[0]).join('').toUpperCase()||'?';}
+const ROLE_EN={lead:'Project leader · PI',co:'Co-Investigator',intl:'International co-researcher',postdoc:'Postdoctoral researcher',phd:'PhD student',master:'Master\u2019s student',intern:'Research intern','alumni-phd':'PhD alumnus/alumna','alumni-master':'Master\u2019s alumnus/alumna'};const ROLE_TH={lead:'หัวหน้าโครงการ',co:'ผู้ร่วมวิจัย',intl:'ผู้ร่วมวิจัย (ต่างประเทศ)',postdoc:'นักวิจัยหลังปริญญาเอก',phd:'นักศึกษาปริญญาเอก',master:'นักศึกษาปริญญาโท',intern:'นักศึกษาฝึกงาน','alumni-phd':'ศิษย์เก่า ปริญญาเอก','alumni-master':'ศิษย์เก่า ปริญญาโท'};function initials(n){return (n||'').replace(/\(.*?\)/g,'').trim().split(/\s+/).filter(w=>!/^(prof|dr|assoc|asst|ms|mr|mrs|professor)\.?$/i.test(w)).slice(0,2).map(w=>w[0]).join('').toUpperCase()||'?';}
 function hue(n){let h=0;for(let i=0;i<(n||'').length;i++)h=n.charCodeAt(i)+((h<<5)-h);return `hsl(${Math.abs(h)%360},34%,52%)`;}
 function avatar(m,big){return m.img?`<img src="${m.img}" alt="${m.en}" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('noimg')">`:`<span class="mono-av" style="background:${hue(m.en)}">${initials(m.en)}</span>`;}
 function memberAff(m){return m.group==='intl'?(lang==='th'?'สถาบันต่างประเทศ':'International partner'):(lang==='th'?'มหาวิทยาลัยขอนแก่น':'Khon Kaen University');}
-function memberCard(m){
+function contactLinks(m){
+  const rows=[];
+  if(m&&m.email) rows.push(`<a href="mailto:${esc(m.email)}" onclick="event.stopPropagation()">${icon('i-mail')}<span>${esc(m.email)}</span></a>`);
+  if(m&&m.phone) rows.push(`<a href="tel:${esc(m.phone)}" onclick="event.stopPropagation()">${icon('i-phone')}<span>${esc(m.phone)}</span></a>`);
+  return rows.join('');
+}
+function contactBlock(m){const links=contactLinks(m);return links?`<div class="contact-line">${links}</div>`:'';}function memberCard(m){
   const idx=MEMBERS.indexOf(m);
   const role=(lang==='th'?ROLE_TH:ROLE_EN)[m.group]||m.group;
   const leadDesc=lang==='th'?'ควบคุมและดำเนินโครงการวิจัยบูรณาการทั้งหมด ตั้งแต่การวิเคราะห์ ตีพิมพ์ ไปจนถึงการยื่นจดสิทธิบัตร':'Directs the whole integrated programme — from analysis and publication through to patent filing.';
@@ -2522,7 +2540,8 @@ function memberCard(m){
       <div class="member__id"><h4>${m.en}</h4>${m.th?`<div class="th">${m.th}</div>`:''}</div>
     </div>
     <span class="role ${m.group==='intl'?'intl':''}">${m.group==='intl'?icon('i-globe'):''}${role}</span>
-    ${m.group==='lead'?`<p class="member__desc">${leadDesc}</p>`:`<div class="aff">${icon('i-pin')}${memberAff(m)}</div>`}
+${m.group==='lead'?`<p class="member__desc">${leadDesc}</p>`:`<div class="aff">${icon('i-pin')}${memberAff(m)}</div>`}
+    ${contactBlock(m)}
     <div class="tags">${(m.tags||[]).map(t=>`<span class="t">${t}</span>`).join('')}</div>
   </article>`;
 }
@@ -2531,6 +2550,7 @@ function renderProjectTeam(){
   const lead=MEMBERS.find(m=>m.group==='lead');
   const co=MEMBERS.filter(m=>m.group==='co');
   const intl=MEMBERS.filter(m=>m.group==='intl');
+  const postdoc=MEMBERS.filter(m=>m.group==='postdoc');
   let h='';
   if(lead){
     const idx=MEMBERS.indexOf(lead);
@@ -2540,11 +2560,13 @@ function renderProjectTeam(){
         <span class="rteam-tag">${TT('Principal investigator','หัวหน้าโครงการ')}</span>
         <h3>${lead.en}</h3>${lead.th?`<div class="th">${lead.th}</div>`:''}
         <p>${TT('Directs the whole integrated programme — from molecular biology and multi-omics through to bioactivity testing and intellectual-property registration.','ควบคุมและดำเนินโครงการวิจัยบูรณาการทั้งหมด ตั้งแต่ชีววิทยาโมเลกุลและมัลติโอมิกส์ ไปจนถึงการทดสอบฤทธิ์ทางชีวภาพและการยื่นจดทรัพย์สินทางปัญญา')}</p>
+        ${contactBlock(lead)}
         <div class="tags">${(lead.tags||[]).map(t=>`<span class="t">${t}</span>`).join('')}</div>
         <button class="btn btn--primary btn--sm" onclick="openModal('piModal')">${TT('View full profile','ดูประวัติเต็ม')} ${icon('i-arrow')}</button>
       </div>
     </div>`;
   }
+  if(postdoc.length) h+=`<div class="rteam-sub"><span class="rteam-sub__l">${TT('Postdoctoral researchers','นักวิจัยหลังปริญญาเอก')}</span></div><div class="team-grid">${postdoc.map(memberCard).join('')}</div>`;
   if(co.length)   h+=`<div class="rteam-sub"><span class="rteam-sub__l">${TT('Co-Investigators','ผู้ร่วมวิจัย')}</span></div><div class="team-grid">${co.map(memberCard).join('')}</div>`;
   if(intl.length) h+=`<div class="rteam-sub"><span class="rteam-sub__l">${TT('International co-researchers','ผู้ร่วมวิจัยต่างประเทศ')}</span></div><div class="team-grid">${intl.map(memberCard).join('')}</div>`;
   el('rteam').innerHTML=h;
@@ -2554,98 +2576,52 @@ function renderProjectTeam(){
 function grantAvatar(m){return m.img?`<img src="${m.img}" alt="${esc(m.en)}" loading="lazy" onerror="this.style.display='none'">`:`<span class="mono-av" style="background:${hue(m.en)}">${initials(m.en)}</span>`;}
 
 function grantMemberCard(m){
-
   const role=lang==='th'?(m.roleTh||m.role||''):(m.role||'');
-
   return `<article class="member clickable" onclick="openGrantMember(${GRANT_TEAM.indexOf(m)})">
-
     <div class="member__head">
-
       <div class="member__ph">${grantAvatar(m)}</div>
-
       <div class="member__id"><h4>${esc(m.en)}</h4>${m.th?`<div class="th">${esc(m.th)}</div>`:''}</div>
-
     </div>
-
-    ${role?`<span class="role">${esc(role)}</span>`:''}
-
+    ${role?`<span class="role ${m.intl?'intl':''}">${m.intl?icon('i-globe'):''}${esc(role)}</span>`:''}
+    ${contactBlock(m)}
     <div class="tags">${(m.tags||[]).map(t=>`<span class="t">${esc(t)}</span>`).join('')}</div>
-
   </article>`;
-
 }
 
 function renderGrantTeam(){
-
   const TT=(en,th)=>lang==='th'?th:en;
-
   const w=el('grantTeam');if(!w)return;
-
-  const lead=GRANT_TEAM.find(m=>m.lead)||GRANT_TEAM[0];
-
-  const co=GRANT_TEAM.filter(m=>m!==lead);
-
+  const thaiCo=GRANT_TEAM.filter(m=>!m.intl);
+  const intlCo=GRANT_TEAM.filter(m=>m.intl);
   let h='';
-
-  if(lead){
-
-    h+=`<div class="pi-banner">
-
-      <div class="pi-banner__ph" onclick="openGrantMember(${GRANT_TEAM.indexOf(lead)})">${grantAvatar(lead)}</div>
-
-      <div class="pi-banner__info">
-
-        <span class="rteam-tag">${TT('Team leader','หัวหน้าโครงการ')}</span>
-
-        <h3>${esc(lead.en)}</h3>${lead.th?`<div class="th">${esc(lead.th)}</div>`:''}
-
-        <p>${esc(lead.bio||'')}</p>
-
-        <div class="tags">${(lead.tags||[]).map(t=>`<span class="t">${esc(t)}</span>`).join('')}</div>
-
-      </div>
-
-    </div>`;
-
-  }
-
-  h+=`<div class="rteam-sub"><span class="rteam-sub__l">${TT('Co-researchers','ผู้ร่วมวิจัย')}</span></div>`;
-
-  h+= co.length ? `<div class="team-grid">${co.map(grantMemberCard).join('')}</div>` :
-
-    `<p style="font-size:.85rem;color:var(--muted)">${TT('Co-researchers will be added soon — use the admin panel.','จะเพิ่มผู้ร่วมวิจัยเร็วๆ นี้ — เพิ่มได้จากระบบหลังบ้าน')}</p>`;
-
+  h+=`<div class="rteam-sub" style="margin-top:0"><span class="rteam-sub__l">${TT('Thai co-researchers','ผู้ร่วมวิจัยชาวไทย')}</span></div>`;
+  h+= thaiCo.length ? `<div class="team-grid">${thaiCo.map(grantMemberCard).join('')}</div>` :
+    `<p style="font-size:.85rem;color:var(--muted)">${TT('Thai co-researchers will be added soon — use the admin panel.','จะเพิ่มผู้ร่วมวิจัยชาวไทยเร็วๆ นี้ — เพิ่มได้จากระบบหลังบ้าน')}</p>`;
+  h+=`<div class="rteam-sub"><span class="rteam-sub__l">${TT('International co-researchers','ผู้ร่วมวิจัยต่างประเทศ')}</span></div>`;
+  h+= intlCo.length ? `<div class="team-grid">${intlCo.map(grantMemberCard).join('')}</div>` :
+    `<p style="font-size:.85rem;color:var(--muted)">${TT('International co-researchers will be added soon — use the admin panel.','จะเพิ่มผู้ร่วมวิจัยต่างประเทศเร็วๆ นี้ — เพิ่มได้จากระบบหลังบ้าน')}</p>`;
   w.innerHTML=h;
-
 }
 
 window.openGrantMember=function(idx){
-
   const m=GRANT_TEAM[idx];if(!m)return;
-
   const role=lang==='th'?(m.roleTh||m.role||''):(m.role||'');
-
   el('mmPhoto').innerHTML=grantAvatar(m);el('mmPhoto').className='mm-photo'+(m.img?'':' noimg');
-
-  el('mmRole').textContent=role;el('mmRole').className='role';
-
+  el('mmRole').textContent=role;el('mmRole').className='role'+(m.intl?' intl':'');
   el('mmName').textContent=m.en;el('mmTh').textContent=m.th||'';el('mmTh').style.display=m.th?'block':'none';
-
-  el('mmAff').innerHTML=icon('i-pin')+(lang==='th'?'มหาวิทยาลัยขอนแก่น':'Khon Kaen University');
-
+  el('mmAff').innerHTML=icon('i-pin')+(m.intl?(lang==='th'?'ผู้ร่วมวิจัยต่างประเทศ':'International co-researcher'):(lang==='th'?'มหาวิทยาลัยขอนแก่น':'Khon Kaen University'));
+  {const links=contactLinks(m);el('mmContact').innerHTML=links;el('mmContact').style.display=links?'flex':'none';}
   el('mmBio').textContent=m.bio||(lang==='th'?'ยังไม่มีประวัติ':'No bio yet.');
-
   el('mmTags').innerHTML=(m.tags||[]).map(t=>`<span class="t">${esc(t)}</span>`).join('');
-
   openModal('memberModal');
-
 };
 
 renderProjectTeam();
 
 renderGrantTeam();
 
-let teamCat='postdoc';
+let teamCat='phd';
+let alumniSub='alumni-phd';
 function renderTeam(cat){
   const g=el('teamGrid');g.style.opacity='0';
   setTimeout(()=>{
@@ -2654,17 +2630,33 @@ function renderTeam(cat){
     g.style.opacity='1';
   },170);
 }
-window.filterTeam=function(cat,btn){teamCat=cat;document.querySelectorAll('#members .filter').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderTeam(cat);};
-renderTeam('postdoc');
-window.openMember=function(idx){
+window.filterTeam=function(cat,btn){
+  document.querySelectorAll('#filters .filter').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const sub=el('alumniSub');
+  if(cat==='alumni'){
+    if(sub)sub.style.display='flex';
+    teamCat=alumniSub;renderTeam(alumniSub);
+  }else{
+    if(sub)sub.style.display='none';
+    teamCat=cat;renderTeam(cat);
+  }
+};
+window.filterAlumniSub=function(sub,btn){
+  alumniSub=sub;teamCat=sub;
+  document.querySelectorAll('#alumniSub .filter').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderTeam(sub);
+};
+renderTeam('phd');window.openMember=function(idx){
   const m=MEMBERS[idx];if(!m)return;
   const role=(lang==='th'?ROLE_TH:ROLE_EN)[m.group]||m.group;
   el('mmPhoto').innerHTML=avatar(m,true);el('mmPhoto').className='mm-photo'+(m.img?'':' noimg');
   el('mmRole').textContent=role;el('mmRole').className='role'+(m.group==='intl'?' intl':'');
   el('mmName').textContent=m.en;el('mmTh').textContent=m.th||'';el('mmTh').style.display=m.th?'block':'none';
-  el('mmAff').innerHTML=icon('i-pin')+memberAff(m);
-  el('mmBio').textContent=m.bio||BIOS[m.en]||(lang==='th'?'ยังไม่มีประวัติ — เพิ่มได้ในระบบหลังบ้าน':'No bio yet — add one in the admin panel.');
-  el('mmTags').innerHTML=(m.tags||[]).map(t=>`<span class="t">${t}</span>`).join('');
+el('mmAff').innerHTML=icon('i-pin')+memberAff(m);
+  {const links=contactLinks(m);el('mmContact').innerHTML=links;el('mmContact').style.display=links?'flex':'none';}
+  el('mmBio').textContent=m.bio||BIOS[m.en]||(lang==='th'?'ยังไม่มีประวัติ — เพิ่มได้ในระบบหลังบ้าน':'No bio yet — add one in the admin panel.');  el('mmTags').innerHTML=(m.tags||[]).map(t=>`<span class="t">${t}</span>`).join('');
   openModal('memberModal');
 };
 
@@ -3220,33 +3212,33 @@ window.admSaveResource=function(){const t=val('rs_title').trim();if(!t){toast(la
 window.admDelResource=function(i){if(!confirm((lang==='th'?'ลบเอกสาร ':'Delete ')+RESOURCES[i].title+'?'))return;RESOURCES.splice(i,1);saveStore();renderResources();renderAdmin('resources');};
 
 /* --- GRANT PROPOSAL TEAM admin --- */
-function admGrantList(){return `<div class="data-card"><h4>${icon('i-spark')} About this team</h4><p>${lang==='th'?'ทีมนี้แยกจาก "ทีมงานโครงการ" ด้านบน ใช้ยื่นข้อเสนอทุนวิจัยโดยเฉพาะ หัวหน้าทีม (อ.อรุณรัตน์) ล็อกไว้ เพิ่ม/ลบผู้ร่วมวิจัยได้ด้านล่าง':'This team is separate from the "Programme team" above — used for grant proposals. The leader is fixed; add/remove co-researchers below.'}</p></div>`+
-  `<div class="adm-section-t">${GRANT_TEAM.length} member(s) · click to edit</div>`+
-  GRANT_TEAM.map((m,i)=>`<div class="adm-row">${m.img?`<img class="thumb" src="${m.img}">`:`<span class="mono-av" style="background:${hue(m.en)}">${initials(m.en)}</span>`}<div class="r-main"><h4>${esc(m.en)}</h4><div class="r-sub">${m.lead?(lang==='th'?'หัวหน้าทีม':'Team leader'):esc(m.role||'')}</div></div><div class="r-act"><button class="adm-ic" onclick="admEditGrant(${i})">${icon('i-doc')}</button>${m.lead?'':`<button class="adm-ic del" onclick="admDelGrant(${i})">${icon('i-close')}</button>`}</div></div>`).join('')+
+function admGrantList(){return `<div class="data-card"><h4>${icon('i-spark')} About this team</h4><p>${lang==='th'?'ทีมนี้แยกจาก "ทีมงานโครงการ" ด้านบน ใช้ยื่นข้อเสนอทุนวิจัยโดยเฉพาะ นำโดย ศ.ดร.อรุณรัตน์ (ดูประวัติเต็มด้านบนแล้ว) เพิ่มผู้ร่วมวิจัยไทย/ต่างประเทศได้ด้านล่าง':'This team is separate from the "Programme team" above — used for grant proposals. It\'s led by Prof. Dr. Arunrat (her full profile is already shown above). Add Thai or international co-researchers below.'}</p></div>`+
+  `<div class="adm-section-t">${GRANT_TEAM.length} co-researcher(s) · click to edit</div>`+
+  GRANT_TEAM.map((m,i)=>`<div class="adm-row">${m.img?`<img class="thumb" src="${m.img}">`:`<span class="mono-av" style="background:${hue(m.en)}">${initials(m.en)}</span>`}<div class="r-main"><h4>${esc(m.en)}</h4><div class="r-sub">${esc(m.role||'')}${m.intl?(lang==='th'?' · ต่างประเทศ':' · International'):''}</div></div><div class="r-act"><button class="adm-ic" onclick="admEditGrant(${i})">${icon('i-doc')}</button><button class="adm-ic del" onclick="admDelGrant(${i})">${icon('i-close')}</button></div></div>`).join('')+
   `<button class="adm-add" onclick="admEditGrant(-1)">${icon('i-plus')} Add co-researcher</button>`;}
-window.admEditGrant=function(i){editIdx=i;const m=i>=0?GRANT_TEAM[i]:{en:'',th:'',role:'Co-researcher',roleTh:'ผู้ร่วมวิจัย',tags:[],bio:'',lead:false};formImg=m.img||'';
+window.admEditGrant=function(i){editIdx=i;const m=i>=0?GRANT_TEAM[i]:{en:'',th:'',role:'Co-researcher',roleTh:'ผู้ร่วมวิจัย',tags:[],bio:'',intl:false,phone:'',email:''};formImg=m.img||'';
   el('adminContent').innerHTML=`<span class="adm-back" onclick="renderAdmin('grantteam')">${icon('i-arrow')} Back</span>
   <div class="adm-form">
     <div class="adm-field"><label>Photo</label><div class="adm-photo-row" id="f_photowrap"></div></div>
-    <div class="adm-2"><div class="adm-field"><label>Name (English)</label><input id="f_en" ${m.lead?'disabled':''}></div><div class="adm-field"><label>Name (Thai)</label><input id="f_th" ${m.lead?'disabled':''}></div></div>
+    <div class="adm-2"><div class="adm-field"><label>Name (English)</label><input id="f_en"></div><div class="adm-field"><label>Name (Thai)</label><input id="f_th"></div></div>
     <div class="adm-2"><div class="adm-field"><label>Role (English)</label><input id="g_role" placeholder="Co-researcher"></div><div class="adm-field"><label>Role (Thai)</label><input id="g_roleth" placeholder="ผู้ร่วมวิจัย"></div></div>
+    <div class="adm-2"><div class="adm-field"><label>Phone</label><input id="g_phone" placeholder="+66 8x xxx xxxx"></div><div class="adm-field"><label>Email</label><input id="g_email" placeholder="name@kku.ac.th"></div></div>
+    <div class="adm-row"><div class="r-main"><h4>${lang==='th'?'ผู้ร่วมวิจัยต่างประเทศ':'International co-researcher'}</h4></div><div class="tgl ${m.intl?'on':''}" id="g_intl" onclick="this.classList.toggle('on')"></div></div>
     <div class="adm-field"><label>Tags (comma-separated)</label><input id="g_tags"></div>
     <div class="adm-field"><label>Bio</label><textarea id="g_bio"></textarea></div>
     <div class="adm-actions"><button class="btn btn--ghost" onclick="renderAdmin('grantteam')">Cancel</button><button class="btn btn--primary" onclick="admSaveGrant()">${icon('i-check')} Save</button></div>
   </div>`;
-  el('f_en').value=m.en||'';el('f_th').value=m.th||'';el('g_role').value=m.role||'';el('g_roleth').value=m.roleTh||'';el('g_tags').value=(m.tags||[]).join(', ');el('g_bio').value=m.bio||'';
+  el('f_en').value=m.en||'';el('f_th').value=m.th||'';el('g_role').value=m.role||'';el('g_roleth').value=m.roleTh||'';el('g_phone').value=m.phone||'';el('g_email').value=m.email||'';el('g_tags').value=(m.tags||[]).join(', ');el('g_bio').value=m.bio||'';
   refreshPhoto(false);el('f_en').addEventListener('input',()=>{if(!formImg)refreshPhoto(false);});
 };
 window.admSaveGrant=function(){
-  const isLead=editIdx>=0&&GRANT_TEAM[editIdx].lead;
-  const en=isLead?GRANT_TEAM[editIdx].en:val('f_en').trim();
+  const en=val('f_en').trim();
   if(!en){toast(lang==='th'?'ต้องมีชื่อ':'Name required');return;}
-  const item={en,th:isLead?GRANT_TEAM[editIdx].th:val('f_th').trim(),role:val('g_role').trim(),roleTh:val('g_roleth').trim(),tags:val('g_tags').split(',').map(s=>s.trim()).filter(Boolean),bio:val('g_bio').trim(),img:formImg,lead:!!isLead};
+  const item={en,th:val('f_th').trim(),role:val('g_role').trim(),roleTh:val('g_roleth').trim(),phone:val('g_phone').trim(),email:val('g_email').trim(),intl:el('g_intl').classList.contains('on'),tags:val('g_tags').split(',').map(s=>s.trim()).filter(Boolean),bio:val('g_bio').trim(),img:formImg};
   if(editIdx>=0)GRANT_TEAM[editIdx]=item;else GRANT_TEAM.push(item);
   saveStore();renderGrantTeam();renderAdmin('grantteam');
 };
-window.admDelGrant=function(i){if(GRANT_TEAM[i].lead){toast(lang==='th'?'ลบหัวหน้าทีมไม่ได้':'Cannot delete the team leader');return;}if(!confirm((lang==='th'?'ลบ ':'Delete ')+GRANT_TEAM[i].en+'?'))return;GRANT_TEAM.splice(i,1);saveStore();renderGrantTeam();renderAdmin('grantteam');};/* --- VOICES admin (published + pending public submissions) --- */
-let PENDING_TESTI=[];
+window.admDelGrant=function(i){if(!confirm((lang==='th'?'ลบ ':'Delete ')+GRANT_TEAM[i].en+'?'))return;GRANT_TEAM.splice(i,1);saveStore();renderGrantTeam();renderAdmin('grantteam');};let PENDING_TESTI=[];
 async function admVoicesList(){
   const c=el('adminContent');
   c.innerHTML=`<div class="adm-section-t">${lang==='th'?'รอตรวจสอบ':'Pending submissions'}</div><div id="admPendingWrap"><p style="font-size:.85rem;color:var(--muted)">Loading…</p></div>
@@ -3335,23 +3327,23 @@ window.admDelMsg=function(i){const m=CONTACT_MSGS[i];if(!m)return;if(!confirm(la
 function admTeamList(){return `<div class="adm-section-t">${MEMBERS.length} members · click to edit</div>`+
   MEMBERS.map((m,i)=>`<div class="adm-row">${m.img?`<img class="thumb" src="${m.img}">`:`<span class="mono-av" style="background:${hue(m.en)}">${initials(m.en)}</span>`}<div class="r-main"><h4>${esc(m.en)}</h4><div class="r-sub">${ROLE_EN[m.group]||m.group}${m.pi?' · locked photo':''}</div></div><div class="r-act"><button class="adm-ic" onclick="admEditMember(${i})">${icon('i-doc')}</button>${m.pi?'':`<button class="adm-ic del" onclick="admDelMember(${i})">${icon('i-close')}</button>`}</div></div>`).join('')+
   `<button class="adm-add" onclick="admEditMember(-1)">${icon('i-plus')} Add member</button>`;}
-window.admEditMember=function(i){editIdx=i;const m=i>=0?MEMBERS[i]:{group:'phd',tags:[],en:'',th:'',bio:''};formImg=m.img||'';
+window.admEditMember=function(i){editIdx=i;const m=i>=0?MEMBERS[i]:{group:'phd',tags:[],en:'',th:'',bio:'',phone:'',email:''};formImg=m.img||'';
   el('adminContent').innerHTML=`<span class="adm-back" onclick="renderAdmin('team')">${icon('i-arrow')} Back</span>
   <div class="adm-form">
     <div class="adm-field"><label>Photo</label><div class="adm-photo-row" id="f_photowrap"></div></div>
     <div class="adm-2"><div class="adm-field"><label>Name (English)</label><input id="f_en"></div><div class="adm-field"><label>Name (Thai)</label><input id="f_th"></div></div>
-    <div class="adm-2"><div class="adm-field"><label>Group</label><select id="f_group">${['lead','co','intl','postdoc','phd','master','intern'].map(g=>`<option value="${g}">${ROLE_EN[g]}</option>`).join('')}</select></div><div class="adm-field"><label>Tags (comma-separated)</label><input id="f_tags"></div></div>
+    <div class="adm-2"><div class="adm-field"><label>Group</label><select id="f_group">${['lead','co','intl','postdoc','phd','master','intern','alumni-phd','alumni-master'].map(g=>`<option value="${g}">${ROLE_EN[g]}</option>`).join('')}</select></div><div class="adm-field"><label>Tags (comma-separated)</label><input id="f_tags"></div></div>
+    <div class="adm-2"><div class="adm-field"><label>Phone</label><input id="f_phone" placeholder="+66 8x xxx xxxx"></div><div class="adm-field"><label>Email</label><input id="f_email" placeholder="name@kku.ac.th"></div></div>
     <div class="adm-field"><label>Bio</label><textarea id="f_bio"></textarea></div>
     <div class="adm-actions"><button class="btn btn--ghost" onclick="renderAdmin('team')">Cancel</button><button class="btn btn--primary" onclick="admSaveMember()">${icon('i-check')} Save</button></div>
   </div>`;
-  el('f_en').value=m.en||'';el('f_th').value=m.th||'';el('f_group').value=m.group||'phd';el('f_tags').value=(m.tags||[]).join(', ');el('f_bio').value=m.bio||BIOS[m.en]||'';
+  el('f_en').value=m.en||'';el('f_th').value=m.th||'';el('f_group').value=m.group||'phd';el('f_tags').value=(m.tags||[]).join(', ');el('f_phone').value=m.phone||'';el('f_email').value=m.email||'';el('f_bio').value=m.bio||BIOS[m.en]||'';
   refreshPhoto(false);el('f_en').addEventListener('input',()=>{if(!formImg)refreshPhoto(false);});
 };
 window.admSaveMember=function(){const en=val('f_en').trim();if(!en){toast(lang==='th'?'ต้องมีชื่อ':'Name required');return;}
-  const m={group:val('f_group'),en:en,th:val('f_th').trim(),tags:val('f_tags').split(',').map(s=>s.trim()).filter(Boolean),bio:val('f_bio').trim(),img:formImg};
+  const m={group:val('f_group'),en:en,th:val('f_th').trim(),tags:val('f_tags').split(',').map(s=>s.trim()).filter(Boolean),phone:val('f_phone').trim(),email:val('f_email').trim(),bio:val('f_bio').trim(),img:formImg};
   if(editIdx>=0){if(MEMBERS[editIdx].pi)m.pi=true;MEMBERS[editIdx]=m;}else MEMBERS.push(m);
-  saveStore();renderProjectTeam();renderTeam(teamCat);renderAdmin('team');};
-window.admDelMember=function(i){if(!confirm((lang==='th'?'ลบสมาชิก ':'Delete ')+MEMBERS[i].en+'?'))return;MEMBERS.splice(i,1);saveStore();renderProjectTeam();renderTeam(teamCat);renderAdmin('team');};
+  saveStore();renderProjectTeam();renderTeam(teamCat);renderAdmin('team');};window.admDelMember=function(i){if(!confirm((lang==='th'?'ลบสมาชิก ':'Delete ')+MEMBERS[i].en+'?'))return;MEMBERS.splice(i,1);saveStore();renderProjectTeam();renderTeam(teamCat);renderAdmin('team');};
 /* --- NEWS --- */
 function admNewsList(){return `<div class="adm-section-t">${NEWS.length} news items</div>`+
   NEWS.map((n,i)=>`<div class="adm-row">${n.img?`<img class="thumb" src="${n.img}">`:`<span class="mono-av" style="background:${hue(n.title)}">${initials(n.title)}</span>`}<div class="r-main"><h4>${esc(n.title)}</h4><div class="r-sub">${esc(n.date)}</div></div><div class="r-act"><button class="adm-ic" onclick="admEditNews(${i})">${icon('i-doc')}</button><button class="adm-ic del" onclick="admDelNews(${i})">${icon('i-close')}</button></div></div>`).join('')+
