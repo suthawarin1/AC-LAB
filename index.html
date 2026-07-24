@@ -1631,6 +1631,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 <script>
    
 let admTextFilter='';
+let admTextColorVal='';
 function admTextRowsHtml(){
   buildTextRegistry();
   const keys=Object.keys(TEXT_REGISTRY).sort((a,b)=>{
@@ -1656,25 +1657,70 @@ function admTextRowsHtml(){
   }).join('');
 }
 function admTextList(){
-  return `<div class="data-card"><h4>${icon('i-spark')} ${lang==='th'?'ข้อความและหัวข้อทั่วเว็บไซต์':'Sitewide text &amp; headings'}</h4><p>${lang==='th'?'แก้ไขหัวข้อ คำโปรย และข้อความสั้นๆ ที่ปรากฏทั่วเว็บไซต์ได้ที่นี่ รองรับ HTML พื้นฐาน เช่น &lt;span&gt; หรือ &lt;em&gt;':'Edit headings, taglines and short copy used across the site. Supports simple HTML such as &lt;span&gt; or &lt;em&gt;.'}</p></div>
-  <div class="pub-search" style="margin-bottom:14px"><svg class="icon"><use href="#i-search"/></svg><input type="text" id="admTextSearch" value="${esc(admTextFilter)}" oninput="admTextFilter=this.value;el('admTextRows').innerHTML=admTextRowsHtml()" placeholder="${lang==='th'?'ค้นหาข้อความหรือคีย์…':'Search text or key…'}"></div>
+  return `<div class="data-card"><h4>${icon('i-spark')} ${lang==='th'?'ข้อความและหัวข้อทั่วเว็บไซต์':'Sitewide text &amp; headings'}</h4><p>${lang==='th'?'แก้ไขหัวข้อ คำโปรย และข้อความสั้นๆ ที่ปรากฏทั่วเว็บไซต์ได้ที่นี่ พร้อมปรับสี น้ำหนักตัวอักษร (ความเข้ม) และระยะห่างตัวอักษร (การเว้น) ของแต่ละข้อความได้เอง รองรับ HTML พื้นฐาน เช่น &lt;span&gt; หรือ &lt;em&gt;':'Edit headings, taglines and short copy used across the site — and adjust each one\u2019s color, font weight and letter spacing. Supports simple HTML such as &lt;span&gt; or &lt;em&gt;.'}</p></div>  <div class="pub-search" style="margin-bottom:14px"><svg class="icon"><use href="#i-search"/></svg><input type="text" id="admTextSearch" value="${esc(admTextFilter)}" oninput="admTextFilter=this.value;el('admTextRows').innerHTML=admTextRowsHtml()" placeholder="${lang==='th'?'ค้นหาข้อความหรือคีย์…':'Search text or key…'}"></div>
   <div id="admTextRows">${admTextRowsHtml()}</div>`;
 }
 window.admEditText=function(k){
   const r=TEXT_REGISTRY[k];const ov=TEXT_OVERRIDES[k]||{};
+  admTextColorVal=ov.color||'';
   el('adminContent').innerHTML=`<span class="adm-back" onclick="renderAdmin('text')">${icon('i-arrow')} Back</span>
   <div class="data-card"><h4>${icon('i-doc')} ${esc(k)}</h4><p>${esc(r.section)}</p></div>
   <div class="adm-form">
     <div class="adm-field"><label>English</label><textarea id="tx_ov_en" style="min-height:90px"></textarea></div>
     <div class="adm-field"><label>Thai / ไทย</label><textarea id="tx_ov_th" style="min-height:90px"></textarea></div>
+    <div class="adm-section-t">${lang==='th'?'สไตล์ของข้อความนี้':'Style for this text'}</div>
+    <div class="adm-2">
+      <div class="adm-field">
+        <label>${lang==='th'?'สีตัวอักษร':'Text color'}</label>
+        <div style="display:flex;gap:8px;align-items:center">
+          <input type="color" id="tx_color" value="${ov.color||'#2f6b4f'}" style="width:48px;height:40px;padding:2px;border-radius:8px;flex:none" oninput="admTextColorVal=this.value;el('tx_colorLbl').textContent=this.value">
+          <button type="button" class="adm-file" onclick="admTextColorVal='';el('tx_colorLbl').textContent='${lang==='th'?'ค่าเริ่มต้น':'Default'}'">${lang==='th'?'ใช้ค่าเริ่มต้น':'Use default'}</button>
+        </div>
+        <div class="r-sub" id="tx_colorLbl" style="margin-top:6px">${ov.color?ov.color:(lang==='th'?'ค่าเริ่มต้น':'Default')}</div>
+      </div>
+      <div class="adm-field">
+        <label>${lang==='th'?'น้ำหนักตัวอักษร (ความเข้ม)':'Font weight'}</label>
+        <select id="tx_weight">
+          <option value="">${lang==='th'?'ค่าเริ่มต้น':'Default'}</option>
+          <option value="300">${lang==='th'?'บาง (Light)':'Light'}</option>
+          <option value="400">${lang==='th'?'ปกติ (Regular)':'Regular'}</option>
+          <option value="500">${lang==='th'?'กลาง (Medium)':'Medium'}</option>
+          <option value="600">${lang==='th'?'กึ่งหนา (Semibold)':'Semibold'}</option>
+          <option value="700">${lang==='th'?'หนา (Bold)':'Bold'}</option>
+        </select>
+      </div>
+    </div>
+    <div class="adm-field">
+      <label>${lang==='th'?'ระยะห่างตัวอักษร (การเว้น)':'Letter spacing'}</label>
+      <div style="display:flex;align-items:center;gap:12px">
+        <input type="range" id="tx_spacing" min="-1" max="6" step="0.5" style="flex:1" oninput="el('tx_spacingLbl').textContent=this.value+'px'">
+        <span id="tx_spacingLbl" class="mono" style="width:48px;text-align:right;font-size:11px;color:var(--muted)"></span>
+      </div>
+    </div>
     <div class="data-card"><h4>${icon('i-globe')} ${lang==='th'?'ค่าเริ่มต้น':'Default text'}</h4><p style="font-family:var(--mono);font-size:11px">EN: ${esc(r.defaultEn)}<br>${r.defaultTh?('TH: '+esc(r.defaultTh)):''}</p></div>
     <div class="adm-actions"><button class="btn btn--ghost" onclick="renderAdmin('text')">Cancel</button><button class="btn btn--primary" onclick="admSaveText('${k}')">${icon('i-check')} Save</button></div>
+    ${(ov.en||ov.th||ov.color||ov.weight||ov.spacing)?`<button class="adm-add" style="margin-top:10px;color:#e05656" onclick="admResetText('${k}')">${icon('i-close')} ${lang==='th'?'ล้างทุกการแก้ไขของข้อความนี้':'Reset this text completely'}</button>`:''}
   </div>`;
   el('tx_ov_en').value=ov.en||'';el('tx_ov_th').value=ov.th||'';
+  el('tx_weight').value=ov.weight||'';
+  el('tx_spacing').value=ov.spacing!=null?ov.spacing:0;
+  el('tx_spacingLbl').textContent=(ov.spacing!=null?ov.spacing:0)+'px';
 };
 window.admSaveText=function(k){
   const en=val('tx_ov_en').trim(),th=val('tx_ov_th').trim();
-  if(!en&&!th){delete TEXT_OVERRIDES[k];}else{TEXT_OVERRIDES[k]={en,th};}
+  const color=admTextColorVal||'';
+  const weight=val('tx_weight')||'';
+  const spacing=+val('tx_spacing')||0;
+  if(!en&&!th&&!color&&!weight&&!spacing){delete TEXT_OVERRIDES[k];}
+  else{
+    const item={};
+    if(en)item.en=en;
+    if(th)item.th=th;
+    if(color)item.color=color;
+    if(weight)item.weight=weight;
+    if(spacing)item.spacing=spacing;
+    TEXT_OVERRIDES[k]=item;
+  }
   saveStore();applyLang();renderAdmin('text');
 };
 window.admResetText=function(k){
@@ -1945,10 +1991,12 @@ function applyLang(){
     if(ov&&ov[lang])text=ov[lang];
     else text=(lang==='th'&&reg.defaultTh)?reg.defaultTh:reg.defaultEn;
     node.innerHTML=text;
+    node.style.color=ov&&ov.color?ov.color:'';
+    node.style.fontWeight=ov&&ov.weight?ov.weight:'';
+    node.style.letterSpacing=ov&&ov.spacing?ov.spacing+'px':'';
   });
   renderTesti();renderFaq();
-}
-window.toggleLang=function(){lang=lang==='th'?'en':'th';applyLang();};
+}window.toggleLang=function(){lang=lang==='th'?'en':'th';applyLang();};
 /* ============ THEME ============ */
 let theme='light';
 window.toggleTheme=function(){
