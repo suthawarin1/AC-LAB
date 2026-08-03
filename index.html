@@ -2347,14 +2347,19 @@ const ORCID='0000-0002-7466-4243';
 let pubYear='all';
 let pubExpanded=false;
 let ORCID_OK=false;
+let DOI_PUBS=[];
 let SRC={mode:'load',n:0};
 function setSrc(){const t=el('pubSourceTxt'),P=el('pubSource');if(!t)return;P.classList.remove('ok','warn');
   if(SRC.mode==='ok'){t.textContent=(lang==='th'?'ดึงสดจาก ORCID · ':'Live from ORCID · ')+SRC.n+(lang==='th'?' ผลงาน':' works');P.classList.add('ok');}
   else if(SRC.mode==='warn'){t.textContent=(lang==='th'?'แสดงผลงานคัดสรร (เชื่อม ORCID ไม่ได้)':'Showing selected papers (ORCID offline)');P.classList.add('warn');}
   else{t.textContent=(lang==='th'?'กำลังดึงข้อมูลจาก ORCID…':'Loading live from ORCID…');}}
 const CURATED=PUBS.slice();               // 4 hand-written papers w/ abstracts (fallback + enrichment)
-function activePubs(){return (ORCID_OK?PUBS:CURATED).concat(CPUBS).slice().sort((a,b)=>(b.year-a.year)||0);}
-function enrich(p){ // add abstract from curated match if ORCID lacks one
+function activePubs(){
+  const base=(ORCID_OK?PUBS:CURATED).concat(CPUBS);
+  const known=new Set(base.map(p=>(p.doi||'').toLowerCase()).filter(Boolean));
+  const extra=DOI_PUBS.filter(p=>!known.has((p.doi||'').toLowerCase()));
+  return base.concat(extra).slice().sort((a,b)=>(b.year-a.year)||0);
+}function enrich(p){ // add abstract from curated match if ORCID lacks one
   if(p.abstract) return p;
   const c=CURATED.find(x=>x.doi&&p.doi&&x.doi.toLowerCase()===p.doi.toLowerCase())||CURATED.find(x=>norm(x.title)===norm(p.title));
   return c?{...p,abstract:p.abstract||c.abstract,authors:p.authors||c.authors}:p;
@@ -2464,6 +2469,44 @@ async function orcidData(){
   } else {ORCID_OK=false;SRC={mode:'warn'};}
   renderPubAll();
 })();
+
+(async function loadOrcid(){
+  ...
+  renderPubAll();
+})();
+
+/* ---- ดึงผลงานเพิ่มเติมผ่าน DOI จาก Crossref (เติมส่วนที่ ORCID ดึงไม่ครบ) ---- */
+function doiId(doi){let h=0;for(let i=0;i<doi.length;i++)h=((h<<5)-h+doi.charCodeAt(i))|0;return 900000000+Math.abs(h)%99999999;}
+async function fetchCrossrefWork(doi){
+  try{
+    const r=await fetch('https://api.crossref.org/works/'+encodeURIComponent(doi)+'?mailto=raccha@kku.ac.th');
+    if(!r.ok)return null;
+    const w=(await r.json()).message;if(!w)return null;
+    const title=(w.title&&w.title[0])||'';if(!title)return null;
+    const authors=(w.author||[]).map(a=>[a.given,a.family].filter(Boolean).join(' ')).join(', ');
+    const journal=(w['container-title']&&w['container-title'][0])||'';
+    const dp=(w.published&&w.published['date-parts'])||(w['published-print']&&w['published-print']['date-parts'])||(w['published-online']&&w['published-online']['date-parts']);
+    const year=(dp&&dp[0]&&dp[0][0])||'';
+    let abstract=w.abstract||'';if(abstract)abstract=abstract.replace(/<[^>]+>/g,'').trim();
+    return {id:doiId(doi),doi,title,authors,journal,year,link:w.URL||('https://doi.org/'+doi),abstract};
+  }catch(e){return null;}
+}
+async function loadDoiPubs(){
+  if(!window.supa)return;
+  const {data,error}=await supa.from('doi_pubs').select('doi').order('created_at',{ascending:true});
+  if(error||!data||!data.length)return;
+  const CHUNK=8,out=[];
+  for(let i=0;i<data.length;i+=CHUNK){
+    const results=await Promise.all(data.slice(i,i+CHUNK).map(r=>fetchCrossrefWork(r.doi)));
+    results.forEach(x=>{if(x)out.push(x);});
+  }
+  DOI_PUBS=out;
+  renderPubAll();
+}
+loadDoiPubs();
+
+/* ============ FUTURE INNOVATIONS ============ */
+function renderInnov(){...}
 
 /* ============ FUTURE INNOVATIONS ============ */
 function renderInnov(){
