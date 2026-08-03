@@ -2470,10 +2470,6 @@ async function orcidData(){
   renderPubAll();
 })();
 
-(async function loadOrcid(){
-  ...
-  renderPubAll();
-})();
 
 /* ---- ดึงผลงานเพิ่มเติมผ่าน DOI จาก Crossref (เติมส่วนที่ ORCID ดึงไม่ครบ) ---- */
 function doiId(doi){let h=0;for(let i=0;i<doi.length;i++)h=((h<<5)-h+doi.charCodeAt(i))|0;return 900000000+Math.abs(h)%99999999;}
@@ -2508,8 +2504,6 @@ loadDoiPubs();
 /* ============ FUTURE INNOVATIONS ============ */
 function renderInnov(){...}
 
-/* ============ FUTURE INNOVATIONS ============ */
-function renderInnov(){
   el('innovGrid').innerHTML=INNOV.map(x=>`<article class="innov-card"><span class="innov-card__no">${x.no}</span><span class="innov-card__ic">${icon(x.icon)}</span><h3>${lang==='th'?x.titleTh:x.title}</h3><p>${lang==='th'?x.descTh:x.desc}</p></article>`).join('');
 }
 renderInnov();
