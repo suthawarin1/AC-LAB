@@ -1225,8 +1225,6 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
   </div>
 </section>
 
-</section>
-
 <!-- VALUE CHAIN: UPSTREAM TO DOWNSTREAM -->
 <section id="valuechain" class="section">
   <div class="wrap">
@@ -2978,7 +2976,7 @@ document.querySelectorAll('.nav-scroll').forEach(a=>{
 function refreshDynamicText(){
   document.querySelectorAll('[data-more]').forEach(n=>{n.innerHTML=(lang==='th'?'อ่านต่อ':'Read more')+' '+icon('i-arrow');});
 }
-const _applyLang=applyLang;applyLang=function(){_applyLang();refreshDynamicText();renderPubAll();renderInnov();renderProducts();renderVideos();renderProjectTeam();renderGrantTeam();renderTeam(teamCat);renderNews();renderTaxa();renderCollabs();renderBanner();renderEvents();renderGallery();renderResources();renderThemes();renderPipe();renderFacilities();renderTimeline();renderRoad();renderCustomSections();};const _applyLang=applyLang;applyLang=function(){_applyLang();refreshDynamicText();renderPubAll();renderInnov();renderProducts();renderVideos();renderProjectTeam();renderGrantTeam();renderTeam(teamCat);renderNews();renderTaxa();renderCollabs();renderBanner();renderEvents();renderGallery();renderResources();renderThemes();renderPipe();renderFacilities();renderTimeline();renderRoad();renderCustomSections();renderValueChain();};const nav=el('nav'),totop=el('totop'),bar=el('progress');
+const _applyLang=applyLang;applyLang=function(){_applyLang();refreshDynamicText();renderPubAll();renderInnov();renderProducts();renderVideos();renderProjectTeam();renderGrantTeam();renderTeam(teamCat);renderNews();renderTaxa();renderCollabs();renderBanner();renderEvents();renderGallery();renderResources();renderThemes();renderPipe();renderFacilities();renderTimeline();renderRoad();renderCustomSections();renderValueChain();};const nav=el('nav'),totop=el('totop'),bar=el('progress');
 const spy=[...document.querySelectorAll('section[id]')];
 const links=[...document.querySelectorAll('#navLinks a')];
 window.addEventListener('scroll',()=>{
