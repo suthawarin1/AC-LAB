@@ -2356,15 +2356,26 @@ function setSrc(){const t=el('pubSourceTxt'),P=el('pubSource');if(!t)return;P.cl
 const CURATED=PUBS.slice();               // 4 hand-written papers w/ abstracts (fallback + enrichment)
 function activePubs(){
   const base=(ORCID_OK?PUBS:CURATED).concat(CPUBS);
-  const known=new Set(base.map(p=>(p.doi||'').toLowerCase()).filter(Boolean));
-  const extra=DOI_PUBS.filter(p=>!known.has((p.doi||'').toLowerCase()));
+  const knownDoi=new Set(base.map(p=>(p.doi||'').toLowerCase()).filter(Boolean));
+  const knownTitle=new Set(base.map(p=>norm(p.title)).filter(Boolean));
+  const extra=DOI_PUBS.filter(p=>{
+    const doi=(p.doi||'').toLowerCase();
+    const t=norm(p.title);
+    if(doi && knownDoi.has(doi)) return false;   // ซ้ำ DOI
+    if(t && knownTitle.has(t)) return false;      // ซ้ำชื่อเรื่อง (เผื่อ DOI ไม่ตรง/ไม่มี)
+    return true;
+  });
   return base.concat(extra).slice().sort((a,b)=>(b.year-a.year)||0);
 }function enrich(p){ // add abstract from curated match if ORCID lacks one
   if(p.abstract) return p;
   const c=CURATED.find(x=>x.doi&&p.doi&&x.doi.toLowerCase()===p.doi.toLowerCase())||CURATED.find(x=>norm(x.title)===norm(p.title));
   return c?{...p,abstract:p.abstract||c.abstract,authors:p.authors||c.authors}:p;
 }
-function norm(s){return (s||'').toLowerCase().replace(/[^a-z0-9]+/g,'').slice(0,50);}
+function norm(s){return (s||'').toLowerCase().replace(/[^a-z0-9]+/g,'').slice(0,50);} function norm(s){return (s||'').toLowerCase().replace(/[^a-z0-9]+/g,'').slice(0,50);}
+function safeTitleHTML(s){
+  // อนุญาตแค่แท็กเอียง/หนา ที่ใช้จริงในชื่อบทความวิทยาศาสตร์
+  return (s||'').replace(/<(?!\/?(i|b|em|sup|sub)\b)[^>]*>/gi,'');
+}
 function pubCard(p){return `<div class="pub" onclick="openPub(${p.id})"><span class="pub__yr">${p.year||'—'}</span><div class="pub__main"><h4>${p.title}</h4>${p.authors?`<div class="by">${p.authors}</div>`:''}<div class="jr">${p.journal||''}</div></div><span class="pub__go">${icon('i-arrow')}</span></div>`;}
 window.setYear=function(y,btn){
   pubYear=y;pubExpanded=false;
@@ -2833,7 +2844,7 @@ window.openModal=function(id){el(id).classList.add('open');document.body.style.o
 window.closeModal=function(id){if(id==='videoModal'){const f=el('vidFrame');if(f)f.innerHTML='';}el(id).classList.remove('open');document.body.style.overflow='';};
 window.openPub=function(id){
   const p=enrich(activePubs().find(x=>x.id===id));if(!p)return;activePub=p;
-  el('pubModalTitle').textContent=p.title;
+  el('pubModalTitle').innerHTML=safeTitleHTML(p.title);
   el('pmAuthors').textContent=p.authors||(lang==='th'?'—':'—');
   el('pmJournal').textContent=p.journal||'';el('pmYear').textContent=p.year||'';
   el('pmAbstract').textContent=p.abstract||(lang==='th'?'กำลังโหลดรายละเอียด…':'Loading details…');
