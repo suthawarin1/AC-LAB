@@ -3555,6 +3555,10 @@ const supa = window.supabase.createClient(SUPA_URL, SUPA_KEY, {
   auth: { persistSession: false }
 });
   window.supa = supa;
+  window.supa = supa;
+  loadDoiPubs();
+
+  // (1) โหลดเนื้อหาจากคลาวด์แล้ว refresh หน้า
 
   // (1) โหลดเนื้อหาจากคลาวด์แล้ว refresh หน้า
   supa.from('site_content').select('data').eq('id',1).single().then(({data,error})=>{
