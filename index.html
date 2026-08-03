@@ -389,25 +389,6 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 .innov-card h3{font-family:var(--serif);font-size:1.12rem;font-weight:500;line-height:1.2;margin-bottom:9px}
 .innov-card p{font-size:.82rem;color:var(--muted);font-weight:300;line-height:1.5}
 
-/* ===== value chain: upstream -> downstream ===== */
-.vc-flow{display:flex;align-items:stretch;gap:0;overflow-x:auto;padding-bottom:6px}
-.vc-step{flex:1;min-width:150px;background:var(--surface);border-radius:var(--r-sm);padding:22px 18px;box-shadow:var(--hair);display:flex;flex-direction:column;gap:10px;position:relative;transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
-.vc-step:hover{transform:translateY(-3px);box-shadow:var(--lift)}
-.vc-step .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
-.vc-step .ic{width:38px;height:38px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:18px}
-.vc-step h4{font-family:var(--serif);font-size:1rem;font-weight:500;line-height:1.25}
-.vc-step p{font-size:.78rem;color:var(--muted);font-weight:300;line-height:1.45}
-.vc-arrow{flex:none;display:flex;align-items:center;justify-content:center;width:28px;color:var(--line-2);font-size:16px}
-.vc-step--end{background:var(--accent);color:#fff;cursor:pointer}
-.vc-step--end .ic{background:rgba(255,255,255,.18);color:#fff}
-.vc-step--end .tag{color:rgba(255,255,255,.75)}
-.vc-step--end h4{color:#fff}
-.vc-step--end p{color:rgba(255,255,255,.82)}
-@media(max-width:760px){
-  .vc-flow{flex-direction:column}
-  .vc-arrow{width:auto;height:22px;transform:rotate(90deg)}
-}
-
 /* ===== collaborations ===== */
 .collab-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px}
 .collab{background:var(--surface);border-radius:var(--r);padding:32px;box-shadow:var(--hair);transition:.4s}
@@ -972,7 +953,6 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
       <a href="#pipeline" class="nav-scroll" data-i18n="nav_pipeline">Pipeline</a>
       <a href="#publications" class="nav-scroll" data-i18n="nav_pubs">Publications</a>
       <a href="#innovation" class="nav-scroll" data-i18n="nav_innov">Innovation</a>
-      <a href="#valuechain" class="nav-scroll" data-i18n="nav_valuechain">Value chain</a>
 <a href="#products" class="nav-scroll" data-i18n="nav_products">Products</a>
       <a href="shop/index.html" data-i18n="nav_shop">Shop</a>
       <a href="#team" class="nav-scroll" data-i18n="nav_team">Team</a>      <a href="#collaborations" class="nav-scroll" data-i18n="nav_collab">Partners</a>
@@ -1224,20 +1204,6 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
     <div class="innov-grid" id="innovGrid"></div>
   </div>
 </section>
-
-<!-- VALUE CHAIN: UPSTREAM TO DOWNSTREAM -->
-<section id="valuechain" class="section">
-  <div class="wrap">
-    <div class="sec-head center reveal">
-      <span class="eyebrow" data-i18n="vc_eye">Research to shelf</span>
-      <h2 class="h-sec" data-i18n="vc_title">From upstream to downstream</h2>
-      <p class="lede" data-i18n="vc_lede">Every SciSeelt product traces back to a plant in the field. Here is the full chain that connects discovery to the product on the shelf.</p>
-    </div>
-    <div class="vc-flow" id="vcFlow"></div>
-  </div>
-</section>
-
-<!-- PRODUCTS -->
 
 <!-- PRODUCTS -->
 <section id="products" class="section section--alt">
@@ -1931,7 +1897,8 @@ const FAQ={
 
 /* ============ i18n ============ */
 const I18N={en:{},th:{
-nav_research:'งานวิจัย',nav_pipeline:'กระบวนการ',nav_pubs:'ผลงานตีพิมพ์',nav_innov:'นวัตกรรม',nav_valuechain:'ห่วงโซ่คุณค่า',nav_products:'ผลิตภัณฑ์',nav_shop:'ร้านค้า',nav_videos:'วิดีโอ',nav_team:'ทีมงาน',nav_collab:'เครือข่าย',nav_contact:'ติดต่อ',nav_join:'ร่วมงานกับเรา',nav_facilities:'เครื่องมือ',  hero_chip:'ศูนย์ความเป็นเลิศ · ตั้งแต่ 2010',  hero_title:'อ่านจีโนมพืช เพื่อค้นหา<span class="em">ยาแห่งอนาคต</span>',
+nav_research:'งานวิจัย',nav_pipeline:'กระบวนการ',nav_pubs:'ผลงานตีพิมพ์',nav_innov:'นวัตกรรม',nav_products:'ผลิตภัณฑ์',nav_shop:'ร้านค้า',nav_videos:'วิดีโอ',nav_team:'ทีมงาน',nav_collab:'เครือข่าย',nav_contact:'ติดต่อ',nav_join:'ร่วมงานกับเรา',nav_facilities:'เครื่องมือ',  hero_chip:'ศูนย์ความเป็นเลิศ · ตั้งแต่ 2010',
+  hero_title:'อ่านจีโนมพืช เพื่อค้นหา<span class="em">ยาแห่งอนาคต</span>',
   hero_lede:'ห้องปฏิบัติการวิจัย มหาวิทยาลัยขอนแก่น ที่ทำงานบนจุดบรรจบของจีโนมิกส์พืช เคมีผลิตภัณฑ์ธรรมชาติ และชีววิทยามะเร็ง',
   hero_cta1:'เราทำอะไร',hero_cta2:'อ่านผลงาน',
   prof_tag:'หัวหน้าห้องปฏิบัติการ',prof_role:'ผู้ก่อตั้งและหัวหน้าแล็บ · 2010',prof_view:'ประวัติ',
@@ -2052,8 +2019,7 @@ const SECTIONS=[
   {id:'publications',label:'Publications',labelTh:'ผลงานตีพิมพ์'},
   {id:'facilities',label:'Facilities & timeline',labelTh:'เครื่องมือและไทม์ไลน์'},
   {id:'videos',label:'Videos',labelTh:'วิดีโอ'},
-{id:'innovation',label:'Future innovations',labelTh:'นวัตกรรมในอนาคต'},
-  {id:'valuechain',label:'Value chain',labelTh:'ห่วงโซ่คุณค่า (ต้นน้ำ–ปลายน้ำ)'},
+  {id:'innovation',label:'Future innovations',labelTh:'นวัตกรรมในอนาคต'},
   {id:'products',label:'Products',labelTh:'ผลิตภัณฑ์'},
   {id:'team',label:'Programme team',labelTh:'ทีมงานโครงการ'},
 {id:'members',label:'Lab members',labelTh:'สมาชิกในแล็บ'},
@@ -2553,30 +2519,7 @@ loadDoiPubs();
 function renderInnov(){
   el('innovGrid').innerHTML=INNOV.map(x=>`<article class="innov-card"><span class="innov-card__no">${x.no}</span><span class="innov-card__ic">${icon(x.icon)}</span><h3>${lang==='th'?x.titleTh:x.title}</h3><p>${lang==='th'?x.descTh:x.desc}</p></article>`).join('');
 }
-renderInnov(); /* ============ VALUE CHAIN ============ */
-let VALUECHAIN=[
-  {tag:'Upstream',tagTh:'ต้นน้ำ',icon:'i-plant',title:'Field collection',titleTh:'เก็บตัวอย่างภาคสนาม',desc:'Vouchered specimens from the field, the starting point of every project.',descTh:'ตัวอย่างพืชที่เก็บและขึ้นทะเบียนอย่างถูกต้องจากภาคสนาม จุดเริ่มต้นของทุกโครงการ'},
-  {tag:'Discovery',tagTh:'ค้นพบ',icon:'i-dna',title:'Genomics & chemistry',titleTh:'จีโนมิกส์และเคมี',desc:'Sequencing, plastome assembly and phytochemical profiling of each species.',descTh:'ถอดรหัสจีโนม ประกอบพลาสโตม และวิเคราะห์สารเคมีของพืชแต่ละชนิด'},
-  {tag:'Validation',tagTh:'พิสูจน์ฤทธิ์',icon:'i-cell',title:'Bioactivity testing',titleTh:'ทดสอบฤทธิ์ทางชีวภาพ',desc:'Cytotoxicity and mechanism studies on human cell lines confirm real potential.',descTh:'ทดสอบความเป็นพิษต่อเซลล์และศึกษากลไกในเซลล์มนุษย์ เพื่อยืนยันศักยภาพที่แท้จริง'},
-  {tag:'Formulation',tagTh:'พัฒนาสูตร',icon:'i-flask',title:'R&D & delivery',titleTh:'วิจัยและพัฒนาสูตร',desc:'Green nano-delivery and formulation turn a compound into a usable product.',descTh:'นาโนเทคโนโลยีสีเขียวและการพัฒนาสูตร เปลี่ยนสารออกฤทธิ์ให้เป็นผลิตภัณฑ์ใช้งานได้จริง'},
-  {tag:'Protection',tagTh:'คุ้มครองสิทธิ์',icon:'i-doc',title:'IP & registration',titleTh:'ทรัพย์สินทางปัญญา',desc:'Petty patents, patents and regulatory registration secure the innovation.',descTh:'อนุสิทธิบัตร สิทธิบัตร และการขึ้นทะเบียน ปกป้องนวัตกรรมที่ค้นพบ'},
-  {tag:'Downstream',tagTh:'ปลายน้ำ',icon:'i-spark',title:'SciSeelt · KKU-SCI',titleTh:'ผลิตภัณฑ์ SciSeelt · KKU-SCI',desc:'The finished product — see what we\u2019ve released so far.',descTh:'ผลิตภัณฑ์สำเร็จรูป — ดูสิ่งที่เราเปิดตัวแล้วทั้งหมด',end:true}
-];
-function renderValueChain(){
-  const w=el('vcFlow');if(!w)return;
-  const TT=(en,th)=>lang==='th'?th:en;
-  w.innerHTML=VALUECHAIN.map((s,i)=>{
-    const card=`<article class="vc-step ${s.end?'vc-step--end':''} reveal in" ${s.end?`onclick="document.querySelector('#products').scrollIntoView({behavior:'smooth'})"`:''}>
-      <span class="tag">${TT(s.tag,s.tagTh)}</span>
-      <span class="ic">${icon(s.icon)}</span>
-      <h4>${TT(s.title,s.titleTh)}</h4>
-      <p>${TT(s.desc,s.descTh)}</p>
-    </article>`;
-    const arrow=i<VALUECHAIN.length-1?`<span class="vc-arrow">${icon('i-arrow')}</span>`:'';
-    return card+arrow;
-  }).join('');
-}
-renderValueChain();
+renderInnov();
 
 /* ============ PRODUCTS ============ */
 function prodVisual(p){
@@ -2976,7 +2919,7 @@ document.querySelectorAll('.nav-scroll').forEach(a=>{
 function refreshDynamicText(){
   document.querySelectorAll('[data-more]').forEach(n=>{n.innerHTML=(lang==='th'?'อ่านต่อ':'Read more')+' '+icon('i-arrow');});
 }
-const _applyLang=applyLang;applyLang=function(){_applyLang();refreshDynamicText();renderPubAll();renderInnov();renderProducts();renderVideos();renderProjectTeam();renderGrantTeam();renderTeam(teamCat);renderNews();renderTaxa();renderCollabs();renderBanner();renderEvents();renderGallery();renderResources();renderThemes();renderPipe();renderFacilities();renderTimeline();renderRoad();renderCustomSections();renderValueChain();};const nav=el('nav'),totop=el('totop'),bar=el('progress');
+const _applyLang=applyLang;applyLang=function(){_applyLang();refreshDynamicText();renderPubAll();renderInnov();renderProducts();renderVideos();renderProjectTeam();renderGrantTeam();renderTeam(teamCat);renderNews();renderTaxa();renderCollabs();renderBanner();renderEvents();renderGallery();renderResources();renderThemes();renderPipe();renderFacilities();renderTimeline();renderRoad();renderCustomSections();};const nav=el('nav'),totop=el('totop'),bar=el('progress');
 const spy=[...document.querySelectorAll('section[id]')];
 const links=[...document.querySelectorAll('#navLinks a')];
 window.addEventListener('scroll',()=>{
