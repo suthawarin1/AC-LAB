@@ -1,0 +1,33 @@
+{
+  "source_html_bytes": 2153210,
+  "files": {
+    "index.html": 63591,
+    "manager.html": 413,
+    ".nojekyll": 0,
+    "README-TH.txt": 4547,
+    "supabase/01-site-content-and-storage.sql": 26140,
+    "assets/js/site.js": 285951,
+    "assets/css/site.css": 101294,
+    "assets/media/professor-arunrat.jpg": 31410,
+    "assets/media/awards/taipei-bronze.webp": 56580,
+    "assets/media/awards/toray-grant.webp": 93348,
+    "assets/media/awards/silver-ceremony.webp": 76990,
+    "assets/media/awards/gold-plaque.webp": 53552,
+    "assets/media/awards/research-expo-event.webp": 102952,
+    "assets/media/awards/gold-ceremony.webp": 69848,
+    "assets/media/awards/silver-plaque.webp": 50698,
+    "assets/media/awards/research-expo-certificate.webp": 82498,
+    "assets/media/team/sanit-kaewdaungdee.jpg": 11596,
+    "assets/media/team/shiou-yih-lee.jpg": 11219,
+    "assets/media/team/runglawan-sudmoon.jpg": 12540,
+    "assets/media/team/tawatchai-tanee.jpg": 5019,
+    "assets/media/team/yannick-benoit.jpg": 11797,
+    "assets/media/team/sakda-daduang.jpg": 7226,
+    "assets/media/team/nisachon-jangpromma.jpg": 11676
+  },
+  "extracted_unique_images": 16,
+  "base64_remaining_in_index": 0,
+  "base64_remaining_in_js": 1,
+  "base64_remaining_in_sql": 0,
+  "known_legacy_media_migrations": 16
+}
