@@ -1,0 +1,44 @@
+AREWARIN PORTAL V12 — PUBLIC REGISTRATION SUBWEB
+================================================
+
+V12 ใช้ต่อจาก V11.1
+
+ติดตั้งตามลำดับนี้
+
+1) Supabase → SQL Editor → New query
+   เปิดไฟล์ portal-v12-registration-subweb.sql
+   คัดลอกทั้งหมด → Run
+
+2) GitHub Repository
+   นำ index.html ไปแทน /index.html
+   สร้างโฟลเดอร์ register แล้วนำ register/index.html ใส่ในนั้น
+
+3) โครงสร้างที่ควรได้
+   AreWarinTh/
+   ├── index.html
+   ├── register/
+   │   └── index.html
+   ├── staff/
+   │   └── index.html
+   ├── student/
+   │   └── index.html
+   └── library/
+       └── index.html
+
+4) Commit changes และรอ GitHub Pages
+
+5) เปิด
+   Public Registration:
+   https://suthawarin1.github.io/AreWarinTh/register/
+
+6) ทดสอบ
+   - ระบบหลักมีคอร์สที่อนุมัติ เผยแพร่ และเปิดรับสมัคร
+   - ตั้งแพ็กเกจ ติวเตอร์ และรอบเรียนจากปุ่ม “ใบสมัคร V12”
+   - ส่งใบสมัครทดลองจาก /register/
+   - ตรวจว่าใบสมัครขึ้น Dashboard
+   - กดอนุมัติ
+   - ตรวจ Student ID, Enrollment, ตารางเรียน, ติวเตอร์ และแผนชำระ
+
+ไม่ต้อง Deploy Edge Function ใหม่
+ไม่ต้องแก้ Verify JWT
+ไม่ต้องให้นักเรียนเดิมสมัครบัญชีใหม่
