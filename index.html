@@ -158,7 +158,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
   padding:8px 13px;border-radius:100px;color:var(--muted);box-shadow:inset 0 0 0 1px var(--line);transition:.25s}
 .lang:hover{color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
 .lang .icon{font-size:14px}
-.burger{display:none;width:42px;height:42px;border-radius:12px;align-items:center;justify-content:center;background:var(--ink);color:var(--bg);font-size:19px}
+.burger{display:none;width:42px;height:42px;border-radius:12px;align-items:center;justify-content:center;background:var(--ink);color:var(--bg);font-size:19px}  /* ===== nav "More" dropdown (desktop) ===== */ .nav-more{position:relative} .nav-more__btn{display:inline-flex;align-items:center;gap:6px;font-size:.88rem;font-weight:500;color:var(--muted);padding:8px 13px;border-radius:100px;transition:color .25s,background .25s} .nav-more__btn .icon{font-size:11px;transition:transform .3s var(--ease);transform:rotate(180deg)} .nav-more__btn:hover{color:var(--ink)} .nav-more.open .nav-more__btn{color:var(--ink);background:var(--surface-2)} .nav-more.open .nav-more__btn .icon{transform:rotate(0deg)} .nav-more__panel{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%) translateY(-8px);min-width:190px;background:var(--surface);border-radius:16px;box-shadow:var(--lift);padding:8px;display:flex;flex-direction:column;gap:1px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s var(--ease),transform .25s var(--ease),visibility .25s;z-index:950} .nav-more.open .nav-more__panel{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0)} .nav__links .nav-more__panel a{position:static;display:block;padding:10px 14px;border-radius:10px;font-size:.86rem;white-space:nowrap} .nav__links .nav-more__panel a::after{display:none} .nav__links .nav-more__panel a:hover{background:var(--surface-2);color:var(--ink)} .nav__links .nav-more__panel a.active{color:var(--accent);background:var(--accent-soft)}
 
 .drawer{position:fixed;inset:0 0 0 auto;width:min(86vw,320px);background:var(--surface);z-index:1100;transform:translateX(100%);
   transition:transform .45s var(--ease);display:flex;flex-direction:column;padding:24px;box-shadow:-30px 0 60px -20px rgba(0,0,0,.3)}
@@ -1179,12 +1179,20 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 
 
 @media(min-width:1025px){
-  .nav__inner{gap:12px}
+  .nav__inner{gap:14px}
   .brand{flex:none}
-  .nav__links{flex:1;min-width:0;justify-content:center}
-  .nav__links a{font-size:.77rem;padding:8px 7px;white-space:nowrap;word-break:normal;overflow-wrap:normal}
-  .nav__actions{gap:6px;flex:none}
+  .nav__links{flex:1;min-width:0;justify-content:center;gap:2px}
+  .nav__links>a,.nav-more__btn{font-size:.86rem;padding:8px 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px}
+  .nav__actions{gap:8px;flex:none}
   .nav__actions .btn{padding:10px 14px;font-size:.8rem}
+  .nav__actions .btn--ghost{display:none}
+  .lang span{display:none}
+  .lang{padding:8px 10px}
+}
+@media(min-width:1300px){
+  .nav__actions .btn--ghost{display:inline-flex}
+  .lang span{display:inline}
+  .lang{padding:8px 13px}
 }
 
 </style>
@@ -1242,17 +1250,25 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
       <span class="brand__mark"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="var(--accent)" stroke-width="1.4"/><circle cx="20" cy="20" r="11.5" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="2.5 3" opacity=".6"/><circle cx="20" cy="20" r="5" fill="var(--accent)"/><circle cx="20" cy="2" r="1.8" fill="var(--ochre)"/></svg></span>
       <span><span class="brand__name">The AC Lab</span><span class="brand__sub">Genomics · KKU</span></span>
     </a>
-    <nav class="nav__links" id="navLinks">
-      <a href="#value-chain" class="nav-scroll" data-i18n="nav_value_chain">Value chain</a>
+      <nav class="nav__links" id="navLinks">
       <a href="#research" class="nav-scroll" data-i18n="nav_research">Research</a>
-      <a href="#pipeline" class="nav-scroll" data-i18n="nav_pipeline">Pipeline</a>
       <a href="#publications" class="nav-scroll" data-i18n="nav_pubs">Publications</a>
-      <a href="#innovation" class="nav-scroll" data-i18n="nav_innov">Innovation</a>
-<a href="#products" class="nav-scroll" data-i18n="nav_products">Products</a>
-      <a href="portfolio/index.html" data-i18n="nav_portfolio">Portfolio</a>
-      <a href="awards/index.html" data-i18n="nav_awards">Awards</a>
-      <a href="shop/index.html" data-i18n="nav_shop">Shop</a>
-      <a href="#team" class="nav-scroll" data-i18n="nav_team">Team</a>      <a href="#collaborations" class="nav-scroll" data-i18n="nav_collab">Partners</a>
+      <a href="#products" class="nav-scroll" data-i18n="nav_products">Products</a>
+      <a href="#team" class="nav-scroll" data-i18n="nav_team">Team</a>
+      <div class="nav-more" id="navMore">
+        <button type="button" class="nav-more__btn" onclick="toggleNavMore(event)" aria-haspopup="true" aria-expanded="false">
+          <span data-i18n="nav_more">More</span><svg class="icon"><use href="#i-up"/></svg>
+        </button>
+        <div class="nav-more__panel">
+          <a href="#value-chain" class="nav-scroll" data-i18n="nav_value_chain">Value chain</a>
+          <a href="#pipeline" class="nav-scroll" data-i18n="nav_pipeline">Pipeline</a>
+          <a href="#innovation" class="nav-scroll" data-i18n="nav_innov">Innovation</a>
+          <a href="portfolio/index.html" data-i18n="nav_portfolio">Portfolio</a>
+          <a href="awards/index.html" data-i18n="nav_awards">Awards</a>
+          <a href="shop/index.html" data-i18n="nav_shop">Shop</a>
+          <a href="#collaborations" class="nav-scroll" data-i18n="nav_collab">Partners</a>
+        </div>
+      </div>
       <a href="#contact" class="nav-scroll" data-i18n="nav_contact">Contact</a>
     </nav>
     <div class="nav__actions">
@@ -2672,7 +2688,7 @@ const FAQ={
 
 /* ============ i18n ============ */
 const I18N={en:{},th:{
-nav_value_chain:'ต้นน้ำ–กลางน้ำ–ปลายน้ำ',nav_ip:'สิทธิบัตรและทรัพย์สินทางปัญญา',nav_research:'งานวิจัย',nav_pipeline:'กระบวนการ',nav_pubs:'ผลงานตีพิมพ์',nav_innov:'นวัตกรรม',nav_products:'ผลิตภัณฑ์',nav_portfolio:'คลังนวัตกรรม',nav_awards:'รางวัลและผลงานเด่น',nav_manager:'จัดการเว็บไซต์',nav_shop:'ร้านค้า',ip_portfolio_cta:'เปิดคลังนวัตกรรมฉบับเต็ม',prod_portfolio_cta:'ดูผลิตภัณฑ์และสิทธิบัตรทั้งหมด',nav_videos:'วิดีโอ',nav_team:'ทีมงาน',nav_collab:'เครือข่าย',nav_contact:'ติดต่อ',nav_join:'ร่วมงานกับเรา',nav_facilities:'เครื่องมือ',  hero_chip:'ศูนย์ความเป็นเลิศ · ตั้งแต่ 2010',
+nav_value_chain:'ต้นน้ำ–กลางน้ำ–ปลายน้ำ',nav_ip:'สิทธิบัตรและทรัพย์สินทางปัญญา',nav_research:'งานวิจัย',nav_pipeline:'กระบวนการ',nav_pubs:'ผลงานตีพิมพ์',nav_innov:'นวัตกรรม',nav_products:'ผลิตภัณฑ์',nav_portfolio:'คลังนวัตกรรม',nav_awards:'รางวัลและผลงานเด่น',nav_manager:'จัดการเว็บไซต์',nav_shop:'ร้านค้า',nav_more:'เพิ่มเติม',ip_portfolio_cta:'เปิดคลังนวัตกรรมฉบับเต็ม',prod_portfolio_cta:'ดูผลิตภัณฑ์และสิทธิบัตรทั้งหมด',nav_videos:'วิดีโอ',nav_team:'ทีมงาน',nav_collab:'เครือข่าย',nav_contact:'ติดต่อ',nav_join:'ร่วมงานกับเรา',nav_facilities:'เครื่องมือ',  hero_chip:'ศูนย์ความเป็นเลิศ · ตั้งแต่ 2010',
   hero_title:'อ่านจีโนมพืช เพื่อค้นหา<span class="em">ยาแห่งอนาคต</span>',
   hero_lede:'ห้องปฏิบัติการวิจัย มหาวิทยาลัยขอนแก่น ที่ทำงานบนจุดบรรจบของจีโนมิกส์พืช เคมีผลิตภัณฑ์ธรรมชาติ และชีววิทยามะเร็ง',
   hero_cta1:'เราทำอะไร',hero_cta2:'อ่านผลงาน',
@@ -3844,6 +3860,28 @@ window.submitForm=async function(e){
 };
 window.openDrawer=function(){el('drawer').classList.add('open');el('scrim').classList.add('open');};
 window.closeDrawer=function(){el('drawer').classList.remove('open');el('scrim').classList.remove('open');};
+
+/* nav "More" dropdown */
+window.toggleNavMore=function(e){
+  e.stopPropagation();
+  const wrap=el('navMore');if(!wrap)return;
+  const open=wrap.classList.toggle('open');
+  wrap.querySelector('.nav-more__btn').setAttribute('aria-expanded',open?'true':'false');
+};
+document.addEventListener('click',(e)=>{
+  const wrap=el('navMore');
+  if(!wrap||!wrap.classList.contains('open'))return;
+  if(!wrap.contains(e.target)||e.target.closest('a')){
+    wrap.classList.remove('open');
+    wrap.querySelector('.nav-more__btn').setAttribute('aria-expanded','false');
+  }
+});
+document.addEventListener('keydown',(e)=>{
+  if(e.key==='Escape'){
+    const wrap=el('navMore');
+    if(wrap)wrap.classList.remove('open');
+  }
+});
 
 /* smooth scroll */
 document.querySelectorAll('.nav-scroll').forEach(a=>{
