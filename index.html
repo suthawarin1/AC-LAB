@@ -1179,78 +1179,12 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 
 
 @media(min-width:1025px){
-  :root{--sidebar-w:250px}
-
-  /* ดันเนื้อหาทั้งหน้าให้เว้นที่ให้ sidebar ทางซ้าย */
-  body{padding-left:var(--sidebar-w)}
-
-  /* progress bar บนสุด ให้เริ่มหลัง sidebar */
-  #progress{left:var(--sidebar-w);width:calc(100% - var(--sidebar-w))}
-
-  /* ปุ่ม Manager ลอยมุมล่างซ้าย ไม่ต้องมีแล้ว เพราะย้ายเข้า sidebar แล้ว */
-  .admin-fab{display:none}
-
-  /* เปลี่ยน nav จากแถบบนเป็นแถบข้าง */
-  .nav{
-    width:var(--sidebar-w);
-    height:100vh;
-    background:var(--surface);
-    backdrop-filter:none;
-    box-shadow:1px 0 0 var(--line);
-  }
-  .nav.scrolled{
-    background:var(--surface);
-    backdrop-filter:none;
-    box-shadow:1px 0 0 var(--line);
-  }
-
-  .nav__inner{
-    flex-direction:column;
-    align-items:stretch;
-    justify-content:flex-start;
-    height:100%;
-    padding-block:24px;
-    padding-inline:16px;
-    gap:20px;
-    overflow-y:auto;
-  }
-
+  .nav__inner{gap:12px}
   .brand{flex:none}
-
-  .nav__links{
-    flex:1;
-    min-height:0;
-    flex-direction:column;
-    align-items:stretch;
-    gap:2px;
-    overflow-y:auto;
-  }
-  .nav__links a{
-    font-size:.86rem;
-    padding:10px 14px;
-    border-radius:10px;
-    white-space:normal;
-  }
-  .nav__links a::after{
-    left:0;right:auto;top:6px;bottom:6px;
-    width:3px;height:auto;
-    border-radius:3px;
-    transform:scaleY(0);
-    transform-origin:top;
-  }
-  .nav__links a.active::after{transform:scaleY(1)}
-
-  .nav__actions{
-    flex:none;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px;
-  }
-  .nav__actions .btn{
-    grid-column:1/-1;
-    justify-content:center;
-    width:100%;
-  }
+  .nav__links{flex:1;min-width:0;justify-content:center}
+  .nav__links a{font-size:.77rem;padding:8px 7px;white-space:nowrap;word-break:normal;overflow-wrap:normal}
+  .nav__actions{gap:6px;flex:none}
+  .nav__actions .btn{padding:10px 14px;font-size:.8rem}
 }
 
 </style>
