@@ -238,9 +238,13 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 /* ===== research ===== */
 .rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .rcard{background:var(--surface);border-radius:var(--r);padding:clamp(26px,2.4vw,36px);box-shadow:var(--hair);
-  transition:transform .5s var(--ease),box-shadow .5s var(--ease);position:relative;display:flex;flex-direction:column}
+  transition:transform .5s var(--ease),box-shadow .5s var(--ease);position:relative;display:flex;flex-direction:column;overflow:hidden}
 .rcard:hover{transform:translateY(-4px);box-shadow:var(--lift)}
-.rcard__no{position:absolute;top:26px;right:30px;font-family:var(--mono);font-size:11px;color:var(--faint)}
+.rcard__media{aspect-ratio:16/10;margin:calc(-1 * clamp(26px,2.4vw,36px)) calc(-1 * clamp(26px,2.4vw,36px)) 24px;position:relative;overflow:hidden;background:var(--surface-2)}
+.rcard__media::after{content:"";position:absolute;inset:auto 0 0 0;height:55%;background:linear-gradient(180deg,transparent,rgba(0,0,0,.16))}
+.rcard__media img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+.rcard:hover .rcard__media img{transform:scale(1.05)}
+.rcard__no{position:absolute;top:26px;right:30px;font-family:var(--mono);font-size:11px;color:var(--faint);z-index:2}
 .rcard__ic{width:54px;height:54px;border-radius:14px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:25px;margin-bottom:22px}
 .rcard h3{font-size:1.5rem;font-weight:500;margin-bottom:12px}
 .rcard p{color:var(--muted);font-size:.92rem;font-weight:300;line-height:1.6;flex:1}
@@ -249,12 +253,16 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 
 /* ===== pipeline ===== */
 .pipe{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
-.pstep{background:var(--surface);border-radius:var(--r-sm);padding:24px 20px;box-shadow:var(--hair);transition:.4s;position:relative}
+.pstep{background:var(--surface);border-radius:var(--r-sm);padding:24px 20px;box-shadow:var(--hair);transition:.4s;position:relative;overflow:hidden;display:flex;flex-direction:column}
 .pstep:hover{box-shadow:inset 0 0 0 1px var(--accent);transform:translateY(-3px)}
+.pstep__media{height:126px;margin:-24px -20px 18px;position:relative;overflow:hidden;background:var(--surface-2)}
+.pstep__media::after{content:"";position:absolute;inset:auto 0 0 0;height:50%;background:linear-gradient(180deg,transparent,rgba(0,0,0,.12))}
+.pstep__media img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.pstep:hover .pstep__media img{transform:scale(1.06)}
 .pstep .no{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.06em}
 .pstep .ic{font-size:24px;color:var(--ink);margin:14px 0 12px}
 .pstep h4{font-family:var(--serif);font-size:1.1rem;font-weight:500;margin-bottom:7px}
-.pstep p{font-size:.8rem;color:var(--muted);font-weight:300;line-height:1.5}
+.pstep p{font-size:.8rem;color:var(--muted);font-weight:300;line-height:1.5;flex:1}
 .pstep .arr{position:absolute;top:50%;right:-10px;transform:translateY(-50%);color:var(--line-2);font-size:15px;z-index:2;background:var(--surface-2);width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center}
 
 /* ===== taxa ===== */
@@ -321,8 +329,13 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 /* ===== facilities + timeline ===== */
 .fac-split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
 .fac-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:32px}
-.fac{background:var(--surface);border-radius:var(--r-sm);padding:24px;box-shadow:var(--hair);transition:.35s}
+.fac{background:var(--surface);border-radius:var(--r-sm);box-shadow:var(--hair);transition:.35s;overflow:hidden}
 .fac:hover{box-shadow:inset 0 0 0 1px var(--accent);transform:translateY(-3px)}
+.fac__media{height:148px;position:relative;overflow:hidden;background:var(--surface-2)}
+.fac__media::after{content:"";position:absolute;inset:auto 0 0 0;height:55%;background:linear-gradient(180deg,transparent,rgba(0,0,0,.14))}
+.fac__media img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.fac:hover .fac__media img{transform:scale(1.06)}
+.fac__body{padding:24px}
 .fac .ic{width:44px;height:44px;border-radius:11px;background:var(--surface-2);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:15px;transition:.3s}
 .fac:hover .ic{background:var(--accent);color:#fff}
 .fac h4{font-family:var(--serif);font-size:1.1rem;font-weight:500;margin-bottom:5px}
@@ -381,8 +394,13 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 .if-mid{font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--accent-ink)}
 .if-line{flex:1;min-width:24px;height:1px;background:var(--line-2);position:relative}
 .innov-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
-.innov-card{background:var(--surface);border-radius:var(--r);padding:26px 22px;box-shadow:var(--hair);transition:transform .45s var(--ease),box-shadow .45s var(--ease);display:flex;flex-direction:column;position:relative}
+.innov-card{background:var(--surface);border-radius:var(--r);box-shadow:var(--hair);transition:transform .45s var(--ease),box-shadow .45s var(--ease);display:flex;flex-direction:column;position:relative;overflow:hidden}
 .innov-card:hover{transform:translateY(-5px);box-shadow:var(--lift)}
+.innov-card__media{height:150px;position:relative;overflow:hidden;background:var(--surface-2)}
+.innov-card__media::after{content:"";position:absolute;inset:auto 0 0 0;height:56%;background:linear-gradient(180deg,transparent,rgba(0,0,0,.16))}
+.innov-card__media img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.innov-card:hover .innov-card__media img{transform:scale(1.06)}
+.innov-card__body{padding:26px 22px;display:flex;flex-direction:column;flex:1}
 .innov-card__no{font-family:var(--mono);font-size:10.5px;color:var(--accent);letter-spacing:.08em}
 .innov-card__ic{width:48px;height:48px;border-radius:13px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:22px;margin:16px 0 16px}
 [data-theme="dark"] .innov-card__ic{background:var(--surface-2)}
@@ -428,6 +446,37 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 .res h4{font-family:var(--sans);font-size:.96rem;font-weight:600}
 .res .m{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:3px}
 .res .go{margin-left:auto;color:var(--faint);font-size:17px}
+
+.join-visual{margin-bottom:16px;border-radius:var(--r);overflow:hidden;background:var(--surface);box-shadow:var(--hair)}
+.join-visual__hero{height:230px;position:relative;overflow:hidden}
+.join-visual__hero img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+.join-visual:hover .join-visual__hero img{transform:scale(1.05)}
+.join-visual__hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(9,24,18,.05),rgba(9,24,18,.48))}
+.join-visual__copy{position:absolute;left:18px;right:18px;bottom:18px;color:#fff;z-index:2}
+.join-visual__copy h3{font-size:1.3rem;font-weight:500;margin-bottom:6px}
+.join-visual__copy p{font-size:.82rem;line-height:1.55;color:rgba(255,255,255,.84)}
+.join-visual__meta{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line)}
+.join-visual__meta div{background:var(--surface);padding:14px 16px}
+.join-visual__meta strong{display:block;font-family:var(--serif);font-size:1.12rem;font-weight:500}
+.join-visual__meta span{display:block;margin-top:4px;font-family:var(--mono);font-size:10px;letter-spacing:.05em;color:var(--muted);text-transform:uppercase}
+.award-spot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.award-teaser{background:var(--surface);border-radius:var(--r);box-shadow:var(--hair);overflow:hidden;display:flex;flex-direction:column;transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.award-teaser:hover{transform:translateY(-4px);box-shadow:var(--lift)}
+.award-teaser__media{height:205px;position:relative;background:var(--surface-2);overflow:hidden}
+.award-teaser__media img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.award-teaser:hover .award-teaser__media img{transform:scale(1.05)}
+.award-teaser__shield{position:absolute;top:14px;right:14px;width:84px;height:84px;border-radius:18px;background:rgba(255,255,255,.96);box-shadow:0 12px 30px rgba(0,0,0,.16);padding:10px;display:flex;align-items:center;justify-content:center}
+.award-teaser__shield img{width:100%;height:100%;object-fit:contain}
+.award-teaser__body{padding:24px;display:flex;flex-direction:column;flex:1}
+.award-teaser__year{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.award-teaser__type{display:inline-flex;align-self:flex-start;margin-top:14px;padding:5px 9px;border-radius:999px;background:var(--accent-soft);font-family:var(--mono);font-size:10px;color:var(--accent)}
+.award-teaser h3{font-size:1.25rem;font-weight:500;line-height:1.2;margin-bottom:9px}
+.award-teaser p{font-size:.86rem;color:var(--muted);line-height:1.55;font-weight:300}
+.award-teaser__foot{margin-top:auto;padding-top:14px}
+.award-statband{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:28px 0 18px}
+.award-stat{background:var(--surface);border-radius:20px;box-shadow:var(--hair);padding:22px}
+.award-stat strong{display:block;font-family:var(--serif);font-size:2rem;font-weight:500;line-height:1;color:var(--accent-ink)}
+.award-stat span{display:block;margin-top:6px;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
 
 /* ===== news ===== */
 .news-layout{display:grid;grid-template-columns:1.7fr 1fr;gap:42px;align-items:start}
@@ -637,6 +686,8 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
   .foot-brand{grid-column:span 2}
   .innov-grid{grid-template-columns:repeat(3,1fr)}
   .team-grid{grid-template-columns:repeat(2,1fr)}
+  .award-spot-grid{grid-template-columns:repeat(2,1fr)}
+  .award-statband{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:760px){
   .innov-flow{flex-direction:column;align-items:center;text-align:center;gap:10px}
@@ -644,6 +695,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
   .rgrid,.taxa-grid,.collab-grid,.pipe{grid-template-columns:1fr}
   .innov-grid{grid-template-columns:repeat(2,1fr)}
   .team-grid{grid-template-columns:repeat(2,1fr)}
+  .award-spot-grid,.award-statband,.join-visual__meta{grid-template-columns:1fr}
   .member.lead{grid-column:span 2}
   .pillar{grid-column:span 12}
   .figs{grid-template-columns:repeat(2,1fr)}
@@ -1197,6 +1249,8 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
       <a href="#publications" class="nav-scroll" data-i18n="nav_pubs">Publications</a>
       <a href="#innovation" class="nav-scroll" data-i18n="nav_innov">Innovation</a>
 <a href="#products" class="nav-scroll" data-i18n="nav_products">Products</a>
+      <a href="portfolio/index.html" data-i18n="nav_portfolio">Portfolio</a>
+      <a href="awards/index.html" data-i18n="nav_awards">Awards</a>
       <a href="shop/index.html" data-i18n="nav_shop">Shop</a>
       <a href="#team" class="nav-scroll" data-i18n="nav_team">Team</a>      <a href="#collaborations" class="nav-scroll" data-i18n="nav_collab">Partners</a>
       <a href="#contact" class="nav-scroll" data-i18n="nav_contact">Contact</a>
@@ -1205,6 +1259,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
       <button class="icon-toggle" onclick="toggleTheme()" aria-label="Toggle theme" id="themeBtn"><svg class="icon"><use href="#i-moon" id="themeIcon"/></svg></button>
       <button class="lang" onclick="toggleLang()"><svg class="icon"><use href="#i-lang"/></svg><span id="langLabel">TH</span></button>
       <a href="#join" class="btn btn--primary btn--sm nav-scroll" data-i18n="nav_join">Join the lab</a>
+      <button class="btn btn--ghost btn--sm" onclick="openAdmin()" data-i18n="nav_manager" aria-label="Open content manager"><svg class="icon"><use href="#i-spark"/></svg> Manager</button>
       <button class="burger" onclick="openDrawer()" aria-label="Menu"><svg class="icon"><use href="#i-menu"/></svg></button>
     </div>
   </div>
@@ -1222,11 +1277,14 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
   <a href="#videos" class="nav-scroll"><svg class="icon"><use href="#i-wave"/></svg> <span data-i18n="nav_videos">Videos</span></a>
   <a href="#innovation" class="nav-scroll"><svg class="icon"><use href="#i-spark"/></svg> <span data-i18n="nav_innov">Innovation</span></a>
 <a href="#products" class="nav-scroll"><svg class="icon"><use href="#i-flask"/></svg> <span data-i18n="nav_products">Products</span></a>
+  <a href="portfolio/index.html"><svg class="icon"><use href="#i-doc"/></svg> <span data-i18n="nav_portfolio">Portfolio</span></a>
+  <a href="awards/index.html"><svg class="icon"><use href="#i-spark"/></svg> <span data-i18n="nav_awards">Awards</span></a>
   <a href="shop/index.html"><svg class="icon"><use href="#i-ext"/></svg> <span data-i18n="nav_shop">Shop</span></a>
   <a href="#team" class="nav-scroll"><svg class="icon"><use href="#i-users"/></svg> <span data-i18n="nav_team">Team</span></a>  <a href="#members" class="nav-scroll"><svg class="icon"><use href="#i-users"/></svg> <span data-i18n="mem_title">Lab members</span></a>
   <a href="#collaborations" class="nav-scroll"><svg class="icon"><use href="#i-globe"/></svg> <span data-i18n="nav_collab">Partners</span></a>
   <a href="#join" class="nav-scroll"><svg class="icon"><use href="#i-spark"/></svg> <span data-i18n="nav_join">Join the lab</span></a>
   <a href="#contact" class="nav-scroll"><svg class="icon"><use href="#i-mail"/></svg> <span data-i18n="nav_contact">Contact</span></a>
+  <a href="#admin" onclick="closeDrawer();setTimeout(openAdmin,50);return false"><svg class="icon"><use href="#i-spark"/></svg> <span data-i18n="nav_manager">Manager</span></a>
 </aside>
 
 <main>
@@ -1653,6 +1711,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
       <div class="ip-filters" id="ipFilters"></div>
     </div>
     <div class="ip-grid" id="ipGrid"></div>
+    <div class="reveal" style="text-align:center;margin-top:30px"><a href="portfolio/index.html#ip" class="btn btn--primary" data-i18n="ip_portfolio_cta">Explore the full innovation portfolio <svg class="icon"><use href="#i-ext"/></svg></a></div>
     <p class="ip-source reveal" data-i18n="ip_source">Portfolio information supplied by the laboratory. Registration details are shown as provided in the attached source document.</p>
   </div>
 </section>
@@ -1718,8 +1777,23 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 <div class="prod-grid" id="prodGrid"></div>
     <div class="reveal" style="text-align:center;margin-top:28px">
       <a href="shop/index.html" class="btn btn--primary" data-i18n="prod_shop_cta">Visit the shop <svg class="icon"><use href="#i-ext"/></svg></a>
+      <a href="portfolio/index.html#products" class="btn btn--ghost" style="margin-left:8px" data-i18n="prod_portfolio_cta">View products &amp; IP portfolio <svg class="icon"><use href="#i-arrow"/></svg></a>
     </div>
     <p class="prod-foot reveal" data-i18n="prod_foot">Commercialised through Sciseeit Co., Ltd. Product images are illustrative and can be updated in the admin panel.</p>  </div>
+</section>
+
+<!-- AWARDS SPOTLIGHT -->
+<section id="awards-spotlight" class="section">
+  <div class="wrap">
+    <div class="sec-head reveal center">
+      <span class="eyebrow" data-i18n="awards_eye">Recognition</span>
+      <h2 class="h-sec" data-i18n="awards_title">Awards, medals & research honours</h2>
+      <p class="lede" data-i18n="awards_lede">A curated look at Professor Arunrat Chaveerach's research awards — from university honours to international innovation medals.</p>
+    </div>
+    <div class="award-statband reveal" id="awardStatband"></div>
+    <div class="award-spot-grid" id="awardSpotlight"></div>
+    <div class="reveal" style="text-align:center;margin-top:28px"><a href="awards/index.html" class="btn btn--primary" data-i18n="awards_cta">Explore the awards subwebsite <svg class="icon"><use href="#i-ext"/></svg></a></div>
+  </div>
 </section>
 
 <!-- RESEARCH TEAM (the 8 project researchers) -->
@@ -1802,7 +1876,21 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
       <a href="https://gs.kku.ac.th" target="_blank" rel="noopener" class="btn btn--primary" style="margin-top:32px" data-i18n="join_cta">Visit the Graduate School <svg class="icon"><use href="#i-ext"/></svg></a>
     </div>
     <div class="reveal" data-d="1">
- <div class="res-card">
+      <div class="join-visual">
+        <div class="join-visual__hero">
+          <img src="https://images.unsplash.com/photo-1579165466949-3180a3d056d1?q=80&w=1400&auto=format&fit=crop" alt="Students working in a laboratory" loading="lazy" onerror="this.style.opacity=.15">
+          <div class="join-visual__copy">
+            <h3 data-i18n="join_visual_title">Life in the lab</h3>
+            <p data-i18n="join_visual_lede">Field sampling, wet-lab practice and translational research mentoring — all in one training environment.</p>
+          </div>
+        </div>
+        <div class="join-visual__meta">
+          <div><strong>2010</strong><span data-i18n="join_meta_1">Lab founded</span></div>
+          <div><strong>40+</strong><span data-i18n="join_meta_2">Graduate researchers trained</span></div>
+          <div><strong>3</strong><span data-i18n="join_meta_3">Core disciplines integrated</span></div>
+        </div>
+      </div>
+      <div class="res-card">
         <h3 data-i18n="res_title">Student resources</h3>
         <div id="resList"></div>
       </div>
@@ -2123,6 +2211,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
         <button class="atab" data-tab="pubs" onclick="adminTab('pubs',this)">Publications</button>
         <button class="atab" data-tab="ip" onclick="adminTab('ip',this)">IP / Patents</button>
         <button class="atab" data-tab="products" onclick="adminTab('products',this)">Products</button>
+        <button class="atab" data-tab="awards" onclick="adminTab('awards',this)">Awards</button>
         <button class="atab" data-tab="videos" onclick="adminTab('videos',this)">Videos</button>
         <button class="atab" data-tab="taxa" onclick="adminTab('taxa',this)">Taxa</button>
         <button class="atab" data-tab="collabs" onclick="adminTab('collabs',this)">Partners</button>
@@ -2260,16 +2349,16 @@ const PROF_IMG="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAQDAwMDA
 
 /* ============ DATA ============ */
 let THEMES=[
-  {icon:'i-leaf',title:'Plant genomics',desc:'We decode complete chloroplast genomes and reconstruct evolutionary relationships using next-generation sequencing — turning raw reads into annotated plastomes and phylogenetic trees.',tags:['NGS','Plastome assembly','Phylogenetics','DNA barcoding']},
-  {icon:'i-flask',title:'Phytochemistry',desc:'We isolate and identify the bioactive compounds that medicinal plants produce, resolving their chemical structures and quantifying them across species and tissues.',tags:['Extraction','HPLC','Structure ID','Resveratrol']},
-  {icon:'i-cell',title:'Biomedical testing',desc:'We put plant compounds to work against human cell lines — screening for cytotoxicity, measuring anticancer potential and tracing the molecular mechanisms behind the effect.',tags:['Cytotoxicity','Cancer cells','Gene expression','Mechanism']}
+  {icon:'i-leaf',title:'Plant genomics',titleTh:'จีโนมิกส์พืช',desc:'We decode complete chloroplast genomes and reconstruct evolutionary relationships using next-generation sequencing — turning raw reads into annotated plastomes and phylogenetic trees.',descTh:'เราถอดรหัสจีโนมคลอโรพลาสต์ทั้งจีโนม และสร้างความสัมพันธ์เชิงวิวัฒนาการของพืชด้วยเทคโนโลยีการหาลำดับเบสยุคใหม่ ตั้งแต่ข้อมูลดิบไปจนถึง plastome ที่ใส่คำอธิบายครบถ้วนและต้นไม้วิวัฒนาการ',img:'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=1200&auto=format&fit=crop',tags:['NGS','Plastome assembly','Phylogenetics','DNA barcoding']},
+  {icon:'i-flask',title:'Phytochemistry',titleTh:'เคมีพฤกษศาสตร์',desc:'We isolate and identify the bioactive compounds that medicinal plants produce, resolving their chemical structures and quantifying them across species and tissues.',descTh:'เราแยกและระบุสารออกฤทธิ์ทางชีวภาพจากพืชสมุนไพร วิเคราะห์โครงสร้างทางเคมี และเปรียบเทียบปริมาณสารในชนิดพืชและส่วนต่าง ๆ ของพืช',img:'https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1200&auto=format&fit=crop',tags:['Extraction','HPLC','Structure ID','Resveratrol']},
+  {icon:'i-cell',title:'Biomedical testing',titleTh:'การทดสอบชีวการแพทย์',desc:'We put plant compounds to work against human cell lines — screening for cytotoxicity, measuring anticancer potential and tracing the molecular mechanisms behind the effect.',descTh:'เรานำสารจากพืชมาทดสอบกับเซลล์มนุษย์ คัดกรองความเป็นพิษ วัดศักยภาพต้านมะเร็ง และติดตามกลไกระดับโมเลกุลของการออกฤทธิ์',img:'https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=1200&auto=format&fit=crop',tags:['Cytotoxicity','Cancer cells','Gene expression','Mechanism']}
 ];
 let PIPE=[
-  {no:'01',icon:'i-plant',title:'Collect',desc:'Field collection with properly vouchered herbarium specimens.'},
-  {no:'02',icon:'i-dna',title:'Sequence',desc:'NGS library prep and chloroplast genome sequencing.'},
-  {no:'03',icon:'i-wave',title:'Assemble',desc:'Plastome assembly, annotation and phylogenetic placement.'},
-  {no:'04',icon:'i-flask',title:'Extract',desc:'Phytochemical extraction and HPLC compound profiling.'},
-  {no:'05',icon:'i-cell',title:'Test',desc:'Cytotoxicity and bioassays on human cancer cell lines.'}
+  {no:'01',icon:'i-plant',title:'Collect',titleTh:'เก็บตัวอย่าง',desc:'Field collection with properly vouchered herbarium specimens.',descTh:'เก็บตัวอย่างภาคสนามพร้อมจัดทำตัวอย่างพรรณไม้แห้งอ้างอิงอย่างถูกต้อง',img:'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=1200&auto=format&fit=crop'},
+  {no:'02',icon:'i-dna',title:'Sequence',titleTh:'หาลำดับเบส',desc:'NGS library prep and chloroplast genome sequencing.',descTh:'เตรียมไลบรารีและหาลำดับเบสจีโนมคลอโรพลาสต์ด้วย NGS',img:'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop'},
+  {no:'03',icon:'i-wave',title:'Assemble',titleTh:'ประกอบจีโนม',desc:'Plastome assembly, annotation and phylogenetic placement.',descTh:'ประกอบ plastome ใส่คำอธิบายตำแหน่งยีน และวิเคราะห์ความสัมพันธ์เชิงวิวัฒนาการ',img:'https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=1200&auto=format&fit=crop'},
+  {no:'04',icon:'i-flask',title:'Extract',titleTh:'สกัดและวิเคราะห์',desc:'Phytochemical extraction and HPLC compound profiling.',descTh:'สกัดสารพฤกษเคมีและทำโปรไฟล์สารด้วย HPLC',img:'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?q=80&w=1200&auto=format&fit=crop'},
+  {no:'05',icon:'i-cell',title:'Test',titleTh:'ทดสอบฤทธิ์',desc:'Cytotoxicity and bioassays on human cancer cell lines.',descTh:'ทดสอบความเป็นพิษและฤทธิ์ทางชีวภาพกับเซลล์มะเร็งมนุษย์',img:'https://images.unsplash.com/photo-1576671081837-49000212a370?q=80&w=1200&auto=format&fit=crop'}
 ];
 let TAXA=[
   {sp:'Cratoxylum formosum',en:'Hypericaceae · resveratrol source',acc:'CP · 157,204 bp',img:'https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=800&auto=format&fit=crop',desc:'A rich, newly-recognised source of resveratrol. We characterised its plastid genome and tested its extracts on normal and cancer cells.'},
@@ -2277,10 +2366,10 @@ let TAXA=[
   {sp:'Morinda citrifolia',en:'Rubiaceae · noni',acc:'Leaf extract study',img:'https://images.unsplash.com/photo-1615485925600-97237c4fc1ec?q=80&w=800&auto=format&fit=crop',desc:'Better known as noni. We investigated how its leaf extracts influence collagen type II synthesis through gene expression.'}
 ];
 let FACILITIES=[
-  {icon:'i-dna',title:'Molecular lab',spec:'PCR · Gel doc · NGS prep'},
-  {icon:'i-flask',title:'Extraction suite',spec:'Rotary evaporator · HPLC'},
-  {icon:'i-cell',title:'Cell culture',spec:'Biosafety Level 2'},
-  {icon:'i-scope',title:'Microscopy',spec:'Fluorescence · SEM'}
+  {icon:'i-dna',title:'Molecular lab',titleTh:'ห้องปฏิบัติการชีวโมเลกุล',spec:'PCR · Gel doc · NGS prep',specTh:'PCR · Gel doc · เตรียมตัวอย่างสำหรับ NGS',img:'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop'},
+  {icon:'i-flask',title:'Extraction suite',titleTh:'ชุดห้องสกัดสาร',spec:'Rotary evaporator · HPLC',specTh:'Rotary evaporator · HPLC',img:'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?q=80&w=1200&auto=format&fit=crop'},
+  {icon:'i-cell',title:'Cell culture',titleTh:'ห้องเพาะเลี้ยงเซลล์',spec:'Biosafety Level 2',specTh:'มาตรฐาน Biosafety Level 2',img:'https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=1200&auto=format&fit=crop'},
+  {icon:'i-scope',title:'Microscopy',titleTh:'งานกล้องจุลทรรศน์',spec:'Fluorescence · SEM',specTh:'Fluorescence · SEM',img:'https://images.unsplash.com/photo-1518152006812-edab29b069ac?q=80&w=1200&auto=format&fit=crop'}
 ];
 let TIMELINE=[
   {yr:'2024',title:'Biomedical expansion',desc:'Opened a collaboration with the Faculty of Medicine to bring plant chemistry into cancer research.'},
@@ -2315,24 +2404,39 @@ const BIOS={
  'Assoc. Prof. Dr. Yannick D. Benoit':'International collaborator in molecular biology, epigenetics, cancer, pharmacology and the digestive system.'
 };
 MEMBERS.push(
- {group:'postdoc',en:'Postdoctoral Researcher',th:'นักวิจัยหลังปริญญาเอก',img:'',tags:['Add expertise'],bio:'Placeholder profile — open the admin panel (gear icon, lower-left) to add the post-doc\u2019s name, photo and bio.'},
+ {group:'postdoc',en:'Postdoctoral Researcher',th:'นักวิจัยหลังปริญญาเอก',img:'',tags:['Add expertise'],bio:'Placeholder profile — open the admin panel (gear icon, lower-left) to add the post-doc’s name, photo and bio.'},
  {group:'phd',en:'PhD Student (1)',th:'นักศึกษาปริญญาเอก',img:'',tags:['Plant genomics'],bio:'Placeholder PhD student. Replace with a real profile from the admin panel.'},
  {group:'phd',en:'PhD Student (2)',th:'นักศึกษาปริญญาเอก',img:'',tags:['Phytochemistry'],bio:'Placeholder PhD student. Replace with a real profile from the admin panel.'},
- {group:'master',en:'Master\u2019s Student (1)',th:'นักศึกษาปริญญาโท',img:'',tags:['Cell culture'],bio:'Placeholder MSc student. Editable via the admin panel.'},
- {group:'master',en:'Master\u2019s Student (2)',th:'นักศึกษาปริญญาโท',img:'',tags:['Molecular biology'],bio:'Placeholder MSc student. Editable via the admin panel.'},
+ {group:'master',en:'Master’s Student (1)',th:'นักศึกษาปริญญาโท',img:'',tags:['Cell culture'],bio:'Placeholder MSc student. Editable via the admin panel.'},
+ {group:'master',en:'Master’s Student (2)',th:'นักศึกษาปริญญาโท',img:'',tags:['Molecular biology'],bio:'Placeholder MSc student. Editable via the admin panel.'},
  {group:'intern',en:'Research Intern (1)',th:'นักศึกษาฝึกงาน',img:'',tags:['Lab techniques'],bio:'Placeholder intern. Editable via the admin panel.'},
-{group:'intern',en:'Research Intern (2)',th:'นักศึกษาฝึกงาน',img:'',tags:['Field sampling'],bio:'Placeholder intern. Editable via the admin panel.'},
- {group:'alumni-phd',en:'PhD Alumnus (2023)',th:'ศิษย์เก่า ปริญญาเอก (2566)',img:'',tags:['Now: Researcher, Dept. of Agriculture'],bio:'Placeholder alumni profile — open the admin panel to add the graduate\u2019s name, current position and story.'},
- {group:'alumni-master',en:'Master\u2019s Alumnus (2022)',th:'ศิษย์เก่า ปริญญาโท (2565)',img:'',tags:['Now: QC Scientist, CPF'],bio:'Placeholder alumni profile — open the admin panel to add the graduate\u2019s name, current position and story.'}
-);let GRANT_TEAM=[
-  // นำโดย ศ.ดร.อรุณรัตน์ (ดูประวัติเต็มได้ใน "The researchers behind the programme" ด้านบนแล้ว)
-  // เพิ่มผู้ร่วมวิจัยไทย (intl:false) หรือต่างประเทศ (intl:true) ได้จากแผงแอดมิน
-];let INNOV=[
-  {no:'01',icon:'i-dna',title:'Molecular biology',titleTh:'ชีววิทยาโมเลกุล',desc:'Gene-expression analysis, qRT-PCR and enzyme assays to read plant bioactivity at the level of the gene.',descTh:'การวิเคราะห์การแสดงออกของยีน qRT-PCR และเอนไซม์แอสเซย์ เพื่ออ่านฤทธิ์ทางชีวภาพของพืชในระดับยีน'},
-  {no:'02',icon:'i-scholar',title:'Multi-omics technology',titleTh:'เทคโนโลยีมัลติโอมิกส์',desc:'Integrating genomics, transcriptomics, proteomics and metabolomics into one high-resolution picture of each plant.',descTh:'ผสานจีโนมิกส์ ทรานสคริปโตมิกส์ โปรตีโอมิกส์ และเมตาโบโลมิกส์ เป็นภาพความละเอียดสูงของพืชแต่ละชนิด'},
-  {no:'03',icon:'i-spark',title:'Green nano-delivery',titleTh:'นาโนระบบนำส่งสีเขียว',desc:'Eco-friendly nanoparticle carriers and encapsulation that deliver plant compounds safely and effectively.',descTh:'ตัวพาอนุภาคนาโนที่เป็นมิตรกับสิ่งแวดล้อมและการเอนแคปซูเลต เพื่อนำส่งสารจากพืชอย่างปลอดภัยและได้ผล'},
-  {no:'04',icon:'i-cell',title:'Bioactivity mechanisms',titleTh:'กลไกการออกฤทธิ์',desc:'Decoding how compounds act on human cells — from cancer to the digestive system — to prove therapeutic potential.',descTh:'ถอดรหัสว่าสารออกฤทธิ์ทำงานกับเซลล์มนุษย์อย่างไร ตั้งแต่มะเร็งจนถึงระบบทางเดินอาหาร เพื่อพิสูจน์ศักยภาพการรักษา'},
-  {no:'05',icon:'i-doc',title:'IP & products',titleTh:'ทรัพย์สินทางปัญญาและผลิตภัณฑ์',desc:'Turning results into registered innovations — medicine, supplements, cosmetics, food — protected by petty patents and patents.',descTh:'แปลงผลวิจัยเป็นนวัตกรรมที่ขึ้นทะเบียน — ยา อาหารเสริม เครื่องสำอาง อาหาร — คุ้มครองด้วยอนุสิทธิบัตรและสิทธิบัตร'}
+ {group:'intern',en:'Research Intern (2)',th:'นักศึกษาฝึกงาน',img:'',tags:['Field sampling'],bio:'Placeholder intern. Editable via the admin panel.'},
+ {group:'alumni-phd',en:'PhD Alumnus (2023)',th:'ศิษย์เก่า ปริญญาเอก (2566)',img:'',tags:['Now: Researcher, Dept. of Agriculture'],bio:'Placeholder alumni profile — open the admin panel to add the graduate’s name, current position and story.'},
+ {group:'alumni-master',en:'Master’s Alumnus (2022)',th:'ศิษย์เก่า ปริญญาโท (2565)',img:'',tags:['Now: QC Scientist, CPF'],bio:'Placeholder alumni profile — open the admin panel to add the graduate’s name, current position and story.'}
+);
+let GRANT_TEAM=[
+  {intl:false,en:'Assoc. Prof. Dr. Tawatchai Tanee',th:'รศ. ดร. ธวัดชัย ธานี',role:'Co-Investigator',roleTh:'ผู้ร่วมวิจัย',aff:'Khon Kaen University',tags:['Environmental science','Biochemistry']},
+  {intl:false,en:'Prof. Dr. Sakda Daduang',th:'ศ. ดร. ศักดา ดาดวง',role:'Co-Investigator',roleTh:'ผู้ร่วมวิจัย',aff:'Khon Kaen University',tags:['Biochemistry','Proteomics']},
+  {intl:false,en:'Asst. Prof. Dr. Wanpen Chaijaroenkul',th:'ผศ. ดร. วันเพ็ญ ไชยเจริญกุล',role:'Co-Investigator',roleTh:'ผู้ร่วมวิจัย',aff:'Khon Kaen University',tags:['Pharmacology','Cancer biology']},
+  {intl:true,en:'Prof. Dr. Pramote Mahakunakorn',th:'ศ. ดร. ประโมทย์ มหากุณากร',role:'International collaborator',roleTh:'ผู้ร่วมวิจัยต่างประเทศ',aff:'Collaborative network',tags:['Natural products','Drug development']}
+];
+let INNOV=[
+  {no:'01',icon:'i-dna',title:'Molecular biology',titleTh:'ชีววิทยาโมเลกุล',desc:'Gene-expression analysis, qRT-PCR and enzyme assays to read plant bioactivity at the level of the gene.',descTh:'การวิเคราะห์การแสดงออกของยีน qRT-PCR และเอนไซม์แอสเซย์ เพื่ออ่านฤทธิ์ทางชีวภาพของพืชในระดับยีน',img:'https://images.unsplash.com/photo-1532187643603-ba119ca4109e?q=80&w=1200&auto=format&fit=crop'},
+  {no:'02',icon:'i-scholar',title:'Multi-omics technology',titleTh:'เทคโนโลยีมัลติโอมิกส์',desc:'Integrating genomics, transcriptomics, proteomics and metabolomics into one high-resolution picture of each plant.',descTh:'ผสานจีโนมิกส์ ทรานสคริปโตมิกส์ โปรตีโอมิกส์ และเมตาโบโลมิกส์ เป็นภาพความละเอียดสูงของพืชแต่ละชนิด',img:'https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=1200&auto=format&fit=crop'},
+  {no:'03',icon:'i-spark',title:'Green nano-delivery',titleTh:'นาโนระบบนำส่งสีเขียว',desc:'Eco-friendly nanoparticle carriers and encapsulation that deliver plant compounds safely and effectively.',descTh:'ตัวพาอนุภาคนาโนที่เป็นมิตรกับสิ่งแวดล้อมและการเอนแคปซูเลต เพื่อนำส่งสารจากพืชอย่างปลอดภัยและได้ผล',img:'https://images.unsplash.com/photo-1532634896-26909d0d4b6b?q=80&w=1200&auto=format&fit=crop'},
+  {no:'04',icon:'i-cell',title:'Bioactivity mechanisms',titleTh:'กลไกการออกฤทธิ์',desc:'Decoding how compounds act on human cells — from cancer to the digestive system — to prove therapeutic potential.',descTh:'ถอดรหัสว่าสารออกฤทธิ์ทำงานกับเซลล์มนุษย์อย่างไร ตั้งแต่มะเร็งจนถึงระบบทางเดินอาหาร เพื่อพิสูจน์ศักยภาพการรักษา',img:'https://images.unsplash.com/photo-1576671081837-49000212a370?q=80&w=1200&auto=format&fit=crop'},
+  {no:'05',icon:'i-doc',title:'IP & products',titleTh:'ทรัพย์สินทางปัญญาและผลิตภัณฑ์',desc:'Turning results into registered innovations — medicine, supplements, cosmetics, food — protected by petty patents and patents.',descTh:'แปลงผลวิจัยเป็นนวัตกรรมที่ขึ้นทะเบียน — ยา อาหารเสริม เครื่องสำอาง อาหาร — คุ้มครองด้วยอนุสิทธิบัตรและสิทธิบัตร',img:'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200&auto=format&fit=crop'}
+];
+let AWARDS=[
+  {id:'award-2015-taipei',year:'2015',yearTh:'2558',level:'International',levelTh:'นานาชาติ',type:'Innovation medal',typeTh:'เหรียญนวัตกรรม',title:'Bronze Medal Award — 2015 Taipei International Invention Show & Technomart',titleTh:'Bronze Medal Award — งาน 2015 Taipei International Invention Show & Technomart',desc:'An international medal from Taipei recognising innovation and invention work presented in Taiwan.',descTh:'รางวัลเหรียญทองแดงระดับนานาชาติ จากการนำเสนอผลงานนวัตกรรมและสิ่งประดิษฐ์ในงาน Taipei International Invention Show & Technomart ที่ไทเป ประเทศไต้หวัน',photo:'awards/assets/taipei-bronze-2015.jpg',shield:''},
+  {id:'award-2018-gold',year:'2018',yearTh:'2561',level:'University',levelTh:'มหาวิทยาลัย',type:'Gold researcher honour',typeTh:'รางวัลนักวิจัยระดับเหรียญทอง',title:'Outstanding Researcher and Sarasin Honorary Researcher Award — Gold Level',titleTh:'รางวัลนักวิจัยดีเด่นและนักวิจัยเกียรติคุณสารสิน ระดับทอง',desc:'University-level gold honour presented on 5 June 2018 for research distinction.',descTh:'รางวัลเชิดชูเกียรตินักวิจัยระดับเหรียญทอง ประจำปีพุทธศักราช 2560 และเข้ารับเมื่อวันที่ 5 มิถุนายน 2561',photo:'awards/assets/gold-award-ceremony.jpg',shield:'awards/assets/gold-award-plaque-cutout.png'},
+  {id:'award-2020-research-expo',year:'2020',yearTh:'2563',level:'National',levelTh:'ประเทศ',type:'Research Expo medals',typeTh:'รางวัลงานมหกรรมวิจัยแห่งชาติ',title:'Higher-Education Innovation Awards — Thailand Research Expo 2020',titleTh:'รางวัลผลงานนวัตกรรมสายอุดมศึกษา ในงานมหกรรมวิจัยแห่งชาติ 2563',desc:'Four bronze-medal innovations: Serum for hair roots, Natural shampoo, Amyrin for anti-acne and inflammatory wounds, and Natural Oleamide.',descTh:'ได้รับรางวัลเหรียญทองแดงจากผลงานนวัตกรรม 4 เรื่อง ได้แก่ Serum for hair roots, Natural shampoo, Amyrin for anti-acne and chronic/inflammatory wound และ Natural Oleamide',photo:'awards/assets/research-expo-medals-2020.jpg',gallery:['awards/assets/research-expo-team-2020.jpg'],shield:''},
+  {id:'award-2015-silver',year:'2015',yearTh:'2558',level:'University',levelTh:'มหาวิทยาลัย',type:'Research honour',typeTh:'รางวัลวิจัย',title:'Outstanding Researcher and Sarasin Honorary Researcher Award — Silver Level',titleTh:'รางวัลนักวิจัยดีเด่นและนักวิจัยเกียรติคุณสารสิน ระดับเงิน',desc:'University-level silver recognition for research excellence.',descTh:'รางวัลนักวิจัยดีเด่นและนักวิจัยเกียรติคุณสารสิน ระดับเงิน',photo:'',shield:''},
+  {id:'award-2016-kondisrichampa',year:'2016',yearTh:'2559',level:'University',levelTh:'มหาวิทยาลัย',type:'Innovation honour',typeTh:'รางวัลเชิดชูเกียรติ',title:'Khon Dee Sri Champa Award — Innovation and Invention Development',titleTh:'คนดีศรีจำปา ด้านการพัฒนานวัตกรรม หรือสิ่งประดิษฐ์คิดค้น',desc:'Recognition for innovation and invention development within the university.',descTh:'รางวัลคนดีศรีจำปา ด้านการพัฒนานวัตกรรม หรือสิ่งประดิษฐ์คิดค้น',photo:'',shield:''},
+  {id:'award-2022-community',year:'2022',yearTh:'2565',level:'University',levelTh:'มหาวิทยาลัย',type:'Community impact',typeTh:'การใช้ประโยชน์ในชุมชนและสังคม',title:'Khon Kaen University Distinguished Research Personnel Award — Community and Social Utilisation / Industrial & Commercial Impact',titleTh:'รางวัลเชิดชูเกียรติบุคลากรมหาวิทยาลัยขอนแก่น ด้านการวิจัย ด้านการใช้ประโยชน์ในชุมชนและสังคม ด้านอุตสาหกรรมและเชิงพาณิชย์',desc:'Recognition for research translated into community, social and commercial value.',descTh:'รางวัลเชิดชูเกียรติด้านการวิจัย สำหรับผลงานที่นำไปใช้ประโยชน์ในชุมชน สังคม อุตสาหกรรม และเชิงพาณิชย์',photo:'',shield:''},
+  {id:'award-2022-diamond',year:'2022',yearTh:'2565',level:'University',levelTh:'มหาวิทยาลัย',type:'Top researcher honour',typeTh:'รางวัลนักวิจัยระดับเพชร',title:'Outstanding Researcher and Sarasin Honorary Researcher Award — Diamond Level',titleTh:'รางวัลนักวิจัยดีเด่นและนักวิจัยเกียรติคุณสารสิน ระดับเพชร',desc:'Top-tier university recognition for sustained research excellence.',descTh:'รางวัลนักวิจัยดีเด่นและนักวิจัยเกียรติคุณสารสิน ระดับเพชร',photo:'',shield:''},
+  {id:'award-2023-kondisrichampa-research',year:'2023',yearTh:'2566',level:'University',levelTh:'มหาวิทยาลัย',type:'Research honour',typeTh:'รางวัลวิจัย',title:'Khon Dee Sri Champa Award — Research',titleTh:'รางวัลคนดีศรีจำปา ด้านการวิจัย',desc:'University honour recognising research contribution and impact.',descTh:'รางวัลคนดีศรีจำปา ด้านการวิจัย',photo:'',shield:''},
+  {id:'award-2024-academic',year:'2024',yearTh:'2567',level:'University',levelTh:'มหาวิทยาลัย',type:'Academic achievement',typeTh:'ผลงานวิชาการ',title:'Khon Kaen University Honour for Academic Achievement at the 60 Years Celebration',titleTh:'รางวัลเชิดชูเกียรติบุคลากร ด้านสร้างผลงานวิชาการ ในงาน 60 ปี แห่งการสร้างสรรค์และพัฒนาเพื่อสังคม',desc:'Recognition for building academic output during the 60-year celebration of Khon Kaen University.',descTh:'รางวัลเชิดชูเกียรติบุคลากร ด้านสร้างผลงานวิชาการ ในงาน 60 ปี แห่งการสร้างสรรค์และพัฒนาเพื่อสังคม',photo:'',shield:''}
 ];
 let IP_ASSETS=[
   {
@@ -2568,7 +2672,7 @@ const FAQ={
 
 /* ============ i18n ============ */
 const I18N={en:{},th:{
-nav_value_chain:'ต้นน้ำ–กลางน้ำ–ปลายน้ำ',nav_ip:'สิทธิบัตรและทรัพย์สินทางปัญญา',nav_research:'งานวิจัย',nav_pipeline:'กระบวนการ',nav_pubs:'ผลงานตีพิมพ์',nav_innov:'นวัตกรรม',nav_products:'ผลิตภัณฑ์',nav_shop:'ร้านค้า',nav_videos:'วิดีโอ',nav_team:'ทีมงาน',nav_collab:'เครือข่าย',nav_contact:'ติดต่อ',nav_join:'ร่วมงานกับเรา',nav_facilities:'เครื่องมือ',  hero_chip:'ศูนย์ความเป็นเลิศ · ตั้งแต่ 2010',
+nav_value_chain:'ต้นน้ำ–กลางน้ำ–ปลายน้ำ',nav_ip:'สิทธิบัตรและทรัพย์สินทางปัญญา',nav_research:'งานวิจัย',nav_pipeline:'กระบวนการ',nav_pubs:'ผลงานตีพิมพ์',nav_innov:'นวัตกรรม',nav_products:'ผลิตภัณฑ์',nav_portfolio:'คลังนวัตกรรม',nav_awards:'รางวัลและผลงานเด่น',nav_manager:'จัดการเว็บไซต์',nav_shop:'ร้านค้า',ip_portfolio_cta:'เปิดคลังนวัตกรรมฉบับเต็ม',prod_portfolio_cta:'ดูผลิตภัณฑ์และสิทธิบัตรทั้งหมด',nav_videos:'วิดีโอ',nav_team:'ทีมงาน',nav_collab:'เครือข่าย',nav_contact:'ติดต่อ',nav_join:'ร่วมงานกับเรา',nav_facilities:'เครื่องมือ',  hero_chip:'ศูนย์ความเป็นเลิศ · ตั้งแต่ 2010',
   hero_title:'อ่านจีโนมพืช เพื่อค้นหา<span class="em">ยาแห่งอนาคต</span>',
   hero_lede:'ห้องปฏิบัติการวิจัย มหาวิทยาลัยขอนแก่น ที่ทำงานบนจุดบรรจบของจีโนมิกส์พืช เคมีผลิตภัณฑ์ธรรมชาติ และชีววิทยามะเร็ง',
   hero_cta1:'เราทำอะไร',hero_cta2:'อ่านผลงาน',
@@ -2611,6 +2715,8 @@ nav_value_chain:'ต้นน้ำ–กลางน้ำ–ปลายน้
   prod_eye:'จากแล็บสู่ชั้นวาง',prod_title:'ผลิตภัณฑ์จากงานวิจัยของเรา',
   prod_lede:'งานวิจัยของเราไม่ได้จบแค่บทความ ผลการค้นพบจากห้องแล็บถูกต่อยอดผ่าน Sciseeit Co., Ltd. เป็นผลิตภัณฑ์สุขภาพ สมุนไพร อาหาร และเครื่องสำอางที่มีการขึ้นทะเบียน',
   prod_foot:'ต่อยอดเชิงพาณิชย์ผ่าน Sciseeit Co., Ltd. — ภาพผลิตภัณฑ์เป็นภาพประกอบและสามารถอัปเดตได้ในระบบหลังบ้าน',
+  awards_eye:'รางวัลและการยอมรับ',awards_title:'รางวัล เหรียญรางวัล และเกียรติคุณด้านการวิจัย',awards_lede:'คัดสรรผลงานเชิดชูเกียรติของ ศ.ดร.อรุณรัตน์ ฉวีราช ตั้งแต่ระดับมหาวิทยาลัยไปจนถึงเวทีนวัตกรรมนานาชาติ',awards_cta:'เปิดเว็บไซต์ย่อยผลงานอาจารย์',
+  join_visual_title:'ชีวิตในแล็บ',join_visual_lede:'ภาคสนาม งาน wet lab และการวิจัยเชิงต่อยอด อยู่ในสภาพแวดล้อมการฝึกวิจัยเดียวกัน',join_meta_1:'ก่อตั้งแล็บ',join_meta_2:'นักวิจัยบัณฑิตศึกษาที่ฝึกแล้ว',join_meta_3:'ศาสตร์หลักที่บูรณาการ',
 prod_ing:'ส่วนประกอบสำคัญ',prod_size:'ขนาด',prod_price:'ราคา',prod_shop_cta:'ไปที่ร้านค้าของเรา',prod_buy:'ซื้อที่ร้านค้าของเรา',  vid_eye:'รับชม',vid_title:'ทำความรู้จักแล็บ — และเรียนรู้ไปกับเรา',vid_lede:'วิดีโอแนะนำแล็บ พร้อมบทเรียนที่พาดูเทคนิคที่เราใช้งานจริงในทุกๆ วัน',
   team_eye:'ทีมงานโครงการ',team_title:'นักวิจัยเบื้องหลังโครงการ',team_lede:'นักวิจัย 8 ท่านจากมหาวิทยาลัยขอนแก่นและสถาบันพันธมิตร ร่วมขับเคลื่อนโครงการวิจัยบูรณาการ ตั้งแต่ชีววิทยาโมเลกุลและมัลติโอมิกส์ ไปจนถึงการทดสอบฤทธิ์ทางชีวภาพและทรัพย์สินทางปัญญา',
   mem_eye:'ภายในแล็บ',mem_title:'สมาชิกในแล็บ',
@@ -2709,6 +2815,7 @@ const SECTIONS=[
   {id:'videos',label:'Videos',labelTh:'วิดีโอ'},
   {id:'innovation',label:'Future innovations',labelTh:'นวัตกรรมในอนาคต'},
   {id:'products',label:'Products',labelTh:'ผลิตภัณฑ์'},
+  {id:'awards-spotlight',label:'Awards spotlight',labelTh:'รางวัลและเกียรติยศ'},
   {id:'team',label:'Programme team',labelTh:'ทีมงานโครงการ'},
 {id:'members',label:'Lab members',labelTh:'สมาชิกในแล็บ'},
   {id:'grant-team',label:'Grant proposal team',labelTh:'ทีมวิจัย (ยื่นทุน)'},  {id:'collaborations',label:'Partners',labelTh:'เครือข่ายพันธมิตร'},
@@ -2978,17 +3085,17 @@ let HIDDEN_SECTIONS=new Set();
 function applyAccent(id){SITE_ACCENT=id;document.documentElement.setAttribute('data-preset',id);}
 const LS_KEY='aclab_cms_v1';
 function loadStore(){try{return JSON.parse(localStorage.getItem(LS_KEY))||{};}catch(e){return {};}}
-function saveStore(silent){try{localStorage.setItem(LS_KEY,JSON.stringify({members:MEMBERS,news:NEWS,cpubs:CPUBS,ipAssets:IP_ASSETS,products:PRODUCTS,videos:VIDEOS,taxa:TAXA,collabs:COLLABS,testimonials:TESTIMONIALS,banners:BANNERS,events:EVENTS,gallery:GALLERY,resources:RESOURCES,grantTeam:GRANT_TEAM,theme:SITE_ACCENT,hiddenSections:[...HIDDEN_SECTIONS],themes:THEMES,pipe:PIPE,facilities:FACILITIES,timeline:TIMELINE,road:ROAD,innov:INNOV,textOverrides:TEXT_OVERRIDES,sectionOrder:SECTION_ORDER,customSections:CUSTOM_SECTIONS}));if(!silent)toast(T('saved_toast'));return true;}catch(e){toast('Save failed — storage full');return false;}}(function(){const s=loadStore();if(s.members&&s.members.length)MEMBERS=s.members;if(s.news&&s.news.length)NEWS=s.news;if(s.cpubs)CPUBS=s.cpubs;if(s.ipAssets&&s.ipAssets.length)IP_ASSETS=s.ipAssets;if(s.products&&s.products.length)PRODUCTS=s.products;if(s.videos&&s.videos.length)VIDEOS=s.videos;if(s.taxa&&s.taxa.length)TAXA=s.taxa;if(s.collabs&&s.collabs.length)COLLABS=s.collabs;if(s.testimonials&&s.testimonials.length)TESTIMONIALS=s.testimonials;if(s.banners&&s.banners.length)BANNERS=s.banners;if(s.events&&s.events.length)EVENTS=s.events;if(s.gallery&&s.gallery.length)GALLERY=s.gallery;if(s.resources&&s.resources.length)RESOURCES=s.resources;if(s.grantTeam&&s.grantTeam.length)GRANT_TEAM=s.grantTeam;if(s.theme)SITE_ACCENT=s.theme;if(Array.isArray(s.hiddenSections))HIDDEN_SECTIONS=new Set(s.hiddenSections);if(s.themes&&s.themes.length)THEMES=s.themes;if(s.pipe&&s.pipe.length)PIPE=s.pipe;if(s.facilities&&s.facilities.length)FACILITIES=s.facilities;if(s.timeline&&s.timeline.length)TIMELINE=s.timeline;if(s.road&&s.road.length)ROAD=s.road;if(s.innov&&s.innov.length)INNOV=s.innov;if(s.textOverrides)TEXT_OVERRIDES=s.textOverrides;if(Array.isArray(s.sectionOrder)&&s.sectionOrder.length)SECTION_ORDER=s.sectionOrder;syncBuiltInSectionOrder();
+function saveStore(silent){try{localStorage.setItem(LS_KEY,JSON.stringify({members:MEMBERS,news:NEWS,cpubs:CPUBS,ipAssets:IP_ASSETS,products:PRODUCTS,videos:VIDEOS,taxa:TAXA,collabs:COLLABS,testimonials:TESTIMONIALS,banners:BANNERS,events:EVENTS,gallery:GALLERY,resources:RESOURCES,grantTeam:GRANT_TEAM,awards:AWARDS,theme:SITE_ACCENT,hiddenSections:[...HIDDEN_SECTIONS],themes:THEMES,pipe:PIPE,facilities:FACILITIES,timeline:TIMELINE,road:ROAD,innov:INNOV,textOverrides:TEXT_OVERRIDES,sectionOrder:SECTION_ORDER,customSections:CUSTOM_SECTIONS}));if(!silent)toast(T('saved_toast'));return true;}catch(e){toast('Save failed — storage full');return false;}}(function(){const s=loadStore();if(s.members&&s.members.length)MEMBERS=s.members;if(s.news&&s.news.length)NEWS=s.news;if(s.cpubs)CPUBS=s.cpubs;if(s.ipAssets&&s.ipAssets.length)IP_ASSETS=s.ipAssets;if(s.products&&s.products.length)PRODUCTS=s.products;if(s.videos&&s.videos.length)VIDEOS=s.videos;if(s.taxa&&s.taxa.length)TAXA=s.taxa;if(s.collabs&&s.collabs.length)COLLABS=s.collabs;if(s.testimonials&&s.testimonials.length)TESTIMONIALS=s.testimonials;if(s.banners&&s.banners.length)BANNERS=s.banners;if(s.events&&s.events.length)EVENTS=s.events;if(s.gallery&&s.gallery.length)GALLERY=s.gallery;if(s.resources&&s.resources.length)RESOURCES=s.resources;if(s.grantTeam&&s.grantTeam.length)GRANT_TEAM=s.grantTeam;if(s.awards&&s.awards.length)AWARDS=s.awards;if(s.theme)SITE_ACCENT=s.theme;if(Array.isArray(s.hiddenSections))HIDDEN_SECTIONS=new Set(s.hiddenSections);if(s.themes&&s.themes.length)THEMES=s.themes;if(s.pipe&&s.pipe.length)PIPE=s.pipe;if(s.facilities&&s.facilities.length)FACILITIES=s.facilities;if(s.timeline&&s.timeline.length)TIMELINE=s.timeline;if(s.road&&s.road.length)ROAD=s.road;if(s.innov&&s.innov.length)INNOV=s.innov;if(s.textOverrides)TEXT_OVERRIDES=s.textOverrides;if(Array.isArray(s.sectionOrder)&&s.sectionOrder.length)SECTION_ORDER=s.sectionOrder;syncBuiltInSectionOrder();
 applyAccent(SITE_ACCENT);applySectionVisibility();applySectionOrder();})();
 function renderThemes(){
   el('rgrid').innerHTML=THEMES.map((t,i)=>`
-  <article class="rcard reveal in" data-d="${i}"><span class="rcard__no mono">0${i+1}</span><span class="rcard__ic">${icon(t.icon)}</span><h3>${lang==='th'&&t.titleTh?t.titleTh:t.title}</h3><p>${lang==='th'&&t.descTh?t.descTh:t.desc}</p><div class="rcard__tags">${(t.tags||[]).map(x=>`<span class="t">${x}</span>`).join('')}</div></article>`).join('');
+  <article class="rcard reveal in" data-d="${i}"><span class="rcard__no mono">0${i+1}</span>${t.img?`<div class="rcard__media"><img src="${t.img}" alt="${lang==='th'&&t.titleTh?t.titleTh:t.title}" loading="lazy" onerror="this.style.opacity=.12"></div>`:''}<span class="rcard__ic">${icon(t.icon)}</span><h3>${lang==='th'&&t.titleTh?t.titleTh:t.title}</h3><p>${lang==='th'&&t.descTh?t.descTh:t.desc}</p><div class="rcard__tags">${(t.tags||[]).map(x=>`<span class="t">${x}</span>`).join('')}</div></article>`).join('');
 }
 renderThemes();
 
 function renderPipe(){
   el('pipe').innerHTML=PIPE.map((p,i)=>`
-  <div class="pstep reveal in" data-d="${i}"><span class="no">${p.no}</span><div class="ic">${icon(p.icon)}</div><h4>${lang==='th'&&p.titleTh?p.titleTh:p.title}</h4><p>${lang==='th'&&p.descTh?p.descTh:p.desc}</p>${i<PIPE.length-1?`<span class="arr">${icon('i-arrow')}</span>`:''}</div>`).join('');
+  <div class="pstep reveal in" data-d="${i}">${p.img?`<div class="pstep__media"><img src="${p.img}" alt="${lang==='th'&&p.titleTh?p.titleTh:p.title}" loading="lazy" onerror="this.style.opacity=.12"></div>`:''}<span class="no">${p.no}</span><div class="ic">${icon(p.icon)}</div><h4>${lang==='th'&&p.titleTh?p.titleTh:p.title}</h4><p>${lang==='th'&&p.descTh?p.descTh:p.desc}</p>${i<PIPE.length-1?`<span class="arr">${icon('i-arrow')}</span>`:''}</div>`).join('');
 }
 renderPipe();
 
@@ -2999,7 +3106,7 @@ function renderTaxa(){
 renderTaxa();
 
 function renderFacilities(){
-  el('facGrid').innerHTML=FACILITIES.map(f=>`<div class="fac reveal in"><span class="ic">${icon(f.icon)}</span><h4>${lang==='th'&&f.titleTh?f.titleTh:f.title}</h4><div class="spec">${lang==='th'&&f.specTh?f.specTh:f.spec}</div></div>`).join('');
+  el('facGrid').innerHTML=FACILITIES.map(f=>`<div class="fac reveal in">${f.img?`<div class="fac__media"><img src="${f.img}" alt="${lang==='th'&&f.titleTh?f.titleTh:f.title}" loading="lazy" onerror="this.style.opacity=.12"></div>`:''}<div class="fac__body"><span class="ic">${icon(f.icon)}</span><h4>${lang==='th'&&f.titleTh?f.titleTh:f.title}</h4><div class="spec">${lang==='th'&&f.specTh?f.specTh:f.spec}</div></div></div>`).join('');
 }
 function renderTimeline(){
   el('timeline').innerHTML=TIMELINE.map(t=>`<div class="tl reveal in"><div class="yr">${t.yr}</div><h4>${lang==='th'&&t.titleTh?t.titleTh:t.title}</h4><p>${lang==='th'&&t.descTh?t.descTh:t.desc}</p></div>`).join('');
@@ -3213,9 +3320,23 @@ async function loadDoiPubs(){
 loadDoiPubs();
 /* ============ FUTURE INNOVATIONS ============ */
 function renderInnov(){
-  el('innovGrid').innerHTML=INNOV.map(x=>`<article class="innov-card"><span class="innov-card__no">${x.no}</span><span class="innov-card__ic">${icon(x.icon)}</span><h3>${lang==='th'?x.titleTh:x.title}</h3><p>${lang==='th'?x.descTh:x.desc}</p></article>`).join('');
+  el('innovGrid').innerHTML=INNOV.map(x=>`<article class="innov-card">${x.img?`<div class="innov-card__media"><img src="${x.img}" alt="${lang==='th'?x.titleTh:x.title}" loading="lazy" onerror="this.style.opacity=.12"></div>`:''}<div class="innov-card__body"><span class="innov-card__no">${x.no}</span><span class="innov-card__ic">${icon(x.icon)}</span><h3>${lang==='th'?x.titleTh:x.title}</h3><p>${lang==='th'?x.descTh:x.desc}</p></div></article>`).join('');
 }
-renderInnov();
+function renderAwardSpotlight(){
+  const items=(AWARDS||[]).slice().sort((a,b)=>(+b.year||0)-(+a.year||0));
+  const featured=items.filter(a=>a.photo||a.shield).slice(0,3);
+  const total=items.length;
+  const international=items.filter(a=>(a.level||'').toLowerCase().includes('international')).length;
+  const national=items.filter(a=>['National','ประเทศ'].includes(a.level)||['National','ประเทศ'].includes(a.levelTh)).length;
+  const university=items.filter(a=>(a.level||'').toLowerCase().includes('university')||(a.levelTh||'').includes('มหาวิทยาลัย')).length;
+  const withPhotos=items.filter(a=>a.photo||a.gallery?.length||a.shield).length;
+  const statWrap=el('awardStatband');
+  if(statWrap)statWrap.innerHTML=`<div class="award-stat"><strong>${total}</strong><span>${lang==='th'?'รางวัลและเกียรติยศทั้งหมด':'Total awards & honours'}</span></div><div class="award-stat"><strong>${international}</strong><span>${lang==='th'?'ระดับนานาชาติ':'International'}</span></div><div class="award-stat"><strong>${national}</strong><span>${lang==='th'?'ระดับประเทศ':'National'}</span></div><div class="award-stat"><strong>${university}</strong><span>${lang==='th'?'ระดับมหาวิทยาลัย':'University level'}</span></div>`;
+  const wrap=el('awardSpotlight');
+  if(!wrap)return;
+  wrap.innerHTML=featured.map(a=>`<article class="award-teaser reveal in"><div class="award-teaser__media">${a.photo?`<img src="${a.photo}" alt="${lang==='th'&&a.titleTh?a.titleTh:a.title}" loading="lazy" onerror="this.style.opacity=.12">`:''}${a.shield?`<div class="award-teaser__shield"><img src="${a.shield}" alt="Award plaque" loading="lazy" onerror="this.parentNode.remove()"></div>`:''}</div><div class="award-teaser__body"><div class="award-teaser__year">${lang==='th'&&a.yearTh?a.yearTh:a.year}</div><h3>${lang==='th'&&a.titleTh?a.titleTh:a.title}</h3><p>${lang==='th'&&a.descTh?a.descTh:a.desc}</p><div class="award-teaser__foot"><span class="award-teaser__type">${lang==='th'&&a.typeTh?a.typeTh:a.type}</span></div></div></article>`).join('');
+}
+renderInnov();renderAwardSpotlight();
 
 
 /* ============ RESEARCH VALUE CHAIN + METHOD ATLAS + IP PORTFOLIO ============ */
@@ -3795,7 +3916,7 @@ window.addEventListener('load',()=>{setTimeout(()=>{const p=el('pre');p.style.op
 
 /* ============ ADMIN / CMS ============ */
 
-let adminUnlocked=false, adminCurrentTab='team', editIdx=-1, formImg='';
+let adminUnlocked=false, adminCurrentTab='team', editIdx=-1, formImg='', awardShieldImg='';
 function esc(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 function safeImgSrc(s){
      s=(s||'').trim();
@@ -3842,6 +3963,7 @@ function renderAdmin(tab){adminCurrentTab=tab;const c=el('adminContent');
   else if(tab==='pubs')c.innerHTML=admPubList();
   else if(tab==='ip')c.innerHTML=admIPList();
   else if(tab==='products')c.innerHTML=admProdList();
+  else if(tab==='awards')c.innerHTML=admAwardsList();
   else if(tab==='videos')c.innerHTML=admVidList();
   else if(tab==='taxa')c.innerHTML=admTaxaList();
 else if(tab==='collabs')c.innerHTML=admCollabList();
@@ -4304,6 +4426,38 @@ window.admSavePub=function(){const t=val('p_title').trim();if(!t){toast(lang==='
   saveStore();renderPubAll();renderAdmin('pubs');};
 window.admDelPub=function(i){if(!confirm('Delete this publication?'))return;CPUBS.splice(i,1);saveStore();renderPubAll();renderAdmin('pubs');};
 
+
+/* --- AWARDS / HONOURS --- */
+function admAwardsList(){
+  return `<div class="data-card"><h4>${icon('i-spark')} ${lang==='th'?'รางวัลและเกียรติยศ':'Awards & honours'}</h4><p>${lang==='th'?'ข้อมูลชุดเดียวกับเว็บไซต์ย่อย Awards และบันทึกลง Supabase ชุดเดียวกับเว็บหลัก':'Shared with the Awards subwebsite and stored in the same Supabase project as the main website.'}</p></div>
+  <div class="adm-section-t">${AWARDS.length} ${lang==='th'?'รายการ · คลิกเพื่อแก้ไข':'records · click to edit'}</div>`+
+  AWARDS.map((a,i)=>`<div class="adm-row">${a.photo?`<img class="thumb" src="${esc(a.photo)}" onerror="this.style.opacity=.2">`:`<span class="mono-av" style="background:var(--accent)">${esc(a.year||'—')}</span>`}<div class="r-main"><h4>${esc(lang==='th'?(a.titleTh||a.title):(a.title||a.titleTh))}</h4><div class="r-sub">${esc(a.year||'—')} · ${esc(lang==='th'?(a.levelTh||a.level):(a.level||a.levelTh))}</div></div><div class="r-act"><button class="adm-ic" onclick="admEditAward(${i})">${icon('i-doc')}</button><button class="adm-ic del" onclick="admDelAward(${i})">${icon('i-close')}</button></div></div>`).join('')+
+  `<button class="adm-add" onclick="admEditAward(-1)">${icon('i-plus')} ${lang==='th'?'เพิ่มรางวัล':'Add award'}</button>`;
+}
+function pickRawImage(cb){const inp=document.createElement('input');inp.type='file';inp.accept='image/*';inp.onchange=()=>{const f=inp.files?.[0];if(!f)return;if(f.size>2500000){toast(lang==='th'?'ไฟล์รูปใหญ่เกิน 2.5 MB':'Image must be under 2.5 MB');return;}const rd=new FileReader();rd.onload=()=>cb(rd.result);rd.readAsDataURL(f);};inp.click();}
+function awardPhotoWidget(){return `${formImg?`<img class="prev" src="${formImg}">`:`<span class="mono-av" style="width:56px;height:56px;border-radius:12px;background:var(--accent)">IMG</span>`}<div><div class="adm-file" onclick="pickRawImage(function(d){formImg=d;refreshAwardPhotos()})">${icon('i-up')} Upload award photo</div>${formImg?`<div class="adm-file" style="color:var(--muted);margin-top:5px" onclick="formImg='';refreshAwardPhotos()">Remove</div>`:''}</div>`;}
+function awardShieldWidget(){return `${awardShieldImg?`<img class="prev" style="object-fit:contain;background:#fff" src="${awardShieldImg}">`:`<span class="mono-av" style="width:56px;height:56px;border-radius:12px;background:var(--ochre)">SH</span>`}<div><div class="adm-file" onclick="pickRawImage(function(d){awardShieldImg=d;refreshAwardPhotos()})">${icon('i-up')} Upload shield / plaque</div>${awardShieldImg?`<div class="adm-file" style="color:var(--muted);margin-top:5px" onclick="awardShieldImg='';refreshAwardPhotos()">Remove</div>`:''}</div>`;}
+window.refreshAwardPhotos=function(){const p=el('a_photowrap'),s=el('a_shieldwrap');if(p)p.innerHTML=awardPhotoWidget();if(s)s.innerHTML=awardShieldWidget();};
+window.admEditAward=function(i){
+  editIdx=i;const a=i>=0?AWARDS[i]:{id:'award-'+Date.now(),year:'',yearTh:'',level:'University',levelTh:'มหาวิทยาลัย',type:'',typeTh:'',title:'',titleTh:'',desc:'',descTh:'',photo:'',shield:'',gallery:[]};formImg=a.photo||'';awardShieldImg=a.shield||'';
+  el('adminContent').innerHTML=`<span class="adm-back" onclick="renderAdmin('awards')">${icon('i-arrow')} Back</span><div class="adm-form">
+  <div class="adm-2"><div class="adm-field"><label>ID</label><input id="a_id"></div><div class="adm-field"><label>Year</label><input id="a_year"></div></div>
+  <div class="adm-2"><div class="adm-field"><label>Thai year</label><input id="a_yearth"></div><div class="adm-field"><label>Level EN</label><input id="a_level"></div></div>
+  <div class="adm-2"><div class="adm-field"><label>Level TH</label><input id="a_levelth"></div><div class="adm-field"><label>Type EN</label><input id="a_type"></div></div>
+  <div class="adm-field"><label>Type TH</label><input id="a_typeth"></div>
+  <div class="adm-field"><label>Title EN</label><textarea id="a_title"></textarea></div><div class="adm-field"><label>Title TH</label><textarea id="a_titleth"></textarea></div>
+  <div class="adm-field"><label>Description EN</label><textarea id="a_desc"></textarea></div><div class="adm-field"><label>Description TH</label><textarea id="a_descth"></textarea></div>
+  <div class="adm-field"><label>${lang==='th'?'ภาพประกอบ':'Award photo'}</label><div class="adm-photo-row" id="a_photowrap">${awardPhotoWidget()}</div></div>
+  <div class="adm-field"><label>${lang==='th'?'ภาพโล่ / โล่เจาะพื้นหลัง':'Shield / plaque cutout'}</label><div class="adm-photo-row" id="a_shieldwrap">${awardShieldWidget()}</div></div>
+  <div class="adm-field"><label>Gallery paths / URLs (comma-separated)</label><input id="a_gallery"></div>
+  <div class="adm-actions"><button class="btn btn--ghost" onclick="renderAdmin('awards')">Cancel</button><button class="btn btn--primary" onclick="admSaveAward()">${icon('i-check')} Save</button></div></div>`;
+  el('a_id').value=a.id||'';el('a_year').value=a.year||'';el('a_yearth').value=a.yearTh||'';el('a_level').value=a.level||'';el('a_levelth').value=a.levelTh||'';el('a_type').value=a.type||'';el('a_typeth').value=a.typeTh||'';el('a_title').value=a.title||'';el('a_titleth').value=a.titleTh||'';el('a_desc').value=a.desc||'';el('a_descth').value=a.descTh||'';el('a_gallery').value=(a.gallery||[]).join(', ');
+};
+window.admSaveAward=function(){const title=val('a_title').trim(),titleTh=val('a_titleth').trim();if(!title&&!titleTh){toast(lang==='th'?'ต้องมีชื่อรางวัล':'Award title required');return;}const item={id:val('a_id').trim()||('award-'+Date.now()),year:val('a_year').trim(),yearTh:val('a_yearth').trim(),level:val('a_level').trim(),levelTh:val('a_levelth').trim(),type:val('a_type').trim(),typeTh:val('a_typeth').trim(),title,titleTh,desc:val('a_desc').trim(),descTh:val('a_descth').trim(),photo:formImg,shield:awardShieldImg,gallery:val('a_gallery').split(',').map(x=>x.trim()).filter(Boolean)};if(editIdx>=0)AWARDS[editIdx]=item;else AWARDS.push(item);saveStore();renderAwardSpotlight();syncAwardsTable();renderAdmin('awards');};
+window.admDelAward=function(i){if(!confirm(lang==='th'?'ลบรางวัลนี้?':'Delete this award?'))return;AWARDS.splice(i,1);saveStore();renderAwardSpotlight();syncAwardsTable();renderAdmin('awards');};
+async function syncAwardsTable(){if(!window.supa)return false;try{const rows=AWARDS.map((a,i)=>({id:a.id,year:a.year||null,year_th:a.yearTh||null,level:a.level||null,level_th:a.levelTh||null,award_type:a.type||null,award_type_th:a.typeTh||null,title:a.title||a.titleTh||'',title_th:a.titleTh||null,description:a.desc||null,description_th:a.descTh||null,photo_url:a.photo||null,shield_url:a.shield||null,gallery:a.gallery||[],sort_order:i+1,is_featured:i===0,updated_at:new Date().toISOString()}));if(rows.length){const {error}=await supa.from('awards').upsert(rows,{onConflict:'id'});if(error)throw error;}const {data:existing,error:rerr}=await supa.from('awards').select('id');if(rerr)throw rerr;const keep=new Set(rows.map(r=>r.id));const stale=(existing||[]).map(r=>r.id).filter(id=>!keep.has(id));if(stale.length){const {error:derr}=await supa.from('awards').delete().in('id',stale);if(derr)throw derr;}return true;}catch(e){console.warn('Awards table mirror sync skipped',e);return false;}}
+async function syncIpAssetsTable(){if(!window.supa)return false;try{const rows=IP_ASSETS.map((x,i)=>({item_no:x.no||String(i+1).padStart(2,'0'),formula_th:x.formula||'',formula_en:x.formulaEn||'',kind:x.kind||'petty-application',registration_number:x.number||null,filing_or_grant_date_text:x.date||null,trade_name:x.tradeName||null,product_registration:x.registration||null,sort_order:i+1,is_visible:true,updated_at:new Date().toISOString()}));if(rows.length){const {error}=await supa.from('ip_assets').upsert(rows,{onConflict:'item_no'});if(error)throw error;}const {data:existing,error:rerr}=await supa.from('ip_assets').select('item_no');if(rerr)throw rerr;const keep=new Set(rows.map(r=>r.item_no));const stale=(existing||[]).map(r=>r.item_no).filter(n=>!keep.has(n));if(stale.length){const {error:derr}=await supa.from('ip_assets').delete().in('item_no',stale);if(derr)throw derr;}return true;}catch(e){console.warn('IP table mirror sync skipped',e);return false;}}
+
 /* --- INTELLECTUAL PROPERTY --- */
 function admIPList(){
   return `<div class="data-card"><h4>${icon('i-doc')} ${lang==='th'?'สิทธิบัตรและอนุสิทธิบัตร':'Patents & petty patents'}</h4><p>${lang==='th'?'รายการนี้แสดงในช่วงกลางน้ำ และบันทึกพร้อมข้อมูลเว็บไซต์ขึ้น Supabase':'These records appear in the midstream portfolio and are saved with the website content in Supabase.'}</p></div>
@@ -4317,7 +4471,7 @@ window.admEditIP=function(i){
   el('adminContent').innerHTML=`<span class="adm-back" onclick="renderAdmin('ip')">${icon('i-arrow')} Back</span>
   <div class="adm-form">
     <div class="adm-2"><div class="adm-field"><label>ชื่อสูตร / นวัตกรรม (ไทย)</label><input id="ip_formula"></div><div class="adm-field"><label>Formula / innovation (English)</label><input id="ip_formulaen"></div></div>
-    <div class="adm-field"><label>${lang==='th'?'ประเภททรัพย์สินทางปัญญา':'IP type'}</label><select id="ip_kind"><option value="petty-granted">Granted petty patent / อนุสิทธิบัตร</option><option value="petty-application">Petty-patent application / คำขออนุสิทธิบัตร</option><option value="patent-application">Patent application / คำขอสิทธิบัตร</option></select></div>
+    <div class="adm-field"><label>${lang==='th'?'ประเภททรัพย์สินทางปัญญา':'IP type'}</label><select id="ip_kind"><option value="petty-granted">Granted petty patent / อนุสิทธิบัตร</option><option value="petty-application">Petty-patent application / คำขออนุสิทธิบัตร</option><option value="patent-granted">Granted patent / สิทธิบัตร</option><option value="patent-application">Patent application / คำขอสิทธิบัตร</option></select></div>
     <div class="adm-2"><div class="adm-field"><label>${lang==='th'?'เลขคำขอ/เลขที่':'Application / IP number'}</label><input id="ip_number"></div><div class="adm-field"><label>${lang==='th'?'วันที่':'Date'}</label><input id="ip_date"></div></div>
     <div class="adm-field"><label>${lang==='th'?'ชื่อทางการค้า':'Trade name'}</label><input id="ip_trade"></div>
     <div class="adm-field"><label>${lang==='th'?'เลขทะเบียนและรายละเอียด':'Registration details'}</label><textarea id="ip_reg"></textarea></div>
@@ -4331,12 +4485,12 @@ window.admSaveIP=function(){
   const item=Object.assign({},base,{formula,formulaEn:val('ip_formulaen').trim(),kind:val('ip_kind'),number:val('ip_number').trim(),date:val('ip_date').trim(),tradeName:val('ip_trade').trim(),registration:val('ip_reg').trim()});
   if(editIdx>=0)IP_ASSETS[editIdx]=item;else IP_ASSETS.push(item);
   IP_ASSETS.forEach((x,k)=>x.no=String(k+1).padStart(2,'0'));
-  saveStore();renderIP();renderAdmin('ip');
+  saveStore();renderIP();syncIpAssetsTable();renderAdmin('ip');
 };
 window.admDelIP=function(i){
   if(!confirm((lang==='th'?'ลบรายการ ':'Delete ')+(IP_ASSETS[i].formula||'')+'?'))return;
   IP_ASSETS.splice(i,1);IP_ASSETS.forEach((x,k)=>x.no=String(k+1).padStart(2,'0'));
-  saveStore();renderIP();renderAdmin('ip');
+  saveStore();renderIP();syncIpAssetsTable();renderAdmin('ip');
 };
 
 
@@ -4400,7 +4554,7 @@ function admData(){return `
   <div class="data-card danger"><h4>${icon('i-close')} Reset</h4><p>Remove all saved edits from this browser and restore the original built-in content.</p><button class="btn btn--ghost" onclick="admReset()">Reset to defaults</button></div>
   <div class="data-card"><h4>${icon('i-spark')} How this works</h4><p>Edits are saved in this browser's local storage — they persist for you here, but other visitors won't see them until you export the JSON and paste it into the site's source, or host the edited file. Change the passcode by editing <code>ADMIN_PASS</code> in the code.</p></div>`;}
 function download(name,text){const b=new Blob([text],{type:'application/json'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1200);}
-window.admExport=function(){download('ac-lab-content.json',JSON.stringify({members:MEMBERS,news:NEWS,cpubs:CPUBS,ipAssets:IP_ASSETS,products:PRODUCTS,videos:VIDEOS,taxa:TAXA,collabs:COLLABS,testimonials:TESTIMONIALS,banners:BANNERS,events:EVENTS,gallery:GALLERY,resources:RESOURCES,grantTeam:GRANT_TEAM,themes:THEMES,pipe:PIPE,facilities:FACILITIES,timeline:TIMELINE,road:ROAD,innov:INNOV,textOverrides:TEXT_OVERRIDES,sectionOrder:SECTION_ORDER,hiddenSections:[...HIDDEN_SECTIONS],theme:SITE_ACCENT,customSections:CUSTOM_SECTIONS},null,2));toast(lang==='th'?'ดาวน์โหลดแล้ว':'Downloaded');};window.admImport=function(){const inp=document.createElement('input');inp.type='file';inp.accept='application/json,.json';inp.onchange=()=>{const f=inp.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const d=JSON.parse(rd.result);if(Array.isArray(d.members))MEMBERS=d.members;if(Array.isArray(d.news))NEWS=d.news;if(Array.isArray(d.cpubs))CPUBS=d.cpubs;if(Array.isArray(d.ipAssets))IP_ASSETS=d.ipAssets;if(Array.isArray(d.products))PRODUCTS=d.products;if(Array.isArray(d.videos))VIDEOS=d.videos;if(Array.isArray(d.taxa))TAXA=d.taxa;if(Array.isArray(d.collabs))COLLABS=d.collabs;if(Array.isArray(d.testimonials))TESTIMONIALS=d.testimonials;if(Array.isArray(d.banners))BANNERS=d.banners;if(Array.isArray(d.resources))RESOURCES=d.resources;if(Array.isArray(d.grantTeam))GRANT_TEAM=d.grantTeam;if(Array.isArray(d.themes))THEMES=d.themes;if(Array.isArray(d.pipe))PIPE=d.pipe;if(Array.isArray(d.facilities))FACILITIES=d.facilities;if(Array.isArray(d.timeline))TIMELINE=d.timeline;if(Array.isArray(d.road))ROAD=d.road;if(Array.isArray(d.innov))INNOV=d.innov;if(d.textOverrides)TEXT_OVERRIDES=d.textOverrides;if(Array.isArray(d.sectionOrder))SECTION_ORDER=d.sectionOrder;if(Array.isArray(d.hiddenSections))HIDDEN_SECTIONS=new Set(d.hiddenSections);if(d.theme)applyAccent(d.theme);saveStore(true);applySectionVisibility();applySectionOrder();renderProjectTeam();renderGrantTeam();renderTeam(teamCat);renderNews();renderIP();renderProducts();renderVideos();renderPubAll();renderTaxa();renderCollabs();renderTesti();renderBanner();renderResources();renderThemes();renderPipe();renderFacilities();renderTimeline();renderRoad();renderInnov();applyLang();renderAdmin('data');toast(lang==='th'?'นำเข้าแล้ว':'Imported');}catch(e){toast('Invalid file');}};rd.readAsText(f);};inp.click();};window.admReset=function(){if(!confirm(lang==='th'?'ลบข้อมูลที่บันทึกไว้ทั้งหมด?':'Remove all saved edits and restore defaults?'))return;try{localStorage.removeItem(LS_KEY);}catch(e){}location.reload();};
+window.admExport=function(){download('ac-lab-content.json',JSON.stringify({members:MEMBERS,news:NEWS,cpubs:CPUBS,ipAssets:IP_ASSETS,products:PRODUCTS,videos:VIDEOS,taxa:TAXA,collabs:COLLABS,testimonials:TESTIMONIALS,banners:BANNERS,events:EVENTS,gallery:GALLERY,resources:RESOURCES,grantTeam:GRANT_TEAM,awards:AWARDS,themes:THEMES,pipe:PIPE,facilities:FACILITIES,timeline:TIMELINE,road:ROAD,innov:INNOV,textOverrides:TEXT_OVERRIDES,sectionOrder:SECTION_ORDER,hiddenSections:[...HIDDEN_SECTIONS],theme:SITE_ACCENT,customSections:CUSTOM_SECTIONS},null,2));toast(lang==='th'?'ดาวน์โหลดแล้ว':'Downloaded');};window.admImport=function(){const inp=document.createElement('input');inp.type='file';inp.accept='application/json,.json';inp.onchange=()=>{const f=inp.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const d=JSON.parse(rd.result);if(Array.isArray(d.members))MEMBERS=d.members;if(Array.isArray(d.news))NEWS=d.news;if(Array.isArray(d.cpubs))CPUBS=d.cpubs;if(Array.isArray(d.ipAssets))IP_ASSETS=d.ipAssets;if(Array.isArray(d.products))PRODUCTS=d.products;if(Array.isArray(d.videos))VIDEOS=d.videos;if(Array.isArray(d.taxa))TAXA=d.taxa;if(Array.isArray(d.collabs))COLLABS=d.collabs;if(Array.isArray(d.testimonials))TESTIMONIALS=d.testimonials;if(Array.isArray(d.banners))BANNERS=d.banners;if(Array.isArray(d.resources))RESOURCES=d.resources;if(Array.isArray(d.grantTeam))GRANT_TEAM=d.grantTeam;if(Array.isArray(d.awards))AWARDS=d.awards;if(Array.isArray(d.themes))THEMES=d.themes;if(Array.isArray(d.pipe))PIPE=d.pipe;if(Array.isArray(d.facilities))FACILITIES=d.facilities;if(Array.isArray(d.timeline))TIMELINE=d.timeline;if(Array.isArray(d.road))ROAD=d.road;if(Array.isArray(d.innov))INNOV=d.innov;if(d.textOverrides)TEXT_OVERRIDES=d.textOverrides;if(Array.isArray(d.sectionOrder))SECTION_ORDER=d.sectionOrder;if(Array.isArray(d.hiddenSections))HIDDEN_SECTIONS=new Set(d.hiddenSections);if(d.theme)applyAccent(d.theme);saveStore(true);applySectionVisibility();applySectionOrder();renderProjectTeam();renderGrantTeam();renderTeam(teamCat);renderNews();renderIP();renderProducts();renderVideos();renderPubAll();renderTaxa();renderCollabs();renderTesti();renderBanner();renderResources();renderThemes();renderPipe();renderFacilities();renderTimeline();renderRoad();renderInnov();renderAwardSpotlight();applyLang();renderAdmin('data');toast(lang==='th'?'นำเข้าแล้ว':'Imported');}catch(e){toast('Invalid file');}};rd.readAsText(f);};inp.click();};window.admReset=function(){if(!confirm(lang==='th'?'ลบข้อมูลที่บันทึกไว้ทั้งหมด?':'Remove all saved edits and restore defaults?'))return;try{localStorage.removeItem(LS_KEY);}catch(e){}location.reload();};
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&el('admin').classList.contains('open'))closeAdmin();});
 if(location.hash==='#admin')setTimeout(openAdmin,300);
 window.addEventListener('hashchange',()=>{if(location.hash==='#admin')openAdmin();});
@@ -4444,6 +4598,7 @@ const supa = window.supabase.createClient(SUPA_URL, SUPA_KEY, {
     if (Array.isArray(s.testimonials) && s.testimonials.length) TESTIMONIALS = s.testimonials;
 if (Array.isArray(s.banners)      && s.banners.length)      BANNERS      = s.banners;
     if (Array.isArray(s.grantTeam) && s.grantTeam.length) GRANT_TEAM = s.grantTeam;
+    if (Array.isArray(s.awards) && s.awards.length) AWARDS = s.awards;
     if (Array.isArray(s.resources) && s.resources.length) RESOURCES  = s.resources;
 if (Array.isArray(s.themes)     && s.themes.length)     THEMES     = s.themes;
     if (Array.isArray(s.pipe)       && s.pipe.length)       PIPE       = s.pipe;
@@ -4475,6 +4630,7 @@ if(typeof renderResources === 'function') renderResources();
     if(typeof renderTimeline === 'function') renderTimeline();
     if(typeof renderRoad === 'function') renderRoad();
 if(typeof renderInnov === 'function') renderInnov();
+    if(typeof renderAwardSpotlight === 'function') renderAwardSpotlight();
     if(typeof renderCustomSections === 'function') renderCustomSections();    if(typeof applyLang === 'function') applyLang();  });
 
   // (2) ทุกครั้งที่กด Save ในหลังบ้าน ให้เขียนขึ้นคลาวด์ด้วย
@@ -4483,7 +4639,7 @@ if(typeof saveStore !== 'undefined') {
     saveStore = function(silent){
       const ok = _saveStore(true);
       supa.from('site_content').update({
-data:{members:MEMBERS, news:NEWS, cpubs:CPUBS, ipAssets:IP_ASSETS, products:PRODUCTS, videos:VIDEOS, taxa:TAXA, collabs:COLLABS, testimonials:TESTIMONIALS, banners:BANNERS, resources:RESOURCES, grantTeam:GRANT_TEAM, theme:SITE_ACCENT, hiddenSections:[...HIDDEN_SECTIONS], themes:THEMES, pipe:PIPE, facilities:FACILITIES, timeline:TIMELINE, road:ROAD, innov:INNOV, textOverrides:TEXT_OVERRIDES, sectionOrder:SECTION_ORDER, customSections:CUSTOM_SECTIONS},        updated_at: new Date()      }).eq('id',1).then(({error})=>{
+data:{members:MEMBERS, news:NEWS, cpubs:CPUBS, ipAssets:IP_ASSETS, products:PRODUCTS, videos:VIDEOS, taxa:TAXA, collabs:COLLABS, testimonials:TESTIMONIALS, banners:BANNERS, resources:RESOURCES, grantTeam:GRANT_TEAM, awards:AWARDS, theme:SITE_ACCENT, hiddenSections:[...HIDDEN_SECTIONS], themes:THEMES, pipe:PIPE, facilities:FACILITIES, timeline:TIMELINE, road:ROAD, innov:INNOV, textOverrides:TEXT_OVERRIDES, sectionOrder:SECTION_ORDER, customSections:CUSTOM_SECTIONS},        updated_at: new Date()      }).eq('id',1).then(({error})=>{
         if(!silent){
           if(error && typeof toast === 'function'){toast('⚠️ Cloud save FAILED — เช็คว่าล็อกอินอยู่ไหม');console.error('Supabase save error:',error);}
           else if(typeof toast === 'function'){toast('✅ Saved to cloud — ผู้เข้าชมทุกคนจะเห็นการเปลี่ยนแปลง');}
