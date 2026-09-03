@@ -165,9 +165,9 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 .drawer.open{transform:translateX(0)}
 .drawer__top{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
 .drawer__top span{font-family:var(--serif);font-size:1.4rem}
-.drawer a{display:flex;align-items:center;gap:13px;padding:14px 12px;border-radius:12px;font-size:1.05rem;font-weight:500;color:var(--ink);transition:background .2s}
-.drawer a:hover{background:var(--surface-2)}
-.drawer a .icon{font-size:19px;color:var(--accent)}
+.drawer a,.drawer .drawer-link{display:flex;align-items:center;gap:13px;padding:14px 12px;border-radius:12px;font-size:1.05rem;font-weight:500;color:var(--ink);transition:background .2s;width:100%;text-align:left;background:none;border:none;cursor:pointer;font-family:inherit}
+.drawer a:hover,.drawer .drawer-link:hover{background:var(--surface-2)}
+.drawer a .icon,.drawer .drawer-link .icon{font-size:19px;color:var(--accent)}
 .scrim{position:fixed;inset:0;background:rgba(10,14,11,.4);backdrop-filter:blur(3px);z-index:1050;opacity:0;pointer-events:none;transition:opacity .35s}
 .scrim.open{opacity:1;pointer-events:auto}
 .iconbtn{width:40px;height:40px;border-radius:11px;display:inline-flex;align-items:center;justify-content:center;background:var(--surface-2);color:var(--muted);font-size:17px;transition:.2s}
@@ -672,12 +672,13 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 
 /* ===== responsive ===== */
 @media(max-width:1024px){
-   .nav__links{display:none}
+  .nav__links{display:none}
   .burger{display:flex}
+  .nav{overflow:hidden}
   .brand{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);max-width:calc(100% - 100px)}
   .brand__name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .nav__actions{margin-left:auto}
-  .nav__actions .btn--ghost,.nav__actions .btn--primary{display:none}
+  .nav__actions .btn--ghost,.nav__actions .btn--primary,#themeBtn,.lang{display:none}
   .lang span{display:none}
   .lang{padding:8px 10px}
   .nav__actions .btn--ghost{display:none}
@@ -1296,6 +1297,8 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 <div class="scrim" id="scrim" onclick="closeDrawer()"></div>
 <aside class="drawer" id="drawer">
   <div class="drawer__top"><span>Menu</span><button class="iconbtn" onclick="closeDrawer()"><svg class="icon"><use href="#i-close"/></svg></button></div>
+  <button type="button" class="drawer-link" onclick="toggleTheme()"><svg class="icon"><use href="#i-moon"/></svg> <span data-i18n="nav_theme">Toggle theme</span></button>
+  <button type="button" class="drawer-link" onclick="toggleLang()"><svg class="icon"><use href="#i-lang"/></svg> <span data-i18n="nav_lang">Change language</span></button>
   <a href="#value-chain" class="nav-scroll"><svg class="icon"><use href="#i-wave"/></svg> <span data-i18n="nav_value_chain">Value chain</span></a>
   <a href="#research" class="nav-scroll"><svg class="icon"><use href="#i-flask"/></svg> <span data-i18n="nav_research">Research</span></a>
   <a href="#pipeline" class="nav-scroll"><svg class="icon"><use href="#i-wave"/></svg> <span data-i18n="nav_pipeline">Pipeline</span></a>
@@ -2700,7 +2703,7 @@ const FAQ={
 
 /* ============ i18n ============ */
 const I18N={en:{},th:{
-nav_value_chain:'ต้นน้ำ–กลางน้ำ–ปลายน้ำ',nav_ip:'สิทธิบัตรและทรัพย์สินทางปัญญา',nav_research:'งานวิจัย',nav_pipeline:'กระบวนการ',nav_pubs:'ผลงานตีพิมพ์',nav_innov:'นวัตกรรม',nav_products:'ผลิตภัณฑ์',nav_portfolio:'คลังนวัตกรรม',nav_awards:'รางวัลและผลงานเด่น',nav_manager:'จัดการเว็บไซต์',nav_shop:'ร้านค้า',nav_more:'เพิ่มเติม',ip_portfolio_cta:'เปิดคลังนวัตกรรมฉบับเต็ม',prod_portfolio_cta:'ดูผลิตภัณฑ์และสิทธิบัตรทั้งหมด',nav_videos:'วิดีโอ',nav_team:'ทีมงาน',nav_collab:'เครือข่าย',nav_contact:'ติดต่อ',nav_join:'ร่วมงานกับเรา',nav_facilities:'เครื่องมือ',  hero_chip:'ศูนย์ความเป็นเลิศ · ตั้งแต่ 2010',
+nav_value_chain:'ต้นน้ำ–กลางน้ำ–ปลายน้ำ',nav_ip:'สิทธิบัตรและทรัพย์สินทางปัญญา',nav_research:'งานวิจัย',nav_pipeline:'กระบวนการ',nav_pubs:'ผลงานตีพิมพ์',nav_innov:'นวัตกรรม',nav_products:'ผลิตภัณฑ์',nav_portfolio:'คลังนวัตกรรม',nav_awards:'รางวัลและผลงานเด่น',nav_manager:'จัดการเว็บไซต์',nav_shop:'ร้านค้า',nav_more:'เพิ่มเติม',nav_theme:'สลับธีมสี',nav_lang:'เปลี่ยนภาษา',ip_portfolio_cta:'เปิดคลังนวัตกรรมฉบับเต็ม',prod_portfolio_cta:'ดูผลิตภัณฑ์และสิทธิบัตรทั้งหมด',nav_videos:'วิดีโอ',nav_team:'ทีมงาน',nav_collab:'เครือข่าย',nav_contact:'ติดต่อ',nav_join:'ร่วมงานกับเรา',nav_facilities:'เครื่องมือ',  hero_chip:'ศูนย์ความเป็นเลิศ · ตั้งแต่ 2010',
   hero_title:'อ่านจีโนมพืช เพื่อค้นหา<span class="em">ยาแห่งอนาคต</span>',
   hero_lede:'ห้องปฏิบัติการวิจัย มหาวิทยาลัยขอนแก่น ที่ทำงานบนจุดบรรจบของจีโนมิกส์พืช เคมีผลิตภัณฑ์ธรรมชาติ และชีววิทยามะเร็ง',
   hero_cta1:'เราทำอะไร',hero_cta2:'อ่านผลงาน',
