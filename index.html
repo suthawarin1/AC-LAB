@@ -137,7 +137,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 #progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--accent);z-index:1000;transition:width .1s}
 .nav{position:fixed;top:0;left:0;width:100%;z-index:900;transition:background .4s,box-shadow .4s,backdrop-filter .4s}
 .nav.scrolled{background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
-.nav__inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+.nav__inner{display:flex;align-items:center;justify-content:space-between;height:72px;position:relative}
 .brand{display:flex;align-items:center;gap:12px}
 .brand>span:last-child{display:flex;flex-direction:column;gap:2px}
 .brand__mark{width:38px;height:38px}
@@ -672,8 +672,14 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 
 /* ===== responsive ===== */
 @media(max-width:1024px){
-  .nav__links{display:none}
+   .nav__links{display:none}
   .burger{display:flex}
+  .brand{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);max-width:calc(100% - 100px)}
+  .brand__name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .nav__actions{margin-left:auto}
+  .nav__actions .btn--ghost,.nav__actions .btn--primary{display:none}
+  .lang span{display:none}
+  .lang{padding:8px 10px}
   .nav__actions .btn--ghost{display:none}
   .lang span{display:none}
   .lang{padding:8px 10px}
