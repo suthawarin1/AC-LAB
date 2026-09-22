@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AC Lab — Update Profile</title>
+<meta name="description" content="Submit an AC Lab member profile update for administrator review.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=Fraunces:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--bg:#f7f6f1;--surface:#fff;--ink:#181d19;--muted:#6a706a;--line:#e6e3da;--accent:#2f6b4f;--soft:#e9f0eb;--danger:#a13d3d;--r:18px;--sans:"Inter","IBM Plex Sans Thai",sans-serif;--serif:"Fraunces","IBM Plex Sans Thai",serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.55}button,input,select,textarea{font:inherit}.wrap{width:min(1180px,calc(100% - 32px));margin:auto}.top{padding:28px 0 12px}.brand{display:flex;align-items:center;gap:12px}.mark{width:42px;height:42px;border:1.5px solid var(--accent);border-radius:50%;display:grid;place-items:center}.mark:after{content:"";width:9px;height:9px;background:var(--accent);border-radius:50%}.brand b{font-family:var(--serif);font-size:1.25rem}.brand span{display:block;color:var(--muted);font-size:.76rem;letter-spacing:.08em;text-transform:uppercase}.hero{padding:42px 0 26px}.hero h1{font-family:var(--serif);font-size:clamp(2.15rem,5vw,3.7rem);font-weight:400;line-height:1.05;margin:0 0 16px}.hero p{color:var(--muted);font-size:1.03rem;max-width:700px;margin:0}.notice{margin-top:20px;background:var(--soft);border-radius:14px;padding:15px 18px;color:#315740;font-size:.9rem}.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:clamp(22px,4vw,38px);margin:18px 0 56px;box-shadow:0 16px 48px -42px rgba(0,0,0,.4)}.sec{padding:26px 0;border-top:1px solid var(--line)}.sec:first-child{border-top:0;padding-top:0}.sec h2{font-family:var(--serif);font-size:1.35rem;margin:0 0 5px}.sec .sub{margin:0 0 20px;color:var(--muted);font-size:.88rem}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.full{grid-column:1/-1}.field label{display:block;font-size:.82rem;font-weight:600;margin-bottom:7px}.field small{display:block;color:var(--muted);font-size:.75rem;margin-top:5px}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);background:#fff;border-radius:11px;padding:12px 13px;color:var(--ink);outline:none;transition:.2s}.field textarea{min-height:108px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(47,107,79,.09)}.required{color:var(--danger)}.manual{display:none;margin-top:12px}.photo-row{display:flex;gap:18px;align-items:center;flex-wrap:wrap}.photo{width:118px;height:118px;border-radius:18px;border:1px solid var(--line);overflow:hidden;background:#fafafa;display:grid;place-items:center;color:var(--muted);font-size:.8rem;text-align:center}.photo img{width:100%;height:100%;object-fit:cover}.filebtn{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:999px;padding:10px 16px;font-weight:600;font-size:.84rem;cursor:pointer;background:#fff}.filebtn:hover{border-color:var(--accent);color:var(--accent)}.photo-note{color:var(--muted);font-size:.78rem;max-width:420px}.consent{display:flex;gap:10px;align-items:flex-start;background:#fafafa;border:1px solid var(--line);padding:14px;border-radius:12px;font-size:.85rem}.consent input{margin-top:4px}.actions{display:flex;gap:12px;align-items:center;justify-content:flex-end;margin-top:24px;flex-wrap:wrap}.btn{border:0;border-radius:999px;padding:13px 22px;font-weight:600;cursor:pointer}.btn-primary{background:var(--accent);color:#fff}.btn-primary:disabled{opacity:.55;cursor:not-allowed}.status{display:none;margin:18px 0 0;padding:16px 18px;border-radius:13px;font-size:.9rem}.status.ok{display:block;background:#edf6f0;color:#24573a}.status.err{display:block;background:#faeeee;color:#843636}.loading{color:var(--muted);font-size:.84rem;margin-top:8px}.footer{padding:0 0 40px;color:var(--muted);font-size:.78rem;text-align:center}.hp{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important}
+.portal-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(300px,.75fr);gap:22px;align-items:start}.portal-grid .card{margin-top:18px}.preview-panel{position:sticky;top:20px;margin:18px 0 56px}.preview-head{margin-bottom:12px}.preview-head .eyebrow{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600}.preview-head h2{font-family:var(--serif);font-size:1.5rem;font-weight:400;margin:4px 0 5px}.preview-head p{margin:0;color:var(--muted);font-size:.82rem}.web-preview{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px;box-shadow:0 16px 48px -42px rgba(0,0,0,.4)}.preview-browser{display:flex;gap:6px;padding-bottom:15px;margin-bottom:18px;border-bottom:1px solid var(--line)}.preview-browser i{width:8px;height:8px;border-radius:50%;background:var(--line);display:block}.member-preview{display:flex;flex-direction:column;min-height:360px}.member-preview__head{display:flex;gap:15px;align-items:center;margin-bottom:16px}.member-preview__ph{width:92px;height:92px;border-radius:50%;position:relative;padding:3px;background:#fff;flex:none;border:1px solid var(--line);overflow:hidden;display:grid;place-items:center;color:var(--muted);font-size:.72rem;text-align:center}.member-preview__ph img{width:100%;height:100%;border-radius:50%;object-fit:contain;background:#fff}.member-preview__id{min-width:0}.member-preview__id h3{font-family:var(--serif);font-size:1.28rem;font-weight:500;margin:0 0 4px;line-height:1.15}.member-preview__id .th{font-size:.82rem;color:var(--muted)}.preview-role{display:inline-flex;align-self:flex-start;font-size:.63rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);background:var(--soft);padding:5px 10px;border-radius:100px;margin-bottom:11px;font-weight:600}.preview-aff{font-size:.73rem;color:#8a918a;letter-spacing:.02em;margin-bottom:13px}.preview-bio{font-size:.87rem;color:var(--muted);line-height:1.58;margin:0 0 14px}.preview-contact{display:flex;flex-direction:column;gap:5px;margin:2px 0 4px;padding-top:10px;border-top:1px solid var(--line)}.preview-contact span{font-size:.72rem;color:var(--muted);word-break:break-word}.preview-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto;padding-top:15px;border-top:1px solid var(--line)}.preview-tags .t{font-size:.65rem;letter-spacing:.02em;color:var(--muted);padding:4px 8px;border-radius:6px;background:#f0eee7}.preview-empty{color:var(--muted);font-size:.8rem}.preview-note{margin-top:11px;padding:11px 13px;background:var(--soft);border-radius:11px;color:#315740;font-size:.75rem}.preview-links{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px}.preview-links span{font-size:.67rem;padding:5px 8px;border:1px solid var(--line);border-radius:999px;color:var(--accent);background:#fff}
+@media(max-width:980px){.portal-grid{grid-template-columns:1fr}.preview-panel{position:static;margin-top:-20px}.web-preview{max-width:620px;margin:auto}.preview-head{text-align:center}}
+@media(max-width:680px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.hero{padding-top:28px}.actions .btn{width:100%}.member-preview__ph{width:78px;height:78px}.web-preview{padding:19px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top"><div class="brand"><div class="mark"></div><div><b>The AC Lab</b><span>Profile update form</span></div></div></header>
+  <section class="hero">
+    <h1>แบบฟอร์มอัปเดตข้อมูลสมาชิก</h1>
+    <p>สำหรับอาจารย์ นักวิจัย และสมาชิกในแล็บ กรอกหรือแก้ไขข้อมูลของตนเองแล้วกดส่ง ระบบจะส่งข้อมูลไปยัง Manager เพื่อตรวจสอบก่อนเผยแพร่บนเว็บไซต์หลัก</p>
+    <div class="notice"><b>ไม่ต้องสมัครสมาชิกหรือเข้าสู่ระบบ</b> — ข้อมูลที่ส่งจะยังไม่แสดงบนเว็บไซต์จนกว่า Manager จะอนุมัติ</div>
+  </section>
+
+  <div class="portal-grid">
+  <form class="card" id="profileForm">
+    <input class="hp" type="text" id="website_check" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+    <section class="sec">
+      <h2>1. เลือกโปรไฟล์ของคุณ</h2>
+      <p class="sub">เลือกรายชื่อที่มีอยู่ในเว็บไซต์ เพื่อให้ Manager ทราบว่าข้อมูลนี้ต้องนำไปอัปเดตกับใคร</p>
+      <div class="field">
+        <label>ชื่อของคุณในเว็บไซต์ <span class="required">*</span></label>
+        <select id="targetMember" required><option value="">กำลังโหลดรายชื่อสมาชิก…</option></select>
+        <div class="loading" id="memberLoadMsg"></div>
+      </div>
+      <div class="field manual" id="manualWrap">
+        <label>กรอกชื่อที่ใช้อยู่ในเว็บไซต์ / ชื่อสำหรับระบุตัวตน <span class="required">*</span></label>
+        <input id="manualTargetName" placeholder="เช่น Dr. Example Name / ชื่อ-นามสกุล">
+      </div>
+    </section>
+
+    <section class="sec">
+      <h2>2. ผู้ส่งข้อมูล</h2>
+      <p class="sub">ใช้สำหรับติดต่อกลับหาก Manager ต้องการสอบถามเพิ่มเติม</p>
+      <div class="grid">
+        <div class="field"><label>ชื่อผู้ส่ง <span class="required">*</span></label><input id="submitterName" required placeholder="ชื่อ-นามสกุล"></div>
+        <div class="field"><label>อีเมลสำหรับติดต่อ <span class="required">*</span></label><input id="submitterEmail" type="email" required placeholder="name@kku.ac.th"></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h2>3. ข้อมูลที่ต้องการให้แสดง</h2>
+      <p class="sub">เมื่อเลือกรายชื่อ ระบบจะเติมข้อมูลเดิมให้โดยอัตโนมัติ คุณสามารถแก้เฉพาะจุดที่ต้องการได้</p>
+      <div class="grid">
+        <div class="field"><label>Name (English) <span class="required">*</span></label><input id="en" required></div>
+        <div class="field"><label>ชื่อภาษาไทย</label><input id="th"></div>
+        <div class="field"><label>Institution / University</label><input id="institution" placeholder="Khon Kaen University"></div>
+        <div class="field"><label>Country</label><input id="country" placeholder="Thailand"></div>
+        <div class="field"><label>Phone</label><input id="phone" placeholder="+66 ..."></div>
+        <div class="field"><label>Public email</label><input id="email" type="email" placeholder="name@kku.ac.th"></div>
+        <div class="field full"><label>Research interests / Tags</label><input id="tags" placeholder="Plant genomics, Phytochemistry, Cancer biology"><small>คั่นแต่ละหัวข้อด้วย comma (,)</small></div>
+        <div class="field full"><label>Biography / Bio</label><textarea id="bio" placeholder="แนะนำงานวิจัย ความเชี่ยวชาญ หรือบทบาทในแล็บ"></textarea></div>
+        <div class="field"><label>ORCID</label><input id="orcid" placeholder="0000-0000-0000-0000"></div>
+        <div class="field"><label>Google Scholar URL</label><input id="scholar" type="url" placeholder="https://scholar.google.com/..."></div>
+        <div class="field"><label>ResearchGate URL</label><input id="researchgate" type="url" placeholder="https://www.researchgate.net/..."></div>
+        <div class="field"><label>Website / Profile URL</label><input id="website" type="url" placeholder="https://..."></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h2>4. รูปโปรไฟล์</h2>
+      <p class="sub">ไม่จำเป็นต้องอัปโหลดใหม่ หากใช้รูปเดิมให้ปล่อยไว้ได้</p>
+      <div class="photo-row">
+        <div class="photo" id="photoPreview"><span>ยังไม่มีรูป</span></div>
+        <div>
+          <label class="filebtn" for="photoFile">เลือกรูปใหม่</label>
+          <input id="photoFile" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+          <button class="filebtn" id="removePhoto" type="button" style="margin-left:6px;display:none">ใช้รูปเดิม</button>
+          <div class="photo-note">ระบบจะย่อรูปอัตโนมัติก่อนส่ง แนะนำภาพบุคคล JPG/PNG/WEBP และไฟล์ต้นฉบับไม่เกิน 8 MB</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h2>5. หมายเหตุถึง Manager</h2>
+      <div class="field"><textarea id="note" placeholder="เช่น ขอแก้ตำแหน่งงาน, เปลี่ยนอีเมล, อัปเดตหัวข้องานวิจัย ฯลฯ"></textarea></div>
+    </section>
+
+    <label class="consent"><input type="checkbox" id="consent" required><span>ข้าพเจ้ายืนยันว่าข้อมูลที่ส่งเป็นข้อมูลของตนเองหรือได้รับอนุญาตให้ส่ง และยินยอมให้ AC Lab ตรวจสอบก่อนนำไปเผยแพร่</span></label>
+    <div class="actions"><button class="btn btn-primary" id="submitBtn" type="submit">ส่งข้อมูลให้ Manager ตรวจสอบ</button></div>
+    <div class="status" id="statusBox"></div>
+  </form>
+
+  <aside class="preview-panel" aria-live="polite">
+    <div class="preview-head">
+      <div class="eyebrow">LIVE WEBSITE PREVIEW</div>
+      <h2>ตัวอย่างเมื่ออยู่บนเว็บไซต์</h2>
+      <p>ตัวอย่างนี้เปลี่ยนตามข้อมูลที่กำลังกรอก และยังไม่ใช่ข้อมูลที่เผยแพร่จริง</p>
+    </div>
+    <div class="web-preview">
+      <div class="preview-browser"><i></i><i></i><i></i></div>
+      <article class="member-preview">
+        <div class="member-preview__head">
+          <div class="member-preview__ph" id="webPrevPhoto"><span>Profile photo</span></div>
+          <div class="member-preview__id">
+            <h3 id="webPrevName">Your Name</h3>
+            <div class="th" id="webPrevNameTh">ชื่อภาษาไทย</div>
+          </div>
+        </div>
+        <div class="preview-role" id="webPrevRole">Lab member</div>
+        <div class="preview-aff" id="webPrevAff">Institution / University · Country</div>
+        <p class="preview-bio" id="webPrevBio">Biography หรือคำแนะนำงานวิจัยจะปรากฏบริเวณนี้</p>
+        <div class="preview-contact" id="webPrevContact"><span>ข้อมูลติดต่อจะแสดงเมื่อกรอก</span></div>
+        <div class="preview-tags" id="webPrevTags"><span class="t">Research interest</span></div>
+        <div class="preview-links" id="webPrevLinks"></div>
+      </article>
+      <div class="preview-note"><b>Preview only</b> — ข้อมูลจะขึ้นเว็บหลักจริงเมื่อ Manager กดอนุมัติเท่านั้น</div>
+    </div>
+  </aside>
+  </div>
+  <footer class="footer">The AC Lab · Khon Kaen University</footer>
+</div>
+
+<script>
+const SUPA_URL='https://nmzwvxdegtfartbhoixx.supabase.co';
+const SUPA_KEY='sb_publishable_EsNS8St8xkIZgSqEGxp4yQ_y1BmeTDh';
+const supa=window.supabase.createClient(SUPA_URL,SUPA_KEY,{auth:{persistSession:false}});
+let members=[];
+let selectedMember=null;
+let newPhotoData='';
+const $=id=>document.getElementById(id);
+const fields=['en','th','institution','country','phone','email','bio','orcid','scholar','researchgate','website'];
+
+function safeText(v){return v==null?'':String(v)}
+function escHtml(v){return safeText(v).replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]||c));}
+const ROLE_LABELS={lead:'Principal Investigator',co:'Co-Investigator',intl:'International Collaborator',postdoc:'Postdoctoral Researcher',phd:'PhD Student',master:"Master's Student",intern:'Intern','alumni-phd':'PhD Alumni','alumni-master':"Master's Alumni"};
+function updateWebsitePreview(){
+  const en=$('en').value.trim()||'Your Name';
+  const th=$('th').value.trim()||'ชื่อภาษาไทย';
+  const inst=$('institution').value.trim();
+  const country=$('country').value.trim();
+  const bio=$('bio').value.trim()||'Biography หรือคำแนะนำงานวิจัยจะปรากฏบริเวณนี้';
+  const tags=$('tags').value.split(',').map(x=>x.trim()).filter(Boolean);
+  const role=selectedMember?.group?(ROLE_LABELS[selectedMember.group]||selectedMember.group):'Lab member';
+  $('webPrevName').textContent=en;
+  $('webPrevNameTh').textContent=th;
+  $('webPrevRole').textContent=role;
+  $('webPrevAff').textContent=[inst,country].filter(Boolean).join(' · ')||'Institution / University · Country';
+  $('webPrevBio').textContent=bio;
+  const photoSrc=newPhotoData||selectedMember?.img||'';
+  $('webPrevPhoto').innerHTML=photoSrc?`<img src="${photoSrc}" alt="${escHtml(en)}">`:'<span>Profile photo</span>';
+  const contacts=[];
+  if($('email').value.trim())contacts.push('✉ '+$('email').value.trim());
+  if($('phone').value.trim())contacts.push('☎ '+$('phone').value.trim());
+  $('webPrevContact').innerHTML=contacts.length?contacts.map(x=>`<span>${escHtml(x)}</span>`).join(''):'<span>ข้อมูลติดต่อจะแสดงเมื่อกรอก</span>';
+  $('webPrevTags').innerHTML=(tags.length?tags:['Research interest']).slice(0,8).map(x=>`<span class="t">${escHtml(x)}</span>`).join('');
+  const links=[];
+  if($('orcid').value.trim())links.push('ORCID');
+  if($('scholar').value.trim())links.push('Google Scholar');
+  if($('researchgate').value.trim())links.push('ResearchGate');
+  if($('website').value.trim())links.push('Website');
+  $('webPrevLinks').innerHTML=links.map(x=>`<span>${x}</span>`).join('');
+}
+function setStatus(type,html){const b=$('statusBox');b.className='status '+type;b.innerHTML=html;b.scrollIntoView({behavior:'smooth',block:'nearest'});}
+function clearStatus(){const b=$('statusBox');b.className='status';b.textContent='';}
+
+async function loadMembers(){
+  const sel=$('targetMember');
+  try{
+    const {data,error}=await supa.from('site_content').select('data').eq('id',1).single();
+    if(error)throw error;
+    members=Array.isArray(data?.data?.members)?data.data.members:[];
+    sel.innerHTML='<option value="">— เลือกชื่อของคุณ —</option>'+members.map((m,i)=>`<option value="${i}">${safeText(m.en)}${m.th?' — '+safeText(m.th):''}</option>`).join('')+'<option value="manual">ไม่พบชื่อของฉัน / ยังไม่มีในเว็บไซต์</option>';
+    $('memberLoadMsg').textContent=members.length?`พบ ${members.length} โปรไฟล์จากเว็บไซต์หลัก`:'ไม่พบรายชื่อในระบบ สามารถเลือก “ไม่พบชื่อของฉัน” ได้';
+  }catch(e){
+    console.error(e);members=[];
+    sel.innerHTML='<option value="">— เลือก —</option><option value="manual">ไม่พบชื่อของฉัน / กรอกชื่อเอง</option>';
+    $('memberLoadMsg').textContent='ไม่สามารถโหลดรายชื่อได้ในขณะนี้ แต่ยังสามารถกรอกและส่งแบบฟอร์มได้';
+  }
+}
+
+function showPhoto(src){const p=$('photoPreview');p.innerHTML=src?`<img src="${src}" alt="preview">`:'<span>ยังไม่มีรูป</span>';}
+function fillMember(m){
+  selectedMember=m||null;
+  fields.forEach(k=>$(k).value=safeText(m?.[k]));
+  $('tags').value=Array.isArray(m?.tags)?m.tags.join(', '):safeText(m?.tags);
+  newPhotoData='';showPhoto(m?.img||'');$('removePhoto').style.display='none';
+  if(m?.en&&!$('submitterName').value)$('submitterName').value=m.en;
+  if(m?.email&&!$('submitterEmail').value)$('submitterEmail').value=m.email;
+  updateWebsitePreview();
+}
+
+$('targetMember').addEventListener('change',e=>{
+  clearStatus();const v=e.target.value;
+  if(v==='manual'){$('manualWrap').style.display='block';$('manualTargetName').required=true;fillMember(null);updateWebsitePreview();}
+  else{$('manualWrap').style.display='none';$('manualTargetName').required=false;$('manualTargetName').value='';if(v!=='')fillMember(members[Number(v)]);else fillMember(null);}
+});
+
+$('photoFile').addEventListener('change',e=>{
+  const f=e.target.files?.[0];if(!f)return;
+  if(f.size>8*1024*1024){setStatus('err','รูปมีขนาดใหญ่เกิน 8 MB กรุณาเลือกรูปใหม่');e.target.value='';return;}
+  const rd=new FileReader();
+  rd.onload=()=>{const img=new Image();img.onload=()=>{
+    const max=780,scale=Math.min(1,max/Math.max(img.width,img.height));
+    const c=document.createElement('canvas');c.width=Math.round(img.width*scale);c.height=Math.round(img.height*scale);
+    c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+    newPhotoData=c.toDataURL('image/jpeg',0.78);showPhoto(newPhotoData);$('removePhoto').style.display='inline-flex';updateWebsitePreview();
+  };img.src=rd.result};rd.readAsDataURL(f);
+});
+$('removePhoto').addEventListener('click',()=>{newPhotoData='';$('photoFile').value='';showPhoto(selectedMember?.img||'');$('removePhoto').style.display='none';updateWebsitePreview();});
+
+$('profileForm').addEventListener('submit',async e=>{
+  e.preventDefault();clearStatus();
+  if($('website_check').value)return;
+  const targetVal=$('targetMember').value;
+  if(!targetVal){setStatus('err','กรุณาเลือกชื่อของคุณในเว็บไซต์');return;}
+  const targetName=targetVal==='manual'?$('manualTargetName').value.trim():safeText(selectedMember?.en).trim();
+  if(!targetName){setStatus('err','กรุณาระบุชื่อโปรไฟล์ที่ต้องการอัปเดต');return;}
+  const last=Number(localStorage.getItem('aclab_profile_submit_at')||0);
+  if(Date.now()-last<30000){setStatus('err','เพิ่งมีการส่งข้อมูล กรุณารอสักครู่ก่อนส่งซ้ำ');return;}
+  const proposed={
+    en:$('en').value.trim(),th:$('th').value.trim(),institution:$('institution').value.trim(),country:$('country').value.trim(),
+    phone:$('phone').value.trim(),email:$('email').value.trim(),bio:$('bio').value.trim(),
+    tags:$('tags').value.split(',').map(x=>x.trim()).filter(Boolean),orcid:$('orcid').value.trim(),scholar:$('scholar').value.trim(),
+    researchgate:$('researchgate').value.trim(),website:$('website').value.trim()
+  };
+  if(newPhotoData)proposed.img=newPhotoData;
+  if(!proposed.en){setStatus('err','กรุณากรอก Name (English)');return;}
+  const current=selectedMember?{
+    en:selectedMember.en||'',th:selectedMember.th||'',institution:selectedMember.institution||'',country:selectedMember.country||'',phone:selectedMember.phone||'',email:selectedMember.email||'',bio:selectedMember.bio||'',tags:selectedMember.tags||[],img:selectedMember.img||'',orcid:selectedMember.orcid||'',scholar:selectedMember.scholar||'',researchgate:selectedMember.researchgate||'',website:selectedMember.website||'',group:selectedMember.group||'',pi:!!selectedMember.pi
+  }:{};
+  const btn=$('submitBtn');btn.disabled=true;btn.textContent='กำลังส่งข้อมูล…';
+  try{
+    const payload={
+      target_member_name:targetName,
+      target_member_email:selectedMember?.email||null,
+      submitted_by_name:$('submitterName').value.trim(),
+      submitter_email:$('submitterEmail').value.trim(),
+      current_data:current,
+      proposed_data:proposed,
+      note:$('note').value.trim()||null,
+      status:'pending'
+    };
+    const {data,error}=await supa.from('profile_update_requests').insert(payload).select('id').single();
+    if(error)throw error;
+    localStorage.setItem('aclab_profile_submit_at',String(Date.now()));
+    const code=data?.id?data.id.split('-')[0].toUpperCase():'';
+    setStatus('ok',`<b>ส่งข้อมูลเรียบร้อยแล้ว</b><br>ข้อมูลถูกส่งไปยัง Manager เพื่อรอตรวจสอบก่อนเผยแพร่${code?`<br><small>รหัสอ้างอิง: <b>${code}</b></small>`:''}`);
+    $('note').value='';$('photoFile').value='';newPhotoData='';$('removePhoto').style.display='none';
+  }catch(err){console.error(err);setStatus('err','ส่งข้อมูลไม่สำเร็จ กรุณาตรวจสอบการตั้งค่า Supabase/SQL แล้วลองอีกครั้ง<br><small>'+safeText(err.message)+'</small>');}
+  finally{btn.disabled=false;btn.textContent='ส่งข้อมูลให้ Manager ตรวจสอบ';}
+});
+['en','th','institution','country','phone','email','tags','bio','orcid','scholar','researchgate','website'].forEach(id=>$(id).addEventListener('input',updateWebsitePreview));
+$('manualTargetName').addEventListener('input',()=>{if(!$('en').value.trim()){$('webPrevName').textContent=$('manualTargetName').value.trim()||'Your Name';}});
+loadMembers().then(updateWebsitePreview);
+</script>
+</body>
+</html>
