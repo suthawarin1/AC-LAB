@@ -2238,6 +2238,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
     <div class="admin__body" id="adminBody" style="display:none">
 <div class="admin__tabs">
   <button class="atab active" data-tab="team" onclick="adminTab('team',this)">Team</button>
+  <button class="atab" data-tab="profileRequests" onclick="adminTab('profileRequests',this)">Profile Requests</button>
         <button class="atab" data-tab="grantteam" onclick="adminTab('grantteam',this)">Grant Team</button>        <button class="atab" data-tab="news" onclick="adminTab('news',this)">News</button>
         <button class="atab" data-tab="pubs" onclick="adminTab('pubs',this)">Publications</button>
         <button class="atab" data-tab="ip" onclick="adminTab('ip',this)">IP / Patents</button>
@@ -4053,8 +4054,77 @@ function pickImage(cb){const inp=document.createElement('input');inp.type='file'
 function photoWidget(name,isNews){   let av;   if(formImg)av=`<img class="prev" src="${formImg}">`;   else if(isNews)av=`<span class="prev" style="display:flex;align-items:center;justify-content:center;color:var(--faint)">${icon('i-scope')}</span>`;   else av=`<span class="mono-av" style="background:${hue(name||'?')}">${initials(name||'?')}</span>`;   return `<div style="display:flex;flex-direction:column;gap:10px;width:100%">     <div style="display:flex;gap:12px;align-items:center">       ${av}       <div><div class="adm-file" onclick="pickImage(function(d){formImg=d;refreshPhoto(${isNews?'true':'false'})})">${icon('i-up')} ${lang==='th'?'อัปโหลดรูป':'Upload image'}</div>${formImg?`<div class="adm-file" style="color:var(--muted);margin-top:5px" onclick="formImg='';refreshPhoto(${isNews?'true':'false'})">${lang==='th'?'ลบรูป':'Remove'}</div>`:''}</div>     </div>     ${driveLinkRow('drv_'+(isNews?'n':'f'),'useDriveFormImg')}   </div>`; }
 window.refreshPhoto=function(isNews){const w=el(isNews?'n_photowrap':'f_photowrap');if(w)w.innerHTML=photoWidget(isNews?(el('n_title')?el('n_title').value:''):(el('f_en')?el('f_en').value:''),isNews);};
 
+
+/* ===== SIMPLE PUBLIC PROFILE UPDATE REQUESTS ===== */
+let PROFILE_REQUESTS=[];
+const PR_FIELDS=[
+  ['en','Name (English)'],['th','ชื่อภาษาไทย'],['institution','Institution / University'],['country','Country'],
+  ['phone','Phone'],['email','Public email'],['tags','Research interests / Tags'],['bio','Biography / Bio'],
+  ['orcid','ORCID'],['scholar','Google Scholar'],['researchgate','ResearchGate'],['website','Website'],['img','Profile photo']
+];
+function prText(v){if(Array.isArray(v))return v.join(', ');if(v===true)return 'Yes';if(v===false)return 'No';return v==null?'':String(v);}
+function prSafe(v){return esc(prText(v));}
+function prDate(v){try{return new Date(v).toLocaleString(lang==='th'?'th-TH':'en-GB');}catch(e){return v||'';}}
+async function admProfileRequestsList(){
+  const c=el('adminContent');
+  c.innerHTML=`<div class="data-card"><h4>${icon('i-users')} ${lang==='th'?'คำขออัปเดตโปรไฟล์':'Profile update requests'}</h4><p>${lang==='th'?'ข้อมูลจากฟอร์มสาธารณะจะเข้ามารอตรวจสอบที่นี่ ไม่มีการล็อกอินสำหรับผู้กรอก และจะไม่ขึ้นเว็บไซต์จนกว่าคุณจะกดอนุมัติ':'Submissions from the public form wait here for review. Submitters do not need to sign in, and nothing is published until you approve it.'}</p></div><div id="prList"><p style="color:var(--muted)">Loading…</p></div>`;
+  if(!window.supa){el('prList').innerHTML='<p style="color:var(--muted)">Supabase is not connected.</p>';return;}
+  const {data,error}=await supa.from('profile_update_requests').select('*').order('created_at',{ascending:false});
+  if(error){el('prList').innerHTML=`<div class="data-card danger"><p>${esc(error.message)}</p></div>`;return;}
+  PROFILE_REQUESTS=data||[];
+  const pending=PROFILE_REQUESTS.filter(x=>x.status==='pending');
+  const history=PROFILE_REQUESTS.filter(x=>x.status!=='pending').slice(0,30);
+  let h=`<div class="adm-section-t">${pending.length} ${lang==='th'?'รายการรอตรวจสอบ':'pending request(s)'}</div>`;
+  h+=pending.length?pending.map(r=>`<div class="adm-row" style="align-items:flex-start"><span class="mono-av" style="background:${hue(r.target_member_name)}">${initials(r.target_member_name)}</span><div class="r-main"><h4>${esc(r.target_member_name)}</h4><div class="r-sub">${lang==='th'?'ผู้ส่ง':'Submitted by'}: ${esc(r.submitted_by_name)} · ${esc(r.submitter_email)}</div><div class="r-sub">${prDate(r.created_at)}${r.note?' · '+esc(r.note.slice(0,80)):''}</div></div><div class="r-act"><button class="btn btn--primary btn--sm" onclick="admReviewProfileRequest('${r.id}')">${lang==='th'?'ตรวจสอบ':'Review'}</button></div></div>`).join(''):`<div class="data-card"><p>${lang==='th'?'ไม่มีรายการรอตรวจสอบ':'No pending requests.'}</p></div>`;
+  if(history.length){h+=`<div class="adm-section-t" style="margin-top:26px">${lang==='th'?'ประวัติล่าสุด':'Recent history'}</div>`+history.map(r=>`<div class="adm-row" style="opacity:.68"><span class="mono-av" style="background:${hue(r.target_member_name)}">${r.status==='approved'?'✓':'×'}</span><div class="r-main"><h4>${esc(r.target_member_name)}</h4><div class="r-sub">${esc(r.status)} · ${prDate(r.reviewed_at||r.created_at)}${r.reviewed_by?' · '+esc(r.reviewed_by):''}</div></div></div>`).join('');}
+  el('prList').innerHTML=h;
+}
+window.admReviewProfileRequest=async function(id){
+  const r=PROFILE_REQUESTS.find(x=>x.id===id);if(!r)return;
+  const proposed=r.proposed_data||{};
+  let defaultIdx=MEMBERS.findIndex(m=>(r.target_member_email&&m.email&&m.email.toLowerCase()===r.target_member_email.toLowerCase())||m.en===r.target_member_name);
+  const opts=MEMBERS.map((m,i)=>`<option value="${i}" ${i===defaultIdx?'selected':''}>${esc(m.en)}${m.th?' — '+esc(m.th):''}</option>`).join('');
+  const current=defaultIdx>=0?MEMBERS[defaultIdx]:(r.current_data||{});
+  const changed=PR_FIELDS.filter(([k])=>{if(k==='img')return !!proposed.img;return JSON.stringify(current?.[k]??'')!==JSON.stringify(proposed?.[k]??'');});
+  const rows=(changed.length?changed:PR_FIELDS).map(([k,label])=>{
+    const oldv=current?.[k];const newv=proposed?.[k];
+    if(k==='img')return `<div class="adm-row" style="align-items:flex-start"><div class="r-main"><h4>${label}</h4><div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px"><div><div class="r-sub">Current</div>${oldv?`<img class="thumb" style="width:90px;height:90px" src="${safeImgSrc(oldv)}">`:'—'}</div><div><div class="r-sub">Proposed</div>${newv?`<img class="thumb" style="width:90px;height:90px" src="${safeImgSrc(newv)}">`:(lang==='th'?'ไม่เปลี่ยนรูป':'No new photo')}</div></div></div></div>`;
+    return `<div class="adm-row" style="align-items:flex-start"><div class="r-main"><h4>${label}</h4><div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:7px"><div><div class="r-sub">${lang==='th'?'ข้อมูลปัจจุบัน':'Current'}</div><div style="white-space:pre-wrap;word-break:break-word">${prSafe(oldv)||'—'}</div></div><div><div class="r-sub">${lang==='th'?'ข้อมูลที่ขอแก้':'Proposed'}</div><div style="white-space:pre-wrap;word-break:break-word;color:var(--accent)">${prSafe(newv)||'—'}</div></div></div></div></div>`;
+  }).join('');
+  el('adminContent').innerHTML=`<span class="adm-back" onclick="renderAdmin('profileRequests')">${icon('i-arrow')} ${lang==='th'?'กลับ':'Back'}</span>
+  <div class="data-card"><h4>${esc(r.target_member_name)}</h4><p>${lang==='th'?'ผู้ส่ง':'Submitted by'}: <b>${esc(r.submitted_by_name)}</b> · ${esc(r.submitter_email)}<br>${prDate(r.created_at)}${r.note?`<br><br><b>${lang==='th'?'หมายเหตุ':'Note'}:</b> ${esc(r.note)}`:''}</p></div>
+  <div class="adm-form"><div class="adm-field"><label>${lang==='th'?'นำข้อมูลนี้ไปอัปเดตสมาชิกคนใด':'Apply this update to'}</label><select id="pr_target">${opts}</select>${defaultIdx<0?`<div style="font-size:.8rem;color:#a9772a;margin-top:6px">${lang==='th'?'ระบบจับคู่ชื่ออัตโนมัติไม่ได้ กรุณาเลือกสมาชิกให้ถูกต้องก่อนอนุมัติ':'No automatic match. Choose the correct member before approval.'}</div>`:''}</div></div>
+  <div class="adm-section-t">${lang==='th'?'เปรียบเทียบข้อมูล':'Compare changes'}</div>${rows}
+  <div class="adm-form" style="margin-top:18px"><div class="adm-field"><label>${lang==='th'?'หมายเหตุจาก Manager (ถ้ามี)':'Manager note (optional)'}</label><textarea id="pr_review_note"></textarea></div><div class="adm-actions"><button class="btn btn--ghost" onclick="admRejectProfileRequest('${r.id}')">${lang==='th'?'ปฏิเสธ':'Reject'}</button><button class="btn btn--primary" onclick="admApproveProfileRequest('${r.id}')">${icon('i-check')} ${lang==='th'?'อนุมัติและเผยแพร่':'Approve & Publish'}</button></div></div>`;
+};
+window.admApproveProfileRequest=async function(id){
+  const r=PROFILE_REQUESTS.find(x=>x.id===id);if(!r)return;
+  const idx=Number(val('pr_target'));if(!Number.isInteger(idx)||!MEMBERS[idx]){toast(lang==='th'?'กรุณาเลือกสมาชิกที่จะอัปเดต':'Choose a target member');return;}
+  if(!confirm(lang==='th'?'อนุมัติและนำข้อมูลนี้ขึ้นเว็บไซต์หลัก?':'Approve and publish this update to the main website?'))return;
+  const p=r.proposed_data||{}, old=MEMBERS[idx], allowed=['en','th','institution','country','phone','email','bio','orcid','scholar','researchgate','website'];
+  const merged=Object.assign({},old);
+  allowed.forEach(k=>{if(Object.prototype.hasOwnProperty.call(p,k))merged[k]=p[k];});
+  if(Array.isArray(p.tags))merged.tags=p.tags;
+  if(p.img)merged.img=p.img;
+  merged.group=old.group;if(old.pi)merged.pi=true;
+  MEMBERS[idx]=merged;
+  saveStore();renderProjectTeam();renderTeam(teamCat);
+  const note=val('pr_review_note').trim();
+  const {data:{user}}=await supa.auth.getUser();
+  const {error}=await supa.from('profile_update_requests').update({status:'approved',review_note:note||null,reviewed_at:new Date().toISOString(),reviewed_by:user?.email||null}).eq('id',id);
+  if(error){toast('Profile published, but request status update failed: '+error.message);return;}
+  toast(lang==='th'?'อนุมัติและเผยแพร่แล้ว':'Approved and published');renderAdmin('profileRequests');
+};
+window.admRejectProfileRequest=async function(id){
+  if(!confirm(lang==='th'?'ปฏิเสธคำขอนี้?':'Reject this request?'))return;
+  const note=val('pr_review_note').trim();const {data:{user}}=await supa.auth.getUser();
+  const {error}=await supa.from('profile_update_requests').update({status:'rejected',review_note:note||null,reviewed_at:new Date().toISOString(),reviewed_by:user?.email||null}).eq('id',id);
+  if(error){toast(error.message);return;}toast(lang==='th'?'ปฏิเสธแล้ว':'Rejected');renderAdmin('profileRequests');
+};
+
 function renderAdmin(tab){adminCurrentTab=tab;const c=el('adminContent');
   if(tab==='team')c.innerHTML=admTeamList();
+  else if(tab==='profileRequests')admProfileRequestsList();
   else if(tab==='news')c.innerHTML=admNewsList();
   else if(tab==='pubs')c.innerHTML=admPubList();
   else if(tab==='ip')c.innerHTML=admIPList();
