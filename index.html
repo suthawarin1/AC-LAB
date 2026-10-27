@@ -1208,7 +1208,17 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
   .lang{padding:8px 13px}
 }
 
+
+/* Lab profile v3: readable research / internship metadata */
+.member-topic{font-family:var(--sans);font-size:12px;line-height:1.45;color:var(--accent-ink);margin-top:7px;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.member-modal .mm-info{max-height:min(86vh,850px);overflow-y:auto;overscroll-behavior:contain}
+.mm-metadata{margin-top:20px;border-top:1px solid var(--line);padding-top:14px}
+.mm-detail-title{font-weight:600;font-family:var(--sans);color:var(--accent);font-size:12px;margin:14px 0}
+.mm-detail{margin-bottom:14px}.mm-detail span{font-family:var(--mono);font-size:10px;color:var(--muted)}.mm-detail p{font-size:13px;white-space:pre-line;line-height:1.5;margin:4px 0 0;overflow-wrap:anywhere}
+.mm-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.mm-gallery img{width:100%;height:74px;border-radius:7px;object-fit:cover}
+@media(max-width:520px){.member-modal .mm-info{max-height:unset;overflow-y:visible}.member-modal .modal__box{max-height:88vh;overflow-y:auto}}
 </style>
+<link rel="stylesheet" href="main-v4.css">
 </head>
 <body>
 
@@ -1249,6 +1259,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 <symbol id="i-building" viewBox="0 0 24 24"><path d="M2 9 12 3l10 6M3 9h18M5 9v9M9 9v9M15 9v9M19 9v9M3 21h18"/></symbol>
 </defs></svg>
 
+<a class="site-skip" href="#hero">Skip to content / ข้ามไปเนื้อหา</a>
 <div id="pre">
   <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="21" stroke="var(--line-2)" stroke-width="3"/><circle class="rot" cx="24" cy="24" r="21" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-dasharray="30 110"/><circle cx="24" cy="24" r="6" fill="var(--accent)"/></svg>
   <div class="lb">The&nbsp;AC&nbsp;Lab</div>
@@ -1276,6 +1287,8 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
           <a href="#value-chain" class="nav-scroll" data-i18n="nav_value_chain">Value chain</a>
           <a href="#pipeline" class="nav-scroll" data-i18n="nav_pipeline">Pipeline</a>
           <a href="#innovation" class="nav-scroll" data-i18n="nav_innov">Innovation</a>
+          <a href="#members" class="nav-scroll">Lab Directory / สมาชิกแล็บ</a>
+          <a href="submit/index.html?category=team">📩 Submit Information</a>
           <a href="portfolio/index.html" data-i18n="nav_portfolio">Portfolio</a>
           <a href="awards/index.html" data-i18n="nav_awards">Awards</a>
           <a href="shop/index.html" data-i18n="nav_shop">Shop</a>
@@ -1299,6 +1312,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
   <div class="drawer__top"><span>Menu</span><button class="iconbtn" onclick="closeDrawer()"><svg class="icon"><use href="#i-close"/></svg></button></div>
   <button type="button" class="drawer-link" onclick="toggleTheme()"><svg class="icon"><use href="#i-moon"/></svg> <span data-i18n="nav_theme">Toggle theme</span></button>
   <button type="button" class="drawer-link" onclick="toggleLang()"><svg class="icon"><use href="#i-lang"/></svg> <span data-i18n="nav_lang">Change language</span></button>
+  <a href="submit/index.html?category=team"><svg class="icon"><use href="#i-send"/></svg> Submit Information / ส่งข้อมูล</a>
   <a href="#value-chain" class="nav-scroll"><svg class="icon"><use href="#i-wave"/></svg> <span data-i18n="nav_value_chain">Value chain</span></a>
   <a href="#research" class="nav-scroll"><svg class="icon"><use href="#i-flask"/></svg> <span data-i18n="nav_research">Research</span></a>
   <a href="#pipeline" class="nav-scroll"><svg class="icon"><use href="#i-wave"/></svg> <span data-i18n="nav_pipeline">Pipeline</span></a>
@@ -1391,6 +1405,15 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
       </div>
 
     </div>
+  </div>
+</section>
+
+<!-- v4: clear entry points to lab member directory and contribution portal -->
+<section class="lab-shortcuts" aria-label="Explore the AC Lab">
+  <div class="wrap lab-shortcuts__grid">
+    <a href="#members" class="lab-shortcut nav-scroll"><span class="lab-shortcut__index">01 / PEOPLE</span><span class="lab-shortcut__title" id="shortcutDirectory">Explore the lab directory</span><span class="lab-shortcut__symbol">↗</span></a>
+    <a href="submit/index.html?category=team" class="lab-shortcut"><span class="lab-shortcut__index">02 / MEMBERS</span><span class="lab-shortcut__title" id="shortcutRegister">Register / update a profile</span><span class="lab-shortcut__symbol">↗</span></a>
+    <a href="#research" class="lab-shortcut nav-scroll"><span class="lab-shortcut__index">03 / DISCOVER</span><span class="lab-shortcut__title" id="shortcutResearch">Discover our research</span><span class="lab-shortcut__symbol">↗</span></a>
   </div>
 </section>
 
@@ -1851,25 +1874,59 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
   </div>
 </section>
 
-<!-- LAB MEMBERS (students) -->
-<section id="members" class="section">
+<!-- LAB MEMBER DIRECTORY — v4 -->
+<section id="members" class="section lab-directory-section" aria-labelledby="directoryHeading">
   <div class="wrap">
-    <div class="sec-head center reveal">
-<span class="eyebrow" data-i18n="mem_eye">In the lab</span>
-      <h2 class="h-sec" data-i18n="mem_title">Lab members</h2>
-      <p class="lede" data-i18n="mem_lede">Current students, interns, and lab alumni.</p>
-      <div class="filters" id="filters">
-        <button class="filter active" data-cat="phd" onclick="filterTeam('phd',this)" data-i18n="team_phd">PhD</button>
-        <button class="filter" data-cat="master" onclick="filterTeam('master',this)" data-i18n="team_master">Master's</button>
-        <button class="filter" data-cat="intern" onclick="filterTeam('intern',this)" data-i18n="team_intern">Interns</button>
-        <button class="filter" data-cat="alumni" onclick="filterTeam('alumni',this)" data-i18n="team_alumni">Alumni</button>
+    <div class="directory-heading reveal">
+      <div class="directory-heading__copy">
+        <span class="eyebrow" data-i18n="mem_eye">In the lab</span>
+        <h2 class="h-sec" id="directoryHeading" data-i18n="mem_title">Lab members</h2>
+        <p class="lede" id="directoryIntro">Find students, research interns, lab staff and alumni. Explore their research interests, internships and thesis projects.</p>
       </div>
-      <div class="filters filters--sub" id="alumniSub" style="display:none">
-        <button class="filter active" data-cat="alumni-phd" onclick="filterAlumniSub('alumni-phd',this)" data-i18n="team_alumni_sub_phd">PhD</button>
-        <button class="filter" data-cat="alumni-master" onclick="filterAlumniSub('alumni-master',this)" data-i18n="team_alumni_sub_master">Master's</button>
+      <div class="directory-heading__actions">
+        <a class="btn btn--primary" href="submit/index.html?category=team" id="registerProfileLink">
+          <svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span id="directoryRegisterText">Register your profile</span>
+        </a>
+        <a class="btn btn--ghost" href="submit/index.html?category=team&amp;action=update"><svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg><span id="directoryUpdateText">Update a profile</span></a>
       </div>
-        </div>
-    <div class="team-grid" id="teamGrid"></div>
+    </div>
+    <div id="directoryStats" class="directory-stats" aria-label="Lab member statistics"></div>
+    <div class="directory-toolbar">
+      <div class="directory-search">
+        <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+        <label class="sr-only" for="directorySearch">Search lab members</label>
+        <input id="directorySearch" type="search" autocomplete="off" maxlength="150" placeholder="Search names, universities, research topics, internship year…" oninput="directorySearchChanged(this.value)">
+        <button type="button" id="directoryClear" class="directory-clear" onclick="directoryClearSearch()" aria-label="Clear search" hidden>×</button>
+      </div>
+      <label class="directory-sort-label" for="directorySort">Sort
+        <select id="directorySort" onchange="directorySortChanged(this.value)">
+          <option value="featured">Default order</option>
+          <option value="az">Name A–Z</option>
+          <option value="za">Name Z–A</option>
+          <option value="recent">Newest year</option>
+        </select>
+      </label>
+    </div>
+    <div class="directory-filter-row">
+      <div class="filters" id="filters" role="group" aria-label="Filter member type">
+        <button class="filter active" type="button" data-cat="all" onclick="filterTeam('all',this)">All members <span class="filter-n" data-count="all"></span></button>
+        <button class="filter" type="button" data-cat="phd" onclick="filterTeam('phd',this)" data-i18n="team_phd">PhD</button>
+        <button class="filter" type="button" data-cat="master" onclick="filterTeam('master',this)" data-i18n="team_master">Master's</button>
+        <button class="filter" type="button" data-cat="intern" onclick="filterTeam('intern',this)" data-i18n="team_intern">Interns</button>
+        <button class="filter" type="button" data-cat="staff" onclick="filterTeam('staff',this)">Staff &amp; assistants</button>
+        <button class="filter" type="button" data-cat="alumni" onclick="filterTeam('alumni',this)" data-i18n="team_alumni">Alumni</button>
+      </div>
+      <p class="directory-results" id="directoryResults" role="status" aria-live="polite"></p>
+    </div>
+    <div class="filters filters--sub" id="alumniSub" style="display:none">
+      <button class="filter active" type="button" data-cat="alumni-phd" onclick="filterAlumniSub('alumni-phd',this)" data-i18n="team_alumni_sub_phd">PhD</button>
+      <button class="filter" type="button" data-cat="alumni-master" onclick="filterAlumniSub('alumni-master',this)" data-i18n="team_alumni_sub_master">Master's</button>
+    </div>
+    <div class="team-grid directory-grid" id="teamGrid"></div>
+    <div class="directory-footer">
+      <div><strong id="directoryFooterTitle">Are you part of AC Lab?</strong><p id="directoryFooterDesc">Help keep our lab directory current. Submit a profile with internship, thesis, project and photo links. All submissions are reviewed before publication.</p></div>
+      <a class="btn btn--ghost" href="submit/index.html?category=team"><span id="directoryFooterAction">Submit member information</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
   </div>
 </section>
 
@@ -1904,6 +1961,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
       <h2 class="h-sec" style="margin-top:16px" data-i18n="join_title">Your route into the lab</h2>
       <p class="lede" style="margin-top:16px" data-i18n="join_lede">We welcome curious students from biology, genetics and biochemistry. Here's how to apply.</p>
       <div class="road" id="road"></div>
+      <div class="join-submit-note"><span id="joinMemberNote">Already a student or staff member? Register your lab profile.</span><a href="submit/index.html?category=team" id="joinMemberLink">Submit member information ↗</a></div>
       <a href="https://gs.kku.ac.th" target="_blank" rel="noopener" class="btn btn--primary" style="margin-top:32px" data-i18n="join_cta">Visit the Graduate School <svg class="icon"><use href="#i-ext"/></svg></a>
     </div>
     <div class="reveal" data-d="1">
@@ -2039,6 +2097,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 <div>
         <h5 data-i18n="foot_connect">Connect</h5>
         <ul>
+          <li><a href="submit/index.html">Submit Information / ส่งข้อมูล</a></li>
           <li><a href="shop/index.html" data-i18n="nav_shop">Shop</a></li>
           <li><a href="#join" class="nav-scroll" data-i18n="nav_join">Join the lab</a></li>          <li><a href="mailto:raccha@kku.ac.th">raccha@kku.ac.th</a></li>
           <li><a href="https://gs.kku.ac.th" target="_blank" rel="noopener" data-i18n="foot_grad">Graduate School</a></li>
@@ -2126,7 +2185,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
       <div class="mm-aff" id="mmAff"></div>
       <div class="mm-contact" id="mmContact"></div>
       <p class="mm-bio" id="mmBio"></p>
-            <div class="mm-tags" id="mmTags"></div>
+            <div class="mm-tags" id="mmTags"></div><div id="mmMeta" class="mm-metadata"></div>
     </div>
   </div>
 </div>
@@ -2237,6 +2296,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 
     <div class="admin__body" id="adminBody" style="display:none">
 <div class="admin__tabs">
+  <button class="atab" data-tab="submissions" onclick="adminTab('submissions',this)">📥 Submissions</button>
   <button class="atab active" data-tab="team" onclick="adminTab('team',this)">Team</button>
   <button class="atab" data-tab="profileRequests" onclick="adminTab('profileRequests',this)">Profile Requests</button>
         <button class="atab" data-tab="grantteam" onclick="adminTab('grantteam',this)">Grant Team</button>        <button class="atab" data-tab="news" onclick="adminTab('news',this)">News</button>
@@ -2258,10 +2318,6 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spa
 <button class="atab" data-tab="cards" onclick="adminTab('cards',this)">Cards</button>
 <button class="atab" data-tab="sections" onclick="adminTab('sections',this)">Sections</button>
         <button class="atab" data-tab="data" onclick="adminTab('data',this)">Data</button>      </div>
-      <div class="admin__content" id="adminContent"></div>
-    </div>
-  </div>
-</div>
       <div class="admin__content" id="adminContent"></div>
     </div>
   </div>
@@ -3591,9 +3647,9 @@ window.openVideo=function(i){
 };
 
 /* ============ TEAM ROSTER ============ */
-const ROLE_EN={lead:'Project leader · PI',co:'Co-Investigator',intl:'International co-researcher',postdoc:'Postdoctoral researcher',phd:'PhD student',master:'Master\u2019s student',intern:'Research intern','alumni-phd':'PhD alumnus/alumna','alumni-master':'Master\u2019s alumnus/alumna'};const ROLE_TH={lead:'หัวหน้าโครงการ',co:'ผู้ร่วมวิจัย',intl:'ผู้ร่วมวิจัย (ต่างประเทศ)',postdoc:'นักวิจัยหลังปริญญาเอก',phd:'นักศึกษาปริญญาเอก',master:'นักศึกษาปริญญาโท',intern:'นักศึกษาฝึกงาน','alumni-phd':'ศิษย์เก่า ปริญญาเอก','alumni-master':'ศิษย์เก่า ปริญญาโท'};function initials(n){return (n||'').replace(/\(.*?\)/g,'').trim().split(/\s+/).filter(w=>!/^(prof|dr|assoc|asst|ms|mr|mrs|professor)\.?$/i.test(w)).slice(0,2).map(w=>w[0]).join('').toUpperCase()||'?';}
+const ROLE_EN={lead:'Project leader · PI',co:'Co-Investigator',intl:'International co-researcher',postdoc:'Postdoctoral researcher',phd:'PhD student',master:'Master\u2019s student',intern:'Research intern','alumni-phd':'PhD alumnus/alumna','alumni-master':'Master\u2019s alumnus/alumna',staff:'Laboratory staff',ra:'Research assistant'};const ROLE_TH={lead:'หัวหน้าโครงการ',co:'ผู้ร่วมวิจัย',intl:'ผู้ร่วมวิจัย (ต่างประเทศ)',postdoc:'นักวิจัยหลังปริญญาเอก',phd:'นักศึกษาปริญญาเอก',master:'นักศึกษาปริญญาโท',intern:'นักศึกษาฝึกงาน','alumni-phd':'ศิษย์เก่า ปริญญาเอก','alumni-master':'ศิษย์เก่า ปริญญาโท',staff:'บุคลากรประจำห้องปฏิบัติการ',ra:'ผู้ช่วยวิจัย'};function initials(n){return (n||'').replace(/\(.*?\)/g,'').trim().split(/\s+/).filter(w=>!/^(prof|dr|assoc|asst|ms|mr|mrs|professor)\.?$/i.test(w)).slice(0,2).map(w=>w[0]).join('').toUpperCase()||'?';}
 function hue(n){let h=0;for(let i=0;i<(n||'').length;i++)h=n.charCodeAt(i)+((h<<5)-h);return `hsl(${Math.abs(h)%360},34%,52%)`;}
-function avatar(m,big){return m.img?`<img src="${m.img}" alt="${m.en}" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('noimg')">`:`<span class="mono-av" style="background:${hue(m.en)}">${initials(m.en)}</span>`;}
+function avatar(m,big){return m.img?`<img src="${m.img}" alt="${esc(m.en)}" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('noimg')">`:`<span class="mono-av" style="background:${hue(m.en)}">${initials(m.en)}</span>`;}
 function memberAff(m){if(m.institution)return m.country?`${m.institution}, ${m.country}`:m.institution;return m.group==='intl'?(lang==='th'?'สถาบันต่างประเทศ':'International partner'):(lang==='th'?'มหาวิทยาลัยขอนแก่น':'Khon Kaen University');}function contactLinks(m){
   const rows=[];
   if(m&&m.email) rows.push(`<a href="mailto:${esc(m.email)}" onclick="event.stopPropagation()">${icon('i-mail')}<span>${esc(m.email)}</span></a>`);
@@ -3608,11 +3664,13 @@ function contactBlock(m){const links=contactLinks(m);return links?`<div class="c
   return `<article class="member ${m.group==='lead'?'lead':''} clickable" ${click}>
     <div class="member__head">
       <div class="member__ph ${m.pi?'pi':''}">${avatar(m)}${m.pi?`<span class="badge">${icon('i-spark')}</span>`:''}</div>
-      <div class="member__id"><h4>${m.en}</h4>${m.th?`<div class="th">${m.th}</div>`:''}</div>
+      <div class="member__id"><h4>${esc(m.en)}</h4>${m.th?`<div class="th">${esc(m.th)}</div>`:''}</div>
     </div>
     <span class="role ${m.group==='intl'?'intl':''}">${m.group==='intl'?icon('i-globe'):''}${role}</span>
 ${m.group==='lead'?`<p class="member__desc">${leadDesc}</p>`:`<div class="aff">${icon('i-building')}${esc(memberAff(m))}</div>`}    ${contactBlock(m)}
-    <div class="tags">${(m.tags||[]).map(t=>`<span class="t">${t}</span>`).join('')}</div>
+    ${m.group==='intern'&&m.internshipYear?`<div class="member-topic">Internship ${esc(m.internshipYear)}${m.internshipTopic?` · ${esc(m.internshipTopic)}`:''}</div>`:''}
+    ${['master','phd'].includes(m.group)&&m.thesisTitle?`<div class="member-topic">${esc(m.thesisTitle)}</div>`:''}
+    <div class="tags">${(m.tags||[]).map(t=>`<span class="t">${esc(t)}</span>`).join('')}</div>
   </article>`;
 }
 function renderProjectTeam(){
@@ -3696,7 +3754,7 @@ let alumniSub='alumni-phd';
 function renderTeam(cat){
   const g=el('teamGrid');g.style.opacity='0';
   setTimeout(()=>{
-    const items=MEMBERS.filter(m=>m.group===cat);
+    const items=MEMBERS.filter(m=>cat==='staff'?['staff','ra'].includes(m.group):m.group===cat);
     g.innerHTML=items.length?items.map(memberCard).join(''):`<div class="pub-empty" style="grid-column:1/-1">${lang==='th'?'ยังไม่มีสมาชิกในกลุ่มนี้ — เพิ่มได้ในระบบหลังบ้าน (ปุ่มมุมล่างซ้าย)':'No members in this group yet — add them in the admin panel (gear icon, lower-left).'}</div>`;
     g.style.opacity='1';
   },170);
@@ -3727,7 +3785,12 @@ renderTeam('phd');window.openMember=function(idx){
   el('mmName').textContent=m.en;el('mmTh').textContent=m.th||'';el('mmTh').style.display=m.th?'block':'none';
 el('mmAff').innerHTML=icon('i-building')+esc(memberAff(m));
   {const links=contactLinks(m);el('mmContact').innerHTML=links;el('mmContact').style.display=links?'flex':'none';}
-  el('mmBio').textContent=m.bio||BIOS[m.en]||(lang==='th'?'ยังไม่มีประวัติ — เพิ่มได้ในระบบหลังบ้าน':'No bio yet — add one in the admin panel.');  el('mmTags').innerHTML=(m.tags||[]).map(t=>`<span class="t">${t}</span>`).join('');
+  el('mmBio').textContent=m.bio||BIOS[m.en]||(lang==='th'?'ยังไม่มีประวัติ — เพิ่มได้ในระบบหลังบ้าน':'No bio yet — add one in the admin panel.');  el('mmTags').innerHTML=(m.tags||[]).map(t=>`<span class="t">${esc(t)}</span>`).join('');
+  const order=[['role','Position / ตำแหน่ง'],['roleTh','ตำแหน่งภาษาไทย'],['startYear','Start year / ปีเริ่มงาน'],['faculty','Faculty / คณะ'],['department','Department / หน่วยงาน'],['program','Program / หลักสูตร'],['studyYear','Year of study / ชั้นปี'],['internshipYear','Internship year / ปีฝึกงาน'],['internshipTerm','Semester / ภาคเรียน'],['startDate','Start / เริ่ม'],['endDate','End / สิ้นสุด'],['internshipTopic','Internship project / โครงการฝึกงาน'],['internshipWork','Work & techniques / งานที่ทำ'],['thesisTitle','Thesis / Dissertation'],['thesisTitleTh','หัวข้อวิทยานิพนธ์ภาษาไทย'],['researchTopic','Research project / งานวิจัย'],['responsibilities','Responsibilities / หน้าที่'],['advisor','Supervisor / ที่ปรึกษา'],['coAdvisor','Co-advisor / ที่ปรึกษาร่วม'],['methodologies','Methods / เทคนิค'],['researchProgress','Research progress / ความก้าวหน้า'],['outputs','Outcomes / ผลงาน'],['publications','Publications / ผลงานตีพิมพ์'],['enrolledYear','Enrollment year / ปีเข้า'],['graduationYear','Graduation year / ปีจบ'],['expectedGraduation','Expected graduation / คาดว่าจบ'],['currentPosition','Current position / ตำแหน่งปัจจุบัน'],['currentInstitution','Current affiliation / สังกัดปัจจุบัน'],['careerStory','Career / เส้นทางอาชีพ']];
+  const details=order.filter(([key])=>m[key]).map(([key,label])=>`<div class="mm-detail"><span>${esc(label)}</span><p>${esc(m[key])}</p></div>`).join('');
+  const photos=(Array.isArray(m.photos)?m.photos:[]).slice(0,12).filter(u=>/^https:\/\//.test(u)).map(u=>`<a href="${esc(u)}" target="_blank" rel="noopener noreferrer"><img src="${esc(u)}" alt="Research activity" loading="lazy"></a>`).join('');
+  el('mmMeta').innerHTML=details?`<div class="mm-detail-title">Research & Lab experience</div>${details}`:'';
+  if(photos)el('mmMeta').innerHTML+=`<div class="mm-detail-title">Photos / ภาพกิจกรรม</div><div class="mm-gallery">${photos}</div>`;
   openModal('memberModal');
 };
 
@@ -4028,7 +4091,7 @@ function driveLinkRow(inputId,fnName){
   return `<div style="display:flex;gap:6px;margin-top:8px;align-items:center;width:100%">
     <input id="${inputId}" type="text" placeholder="${lang==='th'?'หรือวางลิงก์ Google Drive (แชร์แบบ \u201cทุกคนที่มีลิงก์\u201d)':'or paste a Google Drive link (share as \u201cAnyone with the link\u201d)'}" style="flex:1;min-width:0;padding:9px 11px;border-radius:8px;background:var(--surface-2);box-shadow:var(--hair);font-family:var(--sans);font-size:.78rem;color:var(--ink);outline:none">
     <button type="button" class="adm-file" style="white-space:nowrap;flex:none" onclick="${fnName}('${inputId}')">${icon('i-check')} ${lang==='th'?'ใช้ลิงก์':'Use link'}</button>
-  </div>`;
+  </div><p style="font-size:11px;color:var(--muted);margin:6px 0 0">Tip: อัปโหลดภาพใน Google Drive → แชร์เป็น 'ทุกคนที่มีลิงก์' → วางลิงก์แทนอัปโหลดไฟล์ เพื่อประหยัดพื้นที่ฐานข้อมูล</p>`;
 }
 window.useDriveFormImg=function(inputId){
   const direct=driveDirectUrl(val(inputId).trim());
@@ -4539,7 +4602,7 @@ window.admEditMember=function(i){editIdx=i;const m=i>=0?MEMBERS[i]:{group:'phd',
   <div class="adm-form">
     <div class="adm-field"><label>Photo</label><div class="adm-photo-row" id="f_photowrap"></div></div>
     <div class="adm-2"><div class="adm-field"><label>Name (English)</label><input id="f_en"></div><div class="adm-field"><label>Name (Thai)</label><input id="f_th"></div></div>
-    <div class="adm-2"><div class="adm-field"><label>Group</label><select id="f_group">${['lead','co','intl','postdoc','phd','master','intern','alumni-phd','alumni-master'].map(g=>`<option value="${g}">${ROLE_EN[g]}</option>`).join('')}</select></div><div class="adm-field"><label>Tags (comma-separated)</label><input id="f_tags"></div></div>
+    <div class="adm-2"><div class="adm-field"><label>Group</label><select id="f_group">${['lead','co','intl','postdoc','staff','ra','phd','master','intern','alumni-phd','alumni-master'].map(g=>`<option value="${g}">${ROLE_EN[g]}</option>`).join('')}</select></div><div class="adm-field"><label>Tags (comma-separated)</label><input id="f_tags"></div></div>
     <div class="adm-2"><div class="adm-field"><label>Institution / University</label><input id="f_inst" placeholder="Khon Kaen University"></div><div class="adm-field"><label>Country</label><input id="f_country" placeholder="Thailand"></div></div>
     <div class="adm-2"><div class="adm-field"><label>Phone</label><input id="f_phone" placeholder="+66 8x xxx xxxx"></div><div class="adm-field"><label>Email</label><input id="f_email" placeholder="name@kku.ac.th"></div></div>
     <div class="adm-field"><label>Bio</label><textarea id="f_bio"></textarea></div>
@@ -4763,6 +4826,8 @@ const supa = window.supabase.createClient(SUPA_URL, SUPA_KEY, {
     if (Array.isArray(s.collabs)      && s.collabs.length)      COLLABS      = s.collabs;
     if (Array.isArray(s.testimonials) && s.testimonials.length) TESTIMONIALS = s.testimonials;
 if (Array.isArray(s.banners)      && s.banners.length)      BANNERS      = s.banners;
+    if (Array.isArray(s.events)) EVENTS = s.events;
+    if (Array.isArray(s.gallery)) GALLERY = s.gallery;
     if (Array.isArray(s.grantTeam) && s.grantTeam.length) GRANT_TEAM = s.grantTeam;
     if (Array.isArray(s.awards) && s.awards.length) AWARDS = s.awards;
     if (Array.isArray(s.resources) && s.resources.length) RESOURCES  = s.resources;
@@ -4788,6 +4853,8 @@ if (typeof applySectionVisibility === 'function') applySectionVisibility();
     if(typeof renderCollabs === 'function') renderCollabs();
     if(typeof renderTesti === 'function') renderTesti();
    if(typeof renderBanner === 'function') renderBanner();
+    if(typeof renderEvents === 'function') renderEvents();
+    if(typeof renderGallery === 'function') renderGallery();
     if(typeof renderGrantTeam === 'function') renderGrantTeam();
 if(typeof renderResources === 'function') renderResources();
     if(typeof renderThemes === 'function') renderThemes();
@@ -4877,5 +4944,8 @@ supa.auth.getSession().then(({data})=>{
 }
 
 </script>
+<script src="submit/schema.js"></script>
+<script src="admin-addon.js"></script>
+<script src="main-v4.js"></script>
 </body>
 </html>
