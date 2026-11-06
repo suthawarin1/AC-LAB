@@ -24,6 +24,8 @@ a { color: inherit; text-decoration: none; }
 .brand-divider { height: 30px; border-left: 1px solid var(--line); }
 .manager-label { font-size: 13px; font-weight: 650; color: var(--teal-700); }
 .top-actions { margin-left: auto; display: flex; flex-wrap: wrap; justify-content: end; gap: 6px; }
+.manager-account { align-self: center; max-width: min(21vw, 245px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--muted); font-size: 12px; }
+@media (max-width: 760px) { .manager-account { display: none; } }
 .button {
   display: inline-flex; justify-content: center; align-items: center; min-height: 38px;
   padding: 7px 13px; border: 1px solid var(--line); border-radius: 7px; font-size: 13px;

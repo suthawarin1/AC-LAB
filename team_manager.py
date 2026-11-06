@@ -1,29 +1,22 @@
-"""Team content and password-protected manager. Python standard library only."""
+"""Team content, uploads and shared Manager routes. Python standard library only."""
 from __future__ import annotations
 
 import base64
 import copy
-import getpass
-import hashlib
-import hmac
 import json
 import os
 import re
 import secrets
 import threading
 import time
-from http.cookies import SimpleCookie
 from pathlib import Path
 from urllib.parse import urlsplit
+
+from manager_auth import APIError, ManagerAuth
 
 
 GROUPS = {"pi", "collaboration", "researcher", "student"}
 CONFIG_RE = re.compile(r'(<script id="team-config" type="application/json">)\s*.*?\s*(</script>)', re.S)
-
-
-class APIError(Exception):
-    def __init__(self, status: int, message: str):
-        self.status, self.message = status, message
 
 
 def atomic_write(path: Path, raw: bytes, private: bool = False) -> None:
@@ -184,29 +177,9 @@ class TeamStore:
     def __init__(self, root: Path):
         self.root = root
         self.folder = root / "team"
-        self.settings = root / ".aclab" / "team-admin.json"
+        self.backups = root / ".aclab" / "backups"
         self.lock = threading.RLock()
-        self.sessions = {}
-        self.attempts = {}
-
-    def configured(self):
-        return self.settings.is_file()
-
-    def setup_password(self, password):
-        if len(password) < 12 or len(password) > 1024:
-            raise ValueError("Use a password of 12–1024 characters.")
-        salt = secrets.token_bytes(24)
-        digest = hashlib.pbkdf2_hmac("sha256", password.encode(), salt, 600_000)
-        atomic_write(self.settings, json.dumps({"salt": salt.hex(), "hash": digest.hex(), "iterations": 600_000}).encode(), True)
-        self.sessions.clear()
-
-    def prompt_setup(self):
-        print("Create/reset the Site Manager password (at least 12 characters).")
-        password = getpass.getpass("New password: ")
-        if password != getpass.getpass("Confirm password: "):
-            raise ValueError("Passwords do not match.")
-        self.setup_password(password)
-        print("Site Manager password saved. Keep the .aclab folder private.")
+        self.auth = ManagerAuth()
 
     def content(self):
         return json.loads((self.folder / "site.json").read_text(encoding="utf-8"))
@@ -254,7 +227,7 @@ class TeamStore:
             new_html, count = CONFIG_RE.subn(lambda m: m[1] + "\n" + snapshot + "\n" + m[2], old_html.decode())
             if count != 1:
                 raise APIError(500, "ไม่พบจุดบันทึกข้อมูลในหน้า Team")
-            backup = self.settings.parent / "backups" / f"team-{previous['revision']:06d}-{time.time_ns()}.json"
+            backup = self.backups / f"team-{previous['revision']:06d}-{time.time_ns()}.json"
             atomic_write(backup, old_json, True)
             try:
                 atomic_write(page, new_html.encode())
@@ -267,41 +240,23 @@ class TeamStore:
                 stale.unlink(missing_ok=True)
             return clean
 
-    def session(self, handler):
-        cookie = SimpleCookie()
-        try:
-            cookie.load(handler.headers.get("Cookie", ""))
-        except Exception:
-            return None
-        token = cookie.get("aclab_team_session")
-        now = time.time()
-        with self.lock:
-            for key in list(self.sessions):
-                if self.sessions[key]["expires"] <= now:
-                    del self.sessions[key]
-            session = self.sessions.get(token.value) if token else None
-        return session
-
     def require_session(self, handler, mutate=False):
-        session = self.session(handler)
-        if not session:
-            raise APIError(401, "กรุณาเข้าสู่ระบบ Manager")
-        if mutate and not hmac.compare_digest(handler.headers.get("X-ACLab-CSRF", ""), session["csrf"]):
-            raise APIError(403, "เซสชันไม่ถูกต้อง กรุณาเข้าสู่ระบบอีกครั้ง")
-        return session
+        return self.auth.require_session(handler, mutate)
 
     def check_origin(self, handler):
-        origin = handler.headers.get("Origin", "")
-        if (not origin or urlsplit(origin).netloc != handler.headers.get("Host") or
-                urlsplit(origin).scheme not in {"http", "https"} or handler.headers.get("X-ACLab-Manager") != "1"):
+        origin = urlsplit(handler.headers.get("Origin", ""))
+        if (not origin.netloc or origin.netloc != handler.headers.get("Host") or
+                origin.scheme not in {"http", "https"} or handler.headers.get("X-ACLab-Manager") != "1"):
             raise APIError(403, "คำขอนี้ไม่ได้มาจากหน้า Manager ของเว็บไซต์")
+        if origin.scheme == "http" and origin.hostname not in {"127.0.0.1", "localhost", "::1"}:
+            raise APIError(403, "กรุณาเปิด Manager ผ่าน HTTPS")
 
-    def body(self, handler):
+    def body(self, handler, maximum=9_000_000):
         try:
             size = int(handler.headers.get("Content-Length", "0"))
         except ValueError as error:
             raise APIError(400, "ขนาดข้อมูลไม่ถูกต้อง") from error
-        if size < 1 or size > 9_000_000:
+        if size < 1 or size > maximum:
             raise APIError(413, "ข้อมูลใหญ่เกินกำหนด (ภาพไม่เกิน 4.5 MB)")
         if handler.headers.get_content_type() != "application/json":
             raise APIError(415, "ต้องใช้ข้อมูล JSON")
@@ -324,12 +279,9 @@ class TeamStore:
                 with self.lock:
                     result = self.public()
             elif handler.command in {"GET", "HEAD"}:
-                if path.endswith("/status"):
-                    session = self.session(handler)
-                    result = {"configured": self.configured(), "authenticated": bool(session)}
-                    if session:
-                        result["csrf"] = session["csrf"]
-                elif path.endswith("/content"):
+                if path == "/api/team/admin/status":
+                    result = self.auth.status(handler)
+                elif path == "/api/team/admin/content":
                     self.require_session(handler)
                     with self.lock:
                         result = self.content()
@@ -337,42 +289,18 @@ class TeamStore:
                     raise APIError(404, "Not found")
             elif handler.command == "POST":
                 self.check_origin(handler)
-                data = self.body(handler)
-                if path.endswith("/login"):
-                    if not self.configured():
-                        raise APIError(503, "ตั้งรหัสผ่านก่อน: python server.py --setup-manager")
-                    address, now = handler.client_address[0], time.time()
-                    with self.lock:
-                        failures = [t for t in self.attempts.get(address, []) if now - t < 600]
-                        self.attempts[address] = failures
-                        if len(failures) >= 5:
-                            raise APIError(429, "รหัสผ่านไม่ถูกต้องหลายครั้ง กรุณาลองอีกครั้งใน 10 นาที")
-                        password = data.get("password", "")
-                        if not isinstance(password, str) or len(password) > 1024:
-                            raise APIError(400, "รหัสผ่านไม่ถูกต้อง")
-                        settings = json.loads(self.settings.read_text())
-                        digest = hashlib.pbkdf2_hmac("sha256", password.encode(), bytes.fromhex(settings["salt"]), settings["iterations"])
-                        if not hmac.compare_digest(digest.hex(), settings["hash"]):
-                            failures.append(now)
-                            raise APIError(401, "รหัสผ่านไม่ถูกต้อง")
-                        self.attempts.pop(address, None)
-                        token, csrf = secrets.token_urlsafe(40), secrets.token_urlsafe(32)
-                        self.sessions[token] = {"csrf": csrf, "expires": now + 8 * 3600}
-                    secure = "; Secure" if urlsplit(handler.headers.get("Origin", "")).scheme == "https" else ""
-                    handler.team_cookie = f"aclab_team_session={token}; Path=/api/team/admin; HttpOnly; SameSite=Strict; Max-Age=28800{secure}"
-                    result = {"authenticated": True, "csrf": csrf}
-                elif path.endswith("/logout"):
-                    session = self.require_session(handler, True)
-                    with self.lock:
-                        self.sessions = {k: v for k, v in self.sessions.items() if v is not session}
-                    handler.team_cookie = "aclab_team_session=; Path=/api/team/admin; HttpOnly; SameSite=Strict; Max-Age=0"
-                    result = {"authenticated": False}
-                elif path.endswith("/save"):
+                if path == "/api/team/admin/login":
+                    result = self.auth.login(handler, self.body(handler, maximum=8192))
+                elif path == "/api/team/admin/logout":
+                    result = self.auth.logout(handler)
+                elif path == "/api/team/admin/save":
                     self.require_session(handler, True)
+                    data = self.body(handler)
                     saved = self.save(data.get("content"), data.get("expectedRevision"))
                     result = {"saved": True, "revision": saved["revision"], "content": saved}
-                elif path.endswith("/upload"):
+                elif path == "/api/team/admin/upload":
                     self.require_session(handler, True)
+                    data = self.body(handler)
                     value = safe_image(data.get("image", ""))
                     if not value.startswith("data:"):
                         raise APIError(400, "กรุณาเลือกไฟล์ภาพ")

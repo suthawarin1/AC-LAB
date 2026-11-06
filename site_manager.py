@@ -345,6 +345,8 @@ class SiteManager:
             else:
                 suffix = path.removeprefix(ADMIN)
                 mutate = handler.command == "POST"
+                if mutate:
+                    self.auth.check_origin(handler)
                 self.auth.require_session(handler, mutate)
                 if suffix == "catalog" and not mutate:
                     result = {"pages": self.catalog()}
@@ -362,7 +364,6 @@ class SiteManager:
                 elif suffix.startswith("page/") and suffix[5:] in self.pages:
                     page = self.pages[suffix[5:]]
                     if mutate:
-                        self.auth.check_origin(handler)
                         result = self.save(page, self.auth.body(handler))
                     else:
                         with self.auth.lock:

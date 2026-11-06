@@ -15,6 +15,7 @@
     <span class="brand-divider" aria-hidden="true"></span>
     <span class="manager-label">Site Manager</span>
     <div class="top-actions" id="top-actions" hidden>
+      <span class="manager-account" id="manager-account"></span>
       <a class="button quiet desktop-action" href="../index.html?lang=th" target="_blank" rel="noopener">เปิดหน้าเว็บ</a>
       <a class="button quiet" href="../api/team/admin/site/export" download>ส่งออกเว็บ</a>
       <button class="button quiet" type="button" id="logout">ออกจากระบบ</button>
@@ -27,11 +28,13 @@
       <h1>เรื่องราวของแล็บ<br><em>เริ่มต้นที่นี่</em></h1>
       <p>แก้เนื้อหาทั้งเว็บจากหน้าเดียว</p>
     </div>
-    <form id="login-form" class="login-panel">
+    <form id="login-form" class="login-panel" method="post" action="../api/team/admin/login">
       <p class="eyebrow">SITE MANAGER</p>
       <h2>เข้าสู่ระบบ</h2>
-      <p class="muted">ใช้รหัสผ่านเดียวกับ Team Manager</p>
-      <label for="password">รหัสผ่าน Manager</label>
+      <p class="muted">ใช้บัญชี Supabase ของผู้ดูแลเว็บไซต์</p>
+      <label for="email">อีเมล</label>
+      <input id="email" name="email" type="email" required autocomplete="username" maxlength="320">
+      <label for="password">รหัสผ่าน</label>
       <input id="password" name="password" type="password" required autocomplete="current-password" maxlength="1024">
       <button class="button primary" id="login-button" type="submit" disabled>เข้าสู่ระบบ</button>
       <p id="login-status" class="notice" role="status">กำลังตรวจสถานะ Manager…</p>

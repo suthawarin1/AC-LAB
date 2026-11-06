@@ -355,13 +355,13 @@ class LabHandler(SimpleHTTPRequestHandler):
             self._json({"status": "ok", "site": "The AC Lab"}, head=head)
             return
         candidate = Path(self.translate_path(path)).resolve()
-        # Do not expose Python source, settings, hidden folders or directory listings.
+        # Do not expose source, setup files, private settings or directory listings.
         try:
             relative = candidate.relative_to(ROOT)
         except ValueError:
             self.send_error(404)
             return
-        if any(part.startswith(".") for part in relative.parts) or candidate.suffix.lower() in {".py", ".pyc", ".json", ".md", ".bat"}:
+        if any(part.startswith(".") for part in relative.parts) or candidate.suffix.lower() in {".py", ".pyc", ".json", ".md", ".bat", ".sql"}:
             self.send_error(404)
             return
         if candidate.is_dir() and not any((candidate / name).is_file() for name in ("index.html", "index.htm")):
@@ -397,16 +397,10 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Run The AC Lab main website")
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8000)
-    parser.add_argument("--setup-manager", action="store_true", help="Create/reset the Manager password locally, then exit")
-    parser.add_argument("--manager", action="store_true", help="Set up the Manager password if needed and run the website")
+    parser.add_argument("--manager", action="store_true", help="Check Supabase configuration and run the website")
     args = parser.parse_args()
-    if args.setup_manager or (args.manager and not TEAM.configured()):
-        try:
-            TEAM.prompt_setup()
-        except ValueError as error:
-            parser.error(str(error))
-        if args.setup_manager:
-            return
+    if args.manager and not TEAM.auth.configured:
+        print("Manager setup: set SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY. See README_MANAGER_TH.md.", flush=True)
     handler = partial(LabHandler, directory=str(ROOT))
     with ThreadingHTTPServer((args.host, args.port), handler) as server:
         print(f"The AC Lab: http://{args.host}:{args.port}/", flush=True)

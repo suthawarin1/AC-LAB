@@ -76,6 +76,17 @@
     status.classList.toggle('error', error);
   }
 
+  function showLogin(message) {
+    csrf = '';
+    opening++;
+    $('studio').hidden = true;
+    $('top-actions').hidden = true;
+    $('login-screen').hidden = false;
+    $('login-button').disabled = false;
+    say(message, true, 'login-status');
+    $('email').focus();
+  }
+
   async function request(path, body) {
     const options = { cache: 'no-store', headers: { Accept: 'application/json' } };
     if (body !== undefined) {
@@ -90,6 +101,7 @@
     if (!response.ok) {
       const error = new Error(result.error || 'เชื่อมต่อ Manager ไม่สำเร็จ');
       error.status = response.status;
+      if (csrf && path !== 'login' && [401, 403].includes(error.status)) showLogin(error.message);
       throw error;
     }
     return result;
@@ -517,12 +529,17 @@
     finally { entry.saving = false; updateStatus(); }
   }
 
-  async function enter() {
+  async function enter(session) {
+    csrf = session.csrf;
     pages = (await request('site/catalog')).pages;
+    $('manager-account').textContent = session.email;
+    $('manager-account').title = session.email;
     $('login-screen').hidden = true;
     $('studio').hidden = false;
     $('top-actions').hidden = false;
-    await openPage(pages[0]);
+    const page = pages.find(item => item.id === active?.id) ?? pages[0];
+    active = null;
+    await openPage(page);
   }
 
   $('login-form').addEventListener('submit', async event => {
@@ -531,12 +548,10 @@
     submit.disabled = true;
     say('กำลังเข้าสู่ระบบ…',false,'login-status');
     try {
-      const result = await request('login',{ password:$('password').value });
-      csrf = result.csrf;
-      $('password').value = '';
-      await enter();
+      const result = await request('login', { email: $('email').value.trim(), password: $('password').value });
+      await enter(result);
     } catch (error) { say(error.message,true,'login-status'); }
-    finally { submit.disabled = false; }
+    finally { $('password').value = ''; submit.disabled = false; }
   });
   $('logout').addEventListener('click', async () => {
     if ([...drafts.values()].some(entry=>entry.dirty)) {
@@ -574,11 +589,20 @@
     }
   });
 
+  const securePage = location.protocol === 'https:' || (location.protocol === 'http:' &&
+    ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname));
+  if (!securePage) {
+    say('เปิด Manager ผ่านเซิร์ฟเวอร์ Python ที่ localhost หรือผ่านเว็บไซต์ HTTPS', true, 'login-status');
+    return;
+  }
   request('status').then(async status => {
-    if (status.authenticated) { csrf = status.csrf; await enter(); }
+    if (status.authenticated) await enter(status);
     else if (status.configured) {
       $('login-button').disabled = false;
-      say('ใช้รหัสผ่าน Manager ที่ตั้งไว้',false,'login-status');
-    } else say('เปิด START_MANAGER.bat เพื่อตั้งรหัสผ่านครั้งแรก',false,'login-status');
-  }).catch(() => say('เปิด START_MANAGER.bat แล้วเข้า /manager/ ผ่านเซิร์ฟเวอร์ Python',true,'login-status'));
+      say('', false, 'login-status');
+    } else say('ตั้งค่า Supabase บนเซิร์ฟเวอร์ตาม README_MANAGER_TH.md', true, 'login-status');
+  }).catch(error => {
+    $('login-button').disabled = error.status !== 503;
+    say(error.message, true, 'login-status');
+  });
 })();
