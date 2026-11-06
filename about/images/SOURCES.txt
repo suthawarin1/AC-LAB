@@ -1,0 +1,7 @@
+Illustrative research images from Unsplash. The portrait was supplied in the original AC Lab HTML.
+
+botanical.jpg: https://images.unsplash.com/photo-1518531933037-91b2f5f229cc
+fieldwork.jpg: https://images.unsplash.com/photo-1441974231531-c6227db76b6e
+chemistry.jpg: https://images.unsplash.com/photo-1554475900-0a0350e3fc7b
+microscopy.jpg: https://images.unsplash.com/photo-1576086213369-97a306d36557
+laboratory.jpg: https://images.unsplash.com/photo-1579154204601-01588f351e67

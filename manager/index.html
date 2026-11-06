@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#00796b">
+  <title>Site Manager · The AC Lab</title>
+  <link rel="stylesheet" href="../about/fonts/local-fonts.css">
+  <link rel="stylesheet" href="manager.css">
+  <script defer src="manager.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a href="../index.html" class="brand"><strong>The AC Lab</strong><small>KhonKaen University</small></a>
+    <span class="brand-divider" aria-hidden="true"></span>
+    <span class="manager-label">Site Manager</span>
+    <div class="top-actions" id="top-actions" hidden>
+      <a class="button quiet desktop-action" href="../index.html?lang=th" target="_blank" rel="noopener">เปิดหน้าเว็บ</a>
+      <a class="button quiet" href="../api/team/admin/site/export" download>ส่งออกเว็บ</a>
+      <button class="button quiet" type="button" id="logout">ออกจากระบบ</button>
+    </div>
+  </header>
+
+  <main id="login-screen" class="login-screen">
+    <div class="login-hero">
+      <p class="eyebrow">THE AC LAB · CONTENT STUDIO</p>
+      <h1>เรื่องราวของแล็บ<br><em>เริ่มต้นที่นี่</em></h1>
+      <p>แก้เนื้อหาทั้งเว็บจากหน้าเดียว</p>
+    </div>
+    <form id="login-form" class="login-panel">
+      <p class="eyebrow">SITE MANAGER</p>
+      <h2>เข้าสู่ระบบ</h2>
+      <p class="muted">ใช้รหัสผ่านเดียวกับ Team Manager</p>
+      <label for="password">รหัสผ่าน Manager</label>
+      <input id="password" name="password" type="password" required autocomplete="current-password" maxlength="1024">
+      <button class="button primary" id="login-button" type="submit" disabled>เข้าสู่ระบบ</button>
+      <p id="login-status" class="notice" role="status">กำลังตรวจสถานะ Manager…</p>
+    </form>
+  </main>
+
+  <div id="studio" class="studio" hidden>
+    <aside class="sidebar" aria-label="หน้าเว็บทั้งหมด">
+      <p class="eyebrow">THE AC LAB</p>
+      <h2>หน้าเว็บทั้งหมด</h2>
+      <nav id="page-nav" class="page-nav" aria-label="เลือกหน้าเว็บ"></nav>
+      <p class="sidebar-note">ข้อความไทย–อังกฤษและรายการของแต่ละหน้า</p>
+    </aside>
+    <main class="workspace" id="workspace" tabindex="-1">
+      <div class="page-hero">
+        <div class="page-hero-copy">
+          <p class="eyebrow">SITE MANAGER <span aria-hidden="true">/</span> <span id="page-number">01</span></p>
+          <h1 id="page-title">จัดการเนื้อหา</h1>
+          <p id="page-subtitle"></p>
+        </div>
+        <div class="page-hero-actions">
+          <span id="draft-status" class="status-chip">กำลังโหลด</span>
+          <div class="page-actions">
+            <a id="page-preview" class="button quiet" target="_blank" rel="noopener">ดูหน้าเว็บ</a>
+            <button class="button primary" id="save-page" type="button" disabled>บันทึกและเผยแพร่</button>
+          </div>
+        </div>
+      </div>
+      <div class="editor" id="editor" hidden>
+        <div class="mode-bar" id="mode-bar" role="group" aria-label="ประเภทการแก้ไข">
+          <button type="button" data-mode="settings" aria-pressed="true">ข้อมูลและรายการ</button>
+          <button type="button" data-mode="text" aria-pressed="false">ข้อความบนหน้า</button>
+          <button type="button" data-mode="blocks" aria-pressed="false">เซกชันเพิ่มเติม</button>
+        </div>
+        <div id="group-nav" class="group-nav" role="group" aria-label="เลือกส่วนที่จะปรับ"></div>
+        <div class="editor-heading">
+          <div><h2 id="section-title"></h2><p id="section-help"></p></div>
+          <label class="search" id="search-label">
+            <span class="sr-only">ค้นหาในส่วนนี้</span>
+            <input type="search" id="section-search" placeholder="ค้นหาในส่วนนี้" maxlength="120">
+          </label>
+        </div>
+        <div id="editor-fields" class="editor-fields"></div>
+        <div class="draft-actions">
+          <button type="button" id="restore-page" class="button quiet" disabled>คืนค่าที่บันทึกไว้</button>
+          <button type="button" id="download-draft" class="button quiet">ดาวน์โหลดข้อมูลหน้านี้</button>
+        </div>
+      </div>
+      <p class="workspace-notice" id="workspace-notice" role="status" aria-live="polite"></p>
+    </main>
+  </div>
+  <noscript>กรุณาเปิด JavaScript เพื่อใช้งาน Site Manager</noscript>
+</body>
+</html>

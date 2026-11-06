@@ -1,0 +1,18 @@
+{
+  "hero": {
+    "image": "visit-cover",
+    "position": "center 44%"
+  },
+  "media": {
+    "visit-cover": "../assets/laboratory.jpg"
+  },
+  "contact": {
+    "email": "raccha@kku.ac.th",
+    "address": {
+      "en": "The AC Lab · Faculty of Science\nRoom 3124, 1st Floor, SC.03 Building\nKhon Kaen University\nKhon Kaen 40002, Thailand",
+      "th": "The AC Lab · คณะวิทยาศาสตร์\nห้อง 3124 ชั้น 1 อาคาร SC.03\nมหาวิทยาลัยขอนแก่น\nจังหวัดขอนแก่น 40002 ประเทศไทย"
+    },
+    "mapEmbed": "https://maps.google.com/maps?q=Faculty%20of%20Science%2C%20Khon%20Kaen%20University&z=16&output=embed",
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Faculty+of+Science+Khon+Kaen+University"
+  }
+}

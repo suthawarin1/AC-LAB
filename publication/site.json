@@ -1,0 +1,234 @@
+{
+  "hero": {
+    "image": "leaves",
+    "position": "center 46%"
+  },
+  "media": {
+    "leaves": "../assets/bento-botanical.jpg",
+    "specimen": "../assets/leaves.jpg"
+  },
+  "topics": [
+    {
+      "id": "genomics",
+      "icon": "dna",
+      "name": {
+        "th": "จีโนมและความหลากหลาย",
+        "en": "Plant genomics"
+      },
+      "summary": {
+        "th": "ใช้ลำดับดีเอ็นเอเพื่อทำความเข้าใจความหลากหลายและความสัมพันธ์ของพืช",
+        "en": "Read plant diversity and evolutionary relationships through DNA sequences."
+      }
+    },
+    {
+      "id": "phytochemistry",
+      "icon": "flask",
+      "name": {
+        "th": "พฤกษเคมี",
+        "en": "Phytochemistry"
+      },
+      "summary": {
+        "th": "สำรวจองค์ประกอบทางเคมีและสารออกฤทธิ์จากพืช",
+        "en": "Profile plant chemistry and investigate compounds with biological activity."
+      }
+    },
+    {
+      "id": "cell-biology",
+      "icon": "microscope",
+      "name": {
+        "th": "ชีววิทยาระดับเซลล์",
+        "en": "Cell and molecular biology"
+      },
+      "summary": {
+        "th": "ศึกษาการตอบสนองของเซลล์และการแสดงออกของยีนในระบบทดลอง",
+        "en": "Study cellular responses and gene expression in experimental models."
+      }
+    }
+  ],
+  "papers": [
+    {
+      "id": "hairy-fruited-eggplant-2026",
+      "title": "Intraspecific genetic variation of the hairy-fruited eggplant (Solanum lasiocarpum Dunal.) based on plastid genome sequences",
+      "authors": [
+        "Rebecca Jia Yiin Ng",
+        "Sanit Kaewdaungdee",
+        "Yangyang Liu",
+        "Arunrat Chaveerach",
+        "Xue Jing Wong",
+        "Chuan Guo",
+        "Douglas Sie Nguong Law",
+        "Shiou Yih Lee"
+      ],
+      "journal": "Scientific Reports",
+      "year": 2026,
+      "date": "2026-01-23",
+      "reference": "2026;16(1):3223",
+      "doi": "10.1038/s41598-025-33167-4",
+      "pmid": "41577942",
+      "pmcid": "PMC12830749",
+      "pdf": "https://www.nature.com/articles/s41598-025-33167-4.pdf",
+      "topics": [
+        "genomics"
+      ],
+      "summary": {
+        "th": "เปรียบเทียบจีโนมพลาสติดของมะเขือขนจากหลายแหล่งตัวอย่าง เพื่ออธิบายความแปรผันภายในชนิดและสำรวจตำแหน่งดีเอ็นเอที่ใช้แยกความแตกต่างระหว่างตัวอย่าง",
+        "en": "Compares plastid genomes from different accessions of hairy-fruited eggplant to characterize variation within the species and identify informative sequence regions."
+      },
+      "cover": "specimen"
+    },
+    {
+      "id": "barleria-bioactivity-2025",
+      "title": "Barleria extracts containing barlerin and verbascoside boost immunity and regulate CYP450 gene in prostate cancer",
+      "authors": [
+        "Sanit Kaewdaungdee",
+        "Zi Wei Sham",
+        "Hao Xuan Ho",
+        "Shiou Yih Lee",
+        "Tawatchai Tanee",
+        "Yannick D Benoit",
+        "Thomas Liehr",
+        "Sakda Daduang",
+        "Runglawan Sudmoon",
+        "Arunrat Chaveerach"
+      ],
+      "journal": "Scientific Reports",
+      "year": 2025,
+      "date": "2025-07-01",
+      "reference": "2025;15(1):21942",
+      "doi": "10.1038/s41598-025-07397-5",
+      "pmid": "40594601",
+      "pmcid": "PMC12214807",
+      "pdf": "https://www.nature.com/articles/s41598-025-07397-5.pdf",
+      "topics": [
+        "phytochemistry",
+        "cell-biology"
+      ],
+      "summary": {
+        "th": "ศึกษาสารสกัดจากพืชสกุล Barleria ที่มี barlerin และ verbascoside และติดตามตัวชี้วัดด้านภูมิคุ้มกันกับการแสดงออกของยีน CYP450 ในระบบทดลอง",
+        "en": "Examines Barleria extracts containing barlerin and verbascoside and measures immune responses and CYP450 expression in experimental models."
+      },
+      "cover": ""
+    },
+    {
+      "id": "cratoxylum-resveratrol-2024",
+      "title": "A New Source and Large Quantity of Resveratrol in Cratoxylum Species and Their Activities on Normal Human and Cancer Cells",
+      "authors": [
+        "Sanit Kaewdaungdee",
+        "Tankun Banlue",
+        "Napatsakon Youngsanbhu",
+        "Mallika Naeklang",
+        "Shiou Yih Lee",
+        "Arnold Ang",
+        "Runglawan Sudmoon",
+        "Tawatchai Tanee",
+        "Sakda Daduang",
+        "Arunrat Chaveerach"
+      ],
+      "journal": "Biology",
+      "year": 2024,
+      "date": "2024-06-01",
+      "reference": "2024;13(6):402",
+      "doi": "10.3390/biology13060402",
+      "pmid": "38927282",
+      "pmcid": "PMC11200464",
+      "pdf": "",
+      "topics": [
+        "phytochemistry",
+        "cell-biology"
+      ],
+      "summary": {
+        "th": "วิเคราะห์สารจากพืชสกุล Cratoxylum รวมถึงเรสเวอราทรอล และเปรียบเทียบการตอบสนองต่อสารสกัดระหว่างเซลล์มะเร็งกับเซลล์เม็ดเลือดขาวปกติในห้องปฏิบัติการ",
+        "en": "Profiles compounds including resveratrol in Cratoxylum and compares the effects of the extracts on cancer cell lines and normal human peripheral blood mononuclear cells."
+      },
+      "cover": ""
+    },
+    {
+      "id": "morinda-collagen-2023",
+      "title": "Investigation of Morinda citrifolia Activity Related Collagen Type II Synthesis Through Gene Expression",
+      "authors": [
+        "Unchaleeporn Ameamsri",
+        "Runglawan Sudmoon",
+        "Warin Wonok",
+        "Sanit Kaewdaungdee",
+        "Tawatchai Tanee",
+        "Arunrat Chaveerach"
+      ],
+      "journal": "HAYATI Journal of Biosciences",
+      "year": 2023,
+      "date": "2023-11",
+      "reference": "2023;30(6):1194–1200",
+      "doi": "10.4308/hjb.30.6.1194-1200",
+      "pmid": "",
+      "pmcid": "",
+      "pdf": "https://journal.ipb.ac.id/hayati/article/download/46623/26264",
+      "topics": [
+        "phytochemistry",
+        "cell-biology"
+      ],
+      "summary": {
+        "th": "เปรียบเทียบสารสกัดจากส่วนต่าง ๆ ของต้นยอ และใช้ qRT-PCR ติดตามการแสดงออกของยีนที่เกี่ยวข้องกับคอลลาเจนชนิดที่ 2 ในเซลล์ไฟโบรบลาสต์ของมนุษย์",
+        "en": "Compares extracts from different parts of noni and uses qRT-PCR to assess type II collagen related gene expression in human dermal fibroblasts."
+      },
+      "cover": ""
+    },
+    {
+      "id": "plant-extract-enzyme-inhibition-2023",
+      "title": "High inhibition efficacy of pancreatic cholesterol esterase and porcine pancreatic lipase from natural products",
+      "authors": [
+        "Runglawan Sudmoon",
+        "Sanit Kaewdaungdee",
+        "Unchaleeporn Ameamsri",
+        "Warin Wonok",
+        "Tawatchai Tanee",
+        "Pornnarong Siripiyasing",
+        "Arunrat Chaveerach"
+      ],
+      "journal": "Asian Journal of Agriculture and Biology",
+      "year": 2023,
+      "date": "2023",
+      "reference": "2023(4)",
+      "doi": "10.35495/ajab.2023.041",
+      "pmid": "",
+      "pmcid": "",
+      "pdf": "https://www.asianjab.com/media/2023/11/AJAB-2023-041.pdf",
+      "topics": [
+        "phytochemistry"
+      ],
+      "summary": {
+        "th": "วิเคราะห์องค์ประกอบของสารสกัดพืชสี่ชนิด และทดสอบการยับยั้งเอนไซม์ cholesterol esterase และ pancreatic lipase ภายใต้สภาวะการทดลอง",
+        "en": "Characterizes extracts from four plants and measures their inhibition of cholesterol esterase and pancreatic lipase under experimental conditions."
+      },
+      "cover": ""
+    },
+    {
+      "id": "cratoxylum-plastomes-2022",
+      "title": "Characterization of the plastid genome of Cratoxylum species (Hypericaceae) and new insights into phylogenetic relationships",
+      "authors": [
+        "Runglawan Sudmoon",
+        "Sanit Kaewdaungdee",
+        "Tawatchai Tanee",
+        "Pornnarong Siripiyasing",
+        "Unchaleeporn Ameamsri",
+        "Samsuddin Ahmad Syazwan",
+        "Shiou Yih Lee",
+        "Arunrat Chaveerach"
+      ],
+      "journal": "Scientific Reports",
+      "year": 2022,
+      "date": "2022-11-05",
+      "reference": "2022;12(1):18810",
+      "doi": "10.1038/s41598-022-23639-2",
+      "pmid": "36335203",
+      "pmcid": "PMC9637187",
+      "pdf": "https://www.nature.com/articles/s41598-022-23639-2.pdf",
+      "topics": [
+        "genomics"
+      ],
+      "summary": {
+        "th": "เปรียบเทียบโครงสร้างและลำดับจีโนมพลาสติดของพืชสกุล Cratoxylum เพื่อศึกษาความสัมพันธ์เชิงวิวัฒนาการและหาบริเวณดีเอ็นเอที่ให้ข้อมูลสำหรับการจำแนก",
+        "en": "Compares Cratoxylum plastome structure and sequence variation to investigate evolutionary relationships and locate informative DNA regions."
+      },
+      "cover": ""
+    }
+  ]
+}

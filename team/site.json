@@ -1,0 +1,614 @@
+{
+  "revision": 1,
+  "contactEmail": "raccha@kku.ac.th",
+  "media": {
+    "arunrat": "profiles/arunrat.jpg",
+    "runglawan": "profiles/runglawan.jpg",
+    "nisachon": "profiles/nisachon.jpg",
+    "yannick": "profiles/yannick.jpg",
+    "researchScene": "images/research.jpg",
+    "studentScene": "images/student.jpg",
+    "shiou-yih": "profiles/shiou-yih.webp"
+  },
+  "hero": {
+    "mode": "mosaic",
+    "image": "",
+    "position": "50% 40%",
+    "title": {
+      "en": "People behind\nthe possibilities.",
+      "th": "ผู้คนที่เชื่อมโยง\nทุกการค้นพบ"
+    },
+    "subtitle": {
+      "en": "Different perspectives. Shared curiosity. Meet the people connecting questions at The AC Lab.",
+      "th": "หลากหลายมุมมอง บนความใคร่รู้เดียวกัน\nรู้จักผู้คนที่ร่วมค้นหาคำตอบไปกับ The AC Lab"
+    }
+  },
+  "members": [
+    {
+      "id": "arunrat",
+      "group": "pi",
+      "name": {
+        "en": "Arunrat Chaveerach",
+        "th": "อรุณรัตน์ ฉวีราช"
+      },
+      "academicTitle": {
+        "en": "Professor, Ph.D.",
+        "th": "ศาสตราจารย์ ดร."
+      },
+      "position": {
+        "en": "Principal Investigator",
+        "th": "หัวหน้าทีมวิจัย"
+      },
+      "expertise": {
+        "en": [
+          "Molecular systematics",
+          "Phytochemistry",
+          "Toxicity testing",
+          "Green nanotech",
+          "Drug delivery",
+          "qRT-PCR",
+          "Innovation & IP"
+        ],
+        "th": [
+          "อนุกรมวิธานเชิงโมเลกุล",
+          "พฤกษเคมี",
+          "การทดสอบความเป็นพิษ",
+          "นาโนเทคโนโลยีสีเขียว",
+          "ระบบนำส่งยา",
+          "qRT-PCR",
+          "นวัตกรรมและทรัพย์สินทางปัญญา"
+        ]
+      },
+      "affiliation": {
+        "en": "Department of Biology\nFaculty of Science, Khon Kaen University",
+        "th": "สาขาวิชาชีววิทยา\nคณะวิทยาศาสตร์ มหาวิทยาลัยขอนแก่น"
+      },
+      "bio": {
+        "en": "",
+        "th": ""
+      },
+      "email": "raccha@kku.ac.th",
+      "photo": "arunrat",
+      "sourceUrl": "https://bio.kku.net/showteacher.php?id=arunrat",
+      "photoPosition": "50% 25%",
+      "photoZoom": 1,
+      "visible": true,
+      "order": 0
+    },
+    {
+      "id": "runglawan",
+      "group": "pi",
+      "name": {
+        "en": "Runglawan Sudmoon",
+        "th": "รุ่งลาวัลย์ สุดมูล"
+      },
+      "academicTitle": {
+        "en": "Assistant Professor, Ph.D.",
+        "th": "ผู้ช่วยศาสตราจารย์ ดร."
+      },
+      "position": {
+        "en": "Principal Investigator",
+        "th": "หัวหน้าทีมวิจัย"
+      },
+      "expertise": {
+        "en": [
+          "Biochemistry",
+          "Molecular biology",
+          "Forensic science"
+        ],
+        "th": [
+          "ชีวเคมี",
+          "ชีววิทยาโมเลกุล",
+          "นิติวิทยาศาสตร์"
+        ]
+      },
+      "affiliation": {
+        "en": "Faculty of Law\nKhon Kaen University",
+        "th": "คณะนิติศาสตร์\nมหาวิทยาลัยขอนแก่น"
+      },
+      "bio": {
+        "en": "",
+        "th": ""
+      },
+      "email": "rsudmoon@yahoo.com",
+      "photo": "runglawan",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/35956463/",
+      "photoPosition": "95% 65%",
+      "photoZoom": 1.65,
+      "visible": true,
+      "order": 1
+    },
+    {
+      "id": "tawatchai",
+      "group": "pi",
+      "name": {
+        "en": "Tawatchai Tanee",
+        "th": "ธวัดชัย ธานี"
+      },
+      "academicTitle": {
+        "en": "Associate Professor, Ph.D.",
+        "th": "รองศาสตราจารย์ ดร."
+      },
+      "position": {
+        "en": "Principal Investigator",
+        "th": "หัวหน้าทีมวิจัย"
+      },
+      "expertise": {
+        "en": [
+          "Environmental science",
+          "Biochemistry"
+        ],
+        "th": [
+          "วิทยาศาสตร์สิ่งแวดล้อม",
+          "ชีวเคมี"
+        ]
+      },
+      "affiliation": {
+        "en": "Faculty of Environment and Resource Studies\nMahasarakham University",
+        "th": "คณะสิ่งแวดล้อมและทรัพยากรศาสตร์\nมหาวิทยาลัยมหาสารคาม"
+      },
+      "bio": {
+        "en": "",
+        "th": ""
+      },
+      "email": "tawatchai5@hotmail.com",
+      "photo": "",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/35956463/",
+      "photoPosition": "50% 25%",
+      "photoZoom": 1,
+      "visible": true,
+      "order": 2
+    },
+    {
+      "id": "yannick",
+      "group": "collaboration",
+      "name": {
+        "en": "Yannick D. Benoit",
+        "th": ""
+      },
+      "academicTitle": {
+        "en": "Associate Professor, Ph.D.",
+        "th": "รองศาสตราจารย์ ดร."
+      },
+      "position": {
+        "en": "Collaborator",
+        "th": "ผู้ร่วมวิจัย"
+      },
+      "expertise": {
+        "en": [
+          "Molecular biology",
+          "Epigenetics",
+          "Cancer",
+          "Pharmacology",
+          "Digestive system"
+        ],
+        "th": [
+          "ชีววิทยาโมเลกุล",
+          "อีพิเจเนติกส์",
+          "มะเร็ง",
+          "เภสัชวิทยา",
+          "ระบบทางเดินอาหาร"
+        ]
+      },
+      "affiliation": {
+        "en": "Department of Cellular and Molecular Medicine\nUniversity of Ottawa, Canada",
+        "th": "Department of Cellular and Molecular Medicine\nUniversity of Ottawa ประเทศแคนาดา"
+      },
+      "bio": {
+        "en": "",
+        "th": ""
+      },
+      "email": "ybenoit@uottawa.ca",
+      "photo": "yannick",
+      "sourceUrl": "https://www.uottawa.ca/faculty-medicine/directory/dr-yannick-benoit",
+      "photoPosition": "50% 25%",
+      "photoZoom": 1,
+      "visible": true,
+      "order": 3
+    },
+    {
+      "id": "shiou-yih",
+      "group": "collaboration",
+      "name": {
+        "en": "Shiou Yih Lee",
+        "th": ""
+      },
+      "academicTitle": {
+        "en": "Professor, Ph.D.",
+        "th": "ศาสตราจารย์ ดร."
+      },
+      "position": {
+        "en": "Collaborator",
+        "th": "ผู้ร่วมวิจัย"
+      },
+      "expertise": {
+        "en": [
+          "Forest biotechnology",
+          "Plant phylogenetics",
+          "Systematics & evolution",
+          "Molecular breeding",
+          "Wood forensic"
+        ],
+        "th": [
+          "เทคโนโลยีชีวภาพป่าไม้",
+          "สายสัมพันธ์เชิงวิวัฒนาการของพืช",
+          "อนุกรมวิธานและวิวัฒนาการ",
+          "การปรับปรุงพันธุ์ระดับโมเลกุล",
+          "นิติวิทยาศาสตร์ไม้"
+        ]
+      },
+      "affiliation": {
+        "en": "INTI International University\nMalaysia",
+        "th": "INTI International University\nประเทศมาเลเซีย"
+      },
+      "bio": {
+        "en": "",
+        "th": ""
+      },
+      "email": "shiouyih.lee@newinti.edu.my",
+      "photo": "shiou-yih",
+      "sourceUrl": "https://leeshiouyih.owlstown.net/",
+      "photoPosition": "50% 25%",
+      "photoZoom": 1,
+      "visible": true,
+      "order": 4
+    },
+    {
+      "id": "nisachon",
+      "group": "collaboration",
+      "name": {
+        "en": "Nisachon Jangpromma",
+        "th": "นิศาชล แจ้งพรมมา"
+      },
+      "academicTitle": {
+        "en": "Assistant Professor, Ph.D.",
+        "th": "ผู้ช่วยศาสตราจารย์ ดร."
+      },
+      "position": {
+        "en": "Collaborator",
+        "th": "ผู้ร่วมวิจัย"
+      },
+      "expertise": {
+        "en": [
+          "Molecular biology",
+          "Biochemistry",
+          "Proteomics",
+          "Cell culture",
+          "Biological function"
+        ],
+        "th": [
+          "ชีววิทยาโมเลกุล",
+          "ชีวเคมี",
+          "โปรตีโอมิกส์",
+          "การเพาะเลี้ยงเซลล์",
+          "หน้าที่ทางชีวภาพ"
+        ]
+      },
+      "affiliation": {
+        "en": "Faculty of Science\nKhon Kaen University",
+        "th": "คณะวิทยาศาสตร์\nมหาวิทยาลัยขอนแก่น"
+      },
+      "bio": {
+        "en": "",
+        "th": ""
+      },
+      "email": "",
+      "photo": "nisachon",
+      "sourceUrl": "https://theaclab.in.th/",
+      "photoPosition": "95% 65%",
+      "photoZoom": 1.65,
+      "visible": true,
+      "order": 5
+    },
+    {
+      "id": "sakda",
+      "group": "collaboration",
+      "name": {
+        "en": "Sakda Daduang",
+        "th": "ศักดา ดาดวง"
+      },
+      "academicTitle": {
+        "en": "Professor, Ph.D.",
+        "th": "ศาสตราจารย์ ดร."
+      },
+      "position": {
+        "en": "Collaborator",
+        "th": "ผู้ร่วมวิจัย"
+      },
+      "expertise": {
+        "en": [
+          "Biochemistry",
+          "Immunological biochem",
+          "Animal cell culture",
+          "Toxicology",
+          "Proteomics",
+          "Biotechnology"
+        ],
+        "th": [
+          "ชีวเคมี",
+          "ชีวเคมีภูมิคุ้มกัน",
+          "การเพาะเลี้ยงเซลล์สัตว์",
+          "พิษวิทยา",
+          "โปรตีโอมิกส์",
+          "เทคโนโลยีชีวภาพ"
+        ]
+      },
+      "affiliation": {
+        "en": "Faculty of Science\nKhon Kaen University",
+        "th": "คณะวิทยาศาสตร์\nมหาวิทยาลัยขอนแก่น"
+      },
+      "bio": {
+        "en": "",
+        "th": ""
+      },
+      "email": "",
+      "photo": "",
+      "sourceUrl": "https://theaclab.in.th/",
+      "photoPosition": "50% 25%",
+      "photoZoom": 1,
+      "visible": true,
+      "order": 6
+    },
+    {
+      "id": "sanit",
+      "group": "collaboration",
+      "name": {
+        "en": "Sanit Kaewdaungdee",
+        "th": "สานิตย์ แก้วดวงดี"
+      },
+      "academicTitle": {
+        "en": "Ph.D.",
+        "th": "ดร."
+      },
+      "position": {
+        "en": "Researcher",
+        "th": "นักวิจัย"
+      },
+      "expertise": {
+        "en": [
+          "Plant systematics",
+          "Chloroplast genome",
+          "Secondary metabolites",
+          "Nutraceuticals",
+          "Molecular biology",
+          "Cell culture",
+          "Organoids"
+        ],
+        "th": [
+          "อนุกรมวิธานพืช",
+          "จีโนมคลอโรพลาสต์",
+          "สารทุติยภูมิ",
+          "สารอาหารเพื่อสุขภาพ",
+          "ชีววิทยาโมเลกุล",
+          "การเพาะเลี้ยงเซลล์",
+          "ออร์แกนอยด์"
+        ]
+      },
+      "affiliation": {
+        "en": "Department of Biology\nFaculty of Science, Khon Kaen University",
+        "th": "สาขาวิชาชีววิทยา\nคณะวิทยาศาสตร์ มหาวิทยาลัยขอนแก่น"
+      },
+      "bio": {
+        "en": "",
+        "th": ""
+      },
+      "email": "sanit_k@kkumail.com",
+      "photo": "",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/41577942/",
+      "photoPosition": "50% 25%",
+      "photoZoom": 1,
+      "visible": false,
+      "order": 7
+    },
+    {
+      "id": "joy",
+      "group": "researcher",
+      "name": {
+        "en": "Joy",
+        "th": "พี่จอย"
+      },
+      "academicTitle": {
+        "en": "",
+        "th": ""
+      },
+      "position": {
+        "en": "Researcher",
+        "th": "นักวิจัย"
+      },
+      "expertise": {
+        "en": [],
+        "th": []
+      },
+      "affiliation": {
+        "en": "",
+        "th": ""
+      },
+      "bio": {
+        "en": "",
+        "th": ""
+      },
+      "email": "",
+      "photo": "",
+      "sourceUrl": "",
+      "photoPosition": "50% 25%",
+      "photoZoom": 1,
+      "visible": true,
+      "order": 8
+    },
+    {
+      "id": "angka",
+      "group": "researcher",
+      "name": {
+        "en": "Angka",
+        "th": "พี่อังกะ"
+      },
+      "academicTitle": {
+        "en": "",
+        "th": ""
+      },
+      "position": {
+        "en": "Researcher",
+        "th": "นักวิจัย"
+      },
+      "expertise": {
+        "en": [],
+        "th": []
+      },
+      "affiliation": {
+        "en": "",
+        "th": ""
+      },
+      "bio": {
+        "en": "",
+        "th": ""
+      },
+      "email": "",
+      "photo": "",
+      "sourceUrl": "",
+      "photoPosition": "50% 25%",
+      "photoZoom": 1,
+      "visible": true,
+      "order": 9
+    },
+    {
+      "id": "researcher-03",
+      "group": "researcher",
+      "name": {
+        "en": "Researcher 03",
+        "th": "รอเพิ่มชื่อนักวิจัย"
+      },
+      "academicTitle": {
+        "en": "",
+        "th": ""
+      },
+      "position": {
+        "en": "Researcher",
+        "th": "นักวิจัย"
+      },
+      "expertise": {
+        "en": [],
+        "th": []
+      },
+      "affiliation": {
+        "en": "",
+        "th": ""
+      },
+      "bio": {
+        "en": "",
+        "th": ""
+      },
+      "email": "",
+      "photo": "",
+      "sourceUrl": "",
+      "photoPosition": "50% 25%",
+      "photoZoom": 1,
+      "visible": true,
+      "order": 10
+    },
+    {
+      "id": "ar",
+      "group": "student",
+      "name": {
+        "en": "Ar",
+        "th": "อาร์"
+      },
+      "academicTitle": {
+        "en": "",
+        "th": ""
+      },
+      "position": {
+        "en": "Student",
+        "th": "นักศึกษา"
+      },
+      "expertise": {
+        "en": [],
+        "th": []
+      },
+      "affiliation": {
+        "en": "",
+        "th": ""
+      },
+      "bio": {
+        "en": "",
+        "th": ""
+      },
+      "email": "",
+      "photo": "",
+      "sourceUrl": "",
+      "photoPosition": "50% 25%",
+      "photoZoom": 1,
+      "visible": true,
+      "order": 11
+    },
+    {
+      "id": "arnold",
+      "group": "student",
+      "name": {
+        "en": "Arnold",
+        "th": "อาโนล"
+      },
+      "academicTitle": {
+        "en": "",
+        "th": ""
+      },
+      "position": {
+        "en": "Student",
+        "th": "นักศึกษา"
+      },
+      "expertise": {
+        "en": [],
+        "th": []
+      },
+      "affiliation": {
+        "en": "",
+        "th": ""
+      },
+      "bio": {
+        "en": "",
+        "th": ""
+      },
+      "email": "",
+      "photo": "",
+      "sourceUrl": "",
+      "photoPosition": "50% 25%",
+      "photoZoom": 1,
+      "visible": true,
+      "order": 12
+    },
+    {
+      "id": "ja",
+      "group": "student",
+      "name": {
+        "en": "Ja",
+        "th": "พี่จ๋า"
+      },
+      "academicTitle": {
+        "en": "",
+        "th": ""
+      },
+      "position": {
+        "en": "Student",
+        "th": "นักศึกษา"
+      },
+      "expertise": {
+        "en": [],
+        "th": []
+      },
+      "affiliation": {
+        "en": "",
+        "th": ""
+      },
+      "bio": {
+        "en": "",
+        "th": ""
+      },
+      "email": "",
+      "photo": "",
+      "sourceUrl": "",
+      "photoPosition": "50% 25%",
+      "photoZoom": 1,
+      "visible": true,
+      "order": 13
+    }
+  ]
+}

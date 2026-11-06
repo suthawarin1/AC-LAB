@@ -1,0 +1,11 @@
+Illustrative photographs from Unsplash, not photographs of The AC Lab.
+
+laboratory.jpg: https://images.unsplash.com/photo-1579154204601-01588f351e67
+discovery.jpg: https://images.unsplash.com/photo-1532187863486-abf9dbad1b69
+leaves.jpg: https://images.unsplash.com/photo-1501004318641-b39e6451bec6
+fieldwork.jpg: https://images.unsplash.com/photo-1441974231531-c6227db76b6e
+
+Bento imagery, reused from the About research imagery:
+bento-botanical.jpg: https://images.unsplash.com/photo-1518531933037-91b2f5f229cc
+bento-chemistry.jpg: https://images.unsplash.com/photo-1554475900-0a0350e3fc7b
+bento-microscopy.jpg: https://images.unsplash.com/photo-1576086213369-97a306d36557

@@ -1,0 +1,325 @@
+{
+  "hero": {
+    "image": "discovery",
+    "position": "center 42%"
+  },
+  "media": {
+    "discovery": "../../assets/discovery.jpg"
+  },
+  "awards": [
+    {
+      "id": "award-2015-taipei",
+      "year": 2015,
+      "title": {
+        "en": "Bronze Medal Award — 2015 Taipei International Invention Show & Technomart",
+        "th": "Bronze Medal Award — งาน 2015 Taipei International Invention Show & Technomart"
+      },
+      "description": {
+        "en": "An international medal from Taipei recognising innovation and invention work presented in Taiwan.",
+        "th": "รางวัลเหรียญทองแดงระดับนานาชาติ จากการนำเสนอผลงานนวัตกรรมและสิ่งประดิษฐ์ในงาน Taipei International Invention Show & Technomart ที่ไทเป ประเทศไต้หวัน"
+      },
+      "level": "international",
+      "type": {
+        "en": "Innovation medal",
+        "th": "เหรียญนวัตกรรม"
+      },
+      "recipients": [
+        {
+          "memberId": "arunrat",
+          "name": {
+            "en": "Prof. Dr. Arunrat Chaveerach",
+            "th": "ศ. ดร. อรุณรัตน์ ฉวีราช"
+          },
+          "role": "faculty",
+          "photo": ""
+        }
+      ],
+      "gallery": [
+        "assets/taipei-bronze-2015.jpg"
+      ],
+      "issuer": {
+        "th": "",
+        "en": ""
+      },
+      "source": ""
+    },
+    {
+      "id": "award-2018-gold",
+      "year": 2018,
+      "title": {
+        "en": "Outstanding Researcher and Sarasin Honorary Researcher Award — Gold Level",
+        "th": "รางวัลนักวิจัยดีเด่นและนักวิจัยเกียรติคุณสารสิน ระดับทอง"
+      },
+      "description": {
+        "en": "University-level gold honour presented on 5 June 2018 for research distinction.",
+        "th": "รางวัลเชิดชูเกียรตินักวิจัยระดับเหรียญทอง ประจำปีพุทธศักราช 2560 และเข้ารับเมื่อวันที่ 5 มิถุนายน 2561"
+      },
+      "level": "university",
+      "type": {
+        "en": "Gold researcher honour",
+        "th": "รางวัลนักวิจัยระดับเหรียญทอง"
+      },
+      "recipients": [
+        {
+          "memberId": "arunrat",
+          "name": {
+            "en": "Prof. Dr. Arunrat Chaveerach",
+            "th": "ศ. ดร. อรุณรัตน์ ฉวีราช"
+          },
+          "role": "faculty",
+          "photo": ""
+        }
+      ],
+      "gallery": [
+        "assets/gold-award-ceremony.jpg",
+        "assets/gold-award-plaque-cutout.png"
+      ],
+      "issuer": {
+        "th": "",
+        "en": ""
+      },
+      "source": ""
+    },
+    {
+      "id": "award-2020-research-expo",
+      "year": 2020,
+      "title": {
+        "en": "Higher-Education Innovation Awards — Thailand Research Expo 2020",
+        "th": "รางวัลผลงานนวัตกรรมสายอุดมศึกษา ในงานมหกรรมวิจัยแห่งชาติ 2563"
+      },
+      "description": {
+        "en": "Four bronze-medal innovations: Serum for hair roots, Natural shampoo, Amyrin for anti-acne and inflammatory wounds, and Natural Oleamide.",
+        "th": "ได้รับรางวัลเหรียญทองแดงจากผลงานนวัตกรรม 4 เรื่อง ได้แก่ Serum for hair roots, Natural shampoo, Amyrin for anti-acne and chronic/inflammatory wound และ Natural Oleamide"
+      },
+      "level": "national",
+      "type": {
+        "en": "Research Expo medals",
+        "th": "รางวัลงานมหกรรมวิจัยแห่งชาติ"
+      },
+      "recipients": [
+        {
+          "memberId": "arunrat",
+          "name": {
+            "en": "Prof. Dr. Arunrat Chaveerach",
+            "th": "ศ. ดร. อรุณรัตน์ ฉวีราช"
+          },
+          "role": "faculty",
+          "photo": ""
+        }
+      ],
+      "gallery": [
+        "assets/research-expo-medals-2020.jpg",
+        "assets/research-expo-team-2020.jpg"
+      ],
+      "issuer": {
+        "th": "",
+        "en": ""
+      },
+      "source": ""
+    },
+    {
+      "id": "award-2015-silver",
+      "year": 2015,
+      "title": {
+        "en": "Outstanding Researcher and Sarasin Honorary Researcher Award — Silver Level",
+        "th": "รางวัลนักวิจัยดีเด่นและนักวิจัยเกียรติคุณสารสิน ระดับเงิน"
+      },
+      "description": {
+        "en": "University-level silver recognition for research excellence.",
+        "th": "รางวัลนักวิจัยดีเด่นและนักวิจัยเกียรติคุณสารสิน ระดับเงิน"
+      },
+      "level": "university",
+      "type": {
+        "en": "Research honour",
+        "th": "รางวัลวิจัย"
+      },
+      "recipients": [
+        {
+          "memberId": "arunrat",
+          "name": {
+            "en": "Prof. Dr. Arunrat Chaveerach",
+            "th": "ศ. ดร. อรุณรัตน์ ฉวีราช"
+          },
+          "role": "faculty",
+          "photo": ""
+        }
+      ],
+      "gallery": [],
+      "issuer": {
+        "th": "",
+        "en": ""
+      },
+      "source": ""
+    },
+    {
+      "id": "award-2016-kondisrichampa",
+      "year": 2016,
+      "title": {
+        "en": "Khon Dee Sri Champa Award — Innovation and Invention Development",
+        "th": "คนดีศรีจำปา ด้านการพัฒนานวัตกรรม หรือสิ่งประดิษฐ์คิดค้น"
+      },
+      "description": {
+        "en": "Recognition for innovation and invention development within the university.",
+        "th": "รางวัลคนดีศรีจำปา ด้านการพัฒนานวัตกรรม หรือสิ่งประดิษฐ์คิดค้น"
+      },
+      "level": "university",
+      "type": {
+        "en": "Innovation honour",
+        "th": "รางวัลเชิดชูเกียรติ"
+      },
+      "recipients": [
+        {
+          "memberId": "arunrat",
+          "name": {
+            "en": "Prof. Dr. Arunrat Chaveerach",
+            "th": "ศ. ดร. อรุณรัตน์ ฉวีราช"
+          },
+          "role": "faculty",
+          "photo": ""
+        }
+      ],
+      "gallery": [],
+      "issuer": {
+        "th": "",
+        "en": ""
+      },
+      "source": ""
+    },
+    {
+      "id": "award-2022-community",
+      "year": 2022,
+      "title": {
+        "en": "Khon Kaen University Distinguished Research Personnel Award — Community and Social / Industrial & Commercial Impact",
+        "th": "รางวัลเชิดชูเกียรติบุคลากรมหาวิทยาลัยขอนแก่น ด้านการวิจัย ด้านการใช้ประโยชน์ในชุมชนและสังคม ด้านอุตสาหกรรมและเชิงพาณิชย์"
+      },
+      "description": {
+        "en": "Recognition for research translated into community, social and commercial value.",
+        "th": "รางวัลเชิดชูเกียรติด้านการวิจัย สำหรับผลงานที่นำไปใช้ประโยชน์ในชุมชน สังคม อุตสาหกรรม และเชิงพาณิชย์"
+      },
+      "level": "university",
+      "type": {
+        "en": "Community impact",
+        "th": "การใช้ประโยชน์ในชุมชนและสังคม"
+      },
+      "recipients": [
+        {
+          "memberId": "arunrat",
+          "name": {
+            "en": "Prof. Dr. Arunrat Chaveerach",
+            "th": "ศ. ดร. อรุณรัตน์ ฉวีราช"
+          },
+          "role": "faculty",
+          "photo": ""
+        }
+      ],
+      "gallery": [],
+      "issuer": {
+        "th": "",
+        "en": ""
+      },
+      "source": ""
+    },
+    {
+      "id": "award-2022-diamond",
+      "year": 2022,
+      "title": {
+        "en": "Outstanding Researcher and Sarasin Honorary Researcher Award — Diamond Level",
+        "th": "รางวัลนักวิจัยดีเด่นและนักวิจัยเกียรติคุณสารสิน ระดับเพชร"
+      },
+      "description": {
+        "en": "Top-tier university recognition for sustained research excellence.",
+        "th": "รางวัลนักวิจัยดีเด่นและนักวิจัยเกียรติคุณสารสิน ระดับเพชร"
+      },
+      "level": "university",
+      "type": {
+        "en": "Top researcher honour",
+        "th": "รางวัลนักวิจัยระดับเพชร"
+      },
+      "recipients": [
+        {
+          "memberId": "arunrat",
+          "name": {
+            "en": "Prof. Dr. Arunrat Chaveerach",
+            "th": "ศ. ดร. อรุณรัตน์ ฉวีราช"
+          },
+          "role": "faculty",
+          "photo": ""
+        }
+      ],
+      "gallery": [],
+      "issuer": {
+        "th": "",
+        "en": ""
+      },
+      "source": ""
+    },
+    {
+      "id": "award-2023-kondisrichampa-research",
+      "year": 2023,
+      "title": {
+        "en": "Khon Dee Sri Champa Award — Research",
+        "th": "รางวัลคนดีศรีจำปา ด้านการวิจัย"
+      },
+      "description": {
+        "en": "University honour recognising research contribution and impact.",
+        "th": "รางวัลคนดีศรีจำปา ด้านการวิจัย"
+      },
+      "level": "university",
+      "type": {
+        "en": "Research honour",
+        "th": "รางวัลวิจัย"
+      },
+      "recipients": [
+        {
+          "memberId": "arunrat",
+          "name": {
+            "en": "Prof. Dr. Arunrat Chaveerach",
+            "th": "ศ. ดร. อรุณรัตน์ ฉวีราช"
+          },
+          "role": "faculty",
+          "photo": ""
+        }
+      ],
+      "gallery": [],
+      "issuer": {
+        "th": "",
+        "en": ""
+      },
+      "source": ""
+    },
+    {
+      "id": "award-2024-academic",
+      "year": 2024,
+      "title": {
+        "en": "Khon Kaen University Honour for Academic Achievement at the 60 Years Celebration",
+        "th": "รางวัลเชิดชูเกียรติบุคลากร ด้านสร้างผลงานวิชาการ ในงาน 60 ปี แห่งการสร้างสรรค์และพัฒนาเพื่อสังคม"
+      },
+      "description": {
+        "en": "Recognition for building academic output during the 60-year celebration of Khon Kaen University.",
+        "th": "รางวัลเชิดชูเกียรติบุคลากร ด้านสร้างผลงานวิชาการ ในงาน 60 ปี แห่งการสร้างสรรค์และพัฒนาเพื่อสังคม"
+      },
+      "level": "university",
+      "type": {
+        "en": "Academic achievement",
+        "th": "ผลงานวิชาการ"
+      },
+      "recipients": [
+        {
+          "memberId": "arunrat",
+          "name": {
+            "en": "Prof. Dr. Arunrat Chaveerach",
+            "th": "ศ. ดร. อรุณรัตน์ ฉวีราช"
+          },
+          "role": "faculty",
+          "photo": ""
+        }
+      ],
+      "gallery": [],
+      "issuer": {
+        "th": "",
+        "en": ""
+      },
+      "source": ""
+    }
+  ]
+}

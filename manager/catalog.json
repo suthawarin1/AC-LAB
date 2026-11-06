@@ -1,0 +1,4694 @@
+[
+  {
+    "id": "main",
+    "path": "index.html",
+    "folder": "",
+    "label": {
+      "th": "หน้า Main",
+      "en": "Main website"
+    },
+    "groups": {
+      "introSlides": "สไลด์ต้อนรับ",
+      "heroSlides": "แบนเนอร์หลัก",
+      "bento": "การ์ดแนะนำงานวิจัย",
+      "news": "ข่าวที่เพิ่มเอง",
+      "routes": "ชื่อเมนูและลิงก์",
+      "media": "คลังภาพ",
+      "slideInterval": "เวลาสลับสไลด์"
+    },
+    "anchors": {
+      "hero": {
+        "selector": "#hero",
+        "label": "แบนเนอร์หลัก"
+      },
+      "introduction": {
+        "selector": "#introduction",
+        "label": "การ์ดแนะนำแล็บ"
+      },
+      "news": {
+        "selector": "#news",
+        "label": "ข่าวสาร"
+      },
+      "find-us": {
+        "selector": "#find-us",
+        "label": "มาพบเรา"
+      }
+    },
+    "copy": {
+      "i18n": {
+        "label": "หัวข้อและข้อความหลัก",
+        "value": {
+          "skip": {
+            "th": "ข้ามไปยังเนื้อหา",
+            "en": "Skip to content"
+          },
+          "openMenu": {
+            "th": "เปิดเมนู",
+            "en": "Open navigation"
+          },
+          "closeMenu": {
+            "th": "ปิดเมนู",
+            "en": "Close navigation"
+          },
+          "close": {
+            "th": "ปิด",
+            "en": "Close"
+          },
+          "researchHighlights": {
+            "th": "ไฮไลต์งานวิจัย",
+            "en": "Research highlights"
+          },
+          "heroContext": {
+            "th": "จีโนมิกส์พืช · พฤกษเคมี · ชีวการแพทย์",
+            "en": "Plant genomics · Phytochemistry · Biomedicine"
+          },
+          "scroll": {
+            "th": "เลื่อนลงเพื่อรู้จักเรา",
+            "en": "Scroll to discover"
+          },
+          "scrollDown": {
+            "th": "เลื่อนลงเพื่อรู้จักห้องปฏิบัติการ",
+            "en": "Scroll to discover the lab"
+          },
+          "introEyebrow": {
+            "th": "เริ่มต้นจากความใคร่รู้",
+            "en": "Rooted in curiosity"
+          },
+          "introLine1": {
+            "th": "เข้าใจธรรมชาติ",
+            "en": "From understanding nature"
+          },
+          "introLine2": {
+            "th": "ค้นพบความเป็นไปได้ใหม่",
+            "en": "to exploring possibilities."
+          },
+          "introBody": {
+            "th": "The AC Lab เชื่อมโยงงานวิจัยด้านจีโนมิกส์พืช พฤกษเคมี และชีวการแพทย์ ณ มหาวิทยาลัยขอนแก่น เราเริ่มต้นจากคำถามง่าย ๆ ว่า พืชรอบตัวจะช่วยให้เราค้นพบอะไรได้บ้าง",
+            "en": "At The AC Lab, we connect plant genomics, phytochemistry and biomedical research. Our work begins with a simple question: what can we learn from the plants around us?"
+          },
+          "aboutLink": {
+            "th": "รู้จักห้องปฏิบัติการของเรา",
+            "en": "A closer look at our lab"
+          },
+          "researchLabel": {
+            "th": "เชื่อมโยงศาสตร์ สร้างความรู้",
+            "en": "Our research, connected"
+          },
+          "bentoLabel": {
+            "th": "สำรวจ The AC Lab และแนววิจัย",
+            "en": "Explore The AC Lab and its research"
+          },
+          "field1": {
+            "th": "จีโนมิกส์พืช",
+            "en": "Plant genomics"
+          },
+          "field2": {
+            "th": "พฤกษเคมี",
+            "en": "Phytochemistry"
+          },
+          "field3": {
+            "th": "งานวิจัยชีวการแพทย์",
+            "en": "Biomedical research"
+          },
+          "newsEyebrow": {
+            "th": "เรื่องราวจากห้องปฏิบัติการ",
+            "en": "Inside the lab"
+          },
+          "newsTitle": {
+            "th": "ข่าวสารจากแล็บ",
+            "en": "News & updates."
+          },
+          "allNews": {
+            "th": "อ่าน Lab Blog",
+            "en": "Read Lab Blog"
+          },
+          "newsLede": {
+            "th": "ติดตามทุนวิจัย ความสำเร็จของทีม และบทความจากสมาชิก The AC Lab",
+            "en": "Research funding, lab milestones and new stories from our research community."
+          },
+          "readStory": {
+            "th": "อ่านรายละเอียด",
+            "en": "Read story"
+          },
+          "sample": {
+            "th": "ตัวอย่าง",
+            "en": "Sample"
+          },
+          "newsFunding": {
+            "th": "ทุนวิจัยล่าสุด",
+            "en": "Latest research funding"
+          },
+          "newsSampleFunding": {
+            "th": "ทุนวิจัย",
+            "en": "Research funding"
+          },
+          "newsAward": {
+            "th": "รางวัลของแล็บ",
+            "en": "Lab recognition"
+          },
+          "newsBlog": {
+            "th": "Lab Blog",
+            "en": "Lab Blog"
+          },
+          "newsRail": {
+            "th": "ข่าวสารและประกาศ",
+            "en": "News and announcements"
+          },
+          "newsControls": {
+            "th": "ตัวควบคุมการ์ดข่าว",
+            "en": "Announcement controls"
+          },
+          "previousNews": {
+            "th": "ข่าวก่อนหน้า",
+            "en": "Previous announcement"
+          },
+          "nextNews": {
+            "th": "ข่าวถัดไป",
+            "en": "Next announcement"
+          },
+          "pauseNews": {
+            "th": "หยุดเลื่อนข่าวอัตโนมัติ",
+            "en": "Pause announcements"
+          },
+          "playNews": {
+            "th": "เล่นข่าวอัตโนมัติ",
+            "en": "Play announcements"
+          },
+          "contactPage": {
+            "th": "ช่องทางติดต่อและการเดินทาง",
+            "en": "Contact & visit details"
+          },
+          "contactEyebrow": {
+            "th": "เริ่มต้นบทสนทนา สร้างโอกาสใหม่",
+            "en": "Good things start with a conversation"
+          },
+          "contactInvitation": {
+            "th": "ไม่ว่าจะเป็นคำถาม แนวคิด หรือความสนใจร่วมกัน เรายินดีพูดคุยกับคุณ",
+            "en": "A question, an idea, or a shared curiosity. We'd love to hear from you."
+          },
+          "locationLabel": {
+            "th": "พบเราได้ที่มหาวิทยาลัย",
+            "en": "Find us on campus"
+          },
+          "directions": {
+            "th": "ดูเส้นทาง",
+            "en": "Get directions"
+          },
+          "backWelcome": {
+            "th": "กลับหน้าต้อนรับ",
+            "en": "Back to welcome"
+          },
+          "comingSoon": {
+            "th": "พบกันเร็ว ๆ นี้",
+            "en": "Coming soon"
+          },
+          "pendingBody": {
+            "th": "เรากำลังเตรียมเนื้อหาสำหรับหน้านี้ ระหว่างนี้สามารถติดต่อห้องปฏิบัติการเพื่อสอบถามเพิ่มเติมได้",
+            "en": "We're preparing this page. Please visit again soon, or contact us to find out more."
+          },
+          "emailUs": {
+            "th": "ส่งอีเมลถึงห้องปฏิบัติการ",
+            "en": "Email the lab"
+          },
+          "previous": {
+            "th": "ภาพก่อนหน้า",
+            "en": "Previous slide"
+          },
+          "next": {
+            "th": "ภาพถัดไป",
+            "en": "Next slide"
+          },
+          "pause": {
+            "th": "หยุดการเลื่อนภาพ",
+            "en": "Pause slideshow"
+          },
+          "play": {
+            "th": "เล่นภาพอัตโนมัติ",
+            "en": "Play slideshow"
+          },
+          "slide": {
+            "th": "ไปยังภาพที่",
+            "en": "Go to slide"
+          },
+          "explore": {
+            "th": "สำรวจงานวิจัยของเรา",
+            "en": "Explore our research"
+          }
+        }
+      },
+      "inline": {
+        "label": "ข้อความเสริมและตัวนับ",
+        "value": {
+          "label-1": {
+            "th": "The AC Lab · มหาวิทยาลัยขอนแก่น",
+            "en": "The AC Lab · KhonKaen University"
+          }
+        }
+      }
+    },
+    "static": {
+      "text-001": {
+        "group": "หน้าต้อนรับ",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-002": {
+        "group": "หน้าต้อนรับ",
+        "label": "KhonKaen University",
+        "value": {
+          "th": "KhonKaen University",
+          "en": "KhonKaen University"
+        },
+        "attribute": ""
+      },
+      "text-003": {
+        "group": "หน้าต้อนรับ",
+        "label": "Khon Kaen, Thailand",
+        "value": {
+          "th": "Khon Kaen, Thailand",
+          "en": "Khon Kaen, Thailand"
+        },
+        "attribute": ""
+      },
+      "text-004": {
+        "group": "หน้าต้อนรับ",
+        "label": "A place for discovery",
+        "value": {
+          "th": "A place for discovery",
+          "en": "A place for discovery"
+        },
+        "attribute": ""
+      },
+      "text-005": {
+        "group": "หน้าต้อนรับ",
+        "label": "Curiosity",
+        "value": {
+          "th": "Curiosity",
+          "en": "Curiosity"
+        },
+        "attribute": ""
+      },
+      "text-006": {
+        "group": "หน้าต้อนรับ",
+        "label": "starts",
+        "value": {
+          "th": "starts",
+          "en": "starts"
+        },
+        "attribute": ""
+      },
+      "text-007": {
+        "group": "หน้าต้อนรับ",
+        "label": "here.",
+        "value": {
+          "th": "here.",
+          "en": "here."
+        },
+        "attribute": ""
+      },
+      "text-008": {
+        "group": "หน้าต้อนรับ",
+        "label": "ยินดีต้อนรับสู่ The AC Lab มหาวิทยาลัยขอนแก่น",
+        "value": {
+          "th": "ยินดีต้อนรับสู่ The AC Lab มหาวิทยาลัยขอนแก่น",
+          "en": "ยินดีต้อนรับสู่ The AC Lab มหาวิทยาลัยขอนแก่น"
+        },
+        "attribute": ""
+      },
+      "text-009": {
+        "group": "หน้าต้อนรับ",
+        "label": "Choose your language / เลือกภาษา",
+        "value": {
+          "th": "Choose your language / เลือกภาษา",
+          "en": "Choose your language / เลือกภาษา"
+        },
+        "attribute": "aria-label"
+      },
+      "text-010": {
+        "group": "หน้าต้อนรับ",
+        "label": "ภาษาไทย",
+        "value": {
+          "th": "ภาษาไทย",
+          "en": "ภาษาไทย"
+        },
+        "attribute": ""
+      },
+      "text-011": {
+        "group": "หน้าต้อนรับ",
+        "label": "English",
+        "value": {
+          "th": "English",
+          "en": "English"
+        },
+        "attribute": ""
+      },
+      "text-012": {
+        "group": "หน้าต้อนรับ",
+        "label": "Nature. Science. Possibility.",
+        "value": {
+          "th": "Nature. Science. Possibility.",
+          "en": "Nature. Science. Possibility."
+        },
+        "attribute": ""
+      },
+      "text-013": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "The AC Lab home",
+        "value": {
+          "th": "The AC Lab home",
+          "en": "The AC Lab home"
+        },
+        "attribute": "aria-label"
+      },
+      "text-014": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-015": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "KhonKaen University",
+        "value": {
+          "th": "KhonKaen University",
+          "en": "KhonKaen University"
+        },
+        "attribute": ""
+      },
+      "text-016": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "Language",
+        "value": {
+          "th": "Language",
+          "en": "Language"
+        },
+        "attribute": "aria-label"
+      },
+      "text-017": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "ภาษาไทย",
+        "value": {
+          "th": "ภาษาไทย",
+          "en": "ภาษาไทย"
+        },
+        "attribute": "aria-label"
+      },
+      "text-018": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "TH",
+        "value": {
+          "th": "TH",
+          "en": "TH"
+        },
+        "attribute": ""
+      },
+      "text-019": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "English",
+        "value": {
+          "th": "English",
+          "en": "English"
+        },
+        "attribute": "aria-label"
+      },
+      "text-020": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "EN",
+        "value": {
+          "th": "EN",
+          "en": "EN"
+        },
+        "attribute": ""
+      },
+      "text-021": {
+        "group": "มาพบเรา",
+        "label": "Come and",
+        "value": {
+          "th": "Come and",
+          "en": "Come and"
+        },
+        "attribute": ""
+      },
+      "text-022": {
+        "group": "มาพบเรา",
+        "label": "find us.",
+        "value": {
+          "th": "find us.",
+          "en": "find us."
+        },
+        "attribute": ""
+      },
+      "text-023": {
+        "group": "มาพบเรา",
+        "label": "raccha@kku.ac.th",
+        "value": {
+          "th": "raccha@kku.ac.th",
+          "en": "raccha@kku.ac.th"
+        },
+        "attribute": ""
+      },
+      "text-024": {
+        "group": "ส่วนท้ายเว็บ",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-025": {
+        "group": "ส่วนท้ายเว็บ",
+        "label": "The AC Lab · KhonKaen University",
+        "value": {
+          "th": "The AC Lab · KhonKaen University",
+          "en": "The AC Lab · KhonKaen University"
+        },
+        "attribute": ""
+      },
+      "text-026": {
+        "group": "กล่องโต้ตอบ",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-027": {
+        "group": "กล่องโต้ตอบ",
+        "label": "KhonKaen University",
+        "value": {
+          "th": "KhonKaen University",
+          "en": "KhonKaen University"
+        },
+        "attribute": ""
+      },
+      "text-028": {
+        "group": "กล่องโต้ตอบ",
+        "label": "Language",
+        "value": {
+          "th": "Language",
+          "en": "Language"
+        },
+        "attribute": "aria-label"
+      },
+      "text-029": {
+        "group": "กล่องโต้ตอบ",
+        "label": "ภาษาไทย",
+        "value": {
+          "th": "ภาษาไทย",
+          "en": "ภาษาไทย"
+        },
+        "attribute": ""
+      },
+      "text-030": {
+        "group": "กล่องโต้ตอบ",
+        "label": "English",
+        "value": {
+          "th": "English",
+          "en": "English"
+        },
+        "attribute": ""
+      }
+    },
+    "templates": {
+      "introSlides": {
+        "image": "",
+        "position": ""
+      },
+      "heroSlides": {
+        "image": "",
+        "position": "",
+        "alt": {
+          "en": "",
+          "th": ""
+        },
+        "eyebrow": {
+          "en": "",
+          "th": ""
+        },
+        "title": {
+          "en": "",
+          "th": ""
+        },
+        "description": {
+          "en": "",
+          "th": ""
+        }
+      },
+      "news": {
+        "id": "",
+        "image": "",
+        "position": "",
+        "sample": false,
+        "date": "",
+        "category": {
+          "en": "",
+          "th": ""
+        },
+        "title": {
+          "en": "",
+          "th": ""
+        },
+        "summary": {
+          "en": "",
+          "th": ""
+        },
+        "url": ""
+      },
+      "bento": {
+        "kind": "",
+        "route": "",
+        "image": "",
+        "position": "",
+        "imageAlt": {
+          "en": "",
+          "th": ""
+        },
+        "kicker": {
+          "en": "",
+          "th": ""
+        },
+        "title": {
+          "en": "",
+          "th": ""
+        },
+        "description": {
+          "en": "",
+          "th": ""
+        },
+        "cta": {
+          "en": "",
+          "th": ""
+        },
+        "path": ""
+      }
+    }
+  },
+  {
+    "id": "about",
+    "path": "about/index.html",
+    "folder": "about",
+    "label": {
+      "th": "เกี่ยวกับเรา",
+      "en": "About"
+    },
+    "groups": {
+      "copy": "บทนำและข้อมูลแล็บ",
+      "visuals": "ภาพแบนเนอร์",
+      "researchAreas": "แนววิจัย",
+      "stages": "เครือข่ายวิธีวิจัย",
+      "email": "อีเมลติดต่อ",
+      "media": "คลังภาพ"
+    },
+    "anchors": {
+      "hero": {
+        "selector": ".about-hero",
+        "label": "แบนเนอร์"
+      },
+      "genome": {
+        "selector": "#barleria-genome",
+        "label": "จีโนมคลอโรพลาสต์"
+      },
+      "story": {
+        "selector": "#about-story",
+        "label": "แนะนำแล็บ"
+      },
+      "research": {
+        "selector": "#research",
+        "label": "แนววิจัย"
+      },
+      "network": {
+        "selector": "#method-network",
+        "label": "เครือข่ายวิธีวิจัย"
+      },
+      "closing": {
+        "selector": ".closing",
+        "label": "ส่วนท้าย"
+      }
+    },
+    "copy": {
+      "i18n": {
+        "label": "หัวข้อและข้อความหลัก",
+        "value": {
+          "skip": {
+            "th": "ข้ามไปยังเนื้อหา",
+            "en": "Skip to content"
+          },
+          "home": {
+            "th": "หน้าหลัก",
+            "en": "Home"
+          },
+          "about": {
+            "th": "เกี่ยวกับเรา",
+            "en": "About"
+          },
+          "openMenu": {
+            "th": "เปิดเมนู",
+            "en": "Open navigation"
+          },
+          "closeMenu": {
+            "th": "ปิดเมนู",
+            "en": "Close navigation"
+          },
+          "close": {
+            "th": "ปิด",
+            "en": "Close"
+          },
+          "heroEyebrow": {
+            "th": "รู้จัก The AC Lab",
+            "en": "About The AC Lab"
+          },
+          "heroLine1": {
+            "th": "เข้าใจธรรมชาติ",
+            "en": "Nature,"
+          },
+          "heroLine2": {
+            "th": "เชื่อมโยงการค้นพบ",
+            "en": "connected."
+          },
+          "researchLink": {
+            "th": "สำรวจแนวทางวิจัยของเรา",
+            "en": "Discover what we study"
+          },
+          "principalLabel": {
+            "th": "หัวหน้าห้องปฏิบัติการวิจัย",
+            "en": "Principal investigator"
+          },
+          "principalAffiliation": {
+            "th": "คณะวิทยาศาสตร์ มหาวิทยาลัยขอนแก่น",
+            "en": "Faculty of Science, Khon Kaen University"
+          },
+          "heroCaption": {
+            "th": "คำถามของเราเริ่มต้นจากธรรมชาติ",
+            "en": "Our questions begin with nature"
+          },
+          "facet1": {
+            "th": "จีโนมพืช",
+            "en": "Plant genomes"
+          },
+          "facet2": {
+            "th": "สารจากธรรมชาติ",
+            "en": "Natural compounds"
+          },
+          "facet3": {
+            "th": "ความเข้าใจทางชีวภาพ",
+            "en": "Biological insight"
+          },
+          "identityLine1": {
+            "th": "จากพืชหนึ่งชนิด",
+            "en": "One plant."
+          },
+          "identityLine2": {
+            "th": "สู่คำถามที่เชื่อมโยงกัน",
+            "en": "Many connected questions."
+          },
+          "viewImage": {
+            "th": "ดูภาพเต็ม",
+            "en": "View image"
+          },
+          "closeImage": {
+            "th": "ปิดภาพ",
+            "en": "Close image"
+          },
+          "imageHint": {
+            "th": "กดที่ภาพเพื่อดูรายละเอียด · ภาพประกอบงานวิจัย",
+            "en": "Select a photograph to see it up close · Research imagery"
+          },
+          "imageNote": {
+            "th": "ภาพประกอบงานวิจัย",
+            "en": "Research imagery"
+          },
+          "strip1": {
+            "th": "ความหลากหลายของพืช ความเข้าใจระดับโมเลกุล และการค้นพบร่วมกัน",
+            "en": "Plant diversity. Molecular insight. Shared discovery."
+          },
+          "strip2": {
+            "th": "The AC Lab · คณะวิทยาศาสตร์ · มหาวิทยาลัยขอนแก่น",
+            "en": "The AC Lab · Faculty of Science · Khon Kaen University"
+          },
+          "researchEyebrow": {
+            "th": "เราศึกษาอะไร",
+            "en": "What we investigate"
+          },
+          "researchLine1": {
+            "th": "สามมุมมองของการวิจัย",
+            "en": "Three perspectives."
+          },
+          "researchLine2": {
+            "th": "เชื่อมโยงด้วยความใคร่รู้",
+            "en": "Connected by curiosity."
+          },
+          "researchCaption": {
+            "th": "จากความหลากหลายของพืช สู่หลักฐานที่ศึกษาและตรวจสอบได้",
+            "en": "From the diversity of plants to the evidence we can examine."
+          },
+          "networkEyebrow": {
+            "th": "เชื่อมโยงวิธีวิจัย",
+            "en": "How the science connects"
+          },
+          "networkLine1": {
+            "th": "สำรวจเครือข่าย",
+            "en": "Explore the research"
+          },
+          "networkLine2": {
+            "th": "วิธีวิจัยของเรา",
+            "en": "method network."
+          },
+          "networkIntro": {
+            "th": "ติดตามเส้นทางจากการศึกษาพืช สู่การทดสอบ พัฒนานวัตกรรม และต่อยอดการใช้ประโยชน์ เลือกช่วงการวิจัย แล้วกดแต่ละจุดเพื่อดูรายละเอียด",
+            "en": "Follow the connections from plant discovery to validation, innovation and translation. Choose a stage, then select a node to look closer."
+          },
+          "stageLabel": {
+            "th": "ช่วงของเครือข่ายวิธีวิจัย",
+            "en": "Research method stages"
+          },
+          "diagramHelp": {
+            "th": "กดแต่ละจุดเพื่อสำรวจวิธีวิจัย",
+            "en": "Select a node to explore its methods"
+          },
+          "detailKicker": {
+            "th": "สำรวจรายละเอียด",
+            "en": "A closer look"
+          },
+          "conditional": {
+            "th": "เส้นทางตามเงื่อนไข",
+            "en": "Conditional pathway"
+          },
+          "backNetwork": {
+            "th": "กลับไปยังแผนภาพ",
+            "en": "Back to the network"
+          },
+          "networkNote": {
+            "th": "กรอบเชื่อมโยงการวิจัย โดยเลือกวิธีศึกษาและความร่วมมือให้เหมาะกับคำถามของแต่ละโครงการ",
+            "en": "A connected research framework. Specific methods and collaborative platforms are selected to match each study."
+          },
+          "closingEyebrow": {
+            "th": "ร่วมตั้งคำถามต่อไปกับเรา",
+            "en": "Keep the conversation going"
+          },
+          "closingTitle": {
+            "th": "การค้นพบครั้งต่อไป อาจเริ่มจากบทสนทนาของเรา",
+            "en": "The next question starts with a conversation."
+          },
+          "contactLink": {
+            "th": "ติดต่อห้องปฏิบัติการ",
+            "en": "Get in touch with the lab"
+          },
+          "backHome": {
+            "th": "กลับเว็บไซต์หลัก",
+            "en": "Back to main website"
+          },
+          "comingSoon": {
+            "th": "พบกันเร็ว ๆ นี้",
+            "en": "Coming soon"
+          },
+          "pendingBody": {
+            "th": "เรากำลังเตรียมเนื้อหาสำหรับหน้านี้ ระหว่างนี้สามารถติดต่อห้องปฏิบัติการเพื่อสอบถามเพิ่มเติมได้",
+            "en": "We're preparing this page. Please visit again soon, or contact the lab to find out more."
+          },
+          "emailUs": {
+            "th": "ส่งอีเมลถึงห้องปฏิบัติการ",
+            "en": "Email the lab"
+          }
+        }
+      },
+      "copy": {
+        "label": "ข้อความส่วนจีโนม",
+        "value": {
+          "eyebrow": {
+            "th": "แผนที่จีโนมแบบโต้ตอบ",
+            "en": "Interactive genome map"
+          },
+          "title": {
+            "th": "จีโนมคลอโรพลาสต์",
+            "en": "Chloroplast genome"
+          },
+          "start": {
+            "th": "เลื่อนลงเพื่อประกอบจีโนม ↓",
+            "en": "Scroll to assemble the genome ↓"
+          },
+          "assembling": {
+            "th": "เลื่อนลงเพื่อประกอบ · เลื่อนขึ้นเพื่อย้อนกลับ",
+            "en": "Scroll down to assemble · scroll up to reverse"
+          },
+          "completeStatus": {
+            "th": "ประกอบวงจีโนมครบแล้ว",
+            "en": "Genome assembly complete."
+          },
+          "ready": {
+            "th": "ประกอบครบแล้ว ชี้หรือแตะที่ยีนเพื่อดูรายละเอียด",
+            "en": "The map is complete. Point to or tap a gene to explore it."
+          },
+          "showComplete": {
+            "th": "ดูแผนที่สมบูรณ์",
+            "en": "View completed map"
+          },
+          "pieces": {
+            "th": "ชิ้นส่วนยีนเข้าที่แล้ว",
+            "en": "gene segments in place"
+          },
+          "species": {
+            "th": "จีโนมคลอโรพลาสต์",
+            "en": "Chloroplast genomes"
+          },
+          "legend": {
+            "th": "เลือกกลุ่มยีนเพื่อเน้นบนแผนที่",
+            "en": "Select a gene group to highlight it"
+          },
+          "legendLabel": {
+            "th": "กลุ่มยีน",
+            "en": "Gene groups"
+          },
+          "mapLabel": {
+            "th": "แผนที่จีโนมคลอโรพลาสต์วงกลมของ Barleria",
+            "en": "Circular chloroplast genome map of Barleria"
+          },
+          "note": {
+            "th": "แผนภาพประกอบการสอน ใช้ตำแหน่งและขนาดยีนโดยประมาณและปรับสัดส่วนเพื่อให้อ่านง่าย",
+            "en": "Teaching illustration with approximate gene positions and lengths. Segments are scaled for readability."
+          }
+        }
+      },
+      "genomeLabels": {
+        "label": "ชื่อและคำอธิบายกลุ่มยีน",
+        "value": {
+          "a": {
+            "name": {
+              "th": "Photosystem I",
+              "en": "Photosystem I"
+            },
+            "description": {
+              "th": "ระบบแสง I รับแสงและส่งอิเล็กตรอนไปสร้าง NADPH",
+              "en": "Photosystem I absorbs light and passes electrons towards NADPH production."
+            }
+          },
+          "b": {
+            "name": {
+              "th": "Photosystem II",
+              "en": "Photosystem II"
+            },
+            "description": {
+              "th": "ระบบแสง II แยกน้ำและปล่อยแก๊สออกซิเจน",
+              "en": "Photosystem II splits water and releases oxygen."
+            }
+          },
+          "c": {
+            "name": {
+              "th": "Cytochrome b6/f",
+              "en": "Cytochrome b6/f"
+            },
+            "description": {
+              "th": "ลำเลียงอิเล็กตรอนและสูบโปรตอนข้ามเยื่อไทลาคอยด์",
+              "en": "Transfers electrons and pumps protons across the thylakoid membrane."
+            }
+          },
+          "d": {
+            "name": {
+              "th": "ATP synthase",
+              "en": "ATP synthase"
+            },
+            "description": {
+              "th": "สร้าง ATP จากความต่างระดับโปรตอน",
+              "en": "Makes ATP from the proton gradient."
+            }
+          },
+          "e": {
+            "name": {
+              "th": "NADH dehydrogenase",
+              "en": "NADH dehydrogenase"
+            },
+            "description": {
+              "th": "ส่งอิเล็กตรอนวนรอบระบบแสง I ช่วยสร้าง ATP เพิ่ม",
+              "en": "Supports cyclic electron flow around photosystem I and additional ATP production."
+            }
+          },
+          "f": {
+            "name": {
+              "th": "RuBisCO",
+              "en": "RuBisCO"
+            },
+            "description": {
+              "th": "เอนไซม์ตรึง CO₂ ในวัฏจักรคัลวิน",
+              "en": "Fixes carbon dioxide in the Calvin cycle."
+            }
+          },
+          "g": {
+            "name": {
+              "th": "RNA polymerase",
+              "en": "RNA polymerase"
+            },
+            "description": {
+              "th": "ถอดรหัสยีนในคลอโรพลาสต์",
+              "en": "Transcribes genes in the chloroplast."
+            }
+          },
+          "h": {
+            "name": {
+              "th": "Ribosomal SSU",
+              "en": "Ribosomal SSU"
+            },
+            "description": {
+              "th": "โปรตีนซับยูนิตเล็กของไรโบโซม",
+              "en": "Proteins of the small ribosomal subunit."
+            }
+          },
+          "i": {
+            "name": {
+              "th": "Ribosomal LSU",
+              "en": "Ribosomal LSU"
+            },
+            "description": {
+              "th": "โปรตีนซับยูนิตใหญ่ของไรโบโซม",
+              "en": "Proteins of the large ribosomal subunit."
+            }
+          },
+          "j": {
+            "name": {
+              "th": "tRNA",
+              "en": "tRNA"
+            },
+            "description": {
+              "th": "นำกรดอะมิโนไปยังไรโบโซมเพื่อแปลรหัส",
+              "en": "Brings amino acids to the ribosome during translation."
+            }
+          },
+          "k": {
+            "name": {
+              "th": "rRNA",
+              "en": "rRNA"
+            },
+            "description": {
+              "th": "อาร์เอ็นเอที่เป็นโครงสร้างของไรโบโซม",
+              "en": "RNA that forms part of the ribosome."
+            }
+          },
+          "l": {
+            "name": {
+              "th": "clpP / matK",
+              "en": "clpP / matK"
+            },
+            "description": {
+              "th": "clpP ย่อยโปรตีน, matK ช่วยตัดต่ออินทรอน",
+              "en": "clpP breaks down proteins, and matK helps splice introns."
+            }
+          },
+          "m": {
+            "name": {
+              "th": "ยีนอื่น ๆ",
+              "en": "Other genes"
+            },
+            "description": {
+              "th": "accD, ccsA, cemA, infA ฯลฯ",
+              "en": "Includes accD, ccsA, cemA and infA."
+            }
+          },
+          "n": {
+            "name": {
+              "th": "ycf",
+              "en": "ycf"
+            },
+            "description": {
+              "th": "เฟรมอ่านรหัสสมมติที่ยังไม่ทราบหน้าที่ชัดเจน",
+              "en": "Hypothetical reading frames with incompletely characterised functions."
+            }
+          }
+        }
+      },
+      "inline": {
+        "label": "ข้อความเสริมและตัวนับ",
+        "value": {
+          "label-1": {
+            "th": "เกี่ยวกับเรา",
+            "en": "About"
+          }
+        }
+      },
+      "genomeSpecies": {
+        "label": "ชื่อชนิดในวงจีโนม",
+        "value": {
+          "B. cristata": {
+            "th": "B. cristata",
+            "en": "B. cristata"
+          },
+          "B. lupulina": {
+            "th": "B. lupulina",
+            "en": "B. lupulina"
+          },
+          "B. repens": {
+            "th": "B. repens",
+            "en": "B. repens"
+          },
+          "B. siamensis": {
+            "th": "B. siamensis",
+            "en": "B. siamensis"
+          },
+          "B. strigosa": {
+            "th": "B. strigosa",
+            "en": "B. strigosa"
+          }
+        }
+      },
+      "genomeGeneNames": {
+        "label": "ชื่อยีนในแผนที่",
+        "value": {
+          "trnH-GUG": {
+            "th": "trnH-GUG",
+            "en": "trnH-GUG"
+          },
+          "psbA": {
+            "th": "psbA",
+            "en": "psbA"
+          },
+          "trnK-UUU": {
+            "th": "trnK-UUU",
+            "en": "trnK-UUU"
+          },
+          "matK": {
+            "th": "matK",
+            "en": "matK"
+          },
+          "rps16": {
+            "th": "rps16",
+            "en": "rps16"
+          },
+          "trnQ-UUG": {
+            "th": "trnQ-UUG",
+            "en": "trnQ-UUG"
+          },
+          "psbK": {
+            "th": "psbK",
+            "en": "psbK"
+          },
+          "psbI": {
+            "th": "psbI",
+            "en": "psbI"
+          },
+          "trnS-GCU": {
+            "th": "trnS-GCU",
+            "en": "trnS-GCU"
+          },
+          "trnG-UCC": {
+            "th": "trnG-UCC",
+            "en": "trnG-UCC"
+          },
+          "atpA": {
+            "th": "atpA",
+            "en": "atpA"
+          },
+          "atpF": {
+            "th": "atpF",
+            "en": "atpF"
+          },
+          "atpH": {
+            "th": "atpH",
+            "en": "atpH"
+          },
+          "atpI": {
+            "th": "atpI",
+            "en": "atpI"
+          },
+          "rps2": {
+            "th": "rps2",
+            "en": "rps2"
+          },
+          "rpoC2": {
+            "th": "rpoC2",
+            "en": "rpoC2"
+          },
+          "rpoC1": {
+            "th": "rpoC1",
+            "en": "rpoC1"
+          },
+          "rpoB": {
+            "th": "rpoB",
+            "en": "rpoB"
+          },
+          "trnC-GCA": {
+            "th": "trnC-GCA",
+            "en": "trnC-GCA"
+          },
+          "petN": {
+            "th": "petN",
+            "en": "petN"
+          },
+          "psbM": {
+            "th": "psbM",
+            "en": "psbM"
+          },
+          "trnD-GUC": {
+            "th": "trnD-GUC",
+            "en": "trnD-GUC"
+          },
+          "trnY-GUA": {
+            "th": "trnY-GUA",
+            "en": "trnY-GUA"
+          },
+          "trnE-UUC": {
+            "th": "trnE-UUC",
+            "en": "trnE-UUC"
+          },
+          "trnT-GGU": {
+            "th": "trnT-GGU",
+            "en": "trnT-GGU"
+          },
+          "psbD": {
+            "th": "psbD",
+            "en": "psbD"
+          },
+          "psbC": {
+            "th": "psbC",
+            "en": "psbC"
+          },
+          "trnS-UGA": {
+            "th": "trnS-UGA",
+            "en": "trnS-UGA"
+          },
+          "psbZ": {
+            "th": "psbZ",
+            "en": "psbZ"
+          },
+          "trnG-GCC": {
+            "th": "trnG-GCC",
+            "en": "trnG-GCC"
+          },
+          "trnfM-CAU": {
+            "th": "trnfM-CAU",
+            "en": "trnfM-CAU"
+          },
+          "rps14": {
+            "th": "rps14",
+            "en": "rps14"
+          },
+          "psaB": {
+            "th": "psaB",
+            "en": "psaB"
+          },
+          "psaA": {
+            "th": "psaA",
+            "en": "psaA"
+          },
+          "ycf3": {
+            "th": "ycf3",
+            "en": "ycf3"
+          },
+          "trnS-GGA": {
+            "th": "trnS-GGA",
+            "en": "trnS-GGA"
+          },
+          "rps4": {
+            "th": "rps4",
+            "en": "rps4"
+          },
+          "trnT-UGU": {
+            "th": "trnT-UGU",
+            "en": "trnT-UGU"
+          },
+          "trnL-UAA": {
+            "th": "trnL-UAA",
+            "en": "trnL-UAA"
+          },
+          "trnF-GAA": {
+            "th": "trnF-GAA",
+            "en": "trnF-GAA"
+          },
+          "ndhJ": {
+            "th": "ndhJ",
+            "en": "ndhJ"
+          },
+          "ndhK": {
+            "th": "ndhK",
+            "en": "ndhK"
+          },
+          "ndhC": {
+            "th": "ndhC",
+            "en": "ndhC"
+          },
+          "trnV-UAC": {
+            "th": "trnV-UAC",
+            "en": "trnV-UAC"
+          },
+          "trnM-CAU": {
+            "th": "trnM-CAU",
+            "en": "trnM-CAU"
+          },
+          "atpE": {
+            "th": "atpE",
+            "en": "atpE"
+          },
+          "atpB": {
+            "th": "atpB",
+            "en": "atpB"
+          },
+          "rbcL": {
+            "th": "rbcL",
+            "en": "rbcL"
+          },
+          "accD": {
+            "th": "accD",
+            "en": "accD"
+          },
+          "psaI": {
+            "th": "psaI",
+            "en": "psaI"
+          },
+          "ycf4": {
+            "th": "ycf4",
+            "en": "ycf4"
+          },
+          "cemA": {
+            "th": "cemA",
+            "en": "cemA"
+          },
+          "petA": {
+            "th": "petA",
+            "en": "petA"
+          },
+          "psbJ": {
+            "th": "psbJ",
+            "en": "psbJ"
+          },
+          "psbL": {
+            "th": "psbL",
+            "en": "psbL"
+          },
+          "psbF": {
+            "th": "psbF",
+            "en": "psbF"
+          },
+          "psbE": {
+            "th": "psbE",
+            "en": "psbE"
+          },
+          "petL": {
+            "th": "petL",
+            "en": "petL"
+          },
+          "petG": {
+            "th": "petG",
+            "en": "petG"
+          },
+          "trnW-CCA": {
+            "th": "trnW-CCA",
+            "en": "trnW-CCA"
+          },
+          "trnP-UGG": {
+            "th": "trnP-UGG",
+            "en": "trnP-UGG"
+          },
+          "psaJ": {
+            "th": "psaJ",
+            "en": "psaJ"
+          },
+          "rpl33": {
+            "th": "rpl33",
+            "en": "rpl33"
+          },
+          "rps18": {
+            "th": "rps18",
+            "en": "rps18"
+          },
+          "rpl20": {
+            "th": "rpl20",
+            "en": "rpl20"
+          },
+          "rps12": {
+            "th": "rps12",
+            "en": "rps12"
+          },
+          "clpP": {
+            "th": "clpP",
+            "en": "clpP"
+          },
+          "psbB": {
+            "th": "psbB",
+            "en": "psbB"
+          },
+          "psbT": {
+            "th": "psbT",
+            "en": "psbT"
+          },
+          "psbN": {
+            "th": "psbN",
+            "en": "psbN"
+          },
+          "psbH": {
+            "th": "psbH",
+            "en": "psbH"
+          },
+          "petB": {
+            "th": "petB",
+            "en": "petB"
+          },
+          "petD": {
+            "th": "petD",
+            "en": "petD"
+          },
+          "rpoA": {
+            "th": "rpoA",
+            "en": "rpoA"
+          },
+          "rps11": {
+            "th": "rps11",
+            "en": "rps11"
+          },
+          "rpl36": {
+            "th": "rpl36",
+            "en": "rpl36"
+          },
+          "infA": {
+            "th": "infA",
+            "en": "infA"
+          },
+          "rps8": {
+            "th": "rps8",
+            "en": "rps8"
+          },
+          "rpl14": {
+            "th": "rpl14",
+            "en": "rpl14"
+          },
+          "rpl16": {
+            "th": "rpl16",
+            "en": "rpl16"
+          },
+          "rps3": {
+            "th": "rps3",
+            "en": "rps3"
+          },
+          "rpl22": {
+            "th": "rpl22",
+            "en": "rpl22"
+          },
+          "rps19": {
+            "th": "rps19",
+            "en": "rps19"
+          },
+          "rpl2": {
+            "th": "rpl2",
+            "en": "rpl2"
+          },
+          "rpl23": {
+            "th": "rpl23",
+            "en": "rpl23"
+          },
+          "trnI-CAU": {
+            "th": "trnI-CAU",
+            "en": "trnI-CAU"
+          },
+          "ycf2": {
+            "th": "ycf2",
+            "en": "ycf2"
+          },
+          "trnL-CAA": {
+            "th": "trnL-CAA",
+            "en": "trnL-CAA"
+          },
+          "ndhB": {
+            "th": "ndhB",
+            "en": "ndhB"
+          },
+          "rps7": {
+            "th": "rps7",
+            "en": "rps7"
+          },
+          "trnV-GAC": {
+            "th": "trnV-GAC",
+            "en": "trnV-GAC"
+          },
+          "rrn16": {
+            "th": "rrn16",
+            "en": "rrn16"
+          },
+          "trnI-GAU": {
+            "th": "trnI-GAU",
+            "en": "trnI-GAU"
+          },
+          "trnA-UGC": {
+            "th": "trnA-UGC",
+            "en": "trnA-UGC"
+          },
+          "rrn23": {
+            "th": "rrn23",
+            "en": "rrn23"
+          },
+          "rrn4.5": {
+            "th": "rrn4.5",
+            "en": "rrn4.5"
+          },
+          "rrn5": {
+            "th": "rrn5",
+            "en": "rrn5"
+          },
+          "trnR-ACG": {
+            "th": "trnR-ACG",
+            "en": "trnR-ACG"
+          },
+          "trnN-GUU": {
+            "th": "trnN-GUU",
+            "en": "trnN-GUU"
+          },
+          "ycf1": {
+            "th": "ycf1",
+            "en": "ycf1"
+          },
+          "ndhF": {
+            "th": "ndhF",
+            "en": "ndhF"
+          },
+          "rpl32": {
+            "th": "rpl32",
+            "en": "rpl32"
+          },
+          "trnL-UAG": {
+            "th": "trnL-UAG",
+            "en": "trnL-UAG"
+          },
+          "ccsA": {
+            "th": "ccsA",
+            "en": "ccsA"
+          },
+          "ndhD": {
+            "th": "ndhD",
+            "en": "ndhD"
+          },
+          "psaC": {
+            "th": "psaC",
+            "en": "psaC"
+          },
+          "ndhE": {
+            "th": "ndhE",
+            "en": "ndhE"
+          },
+          "ndhG": {
+            "th": "ndhG",
+            "en": "ndhG"
+          },
+          "ndhI": {
+            "th": "ndhI",
+            "en": "ndhI"
+          },
+          "ndhA": {
+            "th": "ndhA",
+            "en": "ndhA"
+          },
+          "ndhH": {
+            "th": "ndhH",
+            "en": "ndhH"
+          },
+          "rps15": {
+            "th": "rps15",
+            "en": "rps15"
+          }
+        }
+      }
+    },
+    "static": {
+      "text-001": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-002": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "KhonKaen University",
+        "value": {
+          "th": "KhonKaen University",
+          "en": "KhonKaen University"
+        },
+        "attribute": ""
+      },
+      "text-003": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "Language",
+        "value": {
+          "th": "Language",
+          "en": "Language"
+        },
+        "attribute": "aria-label"
+      },
+      "text-004": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "ภาษาไทย",
+        "value": {
+          "th": "ภาษาไทย",
+          "en": "ภาษาไทย"
+        },
+        "attribute": "aria-label"
+      },
+      "text-005": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "TH",
+        "value": {
+          "th": "TH",
+          "en": "TH"
+        },
+        "attribute": ""
+      },
+      "text-006": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "English",
+        "value": {
+          "th": "English",
+          "en": "English"
+        },
+        "attribute": "aria-label"
+      },
+      "text-007": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "EN",
+        "value": {
+          "th": "EN",
+          "en": "EN"
+        },
+        "attribute": ""
+      },
+      "text-008": {
+        "group": "แบนเนอร์",
+        "label": "Breadcrumb",
+        "value": {
+          "th": "Breadcrumb",
+          "en": "Breadcrumb"
+        },
+        "attribute": "aria-label"
+      },
+      "text-009": {
+        "group": "จีโนมคลอโรพลาสต์",
+        "label": "Barleria",
+        "value": {
+          "th": "Barleria",
+          "en": "Barleria"
+        },
+        "attribute": ""
+      },
+      "text-010": {
+        "group": "แนะนำแล็บ",
+        "label": "The people and questions behind the lab",
+        "value": {
+          "th": "The people and questions behind the lab",
+          "en": "The people and questions behind the lab"
+        },
+        "attribute": "aria-label"
+      },
+      "text-011": {
+        "group": "ส่วนท้ายเว็บ",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-012": {
+        "group": "ส่วนท้ายเว็บ",
+        "label": "The AC Lab · KhonKaen University",
+        "value": {
+          "th": "The AC Lab · KhonKaen University",
+          "en": "The AC Lab · KhonKaen University"
+        },
+        "attribute": ""
+      },
+      "text-013": {
+        "group": "กล่องโต้ตอบ",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-014": {
+        "group": "กล่องโต้ตอบ",
+        "label": "KhonKaen University",
+        "value": {
+          "th": "KhonKaen University",
+          "en": "KhonKaen University"
+        },
+        "attribute": ""
+      },
+      "text-015": {
+        "group": "กล่องโต้ตอบ",
+        "label": "Language",
+        "value": {
+          "th": "Language",
+          "en": "Language"
+        },
+        "attribute": "aria-label"
+      },
+      "text-016": {
+        "group": "กล่องโต้ตอบ",
+        "label": "ภาษาไทย",
+        "value": {
+          "th": "ภาษาไทย",
+          "en": "ภาษาไทย"
+        },
+        "attribute": ""
+      },
+      "text-017": {
+        "group": "กล่องโต้ตอบ",
+        "label": "English",
+        "value": {
+          "th": "English",
+          "en": "English"
+        },
+        "attribute": ""
+      }
+    },
+    "templates": {
+      "researchAreas": {
+        "title": {
+          "en": "",
+          "th": ""
+        },
+        "description": {
+          "en": "",
+          "th": ""
+        },
+        "tags": {
+          "en": "",
+          "th": ""
+        },
+        "image": "",
+        "imagePosition": "",
+        "imageAlt": {
+          "en": "",
+          "th": ""
+        }
+      },
+      "stages": {
+        "id": "",
+        "label": {
+          "en": "",
+          "th": ""
+        },
+        "title": {
+          "en": "",
+          "th": ""
+        },
+        "description": {
+          "en": "",
+          "th": ""
+        },
+        "context": {
+          "en": "",
+          "th": ""
+        },
+        "caption": {
+          "en": "",
+          "th": ""
+        },
+        "nodes": [],
+        "edges": [],
+        "image": "",
+        "imagePosition": "",
+        "imageAlt": {
+          "en": "",
+          "th": ""
+        },
+        "additional": []
+      },
+      "stages/nodes": {
+        "id": "",
+        "label": {
+          "en": "",
+          "th": ""
+        },
+        "type": {
+          "en": "",
+          "th": ""
+        },
+        "description": {
+          "en": "",
+          "th": ""
+        },
+        "methods": [],
+        "desktop": [
+          0.5,
+          0.5
+        ],
+        "mobile": [
+          0.5,
+          0.5
+        ]
+      },
+      "stages/nodes/methods": {
+        "en": "",
+        "th": ""
+      },
+      "stages/nodes/desktop": 0,
+      "stages/nodes/mobile": 0,
+      "stages/edges": {
+        "from": "",
+        "to": "",
+        "conditional": false
+      },
+      "stages/additional": {
+        "title": {
+          "en": "",
+          "th": ""
+        },
+        "items": []
+      },
+      "stages/additional/items": {
+        "en": "",
+        "th": ""
+      }
+    }
+  },
+  {
+    "id": "team",
+    "path": "team/index.html",
+    "folder": "team",
+    "label": {
+      "th": "ทีมวิจัย",
+      "en": "The Team"
+    },
+    "groups": {
+      "hero": "แบนเนอร์",
+      "members": "สมาชิกทีม",
+      "contactEmail": "อีเมลกลาง",
+      "media": "คลังภาพ"
+    },
+    "anchors": {
+      "hero": {
+        "selector": ".hero",
+        "label": "แบนเนอร์"
+      },
+      "pi": {
+        "selector": "#pi",
+        "label": "หัวหน้าห้องปฏิบัติการ"
+      },
+      "collaboration": {
+        "selector": "#collaboration",
+        "label": "ผู้ร่วมวิจัย"
+      },
+      "researcher": {
+        "selector": "#researcher",
+        "label": "นักวิจัย"
+      },
+      "student": {
+        "selector": "#student",
+        "label": "นักศึกษา"
+      },
+      "closing": {
+        "selector": ".closing",
+        "label": "ส่วนท้าย"
+      }
+    },
+    "copy": {
+      "tr": {
+        "label": "หัวข้อและข้อความทีม",
+        "value": {
+          "skip": {
+            "th": "ข้ามไปยังรายชื่อทีมวิจัย",
+            "en": "Skip to the people"
+          },
+          "heroEyebrow": {
+            "th": "ผู้คนแห่ง The AC Lab",
+            "en": "Meet The Team"
+          },
+          "meetPeople": {
+            "th": "รู้จักทีมวิจัยของเรา",
+            "en": "Meet our people"
+          },
+          "scroll": {
+            "th": "เลื่อนลงเพื่อรู้จักเรา",
+            "en": "Scroll to connect"
+          },
+          "portraitCaption": {
+            "th": "ภาพสมาชิกในเครือข่ายวิจัยของเรา",
+            "en": "Portraits of our research community"
+          },
+          "groupCaption": {
+            "th": "ร่วมกันที่ The AC Lab",
+            "en": "Together at The AC Lab"
+          },
+          "searchLabel": {
+            "th": "ค้นหาสมาชิก",
+            "en": "Search the team"
+          },
+          "searchPlaceholder": {
+            "th": "ค้นหาชื่อ ความเชี่ยวชาญ หรือสังกัด…",
+            "en": "Name, expertise, institution…"
+          },
+          "piEyebrow": {
+            "th": "หัวหน้าทีมวิจัย",
+            "en": "Principal investigators"
+          },
+          "piTitle": {
+            "th": "ผู้คนเบื้องหลังทุกการค้นพบ",
+            "en": "The minds behind our work."
+          },
+          "piIntro": {
+            "th": "เชื่อมโยงความเชี่ยวชาญที่หลากหลาย ผ่านคำถามที่เราค้นหาคำตอบร่วมกัน",
+            "en": "Different expertise, connected by the questions we ask together."
+          },
+          "collabEyebrow": {
+            "th": "เชื่อมโยงความร่วมมือทางวิจัย",
+            "en": "A wider circle of discovery"
+          },
+          "collabIntro": {
+            "th": "แลกเปลี่ยนมุมมองและองค์ความรู้ ระหว่างศาสตร์และสถาบัน",
+            "en": "Shared perspectives connect our research across disciplines and institutions."
+          },
+          "researcherEyebrow": {
+            "th": "จากแนวคิดสู่การลงมือค้นคว้า",
+            "en": "Ideas into investigation"
+          },
+          "researcherIntro": {
+            "th": "ผู้เชื่อมโยงคำถาม การทดลอง และหลักฐานทางวิทยาศาสตร์",
+            "en": "The people connecting questions, experiments and evidence."
+          },
+          "studentEyebrow": {
+            "th": "ก้าวต่อไปของคำถามใหม่",
+            "en": "The next generation of questions"
+          },
+          "studentIntro": {
+            "th": "เรียนรู้ผ่านความสงสัย การแลกเปลี่ยน และการทำวิจัย",
+            "en": "Learning through curiosity, conversation and research."
+          },
+          "closingEyebrow": {
+            "th": "งานวิจัยที่ดีเริ่มต้นจากบทสนทนา",
+            "en": "Good research starts with a conversation"
+          },
+          "closingTitle": {
+            "th": "เชื่อมโยงคำถามของเราเข้าด้วยกัน",
+            "en": "Let's connect our questions."
+          },
+          "contactLab": {
+            "th": "ติดต่อห้องปฏิบัติการ",
+            "en": "Contact the lab"
+          },
+          "home": {
+            "th": "กลับเว็บไซต์หลัก",
+            "en": "Main website"
+          },
+          "comingSoon": {
+            "th": "กำลังจัดเตรียม",
+            "en": "Coming soon"
+          },
+          "pendingBody": {
+            "th": "เรากำลังจัดเตรียม subweb นี้ ติดต่อห้องปฏิบัติการเพื่อสอบถามเพิ่มเติมได้",
+            "en": "This subweb is being prepared. Contact the lab to find out more."
+          },
+          "affiliation": {
+            "th": "สังกัด",
+            "en": "Affiliation"
+          },
+          "expertise": {
+            "th": "ความเชี่ยวชาญ",
+            "en": "Expertise"
+          },
+          "email": {
+            "th": "อีเมล",
+            "en": "Email"
+          },
+          "notProvided": {
+            "th": "รออัปเดตข้อมูล",
+            "en": "Details to be updated"
+          },
+          "viaLab": {
+            "th": "ติดต่อผ่านห้องปฏิบัติการ",
+            "en": "Contact via the lab"
+          },
+          "profile": {
+            "th": "ดูข้อมูลบุคลากร",
+            "en": "View profile"
+          },
+          "close": {
+            "th": "ปิด",
+            "en": "Close"
+          },
+          "profilePending": {
+            "th": "กำลังเพิ่มรายละเอียดโปรไฟล์",
+            "en": "Profile details will be added soon."
+          },
+          "photoPending": {
+            "th": "รอภาพบุคลากร",
+            "en": "PORTRAIT TO FOLLOW"
+          },
+          "storyEyebrow": {
+            "th": "ความใคร่รู้ที่เชื่อมโยงเรา",
+            "en": "Connected by curiosity"
+          },
+          "storyTitle": {
+            "th": "แลกเปลี่ยนมุมมอง ต่อยอดการค้นพบ",
+            "en": "Science grows through connection."
+          },
+          "storyBody": {
+            "th": "สำรวจคำถามและวิธีวิจัย ที่เชื่อมโยงความเชี่ยวชาญของเราเข้าด้วยกัน",
+            "en": "Explore the questions and methods that bring our perspectives together."
+          },
+          "storyLink": {
+            "th": "สำรวจงานวิจัยของเรา",
+            "en": "Explore our research"
+          },
+          "researchStoryTitle": {
+            "th": "จากคำถาม สู่ความเข้าใจที่ลึกขึ้น",
+            "en": "From a question to a closer look."
+          },
+          "researchStoryBody": {
+            "th": "สำรวจความเชื่อมโยงระหว่างแนวทางและวิธีการวิจัยของเรา",
+            "en": "Follow the connections between our research areas and methods."
+          },
+          "researchStoryLink": {
+            "th": "สำรวจเครือข่ายวิธีวิจัย",
+            "en": "Explore the method network"
+          },
+          "joinEyebrow": {
+            "th": "พื้นที่สำหรับความใคร่รู้ของคุณ",
+            "en": "A place for your curiosity"
+          },
+          "joinTitle": {
+            "th": "เริ่มต้นคำถามถัดไป ไปกับเรา",
+            "en": "Your next question begins here."
+          },
+          "joinBody": {
+            "th": "สนใจเรียนรู้และทำวิจัยร่วมกัน ติดต่อห้องปฏิบัติการเพื่อพูดคุยเกี่ยวกับแนวทางวิจัยและโอกาสทางการศึกษา",
+            "en": "Interested in learning with us? Talk to the lab about research and study opportunities."
+          },
+          "joinLink": {
+            "th": "เริ่มต้นบทสนทนา",
+            "en": "Start a conversation"
+          },
+          "studentEmpty": {
+            "th": "เตรียมพบกับข้อมูลนักศึกษาในส่วนนี้",
+            "en": "Student profiles will be added here."
+          },
+          "empty": {
+            "th": "กำลังจัดเตรียมข้อมูลสมาชิก",
+            "en": "Profiles will be added here."
+          },
+          "results": {
+            "th": "คนที่ตรงกับการค้นหา",
+            "en": "matching people"
+          },
+          "noResults": {
+            "th": "ไม่พบสมาชิกที่ตรงกับการค้นหา ลองใช้ชื่อหรือความเชี่ยวชาญอื่น",
+            "en": "No matching people. Try another name or area of expertise."
+          },
+          "openMenu": {
+            "th": "เปิดเมนู",
+            "en": "Open navigation"
+          },
+          "closeMenu": {
+            "th": "ปิดเมนู",
+            "en": "Close navigation"
+          },
+          "rolePI": {
+            "th": "หัวหน้าทีมวิจัย",
+            "en": "Principal investigator"
+          },
+          "roleCollab": {
+            "th": "ผู้ร่วมวิจัย",
+            "en": "Collaborator"
+          },
+          "roleResearcher": {
+            "th": "นักวิจัย",
+            "en": "Researcher"
+          },
+          "roleStudent": {
+            "th": "นักศึกษา",
+            "en": "Student"
+          }
+        }
+      },
+      "inline": {
+        "label": "ข้อความเสริมและตัวนับ",
+        "value": {
+          "label-1": {
+            "th": "ทีมวิจัย",
+            "en": "The Team"
+          }
+        }
+      }
+    },
+    "static": {
+      "text-001": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-002": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "KhonKaen University",
+        "value": {
+          "th": "KhonKaen University",
+          "en": "KhonKaen University"
+        },
+        "attribute": ""
+      },
+      "text-003": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "Language",
+        "value": {
+          "th": "Language",
+          "en": "Language"
+        },
+        "attribute": "aria-label"
+      },
+      "text-004": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "TH",
+        "value": {
+          "th": "TH",
+          "en": "TH"
+        },
+        "attribute": ""
+      },
+      "text-005": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "EN",
+        "value": {
+          "th": "EN",
+          "en": "EN"
+        },
+        "attribute": ""
+      },
+      "text-006": {
+        "group": "แบนเนอร์",
+        "label": "THE AC LAB",
+        "value": {
+          "th": "THE AC LAB",
+          "en": "THE AC LAB"
+        },
+        "attribute": ""
+      },
+      "text-007": {
+        "group": "แบนเนอร์",
+        "label": "PEOPLE & PERSPECTIVES",
+        "value": {
+          "th": "PEOPLE & PERSPECTIVES",
+          "en": "PEOPLE & PERSPECTIVES"
+        },
+        "attribute": ""
+      },
+      "text-008": {
+        "group": "แบนเนอร์",
+        "label": "KHON KAEN, THAILAND",
+        "value": {
+          "th": "KHON KAEN, THAILAND",
+          "en": "KHON KAEN, THAILAND"
+        },
+        "attribute": ""
+      },
+      "text-009": {
+        "group": "ส่วนอื่น ๆ",
+        "label": "Team sections",
+        "value": {
+          "th": "Team sections",
+          "en": "Team sections"
+        },
+        "attribute": "aria-label"
+      },
+      "text-010": {
+        "group": "ส่วนอื่น ๆ",
+        "label": "PI",
+        "value": {
+          "th": "PI",
+          "en": "PI"
+        },
+        "attribute": ""
+      },
+      "text-011": {
+        "group": "ส่วนอื่น ๆ",
+        "label": "Collaboration",
+        "value": {
+          "th": "Collaboration",
+          "en": "Collaboration"
+        },
+        "attribute": ""
+      },
+      "text-012": {
+        "group": "ส่วนอื่น ๆ",
+        "label": "Researcher",
+        "value": {
+          "th": "Researcher",
+          "en": "Researcher"
+        },
+        "attribute": ""
+      },
+      "text-013": {
+        "group": "ส่วนอื่น ๆ",
+        "label": "Student",
+        "value": {
+          "th": "Student",
+          "en": "Student"
+        },
+        "attribute": ""
+      },
+      "text-014": {
+        "group": "ผู้ร่วมวิจัย",
+        "label": "Collaboration.",
+        "value": {
+          "th": "Collaboration.",
+          "en": "Collaboration."
+        },
+        "attribute": ""
+      },
+      "text-015": {
+        "group": "นักวิจัย",
+        "label": "Researcher.",
+        "value": {
+          "th": "Researcher.",
+          "en": "Researcher."
+        },
+        "attribute": ""
+      },
+      "text-016": {
+        "group": "นักศึกษา",
+        "label": "Student.",
+        "value": {
+          "th": "Student.",
+          "en": "Student."
+        },
+        "attribute": ""
+      },
+      "text-017": {
+        "group": "ส่วนท้ายเว็บ",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-018": {
+        "group": "ส่วนท้ายเว็บ",
+        "label": "KhonKaen University",
+        "value": {
+          "th": "KhonKaen University",
+          "en": "KhonKaen University"
+        },
+        "attribute": ""
+      },
+      "text-019": {
+        "group": "ส่วนท้ายเว็บ",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-020": {
+        "group": "ส่วนท้ายเว็บ",
+        "label": "Team Manager",
+        "value": {
+          "th": "Team Manager",
+          "en": "Team Manager"
+        },
+        "attribute": ""
+      },
+      "text-021": {
+        "group": "กล่องโต้ตอบ",
+        "label": "Close profile",
+        "value": {
+          "th": "Close profile",
+          "en": "Close profile"
+        },
+        "attribute": "aria-label"
+      },
+      "text-022": {
+        "group": "กล่องโต้ตอบ",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-023": {
+        "group": "กล่องโต้ตอบ",
+        "label": "KhonKaen University",
+        "value": {
+          "th": "KhonKaen University",
+          "en": "KhonKaen University"
+        },
+        "attribute": ""
+      },
+      "text-024": {
+        "group": "กล่องโต้ตอบ",
+        "label": "Close navigation",
+        "value": {
+          "th": "Close navigation",
+          "en": "Close navigation"
+        },
+        "attribute": "aria-label"
+      },
+      "text-025": {
+        "group": "กล่องโต้ตอบ",
+        "label": "Close",
+        "value": {
+          "th": "Close",
+          "en": "Close"
+        },
+        "attribute": "aria-label"
+      }
+    },
+    "templates": {
+      "members": {
+        "id": "",
+        "group": "",
+        "name": {
+          "en": "",
+          "th": ""
+        },
+        "academicTitle": {
+          "en": "",
+          "th": ""
+        },
+        "position": {
+          "en": "",
+          "th": ""
+        },
+        "expertise": {
+          "en": [],
+          "th": []
+        },
+        "affiliation": {
+          "en": "",
+          "th": ""
+        },
+        "bio": {
+          "en": "",
+          "th": ""
+        },
+        "email": "",
+        "photo": "",
+        "sourceUrl": "",
+        "photoPosition": "",
+        "photoZoom": 1,
+        "visible": false,
+        "order": 0
+      },
+      "members/expertise/en": "",
+      "members/expertise/th": ""
+    }
+  },
+  {
+    "id": "publication",
+    "path": "publication/index.html",
+    "folder": "publication",
+    "label": {
+      "th": "ผลงานตีพิมพ์",
+      "en": "Publication"
+    },
+    "groups": {
+      "hero": "แบนเนอร์",
+      "topics": "ขอบเขตงานวิจัย",
+      "papers": "ผลงานตีพิมพ์",
+      "media": "คลังภาพ"
+    },
+    "anchors": {
+      "cover": {
+        "selector": "#cover",
+        "label": "แบนเนอร์"
+      },
+      "scope": {
+        "selector": "#research-scope",
+        "label": "ขอบเขตงานวิจัย"
+      },
+      "papers": {
+        "selector": "#publications",
+        "label": "ผลงานตีพิมพ์"
+      }
+    },
+    "copy": {
+      "sharedCopy": {
+        "label": "เมนูและปุ่มมาตรฐาน",
+        "value": {
+          "home": {
+            "th": "หน้าหลัก",
+            "en": "Home"
+          },
+          "skip": {
+            "th": "ข้ามไปยังเนื้อหา",
+            "en": "Skip to content"
+          },
+          "navigation": {
+            "th": "เมนูหลัก",
+            "en": "Main navigation"
+          },
+          "openMenu": {
+            "th": "เปิดเมนู",
+            "en": "Open menu"
+          },
+          "closeMenu": {
+            "th": "ปิดเมนู",
+            "en": "Close menu"
+          },
+          "language": {
+            "th": "ภาษา",
+            "en": "Language"
+          },
+          "close": {
+            "th": "ปิด",
+            "en": "Close"
+          },
+          "pending": {
+            "th": "กำลังจัดเตรียมหน้านี้",
+            "en": "This page is in preparation."
+          }
+        }
+      },
+      "publicationCopy": {
+        "label": "หัวข้อและข้อความของหน้า",
+        "value": {
+          "title": {
+            "th": "ผลงานตีพิมพ์",
+            "en": "Publications"
+          },
+          "heroHeading": {
+            "th": "ผลงานวิจัย\nที่ตีพิมพ์",
+            "en": "Research\npublications"
+          },
+          "action": {
+            "th": "ดูผลงานตีพิมพ์",
+            "en": "Browse publications"
+          },
+          "lede": {
+            "th": "สำรวจผลงานวิจัยตั้งแต่จีโนมและความหลากหลายของพืช ไปจนถึงพฤกษเคมีและการทดลองระดับเซลล์",
+            "en": "Explore research spanning plant genomes, natural compounds, and cellular responses."
+          },
+          "note": {
+            "th": "ผลงานคัดสรรจาก The AC Lab",
+            "en": "Selected work from The AC Lab"
+          },
+          "scroll": {
+            "th": "ขอบเขตงานวิจัย",
+            "en": "Research scope"
+          },
+          "scope": {
+            "th": "เราศึกษาเรื่องอะไร",
+            "en": "What we study"
+          },
+          "scopeLede": {
+            "th": "เลือกขอบเขตที่สนใจเพื่อดูผลงานในกลุ่มนั้น",
+            "en": "Choose an area to find publications on that topic."
+          },
+          "about": {
+            "th": "รู้จักแล็บและงานวิจัย",
+            "en": "About our research"
+          },
+          "catalog": {
+            "th": "ค้นหาผลงานตีพิมพ์",
+            "en": "Browse publications"
+          },
+          "search": {
+            "th": "ค้นหาผลงาน",
+            "en": "Search publications"
+          },
+          "searchHint": {
+            "th": "ชื่อเรื่อง ผู้เขียน วารสาร หรือ DOI",
+            "en": "Title, author, journal, or DOI"
+          },
+          "year": {
+            "th": "ปีตีพิมพ์",
+            "en": "Publication year"
+          },
+          "topic": {
+            "th": "ขอบเขตงานวิจัย",
+            "en": "Research area"
+          },
+          "allYears": {
+            "th": "ทุกปี",
+            "en": "All years"
+          },
+          "allTopics": {
+            "th": "ทุกขอบเขต",
+            "en": "All areas"
+          },
+          "reset": {
+            "th": "ล้างตัวกรอง",
+            "en": "Reset filters"
+          },
+          "order": {
+            "th": "เรียงจากล่าสุด",
+            "en": "Newest first"
+          },
+          "cite": {
+            "th": "อ้างอิง",
+            "en": "Cite"
+          },
+          "citeSelected": {
+            "th": "อ้างอิงรายการที่เลือก",
+            "en": "Cite selected"
+          },
+          "clearSelection": {
+            "th": "ยกเลิกการเลือก",
+            "en": "Clear selection"
+          },
+          "citations": {
+            "th": "รายการอ้างอิง",
+            "en": "Citations"
+          },
+          "copy": {
+            "th": "คัดลอกอ้างอิง",
+            "en": "Copy citations"
+          },
+          "copied": {
+            "th": "คัดลอกแล้ว",
+            "en": "Copied"
+          },
+          "copyManual": {
+            "th": "เลือกข้อความแล้ว กด Ctrl+C หรือ ⌘C เพื่อคัดลอก",
+            "en": "Text selected. Press Ctrl+C or ⌘C to copy."
+          },
+          "article": {
+            "th": "เปิดบทความ",
+            "en": "Open article"
+          },
+          "fullText": {
+            "th": "อ่านฉบับเต็ม",
+            "en": "Full text"
+          },
+          "pdf": {
+            "th": "ดู PDF",
+            "en": "View PDF"
+          },
+          "openAccess": {
+            "th": "อ่านได้ฟรีใน PMC",
+            "en": "Free PMC article"
+          },
+          "illustration": {
+            "th": "ภาพประกอบ",
+            "en": "Illustrative photograph"
+          },
+          "emptyTitle": {
+            "th": "ไม่พบผลงานที่ตรงกับตัวกรอง",
+            "en": "No matching publications"
+          },
+          "emptyNote": {
+            "th": "ลองเปลี่ยนคำค้นหรือเลือกปีอื่น",
+            "en": "Try a different search term or publication year."
+          },
+          "more": {
+            "th": "แสดงผลงานเพิ่ม",
+            "en": "Show more publications"
+          },
+          "bottom": {
+            "th": "อ่านเรื่องเบื้องหลังการทำวิจัย",
+            "en": "Read the stories behind the research"
+          }
+        }
+      },
+      "inline": {
+        "label": "ข้อความเสริมและตัวนับ",
+        "value": {
+          "label-1": {
+            "th": "เลือกผลงาน",
+            "en": "Select publication"
+          }
+        }
+      },
+      "counters": {
+        "label": "ข้อความแสดงจำนวน",
+        "value": {
+          "paperCount": {
+            "th": "{count} ผลงาน",
+            "en": "{count} publications"
+          },
+          "selectionCount": {
+            "th": "เลือก {count} รายการ",
+            "en": "{count} selected"
+          }
+        }
+      }
+    },
+    "static": {
+      "text-001": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-002": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "KhonKaen University",
+        "value": {
+          "th": "KhonKaen University",
+          "en": "KhonKaen University"
+        },
+        "attribute": ""
+      },
+      "text-003": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "Language",
+        "value": {
+          "th": "Language",
+          "en": "Language"
+        },
+        "attribute": "aria-label"
+      },
+      "text-004": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "ภาษาไทย",
+        "value": {
+          "th": "ภาษาไทย",
+          "en": "ภาษาไทย"
+        },
+        "attribute": "aria-label"
+      },
+      "text-005": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "TH",
+        "value": {
+          "th": "TH",
+          "en": "TH"
+        },
+        "attribute": ""
+      },
+      "text-006": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "English",
+        "value": {
+          "th": "English",
+          "en": "English"
+        },
+        "attribute": "aria-label"
+      },
+      "text-007": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "EN",
+        "value": {
+          "th": "EN",
+          "en": "EN"
+        },
+        "attribute": ""
+      },
+      "text-008": {
+        "group": "กล่องโต้ตอบ",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-009": {
+        "group": "กล่องโต้ตอบ",
+        "label": "KhonKaen University",
+        "value": {
+          "th": "KhonKaen University",
+          "en": "KhonKaen University"
+        },
+        "attribute": ""
+      },
+      "text-010": {
+        "group": "กล่องโต้ตอบ",
+        "label": "Language",
+        "value": {
+          "th": "Language",
+          "en": "Language"
+        },
+        "attribute": "aria-label"
+      },
+      "text-011": {
+        "group": "กล่องโต้ตอบ",
+        "label": "ภาษาไทย",
+        "value": {
+          "th": "ภาษาไทย",
+          "en": "ภาษาไทย"
+        },
+        "attribute": ""
+      },
+      "text-012": {
+        "group": "กล่องโต้ตอบ",
+        "label": "English",
+        "value": {
+          "th": "English",
+          "en": "English"
+        },
+        "attribute": ""
+      },
+      "text-013": {
+        "group": "แบนเนอร์",
+        "label": "The AC Lab · Publication",
+        "value": {
+          "th": "The AC Lab · Publication",
+          "en": "The AC Lab · Publication"
+        },
+        "attribute": ""
+      },
+      "text-014": {
+        "group": "ขอบเขตงานวิจัย",
+        "label": "Research Scope",
+        "value": {
+          "th": "Research Scope",
+          "en": "Research Scope"
+        },
+        "attribute": ""
+      },
+      "text-015": {
+        "group": "ผลงานตีพิมพ์",
+        "label": "Selected Publications",
+        "value": {
+          "th": "Selected Publications",
+          "en": "Selected Publications"
+        },
+        "attribute": ""
+      },
+      "text-016": {
+        "group": "กล่องโต้ตอบ",
+        "label": "ปิด",
+        "value": {
+          "th": "ปิด",
+          "en": "ปิด"
+        },
+        "attribute": "aria-label"
+      },
+      "text-017": {
+        "group": "ส่วนท้ายเว็บ",
+        "label": "KhonKaen University",
+        "value": {
+          "th": "KhonKaen University",
+          "en": "KhonKaen University"
+        },
+        "attribute": ""
+      },
+      "text-018": {
+        "group": "ส่วนท้ายเว็บ",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-019": {
+        "group": "กล่องโต้ตอบ",
+        "label": "ปิด",
+        "value": {
+          "th": "ปิด",
+          "en": "ปิด"
+        },
+        "attribute": "aria-label"
+      }
+    },
+    "templates": {
+      "topics": {
+        "id": "",
+        "icon": "",
+        "name": {
+          "th": "",
+          "en": ""
+        },
+        "summary": {
+          "th": "",
+          "en": ""
+        }
+      },
+      "papers": {
+        "id": "",
+        "title": "",
+        "authors": [],
+        "journal": "",
+        "year": 0,
+        "date": "",
+        "reference": "",
+        "doi": "",
+        "pmid": "",
+        "pmcid": "",
+        "pdf": "",
+        "topics": [],
+        "summary": {
+          "th": "",
+          "en": ""
+        },
+        "cover": ""
+      },
+      "papers/authors": "",
+      "papers/topics": ""
+    }
+  },
+  {
+    "id": "blog",
+    "path": "blog/index.html",
+    "folder": "blog",
+    "label": {
+      "th": "บล็อกแล็บ",
+      "en": "Lab Blog"
+    },
+    "groups": {
+      "hero": "แบนเนอร์",
+      "posts": "บทความ",
+      "categories": "หมวดหมู่",
+      "tags": "แท็ก",
+      "authors": "ผู้เขียน",
+      "media": "คลังภาพ"
+    },
+    "anchors": {
+      "cover": {
+        "selector": "#cover",
+        "label": "แบนเนอร์"
+      },
+      "posts": {
+        "selector": "#posts",
+        "label": "รายการบทความ"
+      }
+    },
+    "copy": {
+      "sharedCopy": {
+        "label": "เมนูและปุ่มมาตรฐาน",
+        "value": {
+          "home": {
+            "th": "หน้าหลัก",
+            "en": "Home"
+          },
+          "skip": {
+            "th": "ข้ามไปยังเนื้อหา",
+            "en": "Skip to content"
+          },
+          "navigation": {
+            "th": "เมนูหลัก",
+            "en": "Main navigation"
+          },
+          "openMenu": {
+            "th": "เปิดเมนู",
+            "en": "Open menu"
+          },
+          "closeMenu": {
+            "th": "ปิดเมนู",
+            "en": "Close menu"
+          },
+          "language": {
+            "th": "ภาษา",
+            "en": "Language"
+          },
+          "close": {
+            "th": "ปิด",
+            "en": "Close"
+          },
+          "pending": {
+            "th": "กำลังจัดเตรียมหน้านี้",
+            "en": "This page is in preparation."
+          }
+        }
+      },
+      "blogCopy": {
+        "label": "หัวข้อและข้อความของหน้า",
+        "value": {
+          "title": {
+            "th": "เรื่องเล่าจากแล็บ",
+            "en": "Lab Blog"
+          },
+          "heroHeading": {
+            "th": "เรื่องเล่า\nจากแล็บ",
+            "en": "Notes from\nthe lab"
+          },
+          "action": {
+            "th": "สำรวจบทความ",
+            "en": "Explore the journal"
+          },
+          "lede": {
+            "th": "พื้นที่แบ่งปันเรื่องวิจัย วิธีทำงาน และมุมมองจากสมาชิก The AC Lab",
+            "en": "Research stories, practical methods, and perspectives from The AC Lab."
+          },
+          "note": {
+            "th": "บันทึกการเรียนรู้จาก The AC Lab",
+            "en": "Notes and perspectives from The AC Lab"
+          },
+          "scroll": {
+            "th": "เลื่อนลงเพื่ออ่าน",
+            "en": "Scroll to discover"
+          },
+          "postsTitle": {
+            "th": "บทความจากแล็บ",
+            "en": "From the lab"
+          },
+          "postsLede": {
+            "th": "เลือกอ่านตามหัวข้อที่สนใจ ตั้งแต่ตัวอย่างพืชไปจนถึงการอ่านผลทดลอง",
+            "en": "Explore a topic, from plant specimens to interpreting an experiment."
+          },
+          "search": {
+            "th": "ค้นหาบทความ",
+            "en": "Search articles"
+          },
+          "searchHint": {
+            "th": "ชื่อบทความ ผู้เขียน หรือหัวข้อ",
+            "en": "Article, author, or topic"
+          },
+          "category": {
+            "th": "หมวดหมู่",
+            "en": "Category"
+          },
+          "tag": {
+            "th": "แท็ก",
+            "en": "Tag"
+          },
+          "allCategories": {
+            "th": "ทุกหมวดหมู่",
+            "en": "All categories"
+          },
+          "allTags": {
+            "th": "ทุกแท็ก",
+            "en": "All tags"
+          },
+          "reset": {
+            "th": "ล้างตัวกรอง",
+            "en": "Reset filters"
+          },
+          "order": {
+            "th": "บทความและบันทึก",
+            "en": "Articles and notes"
+          },
+          "sample": {
+            "th": "บทความตัวอย่าง",
+            "en": "Sample article"
+          },
+          "emptyTitle": {
+            "th": "ไม่พบบทความที่ตรงกับตัวกรอง",
+            "en": "No matching articles"
+          },
+          "emptyNote": {
+            "th": "ลองเปลี่ยนคำค้นหรือเลือกหมวดอื่น",
+            "en": "Try a different search term or category."
+          },
+          "prev": {
+            "th": "ก่อนหน้า",
+            "en": "Previous"
+          },
+          "next": {
+            "th": "ถัดไป",
+            "en": "Next"
+          },
+          "pages": {
+            "th": "หน้าบทความ",
+            "en": "Article pages"
+          },
+          "back": {
+            "th": "กลับไปที่ Lab Blog",
+            "en": "Back to Lab Blog"
+          },
+          "read": {
+            "th": "อ่านบทความ",
+            "en": "Read article"
+          },
+          "missingTitle": {
+            "th": "ไม่พบบทความนี้",
+            "en": "Article unavailable"
+          },
+          "missingNote": {
+            "th": "กลับไปเลือกบทความใน Lab Blog",
+            "en": "Return to Lab Blog to browse available articles."
+          },
+          "sources": {
+            "th": "อ่านเพิ่มเติมจากงานวิจัย",
+            "en": "Further reading"
+          },
+          "illustration": {
+            "th": "ภาพประกอบ",
+            "en": "Illustrative photograph"
+          },
+          "bottom": {
+            "th": "สำรวจผลงานตีพิมพ์ของแล็บ",
+            "en": "Explore the lab’s publications"
+          },
+          "publication": {
+            "th": "ไปที่ Publication",
+            "en": "Go to Publication"
+          }
+        }
+      },
+      "counters": {
+        "label": "ข้อความแสดงจำนวน",
+        "value": {
+          "postCount": {
+            "th": "{count} บทความ",
+            "en": "{count} articles"
+          }
+        }
+      }
+    },
+    "static": {
+      "text-001": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-002": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "KhonKaen University",
+        "value": {
+          "th": "KhonKaen University",
+          "en": "KhonKaen University"
+        },
+        "attribute": ""
+      },
+      "text-003": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "Language",
+        "value": {
+          "th": "Language",
+          "en": "Language"
+        },
+        "attribute": "aria-label"
+      },
+      "text-004": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "ภาษาไทย",
+        "value": {
+          "th": "ภาษาไทย",
+          "en": "ภาษาไทย"
+        },
+        "attribute": "aria-label"
+      },
+      "text-005": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "TH",
+        "value": {
+          "th": "TH",
+          "en": "TH"
+        },
+        "attribute": ""
+      },
+      "text-006": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "English",
+        "value": {
+          "th": "English",
+          "en": "English"
+        },
+        "attribute": "aria-label"
+      },
+      "text-007": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "EN",
+        "value": {
+          "th": "EN",
+          "en": "EN"
+        },
+        "attribute": ""
+      },
+      "text-008": {
+        "group": "กล่องโต้ตอบ",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-009": {
+        "group": "กล่องโต้ตอบ",
+        "label": "KhonKaen University",
+        "value": {
+          "th": "KhonKaen University",
+          "en": "KhonKaen University"
+        },
+        "attribute": ""
+      },
+      "text-010": {
+        "group": "กล่องโต้ตอบ",
+        "label": "Language",
+        "value": {
+          "th": "Language",
+          "en": "Language"
+        },
+        "attribute": "aria-label"
+      },
+      "text-011": {
+        "group": "กล่องโต้ตอบ",
+        "label": "ภาษาไทย",
+        "value": {
+          "th": "ภาษาไทย",
+          "en": "ภาษาไทย"
+        },
+        "attribute": ""
+      },
+      "text-012": {
+        "group": "กล่องโต้ตอบ",
+        "label": "English",
+        "value": {
+          "th": "English",
+          "en": "English"
+        },
+        "attribute": ""
+      },
+      "text-013": {
+        "group": "แบนเนอร์",
+        "label": "The AC Lab · Lab Blog",
+        "value": {
+          "th": "The AC Lab · Lab Blog",
+          "en": "The AC Lab · Lab Blog"
+        },
+        "attribute": ""
+      },
+      "text-014": {
+        "group": "รายการบทความ",
+        "label": "From the Lab",
+        "value": {
+          "th": "From the Lab",
+          "en": "From the Lab"
+        },
+        "attribute": ""
+      },
+      "text-015": {
+        "group": "ส่วนท้ายเว็บ",
+        "label": "KhonKaen University",
+        "value": {
+          "th": "KhonKaen University",
+          "en": "KhonKaen University"
+        },
+        "attribute": ""
+      },
+      "text-016": {
+        "group": "ส่วนท้ายเว็บ",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-017": {
+        "group": "กล่องโต้ตอบ",
+        "label": "ปิด",
+        "value": {
+          "th": "ปิด",
+          "en": "ปิด"
+        },
+        "attribute": "aria-label"
+      }
+    },
+    "templates": {
+      "categories": {
+        "id": "",
+        "name": {
+          "th": "",
+          "en": ""
+        }
+      },
+      "tags": {
+        "id": "",
+        "name": {
+          "th": "",
+          "en": ""
+        }
+      },
+      "posts": {
+        "id": "",
+        "title": {
+          "th": "",
+          "en": ""
+        },
+        "summary": {
+          "th": "",
+          "en": ""
+        },
+        "category": "",
+        "tags": [],
+        "cover": "",
+        "coverPosition": "",
+        "authorId": "",
+        "date": "",
+        "status": "",
+        "sample": false,
+        "featured": false,
+        "sections": [],
+        "sources": []
+      },
+      "posts/tags": "",
+      "posts/sections": {
+        "heading": {
+          "th": "",
+          "en": ""
+        },
+        "paragraphs": []
+      },
+      "posts/sections/paragraphs": {
+        "th": "",
+        "en": ""
+      },
+      "posts/sources": {
+        "name": "",
+        "url": ""
+      }
+    }
+  },
+  {
+    "id": "funding",
+    "path": "reward/funding/index.html",
+    "folder": "reward/funding",
+    "label": {
+      "th": "ทุนวิจัย",
+      "en": "Research Funding"
+    },
+    "groups": {
+      "hero": "แบนเนอร์",
+      "grants": "รายการทุน",
+      "media": "คลังภาพ"
+    },
+    "anchors": {
+      "cover": {
+        "selector": "#cover",
+        "label": "แบนเนอร์"
+      },
+      "grants": {
+        "selector": "#grants",
+        "label": "รายการทุน"
+      }
+    },
+    "copy": {
+      "sharedCopy": {
+        "label": "เมนูและปุ่มมาตรฐาน",
+        "value": {
+          "home": {
+            "th": "หน้าหลัก",
+            "en": "Home"
+          },
+          "skip": {
+            "th": "ข้ามไปยังเนื้อหา",
+            "en": "Skip to content"
+          },
+          "navigation": {
+            "th": "เมนูหลัก",
+            "en": "Main navigation"
+          },
+          "openMenu": {
+            "th": "เปิดเมนู",
+            "en": "Open menu"
+          },
+          "closeMenu": {
+            "th": "ปิดเมนู",
+            "en": "Close menu"
+          },
+          "language": {
+            "th": "ภาษา",
+            "en": "Language"
+          },
+          "close": {
+            "th": "ปิด",
+            "en": "Close"
+          },
+          "pending": {
+            "th": "กำลังจัดเตรียมหน้านี้",
+            "en": "This page is in preparation."
+          }
+        }
+      },
+      "fundingCopy": {
+        "label": "หัวข้อและข้อความของหน้า",
+        "value": {
+          "title": {
+            "th": "ทุนวิจัย",
+            "en": "Research Funding"
+          },
+          "heroHeading": {
+            "th": "ทุนวิจัย\nของแล็บ",
+            "en": "Research\nFunding"
+          },
+          "lede": {
+            "th": "สำรวจโครงการที่ได้รับทุน แหล่งทุน และหัวหน้าโครงการของ The AC Lab",
+            "en": "Explore the funded projects, supporting agencies, and people leading research at The AC Lab."
+          },
+          "note": {
+            "th": "The AC Lab · มหาวิทยาลัยขอนแก่น",
+            "en": "The AC Lab · Khon Kaen University"
+          },
+          "action": {
+            "th": "ดูรายการทุนวิจัย",
+            "en": "Explore the grants"
+          },
+          "scroll": {
+            "th": "เลื่อนลงเพื่อดูรายการทุน",
+            "en": "Scroll to explore"
+          },
+          "catalog": {
+            "th": "โครงการที่ได้รับทุน",
+            "en": "Funded projects"
+          },
+          "intro": {
+            "th": "ค้นหาจากชื่อทุน ชื่อโครงการ แหล่งทุน หรือหัวหน้าโครงการ แล้วเลือกปีงบประมาณที่สนใจ",
+            "en": "Search by grant, project, funding agency, or project lead and narrow the list by fiscal year."
+          },
+          "search": {
+            "th": "ค้นหารายการทุน",
+            "en": "Search grants"
+          },
+          "placeholder": {
+            "th": "ชื่อทุน โครงการ แหล่งทุน หรือหัวหน้าโครงการ",
+            "en": "Grant, project, agency, or lead"
+          },
+          "year": {
+            "th": "ปีงบประมาณ",
+            "en": "Fiscal year"
+          },
+          "yearFilter": {
+            "th": "ปีงบประมาณ (พ.ศ.)",
+            "en": "Fiscal year"
+          },
+          "allYears": {
+            "th": "ทุกปี",
+            "en": "All years"
+          },
+          "reset": {
+            "th": "ล้างตัวกรอง",
+            "en": "Reset filters"
+          },
+          "order": {
+            "th": "เรียงจากปีล่าสุด",
+            "en": "Newest fiscal year first"
+          },
+          "project": {
+            "th": "โครงการวิจัย",
+            "en": "Research project"
+          },
+          "grant": {
+            "th": "ชื่อทุน",
+            "en": "Grant name"
+          },
+          "funder": {
+            "th": "แหล่งทุน",
+            "en": "Funding agency"
+          },
+          "leader": {
+            "th": "หัวหน้าโครงการ",
+            "en": "Project lead"
+          },
+          "sampleProfile": {
+            "th": "ตัวอย่างโปรไฟล์จากหน้า Team",
+            "en": "Example Team profile"
+          },
+          "sample": {
+            "th": "ข้อมูลตัวอย่าง",
+            "en": "Sample record"
+          },
+          "exampleNotice": {
+            "th": "รายการด้านล่างเป็นตัวอย่างการแสดงผลสำหรับเตรียมข้อมูลทุนจริง",
+            "en": "These sample records show how confirmed grants will appear."
+          },
+          "missing": {
+            "th": "รอระบุข้อมูล",
+            "en": "To be added"
+          },
+          "empty": {
+            "th": "ไม่พบรายการทุน",
+            "en": "No matching grants"
+          },
+          "emptyNote": {
+            "th": "ลองเปลี่ยนคำค้นหรือเลือกปีอื่น",
+            "en": "Try a different search term or fiscal year."
+          },
+          "bottom": {
+            "th": "รู้จักทีมที่อยู่เบื้องหลังงานวิจัย",
+            "en": "Meet the people behind the research"
+          },
+          "team": {
+            "th": "ดูทีมวิจัย",
+            "en": "The Team"
+          }
+        }
+      },
+      "counters": {
+        "label": "ข้อความแสดงจำนวน",
+        "value": {
+          "fundingCount": {
+            "th": "{count} รายการ",
+            "en": "{count} grants"
+          },
+          "sampleCount": {
+            "th": "{count} ตัวอย่าง",
+            "en": "{count} sample records"
+          }
+        }
+      }
+    },
+    "static": {
+      "text-001": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-002": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "KhonKaen University",
+        "value": {
+          "th": "KhonKaen University",
+          "en": "KhonKaen University"
+        },
+        "attribute": ""
+      },
+      "text-003": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "Language",
+        "value": {
+          "th": "Language",
+          "en": "Language"
+        },
+        "attribute": "aria-label"
+      },
+      "text-004": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "ภาษาไทย",
+        "value": {
+          "th": "ภาษาไทย",
+          "en": "ภาษาไทย"
+        },
+        "attribute": "aria-label"
+      },
+      "text-005": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "TH",
+        "value": {
+          "th": "TH",
+          "en": "TH"
+        },
+        "attribute": ""
+      },
+      "text-006": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "English",
+        "value": {
+          "th": "English",
+          "en": "English"
+        },
+        "attribute": "aria-label"
+      },
+      "text-007": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "EN",
+        "value": {
+          "th": "EN",
+          "en": "EN"
+        },
+        "attribute": ""
+      },
+      "text-008": {
+        "group": "กล่องโต้ตอบ",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-009": {
+        "group": "กล่องโต้ตอบ",
+        "label": "KhonKaen University",
+        "value": {
+          "th": "KhonKaen University",
+          "en": "KhonKaen University"
+        },
+        "attribute": ""
+      },
+      "text-010": {
+        "group": "กล่องโต้ตอบ",
+        "label": "Language",
+        "value": {
+          "th": "Language",
+          "en": "Language"
+        },
+        "attribute": "aria-label"
+      },
+      "text-011": {
+        "group": "กล่องโต้ตอบ",
+        "label": "ภาษาไทย",
+        "value": {
+          "th": "ภาษาไทย",
+          "en": "ภาษาไทย"
+        },
+        "attribute": ""
+      },
+      "text-012": {
+        "group": "กล่องโต้ตอบ",
+        "label": "English",
+        "value": {
+          "th": "English",
+          "en": "English"
+        },
+        "attribute": ""
+      },
+      "text-013": {
+        "group": "แบนเนอร์",
+        "label": "The AC Lab · Honer",
+        "value": {
+          "th": "The AC Lab · Honer",
+          "en": "The AC Lab · Honer"
+        },
+        "attribute": ""
+      },
+      "text-014": {
+        "group": "รายการทุน",
+        "label": "Funding Directory",
+        "value": {
+          "th": "Funding Directory",
+          "en": "Funding Directory"
+        },
+        "attribute": ""
+      },
+      "text-015": {
+        "group": "ส่วนท้ายเว็บ",
+        "label": "KhonKaen University",
+        "value": {
+          "th": "KhonKaen University",
+          "en": "KhonKaen University"
+        },
+        "attribute": ""
+      },
+      "text-016": {
+        "group": "ส่วนท้ายเว็บ",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-017": {
+        "group": "กล่องโต้ตอบ",
+        "label": "ปิด",
+        "value": {
+          "th": "ปิด",
+          "en": "ปิด"
+        },
+        "attribute": "aria-label"
+      }
+    },
+    "templates": {
+      "grants": {
+        "id": "",
+        "sample": false,
+        "fiscalYear": 0,
+        "grant": {
+          "th": "",
+          "en": ""
+        },
+        "funder": {
+          "th": "",
+          "en": ""
+        },
+        "project": {
+          "th": "",
+          "en": ""
+        },
+        "leaderId": "",
+        "leaderName": {
+          "th": "",
+          "en": ""
+        }
+      }
+    }
+  },
+  {
+    "id": "awards",
+    "path": "reward/awards/index.html",
+    "folder": "reward/awards",
+    "label": {
+      "th": "รางวัล",
+      "en": "Awards"
+    },
+    "groups": {
+      "hero": "แบนเนอร์",
+      "awards": "รายการรางวัล",
+      "media": "คลังภาพ"
+    },
+    "anchors": {
+      "cover": {
+        "selector": "#cover",
+        "label": "แบนเนอร์"
+      },
+      "awards": {
+        "selector": "#awards",
+        "label": "รายการรางวัล"
+      }
+    },
+    "copy": {
+      "sharedCopy": {
+        "label": "เมนูและปุ่มมาตรฐาน",
+        "value": {
+          "home": {
+            "th": "หน้าหลัก",
+            "en": "Home"
+          },
+          "skip": {
+            "th": "ข้ามไปยังเนื้อหา",
+            "en": "Skip to content"
+          },
+          "navigation": {
+            "th": "เมนูหลัก",
+            "en": "Main navigation"
+          },
+          "openMenu": {
+            "th": "เปิดเมนู",
+            "en": "Open menu"
+          },
+          "closeMenu": {
+            "th": "ปิดเมนู",
+            "en": "Close menu"
+          },
+          "language": {
+            "th": "ภาษา",
+            "en": "Language"
+          },
+          "close": {
+            "th": "ปิด",
+            "en": "Close"
+          },
+          "pending": {
+            "th": "กำลังจัดเตรียมหน้านี้",
+            "en": "This page is in preparation."
+          }
+        }
+      },
+      "awardCopy": {
+        "label": "หัวข้อและข้อความของหน้า",
+        "value": {
+          "title": {
+            "th": "รางวัลและเกียรติคุณ",
+            "en": "Awards & Honours"
+          },
+          "heroHeading": {
+            "th": "รางวัลและ\nเกียรติคุณ",
+            "en": "Awards &\nHonours"
+          },
+          "lede": {
+            "th": "รวมความสำเร็จของอาจารย์ นักวิจัย นักศึกษา ศิษย์เก่า และทีมที่ร่วมสร้างผลงานกับ The AC Lab",
+            "en": "Celebrating the achievements of faculty, researchers, students, alumni, and teams across The AC Lab."
+          },
+          "note": {
+            "th": "The AC Lab · มหาวิทยาลัยขอนแก่น",
+            "en": "The AC Lab · Khon Kaen University"
+          },
+          "action": {
+            "th": "ดูรายการรางวัล",
+            "en": "Explore the awards"
+          },
+          "scroll": {
+            "th": "เลื่อนลงเพื่อดูรางวัล",
+            "en": "Scroll to explore"
+          },
+          "archive": {
+            "th": "ความสำเร็จของคนในแล็บ",
+            "en": "Recognition across the lab"
+          },
+          "intro": {
+            "th": "ค้นหารางวัลตามชื่อผู้รับ ปี หรือระดับ และดูความสำเร็จตามลำดับเวลา",
+            "en": "Find awards by recipient, year, or level, and follow milestones on the timeline."
+          },
+          "total": {
+            "th": "รางวัลในคลัง",
+            "en": "Awards in the archive"
+          },
+          "range": {
+            "th": "ช่วงปีที่ได้รับรางวัล",
+            "en": "Years of recognition"
+          },
+          "search": {
+            "th": "ค้นหารางวัล",
+            "en": "Search awards"
+          },
+          "placeholder": {
+            "th": "ชื่อรางวัล ผู้รับ หรือหน่วยงาน",
+            "en": "Award, recipient, or organisation"
+          },
+          "year": {
+            "th": "ปีที่ได้รับ",
+            "en": "Award year"
+          },
+          "role": {
+            "th": "บทบาทผู้รับ",
+            "en": "Recipient role"
+          },
+          "level": {
+            "th": "ระดับรางวัล",
+            "en": "Award level"
+          },
+          "allYears": {
+            "th": "ทุกปี",
+            "en": "All years"
+          },
+          "allRoles": {
+            "th": "ทุกบทบาท",
+            "en": "All roles"
+          },
+          "allLevels": {
+            "th": "ทุกระดับ",
+            "en": "All levels"
+          },
+          "reset": {
+            "th": "ล้างตัวกรอง",
+            "en": "Reset filters"
+          },
+          "order": {
+            "th": "เรียงตาม",
+            "en": "Sort by"
+          },
+          "newest": {
+            "th": "ล่าสุด",
+            "en": "Newest"
+          },
+          "oldest": {
+            "th": "เก่าสุด",
+            "en": "Oldest"
+          },
+          "alphabetical": {
+            "th": "ชื่อ ก–ฮ / A–Z",
+            "en": "Title A–Z"
+          },
+          "view": {
+            "th": "มุมมองรายการรางวัล",
+            "en": "Awards view"
+          },
+          "cards": {
+            "th": "การ์ด",
+            "en": "Cards"
+          },
+          "timeline": {
+            "th": "ไทม์ไลน์",
+            "en": "Timeline"
+          },
+          "details": {
+            "th": "รายละเอียด",
+            "en": "Details"
+          },
+          "recipients": {
+            "th": "ผู้รับรางวัล",
+            "en": "Recipients"
+          },
+          "issuer": {
+            "th": "หน่วยงานที่มอบ",
+            "en": "Awarded by"
+          },
+          "source": {
+            "th": "ดูแหล่งอ้างอิง",
+            "en": "View source"
+          },
+          "photo": {
+            "th": "ภาพประกอบรางวัล",
+            "en": "Award photograph"
+          },
+          "empty": {
+            "th": "ไม่พบรายการรางวัล",
+            "en": "No matching awards"
+          },
+          "emptyNote": {
+            "th": "ลองเปลี่ยนคำค้นหรือเลือกตัวกรองอื่น",
+            "en": "Try a different search term or filter."
+          },
+          "bottom": {
+            "th": "รู้จักสมาชิกและทีมวิจัยของเรา",
+            "en": "Meet the people behind the work"
+          },
+          "team": {
+            "th": "ดูทีมวิจัย",
+            "en": "The Team"
+          }
+        }
+      },
+      "awardRoles": {
+        "label": "บทบาทผู้รับรางวัล",
+        "value": {
+          "faculty": {
+            "th": "อาจารย์",
+            "en": "Faculty"
+          },
+          "researcher": {
+            "th": "นักวิจัย",
+            "en": "Researcher"
+          },
+          "student": {
+            "th": "นักศึกษา",
+            "en": "Student"
+          },
+          "alumni": {
+            "th": "ศิษย์เก่า",
+            "en": "Alumni"
+          },
+          "team": {
+            "th": "ทีม",
+            "en": "Team"
+          },
+          "collaborator": {
+            "th": "ผู้ร่วมวิจัย",
+            "en": "Collaborator"
+          },
+          "other": {
+            "th": "ผู้รับรางวัล",
+            "en": "Award recipient"
+          }
+        }
+      },
+      "awardLevels": {
+        "label": "ระดับรางวัล",
+        "value": {
+          "international": {
+            "th": "นานาชาติ",
+            "en": "International"
+          },
+          "national": {
+            "th": "ระดับประเทศ",
+            "en": "National"
+          },
+          "university": {
+            "th": "ระดับมหาวิทยาลัย",
+            "en": "University"
+          },
+          "institutional": {
+            "th": "ระดับสถาบัน",
+            "en": "Institutional"
+          },
+          "other": {
+            "th": "อื่น ๆ",
+            "en": "Other"
+          }
+        }
+      },
+      "counters": {
+        "label": "ข้อความแสดงจำนวน",
+        "value": {
+          "awardCount": {
+            "th": "{count} จาก {total} รางวัล",
+            "en": "{count} of {total} awards"
+          }
+        }
+      }
+    },
+    "static": {
+      "text-001": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-002": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "KhonKaen University",
+        "value": {
+          "th": "KhonKaen University",
+          "en": "KhonKaen University"
+        },
+        "attribute": ""
+      },
+      "text-003": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "Language",
+        "value": {
+          "th": "Language",
+          "en": "Language"
+        },
+        "attribute": "aria-label"
+      },
+      "text-004": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "ภาษาไทย",
+        "value": {
+          "th": "ภาษาไทย",
+          "en": "ภาษาไทย"
+        },
+        "attribute": "aria-label"
+      },
+      "text-005": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "TH",
+        "value": {
+          "th": "TH",
+          "en": "TH"
+        },
+        "attribute": ""
+      },
+      "text-006": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "English",
+        "value": {
+          "th": "English",
+          "en": "English"
+        },
+        "attribute": "aria-label"
+      },
+      "text-007": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "EN",
+        "value": {
+          "th": "EN",
+          "en": "EN"
+        },
+        "attribute": ""
+      },
+      "text-008": {
+        "group": "กล่องโต้ตอบ",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-009": {
+        "group": "กล่องโต้ตอบ",
+        "label": "KhonKaen University",
+        "value": {
+          "th": "KhonKaen University",
+          "en": "KhonKaen University"
+        },
+        "attribute": ""
+      },
+      "text-010": {
+        "group": "กล่องโต้ตอบ",
+        "label": "Language",
+        "value": {
+          "th": "Language",
+          "en": "Language"
+        },
+        "attribute": "aria-label"
+      },
+      "text-011": {
+        "group": "กล่องโต้ตอบ",
+        "label": "ภาษาไทย",
+        "value": {
+          "th": "ภาษาไทย",
+          "en": "ภาษาไทย"
+        },
+        "attribute": ""
+      },
+      "text-012": {
+        "group": "กล่องโต้ตอบ",
+        "label": "English",
+        "value": {
+          "th": "English",
+          "en": "English"
+        },
+        "attribute": ""
+      },
+      "text-013": {
+        "group": "แบนเนอร์",
+        "label": "The AC Lab · Honer",
+        "value": {
+          "th": "The AC Lab · Honer",
+          "en": "The AC Lab · Honer"
+        },
+        "attribute": ""
+      },
+      "text-014": {
+        "group": "รายการรางวัล",
+        "label": "Recognition Archive",
+        "value": {
+          "th": "Recognition Archive",
+          "en": "Recognition Archive"
+        },
+        "attribute": ""
+      },
+      "text-015": {
+        "group": "ส่วนท้ายเว็บ",
+        "label": "KhonKaen University",
+        "value": {
+          "th": "KhonKaen University",
+          "en": "KhonKaen University"
+        },
+        "attribute": ""
+      },
+      "text-016": {
+        "group": "ส่วนท้ายเว็บ",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-017": {
+        "group": "กล่องโต้ตอบ",
+        "label": "ปิด",
+        "value": {
+          "th": "ปิด",
+          "en": "ปิด"
+        },
+        "attribute": "aria-label"
+      }
+    },
+    "templates": {
+      "awards": {
+        "id": "",
+        "year": 0,
+        "title": {
+          "en": "",
+          "th": ""
+        },
+        "description": {
+          "en": "",
+          "th": ""
+        },
+        "level": "",
+        "type": {
+          "en": "",
+          "th": ""
+        },
+        "recipients": [],
+        "gallery": [],
+        "issuer": {
+          "th": "",
+          "en": ""
+        },
+        "source": ""
+      },
+      "awards/recipients": {
+        "memberId": "",
+        "name": {
+          "en": "",
+          "th": ""
+        },
+        "role": "",
+        "photo": ""
+      },
+      "awards/gallery": ""
+    }
+  },
+  {
+    "id": "patents",
+    "path": "reward/patents/index.html",
+    "folder": "reward/patents",
+    "label": {
+      "th": "สิทธิบัตรและอนุสิทธิบัตร",
+      "en": "Patents & Petty Patents"
+    },
+    "groups": {
+      "hero": "แบนเนอร์",
+      "records": "รายการสิทธิบัตรและอนุสิทธิบัตร",
+      "media": "คลังภาพ"
+    },
+    "anchors": {
+      "cover": {
+        "selector": "#cover",
+        "label": "แบนเนอร์"
+      },
+      "portfolio": {
+        "selector": "#portfolio",
+        "label": "รายการผลงาน"
+      }
+    },
+    "copy": {
+      "sharedCopy": {
+        "label": "เมนูและปุ่มมาตรฐาน",
+        "value": {
+          "home": {
+            "th": "หน้าหลัก",
+            "en": "Home"
+          },
+          "skip": {
+            "th": "ข้ามไปยังเนื้อหา",
+            "en": "Skip to content"
+          },
+          "navigation": {
+            "th": "เมนูหลัก",
+            "en": "Main navigation"
+          },
+          "openMenu": {
+            "th": "เปิดเมนู",
+            "en": "Open menu"
+          },
+          "closeMenu": {
+            "th": "ปิดเมนู",
+            "en": "Close menu"
+          },
+          "language": {
+            "th": "ภาษา",
+            "en": "Language"
+          },
+          "close": {
+            "th": "ปิด",
+            "en": "Close"
+          },
+          "pending": {
+            "th": "กำลังจัดเตรียมหน้านี้",
+            "en": "This page is in preparation."
+          }
+        }
+      },
+      "patentCopy": {
+        "label": "หัวข้อและข้อความของหน้า",
+        "value": {
+          "heroHeading": {
+            "th": "สิทธิบัตรและ\nอนุสิทธิบัตร",
+            "en": "Patents &\nPetty Patents"
+          },
+          "lede": {
+            "th": "สำรวจสูตรและสิ่งประดิษฐ์ที่ต่อยอดจากงานวิจัยของ The AC Lab",
+            "en": "Explore formulas and inventions developed from research at The AC Lab."
+          },
+          "action": {
+            "th": "สำรวจพอร์ตโฟลิโอ",
+            "en": "Explore the portfolio"
+          },
+          "note": {
+            "th": "พฤกษเคมี · ผลิตภัณฑ์จากธรรมชาติ",
+            "en": "Phytochemistry · Natural products"
+          },
+          "scroll": {
+            "th": "เลื่อนเพื่อดูผลงาน",
+            "en": "Scroll to explore"
+          },
+          "title": {
+            "th": "จากงานวิจัยสู่นวัตกรรม",
+            "en": "From research to invention."
+          },
+          "intro": {
+            "th": "ค้นหาจากชื่อผลงาน ชื่อการค้า หรือเลขที่เอกสาร และเลือกดูตามประเภทที่สนใจ",
+            "en": "Search by invention, trade name or document number, or filter by record type."
+          },
+          "all": {
+            "th": "ทั้งหมด",
+            "en": "All records"
+          },
+          "patent": {
+            "th": "สิทธิบัตรและคำขอ",
+            "en": "Patents & applications"
+          },
+          "petty": {
+            "th": "อนุสิทธิบัตรและคำขอ",
+            "en": "Petty patents & applications"
+          },
+          "search": {
+            "th": "ค้นหาชื่อหรือเลขที่เอกสาร",
+            "en": "Search title or document number"
+          },
+          "types": {
+            "th": "ประเภทเอกสาร",
+            "en": "Record type"
+          },
+          "source": {
+            "th": "ชื่อ เลขที่ วันที่ และประเภทตามข้อมูลพอร์ตโฟลิโอของแล็บ",
+            "en": "Record titles, numbers, dates and types are from the lab portfolio."
+          },
+          "registered": {
+            "th": "เลขทะเบียน",
+            "en": "Registration number"
+          },
+          "application": {
+            "th": "เลขที่คำขอ",
+            "en": "Application number"
+          },
+          "recordDate": {
+            "th": "วันที่ในข้อมูลพอร์ตโฟลิโอ",
+            "en": "Date in the portfolio"
+          },
+          "tradeName": {
+            "th": "ชื่อการค้า",
+            "en": "Trade name"
+          },
+          "empty": {
+            "th": "ไม่พบรายการที่ตรงกัน",
+            "en": "No matching records"
+          },
+          "emptyNote": {
+            "th": "ลองเปลี่ยนประเภทหรือใช้คำค้นอื่น",
+            "en": "Try another record type or search term."
+          },
+          "bottom": {
+            "th": "พูดคุยเรื่องงานวิจัยและนวัตกรรม",
+            "en": "Talk with us about research and innovation."
+          },
+          "contact": {
+            "th": "ติดต่อ The AC Lab",
+            "en": "Contact The AC Lab"
+          }
+        }
+      },
+      "patentKinds": {
+        "label": "ประเภทเอกสาร",
+        "value": {
+          "patent-granted": {
+            "th": "สิทธิบัตร",
+            "en": "Granted patent"
+          },
+          "patent-application": {
+            "th": "คำขอสิทธิบัตร",
+            "en": "Patent application"
+          },
+          "petty-granted": {
+            "th": "อนุสิทธิบัตร",
+            "en": "Granted petty patent"
+          },
+          "petty-application": {
+            "th": "คำขออนุสิทธิบัตร",
+            "en": "Petty patent application"
+          }
+        }
+      },
+      "counters": {
+        "label": "ข้อความแสดงจำนวน",
+        "value": {
+          "ipCount": {
+            "th": "{count} รายการ",
+            "en": "{count} records"
+          },
+          "ipSingle": {
+            "th": "{count} รายการ",
+            "en": "{count} record"
+          }
+        }
+      }
+    },
+    "static": {
+      "text-001": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-002": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "KhonKaen University",
+        "value": {
+          "th": "KhonKaen University",
+          "en": "KhonKaen University"
+        },
+        "attribute": ""
+      },
+      "text-003": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "Language",
+        "value": {
+          "th": "Language",
+          "en": "Language"
+        },
+        "attribute": "aria-label"
+      },
+      "text-004": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "ภาษาไทย",
+        "value": {
+          "th": "ภาษาไทย",
+          "en": "ภาษาไทย"
+        },
+        "attribute": "aria-label"
+      },
+      "text-005": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "TH",
+        "value": {
+          "th": "TH",
+          "en": "TH"
+        },
+        "attribute": ""
+      },
+      "text-006": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "English",
+        "value": {
+          "th": "English",
+          "en": "English"
+        },
+        "attribute": "aria-label"
+      },
+      "text-007": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "EN",
+        "value": {
+          "th": "EN",
+          "en": "EN"
+        },
+        "attribute": ""
+      },
+      "text-008": {
+        "group": "กล่องโต้ตอบ",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-009": {
+        "group": "กล่องโต้ตอบ",
+        "label": "KhonKaen University",
+        "value": {
+          "th": "KhonKaen University",
+          "en": "KhonKaen University"
+        },
+        "attribute": ""
+      },
+      "text-010": {
+        "group": "กล่องโต้ตอบ",
+        "label": "Language",
+        "value": {
+          "th": "Language",
+          "en": "Language"
+        },
+        "attribute": "aria-label"
+      },
+      "text-011": {
+        "group": "กล่องโต้ตอบ",
+        "label": "ภาษาไทย",
+        "value": {
+          "th": "ภาษาไทย",
+          "en": "ภาษาไทย"
+        },
+        "attribute": ""
+      },
+      "text-012": {
+        "group": "กล่องโต้ตอบ",
+        "label": "English",
+        "value": {
+          "th": "English",
+          "en": "English"
+        },
+        "attribute": ""
+      },
+      "text-013": {
+        "group": "แบนเนอร์",
+        "label": "The AC Lab · Intellectual property",
+        "value": {
+          "th": "The AC Lab · Intellectual property",
+          "en": "The AC Lab · Intellectual property"
+        },
+        "attribute": ""
+      },
+      "text-014": {
+        "group": "รายการผลงาน",
+        "label": "Innovation portfolio",
+        "value": {
+          "th": "Innovation portfolio",
+          "en": "Innovation portfolio"
+        },
+        "attribute": ""
+      },
+      "text-015": {
+        "group": "ส่วนท้ายเว็บ",
+        "label": "KhonKaen University",
+        "value": {
+          "th": "KhonKaen University",
+          "en": "KhonKaen University"
+        },
+        "attribute": ""
+      },
+      "text-016": {
+        "group": "ส่วนท้ายเว็บ",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-017": {
+        "group": "กล่องโต้ตอบ",
+        "label": "ปิด",
+        "value": {
+          "th": "ปิด",
+          "en": "ปิด"
+        },
+        "attribute": "aria-label"
+      }
+    },
+    "templates": {
+      "records": {
+        "id": "",
+        "kind": "",
+        "number": "",
+        "date": "",
+        "title": {
+          "th": "",
+          "en": ""
+        },
+        "tradeName": ""
+      }
+    }
+  },
+  {
+    "id": "contact",
+    "path": "contact/index.html",
+    "folder": "contact",
+    "label": {
+      "th": "ติดต่อ",
+      "en": "Contact"
+    },
+    "groups": {
+      "hero": "แบนเนอร์",
+      "contact": "อีเมล ที่อยู่ และแผนที่",
+      "media": "คลังภาพ"
+    },
+    "anchors": {
+      "cover": {
+        "selector": "#cover",
+        "label": "แบนเนอร์"
+      },
+      "visit": {
+        "selector": "#visit",
+        "label": "ข้อมูลติดต่อ"
+      }
+    },
+    "copy": {
+      "sharedCopy": {
+        "label": "เมนูและปุ่มมาตรฐาน",
+        "value": {
+          "home": {
+            "th": "หน้าหลัก",
+            "en": "Home"
+          },
+          "skip": {
+            "th": "ข้ามไปยังเนื้อหา",
+            "en": "Skip to content"
+          },
+          "navigation": {
+            "th": "เมนูหลัก",
+            "en": "Main navigation"
+          },
+          "openMenu": {
+            "th": "เปิดเมนู",
+            "en": "Open menu"
+          },
+          "closeMenu": {
+            "th": "ปิดเมนู",
+            "en": "Close menu"
+          },
+          "language": {
+            "th": "ภาษา",
+            "en": "Language"
+          },
+          "close": {
+            "th": "ปิด",
+            "en": "Close"
+          },
+          "pending": {
+            "th": "กำลังจัดเตรียมหน้านี้",
+            "en": "This page is in preparation."
+          }
+        }
+      },
+      "contactCopy": {
+        "label": "หัวข้อและข้อความของหน้า",
+        "value": {
+          "heroHeading": {
+            "th": "มาพบเรา\nที่ The AC Lab",
+            "en": "Come and\nfind us."
+          },
+          "lede": {
+            "th": "คุยเรื่องความร่วมมือทางวิจัย การเข้าร่วมแล็บ หรือนัดหมายเข้าพบที่มหาวิทยาลัยขอนแก่น",
+            "en": "Get in touch about research collaboration, joining the lab or visiting us at Khon Kaen University."
+          },
+          "action": {
+            "th": "ดูช่องทางติดต่อ",
+            "en": "Find contact details"
+          },
+          "note": {
+            "th": "คณะวิทยาศาสตร์ · อาคาร SC.03",
+            "en": "Faculty of Science · SC.03 Building"
+          },
+          "scroll": {
+            "th": "เลื่อนเพื่อดูข้อมูลติดต่อ",
+            "en": "Scroll to contact us"
+          },
+          "title": {
+            "th": "ติดต่อและเดินทาง",
+            "en": "Let’s get in touch."
+          },
+          "intro": {
+            "th": "ส่งอีเมลถึงทีม หรือนัดหมายก่อนเข้าพบที่ห้องปฏิบัติการ",
+            "en": "Email the team or arrange a visit to our lab."
+          },
+          "email": {
+            "th": "อีเมลของแล็บ",
+            "en": "Email the lab"
+          },
+          "address": {
+            "th": "ที่ตั้งห้องปฏิบัติการ",
+            "en": "Lab address"
+          },
+          "directions": {
+            "th": "เปิดเส้นทางใน Google Maps",
+            "en": "Directions in Google Maps"
+          },
+          "map": {
+            "th": "แผนที่มหาวิทยาลัย",
+            "en": "Campus map"
+          },
+          "mapCaption": {
+            "th": "คณะวิทยาศาสตร์ มหาวิทยาลัยขอนแก่น",
+            "en": "Faculty of Science, Khon Kaen University"
+          },
+          "copy": {
+            "th": "คัดลอกอีเมล",
+            "en": "Copy email address"
+          },
+          "copied": {
+            "th": "คัดลอกอีเมลแล้ว",
+            "en": "Email address copied."
+          },
+          "copyHelp": {
+            "th": "เลือกข้อความอีเมลด้านบนเพื่อคัดลอก",
+            "en": "Select the email address above to copy it."
+          },
+          "form": {
+            "th": "เขียนถึงเรา",
+            "en": "Write to the lab."
+          },
+          "formLede": {
+            "th": "เลือกหัวข้อและเล่าให้เราฟังว่าต้องการคุยเรื่องอะไร",
+            "en": "Choose a topic and tell us a little about your enquiry."
+          },
+          "name": {
+            "th": "ชื่อของคุณ",
+            "en": "Your name"
+          },
+          "replyEmail": {
+            "th": "อีเมลสำหรับติดต่อกลับ",
+            "en": "Your email address"
+          },
+          "topic": {
+            "th": "หัวข้อ",
+            "en": "Topic"
+          },
+          "message": {
+            "th": "ข้อความ",
+            "en": "Message"
+          },
+          "send": {
+            "th": "เปิดร่างในแอปอีเมล",
+            "en": "Open email draft"
+          },
+          "formNote": {
+            "th": "ระบบจะเปิดร่างอีเมลให้ตรวจสอบและกดส่งในแอปของคุณ",
+            "en": "Review and send the draft from your email app."
+          },
+          "bottom": {
+            "th": "รู้จักผู้คนเบื้องหลังงานวิจัย",
+            "en": "Meet the people behind the research."
+          },
+          "team": {
+            "th": "ดูทีมวิจัย",
+            "en": "Meet the team"
+          }
+        }
+      },
+      "contactTopics": {
+        "label": "หัวข้อในฟอร์มติดต่อ",
+        "value": {
+          "general": {
+            "th": "สอบถามทั่วไป",
+            "en": "General enquiry"
+          },
+          "research": {
+            "th": "ความร่วมมือทางวิจัย",
+            "en": "Research collaboration"
+          },
+          "join": {
+            "th": "สนใจเข้าร่วมแล็บ",
+            "en": "Joining the lab"
+          },
+          "visit": {
+            "th": "นัดหมายเข้าเยี่ยมชม",
+            "en": "Arrange a visit"
+          }
+        }
+      }
+    },
+    "static": {
+      "text-001": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-002": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "KhonKaen University",
+        "value": {
+          "th": "KhonKaen University",
+          "en": "KhonKaen University"
+        },
+        "attribute": ""
+      },
+      "text-003": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "Language",
+        "value": {
+          "th": "Language",
+          "en": "Language"
+        },
+        "attribute": "aria-label"
+      },
+      "text-004": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "ภาษาไทย",
+        "value": {
+          "th": "ภาษาไทย",
+          "en": "ภาษาไทย"
+        },
+        "attribute": "aria-label"
+      },
+      "text-005": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "TH",
+        "value": {
+          "th": "TH",
+          "en": "TH"
+        },
+        "attribute": ""
+      },
+      "text-006": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "English",
+        "value": {
+          "th": "English",
+          "en": "English"
+        },
+        "attribute": "aria-label"
+      },
+      "text-007": {
+        "group": "ส่วนหัวและเมนู",
+        "label": "EN",
+        "value": {
+          "th": "EN",
+          "en": "EN"
+        },
+        "attribute": ""
+      },
+      "text-008": {
+        "group": "กล่องโต้ตอบ",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-009": {
+        "group": "กล่องโต้ตอบ",
+        "label": "KhonKaen University",
+        "value": {
+          "th": "KhonKaen University",
+          "en": "KhonKaen University"
+        },
+        "attribute": ""
+      },
+      "text-010": {
+        "group": "กล่องโต้ตอบ",
+        "label": "Language",
+        "value": {
+          "th": "Language",
+          "en": "Language"
+        },
+        "attribute": "aria-label"
+      },
+      "text-011": {
+        "group": "กล่องโต้ตอบ",
+        "label": "ภาษาไทย",
+        "value": {
+          "th": "ภาษาไทย",
+          "en": "ภาษาไทย"
+        },
+        "attribute": ""
+      },
+      "text-012": {
+        "group": "กล่องโต้ตอบ",
+        "label": "English",
+        "value": {
+          "th": "English",
+          "en": "English"
+        },
+        "attribute": ""
+      },
+      "text-013": {
+        "group": "แบนเนอร์",
+        "label": "The AC Lab · Khon Kaen University",
+        "value": {
+          "th": "The AC Lab · Khon Kaen University",
+          "en": "The AC Lab · Khon Kaen University"
+        },
+        "attribute": ""
+      },
+      "text-014": {
+        "group": "ข้อมูลติดต่อและแผนที่",
+        "label": "Visit & connect",
+        "value": {
+          "th": "Visit & connect",
+          "en": "Visit & connect"
+        },
+        "attribute": ""
+      },
+      "text-015": {
+        "group": "ข้อมูลติดต่อและแผนที่",
+        "label": "Write to us",
+        "value": {
+          "th": "Write to us",
+          "en": "Write to us"
+        },
+        "attribute": ""
+      },
+      "text-016": {
+        "group": "ส่วนท้ายเว็บ",
+        "label": "KhonKaen University",
+        "value": {
+          "th": "KhonKaen University",
+          "en": "KhonKaen University"
+        },
+        "attribute": ""
+      },
+      "text-017": {
+        "group": "ส่วนท้ายเว็บ",
+        "label": "The AC Lab",
+        "value": {
+          "th": "The AC Lab",
+          "en": "The AC Lab"
+        },
+        "attribute": ""
+      },
+      "text-018": {
+        "group": "กล่องโต้ตอบ",
+        "label": "ปิด",
+        "value": {
+          "th": "ปิด",
+          "en": "ปิด"
+        },
+        "attribute": "aria-label"
+      }
+    },
+    "templates": {}
+  }
+]

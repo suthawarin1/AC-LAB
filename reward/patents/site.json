@@ -1,0 +1,154 @@
+{
+  "hero": {
+    "image": "portfolio-cover",
+    "position": "center 43%"
+  },
+  "media": {
+    "portfolio-cover": "../../assets/molecular-work.jpg"
+  },
+  "records": [
+    {
+      "id": "ip-19554",
+      "kind": "petty-granted",
+      "number": "19554",
+      "date": "2022-03-30",
+      "title": {
+        "th": "ผลิตภัณฑ์โอลีเอไมด์ในน้ำมันรำข้าว",
+        "en": "Rice-bran-oil oleamide product"
+      },
+      "tradeName": "Nat OleA"
+    },
+    {
+      "id": "ip-2001000059",
+      "kind": "patent-application",
+      "number": "2001000059",
+      "date": "2019-11-15",
+      "title": {
+        "th": "สูตรซีรั่มบำรุงเส้นผมและหนังศีรษะ",
+        "en": "Hair and scalp nourishing serum formula"
+      },
+      "tradeName": "Nat Hair Serum"
+    },
+    {
+      "id": "ip-21065",
+      "kind": "petty-granted",
+      "number": "21065",
+      "date": "2023-03-07",
+      "title": {
+        "th": "สูตรแชมพูสระผม",
+        "en": "Shampoo formula"
+      },
+      "tradeName": "Nat Hair Shampoo"
+    },
+    {
+      "id": "ip-25893",
+      "kind": "petty-granted",
+      "number": "25893",
+      "date": "2020-06-30",
+      "title": {
+        "th": "สูตรสารสกัดต้านการอักเสบสำหรับแผลที่ผิวหนัง",
+        "en": "Anti-inflammatory extract formula for skin wounds"
+      },
+      "tradeName": "Nat Amy"
+    },
+    {
+      "id": "ip-23068",
+      "kind": "petty-granted",
+      "number": "23068",
+      "date": "2021-12-20",
+      "title": {
+        "th": "ผลิตภัณฑ์ลดความอยากอาหารและคอเลสเตอรอล",
+        "en": "Appetite- and cholesterol-reducing product"
+      },
+      "tradeName": "Nat OneC"
+    },
+    {
+      "id": "ip-26211",
+      "kind": "petty-granted",
+      "number": "26211",
+      "date": "2025-08-21",
+      "title": {
+        "th": "สูตรสมุนไพรเสริมสร้างคอลลาเจน",
+        "en": "Herbal collagen-support formula"
+      },
+      "tradeName": "Wonwi"
+    },
+    {
+      "id": "ip-2303000724",
+      "kind": "petty-application",
+      "number": "2303000724",
+      "date": "2023-03-14",
+      "title": {
+        "th": "สูตรครีมกันแดดที่มีส่วนประกอบผลยอและใบมะหาด",
+        "en": "Sunscreen formula containing noni fruit and lakoocha leaves"
+      },
+      "tradeName": "EPA Sunscreen"
+    },
+    {
+      "id": "ip-2403002488",
+      "kind": "petty-application",
+      "number": "2403002488",
+      "date": "2024-08-08",
+      "title": {
+        "th": "เจลล้างหน้าจากสารสกัดพืช",
+        "en": "Plant-extract facial cleansing gel"
+      },
+      "tradeName": "EPC Cleansing Gel"
+    },
+    {
+      "id": "ip-2403002602",
+      "kind": "petty-application",
+      "number": "2403002602",
+      "date": "2024-08-16",
+      "title": {
+        "th": "สูตรส่วนผสมยาระบาย มะขาม : มะขามแขก",
+        "en": "Laxative blend: tamarind and senna"
+      },
+      "tradeName": "Nat Lax"
+    },
+    {
+      "id": "ip-2503003888",
+      "kind": "petty-application",
+      "number": "2503003888",
+      "date": "2025-10-03",
+      "title": {
+        "th": "ผงปรุงรสต้มยำ ลดเค็ม",
+        "en": "Reduced-sodium tom yum seasoning powder"
+      },
+      "tradeName": ""
+    },
+    {
+      "id": "ip-2503003886",
+      "kind": "petty-application",
+      "number": "2503003886",
+      "date": "2025-10-03",
+      "title": {
+        "th": "ผงปรุงรสแกงจืด ลดเค็ม",
+        "en": "Reduced-sodium clear-soup seasoning powder"
+      },
+      "tradeName": ""
+    },
+    {
+      "id": "ip-2501001075",
+      "kind": "patent-application",
+      "number": "2501001075",
+      "date": "2025-02-19",
+      "title": {
+        "th": "สูตรส่วนผสมสำหรับแคปซูลที่มีสารสกัดใบกระทุ่มเนินและสารสกัดผักบุ้ง",
+        "en": "Capsule formula with Kratum Noen leaf and water-spinach extracts"
+      },
+      "tradeName": "RhynoleA"
+    },
+    {
+      "id": "ip-2601003650",
+      "kind": "patent-application",
+      "number": "2601003650",
+      "date": "2026-05-24",
+      "title": {
+        "th": "สูตรส่วนผสมสำหรับแคปซูลที่มีส่วนผสมของเพชรสังฆาตและส้มแขก",
+        "en": "Capsule formula containing Cissus quadrangularis and Garcinia"
+      },
+      "tradeName": ""
+    }
+  ]
+}

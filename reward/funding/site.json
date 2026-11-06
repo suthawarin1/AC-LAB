@@ -1,0 +1,68 @@
+{
+  "hero": {
+    "image": "fieldwork",
+    "position": "center 47%"
+  },
+  "media": {
+    "fieldwork": "../../assets/fieldwork.jpg"
+  },
+  "grants": [
+    {
+      "id": "sample-plant-genomes",
+      "sample": true,
+      "fiscalYear": 2569,
+      "grant": {
+        "th": "ทุนวิจัยด้านความหลากหลายทางชีวภาพ",
+        "en": "Biodiversity Research Grant"
+      },
+      "funder": {
+        "th": "หน่วยงานให้ทุนตัวอย่าง 01",
+        "en": "Example funding agency 01"
+      },
+      "project": {
+        "th": "จีโนมพืชเพื่อการอนุรักษ์",
+        "en": "Plant genomes for conservation"
+      },
+      "leaderId": "arunrat"
+    },
+    {
+      "id": "sample-plant-compounds",
+      "sample": true,
+      "fiscalYear": 2568,
+      "grant": {
+        "th": "ทุนวิจัยด้านผลิตภัณฑ์ธรรมชาติ",
+        "en": "Natural Products Research Grant"
+      },
+      "funder": {
+        "th": "หน่วยงานให้ทุนตัวอย่าง 02",
+        "en": "Example funding agency 02"
+      },
+      "project": {
+        "th": "สำรวจสารออกฤทธิ์จากพืช",
+        "en": "Exploring bioactive plant compounds"
+      },
+      "leaderId": "runglawan"
+    },
+    {
+      "id": "sample-cell-response",
+      "sample": true,
+      "fiscalYear": 2567,
+      "grant": {
+        "th": "ทุนวิจัยด้านชีววิทยาของเซลล์",
+        "en": "Cell Biology Research Grant"
+      },
+      "funder": {
+        "th": "หน่วยงานให้ทุนตัวอย่าง 03",
+        "en": "Example funding agency 03"
+      },
+      "project": {
+        "th": "การตอบสนองของเซลล์ต่อสารสกัดจากพืช",
+        "en": "Cellular responses to plant extracts"
+      },
+      "leaderName": {
+        "th": "ตัวอย่างหัวหน้าโครงการ",
+        "en": "Example project lead"
+      }
+    }
+  ]
+}

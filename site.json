@@ -1,0 +1,367 @@
+{
+  "slideInterval": 6500,
+  "introSlides": [
+    {
+      "image": "fieldwork",
+      "position": "50% 50%"
+    },
+    {
+      "image": "discovery",
+      "position": "58% 50%"
+    },
+    {
+      "image": "leaves",
+      "position": "50% 55%"
+    }
+  ],
+  "heroSlides": [
+    {
+      "image": "discovery",
+      "position": "60% 50%",
+      "alt": {
+        "en": "A pipette above a tray of laboratory tubes",
+        "th": "ภาพประกอบปิเปตและหลอดทดลอง"
+      },
+      "eyebrow": {
+        "en": "The AC Lab · Plant science & beyond",
+        "th": "The AC Lab · จากพืชสู่ความรู้ใหม่"
+      },
+      "title": {
+        "en": "Reading nature.\nDiscovering more.",
+        "th": "อ่านรหัสธรรมชาติ\nค้นพบความเป็นไปได้"
+      },
+      "description": {
+        "en": "Exploring the connections between plant genomes, natural compounds and biomedical research.",
+        "th": "เชื่อมโยงจีโนมพืช สารจากธรรมชาติ และงานวิจัยชีวการแพทย์ เพื่อสร้างความรู้และต่อยอดการค้นพบ"
+      }
+    },
+    {
+      "image": "leaves",
+      "position": "65% 50%",
+      "alt": {
+        "en": "Green leaves on a young plant",
+        "th": "ภาพประกอบใบสีเขียวของต้นพืช"
+      },
+      "eyebrow": {
+        "en": "Curiosity, rooted in nature",
+        "th": "ความใคร่รู้ เริ่มต้นที่ธรรมชาติ"
+      },
+      "title": {
+        "en": "Small questions.\nNew possibilities.",
+        "th": "จากคำถามเล็ก ๆ\nสู่การค้นพบใหม่"
+      },
+      "description": {
+        "en": "From the diversity of plants to the molecules they make, there is always more to understand.",
+        "th": "จากความหลากหลายของพืช สู่สารที่พืชสร้างขึ้น ธรรมชาติยังมีเรื่องราวให้เราศึกษาอีกมาก"
+      }
+    },
+    {
+      "image": "laboratory",
+      "position": "62% 50%",
+      "alt": {
+        "en": "An illustrative laboratory workspace",
+        "th": "ภาพประกอบพื้นที่ทำงานในห้องปฏิบัติการ"
+      },
+      "eyebrow": {
+        "en": "Genomics · Phytochemistry · Biomedicine",
+        "th": "จีโนมิกส์ · พฤกษเคมี · ชีวการแพทย์"
+      },
+      "title": {
+        "en": "Connected science.\nShared discovery.",
+        "th": "เชื่อมโยงความรู้\nร่วมสร้างการค้นพบ"
+      },
+      "description": {
+        "en": "Bringing different perspectives together at Khon Kaen University.",
+        "th": "พื้นที่แห่งการเชื่อมโยงแนวคิดและศาสตร์ต่าง ๆ ณ มหาวิทยาลัยขอนแก่น"
+      }
+    }
+  ],
+  "routes": {
+    "about": {
+      "url": "about/index.html",
+      "enabled": true,
+      "label": {
+        "en": "About",
+        "th": "เกี่ยวกับเรา"
+      }
+    },
+    "team": {
+      "url": "team/index.html",
+      "enabled": true,
+      "label": {
+        "en": "The Team",
+        "th": "ทีมวิจัย"
+      }
+    },
+    "publication": {
+      "url": "publication/index.html",
+      "enabled": true,
+      "label": {
+        "en": "Publication",
+        "th": "ผลงานตีพิมพ์"
+      }
+    },
+    "blog": {
+      "url": "blog/index.html",
+      "enabled": true,
+      "label": {
+        "en": "Lab Blog",
+        "th": "บล็อกแล็บ"
+      }
+    },
+    "reward": {
+      "url": "reward/index.html",
+      "enabled": false,
+      "label": {
+        "en": "Honer",
+        "th": "เกียรติประวัติ"
+      }
+    },
+    "funding": {
+      "url": "reward/funding/index.html",
+      "enabled": true,
+      "label": {
+        "en": "Research Funding",
+        "th": "ทุนวิจัย"
+      }
+    },
+    "awards": {
+      "url": "reward/awards/index.html",
+      "enabled": true,
+      "label": {
+        "en": "Awards",
+        "th": "รางวัล"
+      }
+    },
+    "patents": {
+      "url": "reward/patents/index.html",
+      "enabled": true,
+      "label": {
+        "th": "สิทธิบัตรและอนุสิทธิบัตร",
+        "en": "Patents & Petty Patents"
+      }
+    },
+    "product": {
+      "url": "product/index.html",
+      "enabled": false,
+      "label": {
+        "en": "Product",
+        "th": "ผลิตภัณฑ์"
+      }
+    },
+    "alumni": {
+      "url": "alumni/index.html",
+      "enabled": false,
+      "label": {
+        "en": "Alumni",
+        "th": "ศิษย์เก่า"
+      }
+    },
+    "contact": {
+      "url": "contact/index.html",
+      "enabled": true,
+      "label": {
+        "en": "Contact",
+        "th": "ติดต่อ"
+      }
+    },
+    "news": {
+      "url": "news/index.html",
+      "enabled": false,
+      "label": {
+        "en": "News",
+        "th": "ข่าวสาร"
+      }
+    }
+  },
+  "news": [
+    {
+      "id": "from-field-to-genome",
+      "image": "fieldwork",
+      "position": "50% 45%",
+      "sample": true,
+      "date": "",
+      "category": {
+        "en": "Research perspective",
+        "th": "มุมมองงานวิจัย"
+      },
+      "title": {
+        "en": "From a leaf in the field to a genome in the lab",
+        "th": "จากใบไม้ในธรรมชาติ สู่จีโนมในห้องปฏิบัติการ"
+      },
+      "summary": {
+        "en": "An introduction to the questions connecting biodiversity, chloroplast genomes and plant research.",
+        "th": "รู้จักคำถามที่เชื่อมโยงความหลากหลายทางชีวภาพ จีโนมคลอโรพลาสต์ และการศึกษาพืช"
+      },
+      "url": ""
+    },
+    {
+      "id": "plant-compounds",
+      "image": "discovery",
+      "position": "60% 50%",
+      "sample": true,
+      "date": "",
+      "category": {
+        "en": "Inside our science",
+        "th": "รู้จักศาสตร์ของเรา"
+      },
+      "title": {
+        "en": "Exploring the chemistry of plants",
+        "th": "สำรวจสารจากพืชและเรื่องราวของพฤกษเคมี"
+      },
+      "summary": {
+        "en": "A closer look at phytochemistry.",
+        "th": "รู้จักงานวิจัยด้านพฤกษเคมี"
+      },
+      "url": ""
+    },
+    {
+      "id": "connected-research",
+      "image": "laboratory",
+      "position": "55% 50%",
+      "sample": true,
+      "date": "",
+      "category": {
+        "en": "Lab perspectives",
+        "th": "เรื่องราวจากแล็บ"
+      },
+      "title": {
+        "en": "Where research questions come together",
+        "th": "เมื่อคำถามจากต่างศาสตร์เชื่อมโยงกัน"
+      },
+      "summary": {
+        "en": "Connecting genomics and biomedical research.",
+        "th": "เชื่อมโยงจีโนมิกส์และชีวการแพทย์"
+      },
+      "url": ""
+    }
+  ],
+  "contact": {
+    "email": "raccha@kku.ac.th",
+    "address": {
+      "en": "The AC Lab · Faculty of Science\nRoom 3124, 1st Floor, SC.03 Building\nKhon Kaen University\nKhon Kaen 40002, Thailand",
+      "th": "The AC Lab · คณะวิทยาศาสตร์\nห้อง 3124 ชั้น 1 อาคาร SC.03\nมหาวิทยาลัยขอนแก่น\nจังหวัดขอนแก่น 40002 ประเทศไทย"
+    },
+    "mapEmbed": "https://maps.google.com/maps?q=Faculty%20of%20Science%2C%20Khon%20Kaen%20University&z=16&output=embed",
+    "mapLink": "https://www.google.com/maps/search/?api=1&query=Faculty+of+Science+Khon+Kaen+University"
+  },
+  "bento": [
+    {
+      "kind": "lab",
+      "route": "about",
+      "image": "botanical",
+      "position": "50% 46%",
+      "imageAlt": {
+        "en": "Illustrative green plant canopy",
+        "th": "ภาพประกอบใบพืชสีเขียวในธรรมชาติ"
+      },
+      "kicker": {
+        "en": "About the lab",
+        "th": "เกี่ยวกับเรา"
+      },
+      "title": {
+        "en": "The AC Lab,\nup close.",
+        "th": "รู้จักแล็บ\nให้มากขึ้น"
+      },
+      "description": {
+        "en": "Meet the lab and the questions connecting plants, molecules and discovery.",
+        "th": "รู้จักแล็บ แนววิจัย และวิธีที่เราเชื่อมโยงการค้นพบ"
+      },
+      "cta": {
+        "en": "Discover our story",
+        "th": "สำรวจเรื่องราวของเรา"
+      }
+    },
+    {
+      "kind": "methods",
+      "route": "about",
+      "path": "about/index.html#method-network",
+      "kicker": {
+        "en": "How we work",
+        "th": "วิธีที่เราศึกษา"
+      },
+      "title": {
+        "en": "Explore the\nmethods.",
+        "th": "เครือข่าย\nวิธีวิจัย"
+      },
+      "description": {
+        "en": "4 connected research stages.",
+        "th": "4 ช่วงวิจัยที่เชื่อมโยงกัน"
+      }
+    },
+    {
+      "kind": "genomics",
+      "route": "about",
+      "path": "about/index.html?stage=systematics&node=genomics#method-network",
+      "image": "leaves",
+      "position": "65% 40%",
+      "imageAlt": {
+        "en": "Illustrative young green plant",
+        "th": "ภาพประกอบต้นพืชสีเขียว"
+      },
+      "kicker": {
+        "en": "01 / Plant identity",
+        "th": "01 / เอกลักษณ์พืช"
+      },
+      "title": {
+        "en": "Plant\ngenomics.",
+        "th": "จีโนมิกส์พืช"
+      },
+      "description": {
+        "en": "Genomes, markers & relationships.",
+        "th": "จีโนม เครื่องหมาย และความสัมพันธ์"
+      }
+    },
+    {
+      "kind": "chemistry",
+      "route": "about",
+      "path": "about/index.html?stage=systematics&node=chemistry#method-network",
+      "image": "chemistry",
+      "position": "50% 65%",
+      "imageAlt": {
+        "en": "Illustrative laboratory glassware and solutions",
+        "th": "ภาพประกอบเครื่องแก้วและสารละลายในการทดลอง"
+      },
+      "kicker": {
+        "en": "02 / Natural compounds",
+        "th": "02 / สารจากธรรมชาติ"
+      },
+      "title": {
+        "en": "Plant\nchemistry.",
+        "th": "พฤกษเคมี"
+      },
+      "description": {
+        "en": "Explore compounds from plants.",
+        "th": "สำรวจสารประกอบจากพืช"
+      }
+    },
+    {
+      "kind": "biomedical",
+      "route": "about",
+      "path": "about/index.html?stage=preclinical&node=activity#method-network",
+      "image": "microscopy",
+      "position": "50% 42%",
+      "imageAlt": {
+        "en": "Illustrative cellular microscopy image",
+        "th": "ภาพประกอบเซลล์จากกล้องจุลทรรศน์"
+      },
+      "kicker": {
+        "en": "03 / Biological activity",
+        "th": "03 / ฤทธิ์ทางชีวภาพ"
+      },
+      "title": {
+        "en": "Biomedical\nresearch.",
+        "th": "ชีวการแพทย์"
+      },
+      "description": {
+        "en": "From activity to mechanisms.",
+        "th": "จากฤทธิ์สู่กลไกการทำงาน"
+      }
+    }
+  ],
+  "media": {
+    "botanical": "assets/bento-botanical.jpg",
+    "chemistry": "assets/bento-chemistry.jpg",
+    "microscopy": "assets/bento-microscopy.jpg"
+  }
+}

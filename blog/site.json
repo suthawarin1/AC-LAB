@@ -1,0 +1,362 @@
+{
+  "hero": {
+    "image": "laboratory",
+    "position": "center 48%"
+  },
+  "media": {
+    "laboratory": "../assets/laboratory.jpg",
+    "botanical": "../assets/bento-botanical.jpg",
+    "chemistry": "../assets/bento-chemistry.jpg",
+    "fieldwork": "../assets/fieldwork.jpg",
+    "leaves": "../assets/leaves.jpg",
+    "cells": "../assets/bento-microscopy.jpg"
+  },
+  "categories": [
+    {
+      "id": "genomics",
+      "name": {
+        "th": "จีโนมพืช",
+        "en": "Plant genomics"
+      }
+    },
+    {
+      "id": "phytochemistry",
+      "name": {
+        "th": "พฤกษเคมี",
+        "en": "Phytochemistry"
+      }
+    },
+    {
+      "id": "lab-notes",
+      "name": {
+        "th": "บันทึกจากแล็บ",
+        "en": "Lab notes"
+      }
+    },
+    {
+      "id": "cell-biology",
+      "name": {
+        "th": "ชีววิทยาของเซลล์",
+        "en": "Cell biology"
+      }
+    }
+  ],
+  "tags": [
+    {
+      "id": "plastome",
+      "name": {
+        "th": "คลอโรพลาสต์",
+        "en": "Chloroplast"
+      }
+    },
+    {
+      "id": "barcoding",
+      "name": {
+        "th": "ดีเอ็นเอบาร์โค้ด",
+        "en": "DNA barcoding"
+      }
+    },
+    {
+      "id": "plant-compounds",
+      "name": {
+        "th": "สารจากพืช",
+        "en": "Plant compounds"
+      }
+    },
+    {
+      "id": "reproducibility",
+      "name": {
+        "th": "การทำซ้ำ",
+        "en": "Reproducibility"
+      }
+    },
+    {
+      "id": "cell-culture",
+      "name": {
+        "th": "การเพาะเลี้ยงเซลล์",
+        "en": "Cell culture"
+      }
+    }
+  ],
+  "authors": {
+    "sample-editor": {
+      "name": {
+        "th": "กองบรรณาธิการตัวอย่าง",
+        "en": "Sample editorial desk"
+      },
+      "photo": "",
+      "photoPosition": "50% 50%",
+      "photoZoom": 1
+    }
+  },
+  "posts": [
+    {
+      "id": "from-leaf-to-plastome",
+      "title": {
+        "th": "จากใบไม้สู่แผนที่จีโนม",
+        "en": "From a leaf to a genome map"
+      },
+      "summary": {
+        "th": "ติดตามเส้นทางของตัวอย่างพืช ตั้งแต่การบันทึกแหล่งเก็บ สู่การประกอบจีโนมคลอโรพลาสต์และเปรียบเทียบลำดับดีเอ็นเอ",
+        "en": "Follow a plant sample from collection records to a chloroplast genome assembly and sequence comparison."
+      },
+      "category": "genomics",
+      "tags": [
+        "plastome",
+        "reproducibility"
+      ],
+      "cover": "botanical",
+      "coverPosition": "center center",
+      "authorId": "sample-editor",
+      "date": "",
+      "status": "published",
+      "sample": true,
+      "featured": true,
+      "sections": [
+        {
+          "heading": {
+            "th": "เริ่มจากข้อมูลของตัวอย่าง",
+            "en": "Start with the specimen"
+          },
+          "paragraphs": [
+            {
+              "th": "ก่อนเข้าสู่ขั้นตอนอ่านลำดับดีเอ็นเอ ให้เก็บรหัสตัวอย่างและข้อมูลแหล่งที่มาไว้คู่กัน รหัสเดียวกันควรตามไปถึงไฟล์ลำดับ เพื่อให้ย้อนกลับมาดูได้ว่าผลแต่ละชุดมาจากพืชต้นไหน",
+              "en": "Keep each sample identifier with its collection record before sequencing. Carry that identifier into the sequence files so that an assembly can always be traced to its specimen."
+            }
+          ]
+        },
+        {
+          "heading": {
+            "th": "ประกอบแล้วตรวจสอบ",
+            "en": "Assemble and verify"
+          },
+          "paragraphs": [
+            {
+              "th": "นำชิ้นส่วนลำดับมาประกอบเป็นจีโนมพลาสติด แล้วตรวจสอบความต่อเนื่อง บริเวณลำดับซ้ำ และความสอดคล้องกับข้อมูลที่อ่านได้ การเปรียบเทียบตัวอย่างจากหลายพื้นที่ช่วยให้เห็นตำแหน่งที่ลำดับเปลี่ยนไปภายในชนิดเดียวกัน",
+              "en": "Assemble the reads into a plastome and check continuity, repeat boundaries, and read support. Comparing accessions from different locations can reveal variation within a single species."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "name": "Ng et al. · Scientific Reports (2026)",
+          "url": "https://doi.org/10.1038/s41598-025-33167-4"
+        }
+      ]
+    },
+    {
+      "id": "plant-extracts-and-questions",
+      "title": {
+        "th": "สารสกัดจากพืชบอกอะไรเราได้บ้าง",
+        "en": "What can a plant extract tell us?"
+      },
+      "summary": {
+        "th": "แยกคำถามเรื่ององค์ประกอบทางเคมีออกจากคำถามเรื่องฤทธิ์ทางชีวภาพ แล้วค่อยเชื่อมผลจากทั้งสองการทดลอง",
+        "en": "Ask separately what an extract contains and what it does in a biological assay, then connect the evidence."
+      },
+      "category": "phytochemistry",
+      "tags": [
+        "plant-compounds"
+      ],
+      "cover": "chemistry",
+      "coverPosition": "center center",
+      "authorId": "sample-editor",
+      "date": "",
+      "status": "published",
+      "sample": true,
+      "featured": false,
+      "sections": [
+        {
+          "heading": {
+            "th": "รู้ก่อนว่ามีสารอะไร",
+            "en": "Begin with composition"
+          },
+          "paragraphs": [
+            {
+              "th": "ชนิดพืช ส่วนของพืช และตัวทำละลายเป็นข้อมูลสำคัญของสารสกัด เมื่อต้องเปรียบเทียบสารสกัดหลายชุด ควรบันทึกเงื่อนไขเหล่านี้ให้ครบ เพื่ออธิบายได้ว่าองค์ประกอบที่ต่างกันสัมพันธ์กับขั้นตอนใด",
+              "en": "Plant identity, tissue, and extraction solvent belong in the description of an extract. Record them consistently when comparing extracts so differences in composition can be traced to the preparation."
+            }
+          ]
+        },
+        {
+          "heading": {
+            "th": "ทดสอบฤทธิ์แยกเป็นอีกคำถาม",
+            "en": "Measure biological activity"
+          },
+          "paragraphs": [
+            {
+              "th": "ผลการวิเคราะห์เคมีช่วยเลือกสารที่น่าสนใจ จากนั้นจึงออกแบบการทดสอบฤทธิ์พร้อมชุดควบคุม หากสารสกัดมีสารหลายชนิด การทดลองกับสารเดี่ยวเป็นวิธีหนึ่งที่ช่วยแยกบทบาทขององค์ประกอบแต่ละตัว",
+              "en": "Chemical profiling can help prioritize compounds for a separate assay with suitable controls. Testing isolated compounds is one way to explore their individual contributions to a mixture's activity."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "name": "Kaewdaungdee et al. · Biology (2024)",
+          "url": "https://doi.org/10.3390/biology13060402"
+        }
+      ]
+    },
+    {
+      "id": "barcode-reference-library",
+      "title": {
+        "th": "ดีเอ็นเอบาร์โค้ดต้องเทียบกับอะไร",
+        "en": "What does a DNA barcode match against?"
+      },
+      "summary": {
+        "th": "ฐานข้อมูลอ้างอิงเชื่อมลำดับดีเอ็นเอกับตัวอย่างที่ระบุชนิดไว้ คุณภาพของข้อมูลนั้นกำหนดว่าเราตีความผลได้ไกลแค่ไหน",
+        "en": "Reference libraries connect DNA sequences to identified specimens. Their coverage and quality shape what a match can tell us."
+      },
+      "category": "genomics",
+      "tags": [
+        "barcoding",
+        "plastome"
+      ],
+      "cover": "leaves",
+      "coverPosition": "center center",
+      "authorId": "sample-editor",
+      "date": "",
+      "status": "published",
+      "sample": true,
+      "featured": false,
+      "sections": [
+        {
+          "heading": {
+            "th": "ลำดับอ้างอิงควรย้อนกลับไปหาตัวอย่างได้",
+            "en": "Trace a reference to its specimen"
+          },
+          "paragraphs": [
+            {
+              "th": "การเปรียบเทียบดีเอ็นเอบาร์โค้ดเริ่มจากลำดับอ้างอิงที่มีชื่อชนิดและข้อมูลตัวอย่างชัดเจน เมื่อหลายชนิดให้ลำดับคล้ายกัน ควรดูความครอบคลุมของฐานข้อมูลและพิจารณาหลักฐานจากลักษณะของพืชร่วมด้วย",
+              "en": "A barcode comparison starts with reference sequences linked to identified specimens. If several species have similar sequences, examine reference coverage and consider evidence from plant morphology."
+            }
+          ]
+        },
+        {
+          "heading": {
+            "th": "เลือกบริเวณให้ตรงกับกลุ่มพืช",
+            "en": "Choose regions for the group"
+          },
+          "paragraphs": [
+            {
+              "th": "จีโนมพลาสติดทั้งชุดเปิดโอกาสให้เปรียบเทียบหลายบริเวณพร้อมกัน บริเวณที่แยกชนิดได้ดีในพืชกลุ่มหนึ่งควรทดสอบอีกครั้งก่อนใช้กับกลุ่มอื่น",
+              "en": "Whole plastomes let researchers compare many candidate regions at once. A region that distinguishes species in one group should be evaluated before it is used in another."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "name": "Sudmoon et al. · Scientific Reports (2022)",
+          "url": "https://doi.org/10.1038/s41598-022-23639-2"
+        }
+      ]
+    },
+    {
+      "id": "a-lab-notebook-that-travels",
+      "title": {
+        "th": "บันทึกงานแล็บให้กลับมาทำซ้ำได้",
+        "en": "A lab notebook you can return to"
+      },
+      "summary": {
+        "th": "เริ่มจากรหัสตัวอย่าง เงื่อนไขที่ใช้ และเหตุผลที่ปรับวิธี เพื่อให้คนอื่นตามรอยการทดลองได้",
+        "en": "Record sample IDs, experimental conditions, and changes to the protocol so another person can follow your work."
+      },
+      "category": "lab-notes",
+      "tags": [
+        "reproducibility"
+      ],
+      "cover": "fieldwork",
+      "coverPosition": "center center",
+      "authorId": "sample-editor",
+      "date": "",
+      "status": "published",
+      "sample": true,
+      "featured": false,
+      "sections": [
+        {
+          "heading": {
+            "th": "ใช้รหัสเดียวตลอดเส้นทาง",
+            "en": "Keep a consistent identifier"
+          },
+          "paragraphs": [
+            {
+              "th": "รหัสที่ติดบนหลอดควรตรงกับสมุดบันทึกและชื่อไฟล์ผลการทดลอง เมื่อแบ่งตัวอย่างออกเป็นหลายส่วน ให้จดความสัมพันธ์ระหว่างรหัสหลักกับรหัสย่อยทันที",
+              "en": "Use the same identifier on the tube, in the notebook, and in the result files. When a sample is divided, record the relationship between the parent ID and its aliquots."
+            }
+          ]
+        },
+        {
+          "heading": {
+            "th": "จดเหตุผลของการเปลี่ยนแปลง",
+            "en": "Record the reason for a change"
+          },
+          "paragraphs": [
+            {
+              "th": "ถ้าเปลี่ยนเวลา อุณหภูมิ หรือวิธีวิเคราะห์ ให้จดทั้งค่าที่ใช้จริงและเหตุผล การบันทึกผลที่ต่างจากที่คาดช่วยให้กลับมาหาสาเหตุได้เมื่อเปรียบเทียบการทดลองรอบถัดไป",
+              "en": "If you change a duration, temperature, or analysis method, record the actual setting and the reason. Document unexpected observations so they can be compared with subsequent runs."
+            }
+          ]
+        }
+      ],
+      "sources": []
+    },
+    {
+      "id": "reading-a-cell-assay",
+      "title": {
+        "th": "อ่านผลทดลองระดับเซลล์อย่างไร",
+        "en": "How to read a cell assay"
+      },
+      "summary": {
+        "th": "มองที่ชนิดเซลล์ ชุดควบคุม และสิ่งที่เครื่องมือวัด ก่อนสรุปความหมายจากกราฟ",
+        "en": "Check the cell model, controls, and measured endpoint before interpreting the bars on a graph."
+      },
+      "category": "cell-biology",
+      "tags": [
+        "cell-culture",
+        "plant-compounds"
+      ],
+      "cover": "cells",
+      "coverPosition": "center center",
+      "authorId": "sample-editor",
+      "date": "",
+      "status": "published",
+      "sample": true,
+      "featured": false,
+      "sections": [
+        {
+          "heading": {
+            "th": "ดูว่าใช้เซลล์อะไรและวัดอะไร",
+            "en": "Identify the model and endpoint"
+          },
+          "paragraphs": [
+            {
+              "th": "เริ่มจากชื่อเซลล์ ระยะเวลาที่สัมผัสสาร และตัวชี้วัดที่ใช้ ค่าความมีชีวิตของเซลล์ การแสดงออกของยีน และการเกิด DNA damage ตอบคำถามคนละแบบ จึงต้องดูว่ากราฟกำลังแสดงค่าใด",
+              "en": "Start with the cell model, exposure time, and measured endpoint. Viability, gene expression, and DNA damage each answer a different question, so identify what the graph measures first."
+            }
+          ]
+        },
+        {
+          "heading": {
+            "th": "เทียบกับชุดควบคุมก่อนอ่านผล",
+            "en": "Read the controls alongside the result"
+          },
+          "paragraphs": [
+            {
+              "th": "ดูว่าชุดควบคุมใช้เงื่อนไขใดและผลมีความแปรปรวนแค่ไหน การเปรียบเทียบเซลล์แต่ละชนิดภายใต้เงื่อนไขเดียวกันช่วยให้ตีความผลในขอบเขตของระบบทดลองนั้น",
+              "en": "Check the control condition and the variability of the measurements. Comparing cell types under the same conditions helps keep interpretation within the scope of the assay."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "name": "Kaewdaungdee et al. · Scientific Reports (2025)",
+          "url": "https://doi.org/10.1038/s41598-025-07397-5"
+        }
+      ]
+    }
+  ]
+}

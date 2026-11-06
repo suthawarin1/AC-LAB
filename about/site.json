@@ -1,0 +1,1084 @@
+{
+  "email": "raccha@kku.ac.th",
+  "media": {
+    "botanical": "images/botanical.jpg",
+    "fieldwork": "images/fieldwork.jpg",
+    "chemistry": "images/chemistry.jpg",
+    "microscopy": "images/microscopy.jpg",
+    "laboratory": "images/laboratory.jpg",
+    "principal": "images/principal.jpg"
+  },
+  "copy": {
+    "introduction": {
+      "en": "The AC Lab is a research group at the Faculty of Science, Khon Kaen University, led by Prof. Dr. Arunrat Chaveerach. We connect the diversity of plants with genomics, phytochemistry and biomedical investigation.",
+      "th": "The AC Lab เป็นกลุ่มวิจัย ณ คณะวิทยาศาสตร์ มหาวิทยาลัยขอนแก่น นำโดย ศ. ดร. อรุณรัตน์ ฉวีราช เราเชื่อมโยงความหลากหลายของพืชกับจีโนมิกส์ พฤกษเคมี และการศึกษาด้านชีวการแพทย์"
+    },
+    "principalName": {
+      "en": "Prof. Dr. Arunrat Chaveerach",
+      "th": "ศ. ดร. อรุณรัตน์ ฉวีราช"
+    },
+    "researchSummary": {
+      "en": "Plant identity, chemical diversity and biological activity are connected parts of our research. Each perspective helps shape the next question.",
+      "th": "เอกลักษณ์ของพืช ความหลากหลายทางเคมี และฤทธิ์ทางชีวภาพ เป็นส่วนที่เชื่อมโยงกัน โดยแต่ละมุมมองช่วยนำไปสู่คำถามวิจัยขั้นต่อไป"
+    }
+  },
+  "researchAreas": [
+    {
+      "title": {
+        "en": "Plant genomics",
+        "th": "จีโนมิกส์พืช"
+      },
+      "description": {
+        "en": "We study chloroplast genomes and genetic variation to investigate plant identity, relationships and evolution.",
+        "th": "ศึกษาจีโนมคลอโรพลาสต์และความแปรผันทางพันธุกรรม เพื่อทำความเข้าใจเอกลักษณ์ ความสัมพันธ์ และวิวัฒนาการของพืช"
+      },
+      "tags": {
+        "en": "Chloroplast genomes | Genetic markers | Phylogenetics",
+        "th": "จีโนมคลอโรพลาสต์ | เครื่องหมายพันธุกรรม | วิวัฒนาการ"
+      },
+      "image": "fieldwork",
+      "imagePosition": "50% 50%",
+      "imageAlt": {
+        "en": "Sunlight across trees and plant diversity in a forest",
+        "th": "ภาพประกอบความหลากหลายของพืชในป่า"
+      }
+    },
+    {
+      "title": {
+        "en": "Phytochemistry",
+        "th": "พฤกษเคมี"
+      },
+      "description": {
+        "en": "We examine plant-derived compounds and chemical profiles, connecting plant diversity with candidates for biological investigation.",
+        "th": "ศึกษาองค์ประกอบและรูปแบบทางเคมีของสารจากพืช เพื่อเชื่อมโยงความหลากหลายของพืชกับเป้าหมายในการศึกษาทางชีวภาพ"
+      },
+      "tags": {
+        "en": "Natural products | Chemical profiling | Lead compounds",
+        "th": "สารจากธรรมชาติ | องค์ประกอบทางเคมี | สารเป้าหมาย"
+      },
+      "image": "chemistry",
+      "imagePosition": "50% 57%",
+      "imageAlt": {
+        "en": "Coloured solutions in laboratory glassware",
+        "th": "ภาพประกอบสารละลายในเครื่องแก้วทดลอง"
+      }
+    },
+    {
+      "title": {
+        "en": "Biomedical research",
+        "th": "งานวิจัยชีวการแพทย์"
+      },
+      "description": {
+        "en": "We investigate the activity, toxicity and possible mechanisms of plant extracts and compounds, including studies in human cancer-cell models.",
+        "th": "ศึกษาฤทธิ์ ความเป็นพิษ และกลไกที่เป็นไปได้ของสารสกัดและสารจากพืช รวมถึงการศึกษาในแบบจำลองเซลล์มะเร็งมนุษย์"
+      },
+      "tags": {
+        "en": "Bioactivity | Toxicity | Molecular mechanisms",
+        "th": "ฤทธิ์ทางชีวภาพ | ความเป็นพิษ | กลไกระดับโมเลกุล"
+      },
+      "image": "microscopy",
+      "imagePosition": "50% 50%",
+      "imageAlt": {
+        "en": "Colourful cellular microscopy image",
+        "th": "ภาพประกอบเซลล์จากกล้องจุลทรรศน์"
+      }
+    }
+  ],
+  "stages": [
+    {
+      "id": "systematics",
+      "label": {
+        "en": "Plant systematics",
+        "th": "การศึกษาพืช"
+      },
+      "title": {
+        "en": "Plant systematics & discovery",
+        "th": "อนุกรมวิธานพืชและการค้นพบ"
+      },
+      "description": {
+        "en": "Identify the plant, examine its chloroplast genome and profile its chemistry. These connected paths establish the identity and research potential of a specimen.",
+        "th": "ระบุชนิดพืช ศึกษาจีโนมคลอโรพลาสต์ และวิเคราะห์องค์ประกอบทางเคมี เพื่อเชื่อมโยงเอกลักษณ์ของพืชกับศักยภาพในการวิจัย"
+      },
+      "context": {
+        "en": "Upstream research",
+        "th": "การวิจัยต้นน้ำ"
+      },
+      "caption": {
+        "en": "Genomic and chemical evidence offer complementary ways to understand a plant.",
+        "th": "ข้อมูลจีโนมและองค์ประกอบทางเคมีเป็นหลักฐานที่ช่วยเสริมความเข้าใจเกี่ยวกับพืช"
+      },
+      "nodes": [
+        {
+          "id": "plants",
+          "label": {
+            "en": "Target plants",
+            "th": "พืชเป้าหมาย"
+          },
+          "type": {
+            "en": "Start here",
+            "th": "จุดเริ่มต้น"
+          },
+          "description": {
+            "en": "Begin with plant diversity and a clearly identified research specimen.",
+            "th": "เริ่มจากความหลากหลายของพืชและตัวอย่างที่ระบุเอกลักษณ์ได้ชัดเจน"
+          },
+          "methods": [
+            {
+              "en": "Biodiversity and focal plant groups",
+              "th": "ความหลากหลายทางชีวภาพและกลุ่มพืชเป้าหมาย"
+            },
+            {
+              "en": "Taxonomic identification",
+              "th": "การระบุชนิดตามหลักอนุกรมวิธาน"
+            },
+            {
+              "en": "Specimen and collection information",
+              "th": "ข้อมูลตัวอย่างและการเก็บรวบรวม"
+            }
+          ],
+          "desktop": [
+            10,
+            167
+          ],
+          "mobile": [
+            103,
+            10
+          ]
+        },
+        {
+          "id": "genomics",
+          "label": {
+            "en": "Identity & genomics",
+            "th": "เอกลักษณ์และจีโนม"
+          },
+          "type": {
+            "en": "Systematics pathway",
+            "th": "เส้นทางด้านพันธุกรรม"
+          },
+          "description": {
+            "en": "Use chloroplast-genome evidence to examine plant identity and relationships.",
+            "th": "ใช้ข้อมูลจีโนมคลอโรพลาสต์เพื่อศึกษาเอกลักษณ์และความสัมพันธ์ของพืช"
+          },
+          "methods": [
+            {
+              "en": "Chloroplast-genome sequencing and assembly",
+              "th": "การหาลำดับและประกอบจีโนมคลอโรพลาสต์"
+            },
+            {
+              "en": "Genome annotation",
+              "th": "การระบุและอธิบายองค์ประกอบของจีโนม"
+            },
+            {
+              "en": "Comparative chloroplast genomics",
+              "th": "การเปรียบเทียบจีโนมคลอโรพลาสต์"
+            }
+          ],
+          "desktop": [
+            365,
+            50
+          ],
+          "mobile": [
+            10,
+            230
+          ]
+        },
+        {
+          "id": "chemistry",
+          "label": {
+            "en": "Phytochemical profiling",
+            "th": "องค์ประกอบทางพฤกษเคมี"
+          },
+          "type": {
+            "en": "Chemical pathway",
+            "th": "เส้นทางด้านเคมี"
+          },
+          "description": {
+            "en": "Examine the compounds a plant produces and characterize its chemical profile.",
+            "th": "วิเคราะห์สารที่พืชสร้างขึ้นและอธิบายรูปแบบองค์ประกอบทางเคมี"
+          },
+          "methods": [
+            {
+              "en": "GC–MS / LC–MS",
+              "th": "GC–MS / LC–MS"
+            },
+            {
+              "en": "¹H NMR / ¹³C NMR",
+              "th": "¹H NMR / ¹³C NMR"
+            },
+            {
+              "en": "GC–FID / HPLC",
+              "th": "GC–FID / HPLC"
+            }
+          ],
+          "desktop": [
+            365,
+            284
+          ],
+          "mobile": [
+            196,
+            230
+          ]
+        },
+        {
+          "id": "relationships",
+          "label": {
+            "en": "Markers & relationships",
+            "th": "เครื่องหมายและความสัมพันธ์"
+          },
+          "type": {
+            "en": "Genomic insight",
+            "th": "ความรู้จากจีโนม"
+          },
+          "description": {
+            "en": "Connect genomic variation with identification and evolutionary questions.",
+            "th": "เชื่อมโยงความแปรผันทางพันธุกรรมกับการจำแนกชนิดและคำถามเชิงวิวัฒนาการ"
+          },
+          "methods": [
+            {
+              "en": "Genetic marker discovery",
+              "th": "การค้นหาเครื่องหมายทางพันธุกรรม"
+            },
+            {
+              "en": "Phylogenetic relationships",
+              "th": "ความสัมพันธ์ทางวิวัฒนาการ"
+            },
+            {
+              "en": "Plant evolution",
+              "th": "วิวัฒนาการของพืช"
+            },
+            {
+              "en": "Ecological research context",
+              "th": "บริบทการศึกษานิเวศวิทยาของพืช"
+            }
+          ],
+          "desktop": [
+            730,
+            50
+          ],
+          "mobile": [
+            10,
+            445
+          ]
+        },
+        {
+          "id": "candidates",
+          "label": {
+            "en": "Compounds & extracts",
+            "th": "สารและสารสกัดเป้าหมาย"
+          },
+          "type": {
+            "en": "Research candidates",
+            "th": "สิ่งที่นำไปศึกษาต่อ"
+          },
+          "description": {
+            "en": "Chemical profiles help guide the selection of extracts and compounds for further investigation.",
+            "th": "ข้อมูลพฤกษเคมีช่วยคัดเลือกสารสกัดและสารประกอบสำหรับการศึกษาในขั้นต่อไป"
+          },
+          "methods": [
+            {
+              "en": "Plant-derived compounds and extracts",
+              "th": "สารประกอบและสารสกัดจากพืช"
+            },
+            {
+              "en": "Candidate selection for drug-discovery research",
+              "th": "การคัดเลือกเป้าหมายในงานค้นคว้ายา"
+            },
+            {
+              "en": "Connection to bioactivity studies",
+              "th": "เชื่อมต่อสู่การศึกษาฤทธิ์ทางชีวภาพ"
+            }
+          ],
+          "desktop": [
+            730,
+            284
+          ],
+          "mobile": [
+            196,
+            445
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "from": "plants",
+          "to": "genomics"
+        },
+        {
+          "from": "plants",
+          "to": "chemistry"
+        },
+        {
+          "from": "genomics",
+          "to": "relationships"
+        },
+        {
+          "from": "chemistry",
+          "to": "candidates"
+        }
+      ],
+      "image": "fieldwork",
+      "imagePosition": "50% 45%",
+      "imageAlt": {
+        "en": "A forest representing plant diversity",
+        "th": "ภาพประกอบความหลากหลายของพืช"
+      }
+    },
+    {
+      "id": "preclinical",
+      "label": {
+        "en": "Preclinical studies",
+        "th": "การทดสอบก่อนคลินิก"
+      },
+      "title": {
+        "en": "Safety, activity & biological mechanisms",
+        "th": "ความปลอดภัย ฤทธิ์ และกลไกทางชีวภาพ"
+      },
+      "description": {
+        "en": "Study safety in context, select suitable candidates and examine biological activity with complementary experimental and computational approaches.",
+        "th": "ศึกษาความปลอดภัยตามบริบทของการทดลอง คัดเลือกเป้าหมายที่เหมาะสม และตรวจสอบฤทธิ์ด้วยวิธีทดลองและการคำนวณที่เสริมกัน"
+      },
+      "context": {
+        "en": "Evidence validation",
+        "th": "ตรวจสอบหลักฐาน"
+      },
+      "caption": {
+        "en": "Candidate selection considers safety findings, biological activity and the experimental context.",
+        "th": "พิจารณาผลด้านความปลอดภัย ฤทธิ์ทางชีวภาพ และบริบทของการทดลองร่วมกันในการคัดเลือกเป้าหมาย"
+      },
+      "nodes": [
+        {
+          "id": "safety",
+          "label": {
+            "en": "Candidate safety",
+            "th": "ความปลอดภัยของเป้าหมาย"
+          },
+          "type": {
+            "en": "Assessment",
+            "th": "การประเมิน"
+          },
+          "description": {
+            "en": "Assess toxicity-related findings before advancing a candidate within the study design.",
+            "th": "ประเมินข้อมูลด้านความเป็นพิษก่อนนำเป้าหมายไปศึกษาต่อตามแบบแผนการวิจัย"
+          },
+          "methods": [
+            {
+              "en": "Cytotoxicity",
+              "th": "ความเป็นพิษต่อเซลล์"
+            },
+            {
+              "en": "Genotoxicity",
+              "th": "ความเป็นพิษต่อสารพันธุกรรม"
+            },
+            {
+              "en": "Interpretation in the relevant experimental model",
+              "th": "การแปลผลในแบบจำลองทดลองที่เกี่ยวข้อง"
+            }
+          ],
+          "desktop": [
+            10,
+            167
+          ],
+          "mobile": [
+            103,
+            10
+          ]
+        },
+        {
+          "id": "selection",
+          "label": {
+            "en": "Study-specific selection",
+            "th": "คัดเลือกตามเกณฑ์การศึกษา"
+          },
+          "type": {
+            "en": "Decision point",
+            "th": "จุดพิจารณา"
+          },
+          "description": {
+            "en": "Select, refine or discontinue candidates according to the evidence and the purpose of the experiment.",
+            "th": "คัดเลือก ปรับแนวทาง หรือยุติการศึกษาตามหลักฐานและวัตถุประสงค์ของการทดลอง"
+          },
+          "methods": [
+            {
+              "en": "Review toxicity and assay context",
+              "th": "พิจารณาข้อมูลความเป็นพิษร่วมกับบริบทการทดสอบ"
+            },
+            {
+              "en": "Select suitable extracts or compounds",
+              "th": "คัดเลือกสารสกัดหรือสารประกอบที่เหมาะสม"
+            },
+            {
+              "en": "Refine the next research question",
+              "th": "ปรับคำถามวิจัยในขั้นต่อไป"
+            }
+          ],
+          "desktop": [
+            365,
+            167
+          ],
+          "mobile": [
+            103,
+            205
+          ]
+        },
+        {
+          "id": "activity",
+          "label": {
+            "en": "Biological activity",
+            "th": "ฤทธิ์ทางชีวภาพ"
+          },
+          "type": {
+            "en": "Functional evidence",
+            "th": "หลักฐานด้านการทำงาน"
+          },
+          "description": {
+            "en": "Measure biological responses and investigate the functional effects of selected candidates.",
+            "th": "ตรวจวัดการตอบสนองทางชีวภาพและศึกษาผลต่อการทำงานของระบบเป้าหมาย"
+          },
+          "methods": [
+            {
+              "en": "Enzyme assays",
+              "th": "การทดสอบการทำงานของเอนไซม์"
+            },
+            {
+              "en": "Biomarker expression",
+              "th": "การแสดงออกของตัวบ่งชี้ทางชีวภาพ"
+            },
+            {
+              "en": "Ion-channel testing",
+              "th": "การทดสอบช่องไอออน"
+            }
+          ],
+          "desktop": [
+            730,
+            50
+          ],
+          "mobile": [
+            10,
+            410
+          ]
+        },
+        {
+          "id": "mechanisms",
+          "label": {
+            "en": "Mechanisms & models",
+            "th": "กลไกและแบบจำลอง"
+          },
+          "type": {
+            "en": "Molecular insight",
+            "th": "ข้อมูลระดับโมเลกุล"
+          },
+          "description": {
+            "en": "Combine molecular measurements and computational analyses to examine possible mechanisms.",
+            "th": "ผสานการตรวจวัดระดับโมเลกุลและการวิเคราะห์เชิงคำนวณเพื่อศึกษากลไกที่เป็นไปได้"
+          },
+          "methods": [
+            {
+              "en": "Multi-omics: genomics, transcriptomics, proteomics and metabolomics",
+              "th": "มัลติโอมิกส์: จีโนม ทรานสคริปโตม โปรตีโอม และเมแทโบโลม"
+            },
+            {
+              "en": "ELISA · qRT-PCR · protein expression",
+              "th": "ELISA · qRT-PCR · การแสดงออกของโปรตีน"
+            },
+            {
+              "en": "Molecular docking",
+              "th": "การจำลองการจับระดับโมเลกุล"
+            },
+            {
+              "en": "Network pharmacology",
+              "th": "เภสัชวิทยาเครือข่าย"
+            }
+          ],
+          "desktop": [
+            730,
+            284
+          ],
+          "mobile": [
+            196,
+            410
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "from": "safety",
+          "to": "selection"
+        },
+        {
+          "from": "selection",
+          "to": "activity"
+        },
+        {
+          "from": "selection",
+          "to": "mechanisms"
+        }
+      ],
+      "additional": [
+        {
+          "title": {
+            "en": "Explore experimental platforms",
+            "th": "ดูแบบจำลองและระบบทดลอง"
+          },
+          "items": [
+            {
+              "en": "Human cell and tissue cultures (in vitro)",
+              "th": "การเพาะเลี้ยงเซลล์และเนื้อเยื่อมนุษย์ (in vitro)"
+            },
+            {
+              "en": "Spheroids and organoids",
+              "th": "สเฟียรอยด์และออร์แกนอยด์"
+            },
+            {
+              "en": "Cell-culture microfluidic chips",
+              "th": "ชิปไมโครฟลูอิดิกสำหรับเพาะเลี้ยงเซลล์"
+            },
+            {
+              "en": "Animal models (in vivo)",
+              "th": "แบบจำลองสัตว์ทดลอง (in vivo)"
+            },
+            {
+              "en": "Computational models (in silico)",
+              "th": "แบบจำลองเชิงคำนวณ (in silico)"
+            }
+          ]
+        },
+        {
+          "title": {
+            "en": "Explore enabling technologies",
+            "th": "ดูเทคโนโลยีสนับสนุน"
+          },
+          "items": [
+            {
+              "en": "Green nanoparticle synthesis",
+              "th": "การสังเคราะห์อนุภาคนาโนด้วยวิธีสีเขียว"
+            },
+            {
+              "en": "Encapsulation technologies",
+              "th": "เทคโนโลยีการห่อหุ้มสาร"
+            }
+          ]
+        }
+      ],
+      "image": "microscopy",
+      "imagePosition": "50% 50%",
+      "imageAlt": {
+        "en": "Cellular microscopy image",
+        "th": "ภาพประกอบการศึกษาเซลล์ด้วยกล้องจุลทรรศน์"
+      }
+    },
+    {
+      "id": "innovation",
+      "label": {
+        "en": "Product innovation",
+        "th": "การพัฒนาผลิตภัณฑ์"
+      },
+      "title": {
+        "en": "From research candidates to a tested prototype",
+        "th": "จากเป้าหมายวิจัยสู่ต้นแบบที่ผ่านการศึกษา"
+      },
+      "description": {
+        "en": "Develop a prototype, examine its safety and quality, and translate the resulting evidence into publications, intellectual property and opportunities for transfer.",
+        "th": "พัฒนาต้นแบบ ศึกษาความปลอดภัยและคุณภาพ แล้วต่อยอดหลักฐานสู่ผลงานตีพิมพ์ ทรัพย์สินทางปัญญา และโอกาสถ่ายทอดเทคโนโลยี"
+      },
+      "context": {
+        "en": "Translational development",
+        "th": "การพัฒนาเพื่อใช้ประโยชน์"
+      },
+      "caption": {
+        "en": "Product development connects evidence, quality and the protection of research outputs.",
+        "th": "การพัฒนาผลิตภัณฑ์เชื่อมโยงหลักฐาน คุณภาพ และการคุ้มครองผลงานวิจัย"
+      },
+      "nodes": [
+        {
+          "id": "prototype",
+          "label": {
+            "en": "Prototype development",
+            "th": "พัฒนาผลิตภัณฑ์ต้นแบบ"
+          },
+          "type": {
+            "en": "Starting point",
+            "th": "จุดเริ่มต้น"
+          },
+          "description": {
+            "en": "Translate a research candidate into a formulation or prototype suited to its intended use.",
+            "th": "นำเป้าหมายจากการวิจัยมาพัฒนาเป็นสูตรหรือต้นแบบให้เหมาะกับวัตถุประสงค์การใช้"
+          },
+          "methods": [
+            {
+              "en": "Nutraceuticals",
+              "th": "โภชนเภสัช"
+            },
+            {
+              "en": "Functional foods",
+              "th": "อาหารฟังก์ชัน"
+            },
+            {
+              "en": "Cosmetics",
+              "th": "เครื่องสำอาง"
+            },
+            {
+              "en": "Herbal medicines",
+              "th": "ยาสมุนไพร"
+            },
+            {
+              "en": "Dietary supplements",
+              "th": "ผลิตภัณฑ์เสริมอาหาร"
+            }
+          ],
+          "desktop": [
+            10,
+            167
+          ],
+          "mobile": [
+            103,
+            10
+          ]
+        },
+        {
+          "id": "quality",
+          "label": {
+            "en": "Safety & quality tests",
+            "th": "ทดสอบความปลอดภัยและคุณภาพ"
+          },
+          "type": {
+            "en": "Validation",
+            "th": "การทดสอบ"
+          },
+          "description": {
+            "en": "Build evidence appropriate to the formulation, intended use and product category.",
+            "th": "สร้างหลักฐานให้สอดคล้องกับสูตร วัตถุประสงค์การใช้ และประเภทผลิตภัณฑ์"
+          },
+          "methods": [
+            {
+              "en": "Irritation and sensitisation tests",
+              "th": "การทดสอบการระคายเคืองและการก่อการแพ้"
+            },
+            {
+              "en": "Toxicity studies",
+              "th": "การศึกษาความเป็นพิษ"
+            },
+            {
+              "en": "Stability tests",
+              "th": "การทดสอบความคงตัว"
+            },
+            {
+              "en": "Contamination and heavy-metal tests",
+              "th": "การทดสอบการปนเปื้อนและโลหะหนัก"
+            }
+          ],
+          "desktop": [
+            365,
+            50
+          ],
+          "mobile": [
+            10,
+            230
+          ]
+        },
+        {
+          "id": "outputs",
+          "label": {
+            "en": "Publication & IP",
+            "th": "ผลงานตีพิมพ์และทรัพย์สินทางปัญญา"
+          },
+          "type": {
+            "en": "Research outputs",
+            "th": "ผลลัพธ์จากงานวิจัย"
+          },
+          "description": {
+            "en": "Document research findings and consider suitable protection for the innovation.",
+            "th": "เผยแพร่ข้อค้นพบและพิจารณาการคุ้มครองนวัตกรรมอย่างเหมาะสม"
+          },
+          "methods": [
+            {
+              "en": "Peer-reviewed publications",
+              "th": "ผลงานตีพิมพ์ในวารสารวิชาการ"
+            },
+            {
+              "en": "Patents",
+              "th": "สิทธิบัตร"
+            },
+            {
+              "en": "Petty patents",
+              "th": "อนุสิทธิบัตร"
+            }
+          ],
+          "desktop": [
+            365,
+            284
+          ],
+          "mobile": [
+            196,
+            230
+          ]
+        },
+        {
+          "id": "validated",
+          "label": {
+            "en": "Evidence-backed prototype",
+            "th": "ต้นแบบที่มีหลักฐานรองรับ"
+          },
+          "type": {
+            "en": "Development output",
+            "th": "ผลจากการพัฒนา"
+          },
+          "description": {
+            "en": "Bring the prototype together with its study results and quality documentation.",
+            "th": "รวบรวมต้นแบบ ผลการศึกษา และเอกสารคุณภาพ เพื่อใช้ประกอบการพัฒนาต่อ"
+          },
+          "methods": [
+            {
+              "en": "Safety and quality evidence",
+              "th": "หลักฐานด้านความปลอดภัยและคุณภาพ"
+            },
+            {
+              "en": "Prototype refinement",
+              "th": "การปรับปรุงต้นแบบ"
+            },
+            {
+              "en": "Preparation for product-specific registration",
+              "th": "การเตรียมข้อมูลตามประเภทผลิตภัณฑ์"
+            }
+          ],
+          "desktop": [
+            730,
+            50
+          ],
+          "mobile": [
+            10,
+            445
+          ]
+        },
+        {
+          "id": "transfer",
+          "label": {
+            "en": "Technology transfer",
+            "th": "ถ่ายทอดเทคโนโลยี"
+          },
+          "type": {
+            "en": "Application pathway",
+            "th": "เส้นทางใช้ประโยชน์"
+          },
+          "description": {
+            "en": "Connect protected knowledge and research results with partners who can support further development.",
+            "th": "เชื่อมโยงองค์ความรู้และผลงานวิจัยกับพันธมิตรเพื่อพัฒนาและใช้ประโยชน์ต่อ"
+          },
+          "methods": [
+            {
+              "en": "Knowledge and technology transfer",
+              "th": "การถ่ายทอดองค์ความรู้และเทคโนโลยี"
+            },
+            {
+              "en": "Collaboration for product development",
+              "th": "ความร่วมมือเพื่อพัฒนาผลิตภัณฑ์"
+            },
+            {
+              "en": "Commercial translation where appropriate",
+              "th": "การต่อยอดเชิงพาณิชย์ตามความเหมาะสม"
+            }
+          ],
+          "desktop": [
+            730,
+            284
+          ],
+          "mobile": [
+            196,
+            445
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "from": "prototype",
+          "to": "quality"
+        },
+        {
+          "from": "prototype",
+          "to": "outputs"
+        },
+        {
+          "from": "quality",
+          "to": "validated"
+        },
+        {
+          "from": "outputs",
+          "to": "transfer"
+        }
+      ],
+      "image": "chemistry",
+      "imagePosition": "50% 57%",
+      "imageAlt": {
+        "en": "Laboratory glassware and solutions",
+        "th": "ภาพประกอบเครื่องแก้วและสารละลายในงานทดลอง"
+      }
+    },
+    {
+      "id": "registration",
+      "label": {
+        "en": "Registration & translation",
+        "th": "ขึ้นทะเบียนและต่อยอด"
+      },
+      "title": {
+        "en": "Product-specific evidence & translation",
+        "th": "หลักฐานตามประเภทผลิตภัณฑ์และการต่อยอด"
+      },
+      "description": {
+        "en": "The intended product category determines the evidence and review pathway. Clinical studies are included when required, before the appropriate route to manufacture and use.",
+        "th": "ประเภทและวัตถุประสงค์ของผลิตภัณฑ์เป็นตัวกำหนดหลักฐานและแนวทางพิจารณา โดยรวมการศึกษาทางคลินิกเมื่อจำเป็น ก่อนเข้าสู่กระบวนการผลิตและใช้ประโยชน์ที่เหมาะสม"
+      },
+      "context": {
+        "en": "Downstream impact",
+        "th": "การใช้ประโยชน์ปลายน้ำ"
+      },
+      "caption": {
+        "en": "Clinical and registration requirements vary between cosmetics, foods, supplements, herbal medicines and medicinal products.",
+        "th": "ข้อกำหนดทางคลินิกและการขึ้นทะเบียนแตกต่างกันระหว่างเครื่องสำอาง อาหาร ผลิตภัณฑ์เสริมอาหาร ยาสมุนไพร และยา"
+      },
+      "nodes": [
+        {
+          "id": "category",
+          "label": {
+            "en": "Product category",
+            "th": "ประเภทผลิตภัณฑ์"
+          },
+          "type": {
+            "en": "Define the route",
+            "th": "กำหนดแนวทาง"
+          },
+          "description": {
+            "en": "Clarify the intended use and category before identifying the evidence needed.",
+            "th": "กำหนดวัตถุประสงค์การใช้และประเภทผลิตภัณฑ์ ก่อนระบุหลักฐานที่ต้องใช้"
+          },
+          "methods": [
+            {
+              "en": "Cosmetics and foods",
+              "th": "เครื่องสำอางและอาหาร"
+            },
+            {
+              "en": "Dietary supplements",
+              "th": "ผลิตภัณฑ์เสริมอาหาร"
+            },
+            {
+              "en": "Herbal and medicinal products",
+              "th": "ยาสมุนไพรและผลิตภัณฑ์ยา"
+            }
+          ],
+          "desktop": [
+            10,
+            167
+          ],
+          "mobile": [
+            103,
+            10
+          ]
+        },
+        {
+          "id": "evidence",
+          "label": {
+            "en": "Required evidence",
+            "th": "หลักฐานที่เกี่ยวข้อง"
+          },
+          "type": {
+            "en": "Documentation",
+            "th": "การรวบรวมข้อมูล"
+          },
+          "description": {
+            "en": "Assemble the quality, safety and other evidence relevant to the product category.",
+            "th": "รวบรวมข้อมูลคุณภาพ ความปลอดภัย และหลักฐานอื่นที่เกี่ยวข้องกับประเภทผลิตภัณฑ์"
+          },
+          "methods": [
+            {
+              "en": "Product documentation",
+              "th": "เอกสารข้อมูลผลิตภัณฑ์"
+            },
+            {
+              "en": "Safety and quality findings",
+              "th": "ข้อมูลความปลอดภัยและคุณภาพ"
+            },
+            {
+              "en": "Category-specific evidence requirements",
+              "th": "หลักฐานตามข้อกำหนดของประเภทผลิตภัณฑ์"
+            }
+          ],
+          "desktop": [
+            365,
+            50
+          ],
+          "mobile": [
+            10,
+            230
+          ]
+        },
+        {
+          "id": "clinical",
+          "label": {
+            "en": "Clinical studies, if needed",
+            "th": "ศึกษาทางคลินิกเมื่อจำเป็น"
+          },
+          "type": {
+            "en": "Conditional step",
+            "th": "ขั้นตอนตามเงื่อนไข"
+          },
+          "description": {
+            "en": "Include human research when required by the product and research question.",
+            "th": "รวมการศึกษาในมนุษย์เมื่อจำเป็นตามประเภทผลิตภัณฑ์และคำถามวิจัย"
+          },
+          "methods": [
+            {
+              "en": "Clinical trials, when required",
+              "th": "การทดลองทางคลินิกเมื่อจำเป็น"
+            },
+            {
+              "en": "Human-population and epidemiological studies",
+              "th": "การศึกษาในประชากรมนุษย์และระบาดวิทยา"
+            },
+            {
+              "en": "Study-specific clinical evidence",
+              "th": "หลักฐานทางคลินิกที่ตรงกับการศึกษา"
+            }
+          ],
+          "desktop": [
+            365,
+            284
+          ],
+          "mobile": [
+            196,
+            230
+          ]
+        },
+        {
+          "id": "review",
+          "label": {
+            "en": "Regulatory review",
+            "th": "พิจารณาและขึ้นทะเบียน"
+          },
+          "type": {
+            "en": "Product-specific route",
+            "th": "เส้นทางตามประเภท"
+          },
+          "description": {
+            "en": "Follow the relevant review and registration process before the intended market use.",
+            "th": "ดำเนินการตามกระบวนการพิจารณาและขึ้นทะเบียนที่เกี่ยวข้อง ก่อนใช้ประโยชน์ในตลาดตามวัตถุประสงค์"
+          },
+          "methods": [
+            {
+              "en": "Appropriate regulatory pathway",
+              "th": "แนวทางกำกับดูแลที่เกี่ยวข้อง"
+            },
+            {
+              "en": "Product registration and applicable approvals",
+              "th": "การขึ้นทะเบียนและการอนุญาตที่เกี่ยวข้อง"
+            },
+            {
+              "en": "Review of the supporting evidence",
+              "th": "การพิจารณาหลักฐานประกอบ"
+            }
+          ],
+          "desktop": [
+            730,
+            50
+          ],
+          "mobile": [
+            10,
+            445
+          ]
+        },
+        {
+          "id": "translation",
+          "label": {
+            "en": "Manufacture & application",
+            "th": "การผลิตและใช้ประโยชน์"
+          },
+          "type": {
+            "en": "Translation",
+            "th": "การต่อยอด"
+          },
+          "description": {
+            "en": "Connect the reviewed product with manufacturing, quality assurance and suitable partners.",
+            "th": "เชื่อมโยงผลิตภัณฑ์ที่ผ่านกระบวนการเกี่ยวข้องกับการผลิต การประกันคุณภาพ และพันธมิตรที่เหมาะสม"
+          },
+          "methods": [
+            {
+              "en": "Manufacturing and quality assurance",
+              "th": "การผลิตและการประกันคุณภาพ"
+            },
+            {
+              "en": "Partnerships and market introduction",
+              "th": "พันธมิตรและการนำผลิตภัณฑ์สู่ตลาด"
+            },
+            {
+              "en": "Commercialization where appropriate",
+              "th": "การใช้ประโยชน์เชิงพาณิชย์ตามความเหมาะสม"
+            }
+          ],
+          "desktop": [
+            730,
+            284
+          ],
+          "mobile": [
+            196,
+            445
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "from": "category",
+          "to": "evidence"
+        },
+        {
+          "from": "evidence",
+          "to": "clinical",
+          "conditional": true
+        },
+        {
+          "from": "evidence",
+          "to": "review"
+        },
+        {
+          "from": "clinical",
+          "to": "review",
+          "conditional": true
+        },
+        {
+          "from": "review",
+          "to": "translation"
+        }
+      ],
+      "additional": [
+        {
+          "title": {
+            "en": "Explore specialist study platforms",
+            "th": "ดูระบบศึกษาทางคลินิกที่เกี่ยวข้อง"
+          },
+          "items": [
+            {
+              "en": "CT and ultrasonography, when relevant to a study",
+              "th": "CT และอัลตราซาวนด์ เมื่อเกี่ยวข้องกับการศึกษา"
+            },
+            {
+              "en": "Nuclear imaging, when relevant to a study",
+              "th": "การถ่ายภาพเวชศาสตร์นิวเคลียร์ เมื่อเกี่ยวข้องกับการศึกษา"
+            }
+          ]
+        }
+      ],
+      "image": "laboratory",
+      "imagePosition": "50% 50%",
+      "imageAlt": {
+        "en": "Illustrative laboratory workspace",
+        "th": "ภาพประกอบพื้นที่ปฏิบัติงานในห้องทดลอง"
+      }
+    }
+  ],
+  "visuals": {
+    "hero": {
+      "image": "botanical",
+      "position": "50% 48%",
+      "alt": {
+        "en": "A canopy of green plant leaves",
+        "th": "ภาพประกอบใบพืชสีเขียวในธรรมชาติ"
+      }
+    }
+  }
+}
