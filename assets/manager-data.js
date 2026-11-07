@@ -1,9 +1,10 @@
 (() => {
   'use strict';
-  const { root, config } = window.ACLabData;
+  const { root, config, imageSource, isImageField } = window.ACLabData;
   const auth = { storageKey: 'aclab-cms:' + root.pathname, detectSessionInUrl: false };
   const client = config?.url && config?.key && window.supabase?.createClient(config.url, config.key, { auth });
   const mediaPattern = /^aclab-media:([a-f0-9-]{36}\.(?:jpg|png|webp))$/;
+  const dataImagePattern = /^data:image\/(?:jpeg|png|webp|gif);base64,[A-Za-z0-9+/=]+$/;
   const draftBucket = 'aclab-cms-drafts';
   const publicBucket = 'aclab-cms-public';
   const previewURLs = new Map();
@@ -61,12 +62,17 @@
 
   async function latest(page) {
     const value = result(await client.from('aclab_cms_versions')
-      .select('revision,document').eq('page_id', page).order('revision', { ascending: false }).limit(1).maybeSingle());
-    if (!value) {
-      if (!await adminAccess()) fail('บัญชีนี้ไม่มีสิทธิ์ผู้ดูแลเว็บไซต์', 403);
-      fail('ไม่พบข้อมูลหน้าเว็บ กรุณารัน The_AC_Lab_Supabase.sql ก่อน', 503);
-    }
-    return value;
+      .select('revision,document').eq('page_id', page.id).order('revision', { ascending: false }).limit(1).maybeSingle());
+    if (value) return value;
+    if (!await adminAccess()) fail('บัญชีนี้ไม่มีสิทธิ์ผู้ดูแลเว็บไซต์', 403);
+
+    // Use the same defaults as the public page until an editor publishes revision one.
+    const url = new URL('site.json', new URL(page.path, root));
+    const response = await fetch(url);
+    if (!response.ok) fail('โหลดข้อมูลตั้งต้นของหน้า ' + page.label.en + ' ไม่สำเร็จ', 503);
+    const settings = await response.json();
+    const defaults = fields => Object.fromEntries(Object.entries(fields).map(([key, field]) => [key, field.value]));
+    return { revision: 0, document: { settings, copy: defaults(page.copy), static: defaults(page.static), blocks: [] } };
   }
 
   function editorState(page, row) {
@@ -96,12 +102,27 @@
     return JSON.stringify(base) === JSON.stringify(value) ? undefined : value;
   }
 
-  const urlKeys = new Set(['url', 'path', 'href', 'pdf', 'sourceUrl', 'mapLink', 'mapEmbed', 'photo', 'image', 'cover']);
+  const urlKeys = new Set(['url', 'path', 'href', 'pdf', 'sourceUrl', 'mapLink', 'mapEmbed']);
   function validateURL(value, image) {
-    if (!value || (image && (mediaPattern.test(value) || /^data:image\/(?:jpeg|png|webp|gif);base64,[A-Za-z0-9+/=]+$/.test(value)))) return;
+    if (image) value = value.trim();
+    if (!value || (image && (mediaPattern.test(value) || dataImagePattern.test(value)))) return;
     if (/[\u0000-\u0020\\]/.test(value) || value.startsWith('//')) fail('ลิงก์มีอักขระที่ใช้ไม่ได้');
-    const url = new URL(value, root);
+    let url;
+    try { url = new URL(value, root); }
+    catch { fail('รูปแบบลิงก์ไม่ถูกต้อง'); }
     if (!['https:', 'http:'].includes(url.protocol) || url.username || url.password) fail('กรุณาใช้ลิงก์ HTTP หรือ HTTPS');
+    if (image && !imageSource(value)) fail('กรุณาวางลิงก์ของไฟล์ภาพจาก Google Drive');
+  }
+
+  function imageURL(value, base = root) {
+    const source = previewURLs.get(value) || imageSource(value);
+    if (!source || dataImagePattern.test(source)) return source;
+    try {
+      const url = new URL(source, base);
+      if (!url.username && !url.password &&
+          (url.protocol === 'https:' || (url.protocol === 'http:' && url.origin === root.origin))) return url.href;
+    } catch {}
+    return '';
   }
 
   function validateTree(value, key = '', inMedia = false, depth = 0) {
@@ -116,7 +137,8 @@
       }
     } else if (typeof value === 'string') {
       if (value.includes('\0')) fail('พบอักขระที่ใช้ไม่ได้');
-      if (urlKeys.has(key) || inMedia) validateURL(value, inMedia || ['photo', 'image', 'cover'].includes(key));
+      const image = inMedia || isImageField(key);
+      if (image || urlKeys.has(key)) validateURL(value, image);
     }
   }
 
@@ -184,7 +206,15 @@
     const { data, error } = await client.storage.from(draftBucket).createSignedUrls(
       paths.map(ref => mediaPattern.exec(ref)[1]), 3600);
     if (error) return;
-    for (const item of data) if (item.signedUrl) previewURLs.set('aclab-media:' + item.path, item.signedUrl);
+    for (const item of data || []) if (item.signedUrl) previewURLs.set('aclab-media:' + item.path, item.signedUrl);
+  }
+
+  function replaceMedia(value, urls) {
+    if (typeof value === 'string') return urls.get(value) || value;
+    if (Array.isArray(value)) return value.map(item => replaceMedia(item, urls));
+    if (value && typeof value === 'object')
+      return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, replaceMedia(item, urls)]));
+    return value;
   }
 
   async function publishMedia(value) {
@@ -196,13 +226,39 @@
         fail('เผยแพร่ภาพไม่สำเร็จ กรุณาตรวจพื้นที่ Storage แล้วลองอีกครั้ง', 503);
       published.set(ref, client.storage.from(publicBucket).getPublicUrl(path).data.publicUrl);
     }
-    function replace(value) {
-      if (typeof value === 'string') return published.get(value) || value;
-      if (Array.isArray(value)) return value.map(replace);
-      if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, replace(item)]));
-      return value;
+    return replaceMedia(value, published);
+  }
+
+  function publicationFor(page, { settings, copy, static: fields, blocks }) {
+    const changes = (base, value) => difference(Object.fromEntries(Object.entries(base)
+      .map(([key, definition]) => [key, definition.value])), value) || {};
+    return {
+      content: publicContent(page.id, settings),
+      editor: {
+        copy: changes(page.copy, copy), static: changes(page.static, fields),
+        blocks: blocks.filter(block => block.visible),
+        anchors: Object.fromEntries(Object.entries(page.anchors).map(([key, anchor]) => [key, anchor.selector])),
+      },
+    };
+  }
+
+  async function previewPage(pageId, payload, reveal) {
+    if (!user) fail('กรุณาเข้าสู่ระบบ Manager', 401);
+    const page = (await getCatalog()).find(item => item.id === pageId);
+    if (!page) fail('ไม่พบหน้าเว็บ', 404);
+    const { settings, copy, static: fields, blocks } = structuredClone(payload);
+    const draft = { settings, copy, static: fields, blocks };
+    validateTree(draft);
+    if (reveal) {
+      const rows = reveal.group === 'blocks' ? blocks : settings[reveal.group];
+      const item = Array.isArray(rows) ? rows.find(row => row.id === reveal.id) : null;
+      if (item && (reveal.group === 'blocks' || (pageId === 'team' && reveal.group === 'members')))
+        item.visible = true;
+      if (item && pageId === 'blog' && reveal.group === 'posts') item.status = 'published';
     }
-    return replace(value);
+    const publication = publicationFor(page, draft);
+    await signedPreviews(publication);
+    return replaceMedia(publication, previewURLs);
   }
 
   async function savePage(page, row, payload) {
@@ -222,14 +278,7 @@
     validateTree(document);
     checkRecords(page, settings);
     if (page.id === 'team') settings.revision = row.revision + 1;
-    const changes = (base, value) => difference(Object.fromEntries(Object.entries(base)
-      .map(([key, definition]) => [key, definition.value])), value) || {};
-    const editor = {
-      copy: changes(page.copy, copy), static: changes(page.static, fields),
-      blocks: blocks.filter(block => block.visible),
-      anchors: Object.fromEntries(Object.entries(page.anchors).map(([key, anchor]) => [key, anchor.selector])),
-    };
-    const publication = await publishMedia({ content: publicContent(page.id, settings), editor });
+    const publication = await publishMedia(publicationFor(page, document));
     const revision = result(await client.rpc('aclab_cms_save_page', {
       p_page_id: page.id, p_expected_revision: row.revision, p_document: document,
       p_public_content: publication.content, p_public_editor: publication.editor,
@@ -271,7 +320,7 @@
     const teamAction = ['content', 'save'].includes(action);
     const page = pages.find(page => page.id === (teamAction ? 'team' : action.replace(/^site\/page\//, '')));
     if (!page) fail('ไม่พบหน้าเว็บ', 404);
-    const row = await latest(page.id);
+    const row = await latest(page);
     if (teamAction) {
       if (action === 'content') {
         await signedPreviews(row.document.settings);
@@ -282,8 +331,10 @@
       });
       return { saved: true, content: saved.settings, revision: saved.version };
     }
-    return body ? savePage(page, row, body) : editorState(page, row);
+    if (body) return savePage(page, row, body);
+    await signedPreviews(row.document);
+    return editorState(page, row);
   }
 
-  window.ACLabManager = { request, imageURL: value => previewURLs.get(value) || '' };
+  window.ACLabManager = { request, previewPage, imageURL };
 })();

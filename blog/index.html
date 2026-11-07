@@ -1453,6 +1453,7 @@ function postLabels(post, className) {
 
 function renderPostCard(post, featured) {
   const article = make('article', featured ? 'post-card feature-post' : 'post-card');
+  article.dataset.aclabRecord = post.id;
   const title = localized(post.title);
   const href = pageURL({ post: post.id });
   const cover = make('a', 'post-cover');
@@ -1579,6 +1580,7 @@ function renderBlogListing() {
 }
 
 function renderArticle(post) {
+  byId('article-view').dataset.aclabRecord = post.id;
   const title = localized(post.title);
   document.title = `${title} · Lab Blog`;
   byId('article-back').href = pageURL({ post: '' }, 'posts');

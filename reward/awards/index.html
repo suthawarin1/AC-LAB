@@ -1506,6 +1506,7 @@ function openAwardDetails(award) {
 
 function awardCard(award, variant) {
   const card = make('article', 'award-card' + (variant ? ' ' + variant : ''));
+  card.dataset.aclabRecord = award.id;
   const visual = make('div', 'award-visual');
   const image = mediaImage(award.gallery[0]);
   if (image) {

@@ -1368,6 +1368,7 @@ function grantPortrait(leader) {
 
 function grantCard(grant, featured) {
   const card = make('article', featured ? 'funding-card is-featured' : 'funding-card');
+  card.dataset.aclabRecord = grant.id;
   const body = make('div', 'funding-body');
   const labels = make('div', 'funding-labels');
   labels.append(make('p', 'eyebrow', fundingText('project')));

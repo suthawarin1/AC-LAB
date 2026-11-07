@@ -5,9 +5,81 @@
   const pageIds = ['main', 'about', 'team', 'publication', 'blog', 'funding', 'awards', 'patents', 'contact'];
   const pageKey = path => path.replace(/^api\//, '') === 'site' ? 'main' : path.replace(/^api\//, '');
   const list = value => Array.isArray(value) ? value : [];
+  const imageFields = new Set(['image', 'photo', 'cover', 'gallery']);
   let pending;
 
+  function imageSource(value) {
+    const source = typeof value === 'string' ? value.trim() : '';
+    if (!/^https?:\/\/(?:drive\.google\.com|drive\.usercontent\.google\.com)(?:\/|$)/i.test(source)) return source;
+    const url = new URL(source);
+    const path = url.pathname.replace(/^\/a\/[^/]+\//, '/');
+    const file = /^\/file\/(?:u\/\d+\/)?d\/([\w-]+)(?:\/|$)/.exec(path);
+    const id = file?.[1] || (/^\/(?:open|uc|thumbnail|download)\/?$/.test(path) ? url.searchParams.get('id') : '');
+    if (!id || !/^[\w-]{8,200}$/.test(id)) return '';
+    const image = new URL('https://drive.google.com/thumbnail');
+    image.searchParams.set('id', id);
+    image.searchParams.set('sz', url.searchParams.get('sz') || 'w1600');
+    const resourceKey = url.searchParams.get('resourcekey');
+    if (resourceKey) image.searchParams.set('resourcekey', resourceKey);
+    return image.href;
+  }
+
+  function resolveImages(value, field = '') {
+    if (Array.isArray(value)) return value.map(item => resolveImages(item, field));
+    if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value)
+      .map(([key, item]) => [key, resolveImages(item, field === 'media' ? 'image' : key)]));
+    return typeof value === 'string' && imageFields.has(field) ? imageSource(value) : value;
+  }
+
+  function previewRows() {
+    if (!window.parent || window.parent === window) return null;
+    const token = new URLSearchParams(location.search).get('aclab-preview');
+    if (!token || !/^[a-f0-9-]{36}$/.test(token)) return null;
+    const origin = location.origin;
+    const send = type => window.parent.postMessage({ type, token }, origin);
+
+    // The preview renders the site but keeps visitors inside the preview frame.
+    document.addEventListener('submit', event => {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }, true);
+    document.addEventListener('click', event => {
+      const link = event.target.closest?.('a[href]');
+      if (!link) return;
+      const url = new URL(link.href, location.href);
+      if (url.origin === origin && url.pathname === location.pathname && url.search === location.search && url.hash) return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }, true);
+
+    return new Promise(resolve => {
+      function receive(event) {
+        if (event.origin !== origin || event.source !== window.parent ||
+            event.data?.type !== 'aclab-preview-data' || event.data.token !== token ||
+            !event.data.rows || typeof event.data.rows !== 'object') return;
+        clearTimeout(timeout);
+        window.removeEventListener('message', receive);
+        resolve(resolveImages(event.data.rows));
+        const rendered = () => setTimeout(() => send('aclab-preview-rendered'), 32);
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', rendered, { once: true });
+        else rendered();
+      }
+      const timeout = setTimeout(() => {
+        window.removeEventListener('message', receive);
+        resolve(null);
+      }, 2400);
+      window.addEventListener('message', receive);
+      send('aclab-preview-request');
+    });
+  }
+
+  const draftPreview = previewRows();
+
   async function read(fresh = false) {
+    if (draftPreview) {
+      const rows = await draftPreview;
+      if (rows) return rows;
+    }
     if (document.querySelector('#aclab-editor-snapshot[data-offline]') ||
         !['http:', 'https:'].includes(location.protocol) || !config?.url || !config?.key) {
       throw new Error('Using the embedded website snapshot');
@@ -24,7 +96,7 @@
       pending = fetch(url, { headers, cache: 'no-store', signal: AbortSignal.timeout(2500) })
         .then(async response => {
           if (!response.ok) throw new Error('Supabase website content is unavailable');
-          return Object.fromEntries((await response.json()).map(row => [row.page_id, row]));
+          return Object.fromEntries((await response.json()).map(row => [row.page_id, resolveImages(row)]));
         }).catch(error => { pending = undefined; throw error; });
     }
     return pending;
@@ -129,7 +201,7 @@
   }
 
   window.ACLabData = {
-    root, config, pageIds, read, materialize,
+    root, config, pageIds, read, materialize, imageSource, isImageField: key => imageFields.has(key),
     load: async path => materialize(await read(), pageKey(path)),
     editor: async page => (await read())[page]?.editor,
   };

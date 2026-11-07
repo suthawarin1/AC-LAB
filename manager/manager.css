@@ -91,6 +91,50 @@ a { color: inherit; text-decoration: none; }
 .status-chip { padding: 3px 9px; border-radius: 50px; background: var(--teal-50); color: #006357; font-size: 11px; font-weight: 650; }
 .status-chip.is-dirty { background: #fff0cc; color: #735321; }
 .editor { border: 1px solid var(--line); border-radius: 15px; background: white; overflow: clip; }
+.editor-layout { display: grid; align-items: start; gap: 16px; min-width: 0; }
+.editor-layout > * { min-width: 0; }
+.live-preview {
+  overflow: hidden; border: 1px solid var(--line); border-radius: 15px; background: white;
+  box-shadow: 0 10px 35px #153e380d; scroll-margin-top: 82px;
+}
+.preview-header, .preview-toolbar, .preview-location {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-inline: 14px;
+}
+.preview-header { min-height: 65px; padding-block: 9px; background: #f1f9f6; }
+.preview-heading h2 { font: 500 19px/1.4 var(--display); }
+.preview-toolbar { padding-block: 9px; flex-wrap: wrap; }
+.preview-choice { display: inline-flex; gap: 2px; padding: 3px; border-radius: 8px; background: var(--paper); }
+.preview-choice button {
+  border: 0; border-radius: 6px; background: transparent; min-height: 29px; padding: 2px 9px;
+  font-size: 12px; font-weight: 650;
+}
+.preview-choice button[aria-pressed="true"] { background: white; color: var(--teal-700); box-shadow: 0 1px 3px #153e3820; }
+.preview-location { padding-block: 5px 9px; }
+.preview-location p { min-width: 0; font-size: 12px; color: var(--muted); overflow-wrap: anywhere; }
+.preview-viewport {
+  position: relative; isolation: isolate; overflow: hidden;
+  height: clamp(310px, 53dvh, 730px); background: #edf2f0;
+  border-block: 1px solid var(--line);
+}
+.preview-frame {
+  position: absolute; top: 0; left: 50%; border: 0; background: white;
+  transform-origin: top center;
+}
+.preview-frame.is-staged { opacity: 0; pointer-events: none; }
+.preview-note { padding: 8px 14px; color: var(--muted); font-size: 11px; }
+@media (min-width: 1100px) {
+  .editor-layout:has(.live-preview:not([hidden])) {
+    grid-template-columns: minmax(0, 1fr) minmax(310px, .9fr);
+  }
+  .live-preview { position: sticky; top: 83px; }
+  .editor-layout:has(.live-preview:not([hidden])) .editor-heading {
+    align-items: start; flex-direction: column;
+  }
+  .editor-layout:has(.live-preview:not([hidden])) .search { flex: auto; width: 100%; max-width: none; }
+}
+@media (max-width: 1099px) {
+  .live-preview { grid-row: 1; }
+}
 .mode-bar,.group-nav { display: flex; flex-wrap: wrap; gap: 7px; padding: 11px 17px; border-bottom: 1px solid var(--line); }
 .mode-bar { background: #fbfdfc; }
 .mode-bar button,.group-nav button {
@@ -114,6 +158,9 @@ input[type=checkbox] { width: 17px; height: 17px; accent-color: var(--teal-700);
 .field,.localized,.object-fields { min-width: 0; }
 .field { display: grid; gap: 5px; align-content: start; }
 .field > span:first-child { font-size: 12px; font-weight: 650; overflow-wrap: anywhere; }
+.image-field { display: grid; gap: 6px; min-width: 0; }
+.image-thumbnail { width: min(136px, 100%); height: 84px; object-fit: contain; border-radius: 7px; background: var(--paper); }
+.image-status { color: #9c3030; font-size: 12px; }
 .field.checkbox { grid-template-columns: auto 1fr; align-items: center; min-height: 37px; }
 .field.checkbox input { grid-column: 1; grid-row: 1; }
 .field.checkbox span { grid-column: 2; grid-row: 1; }

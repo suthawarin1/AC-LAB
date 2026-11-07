@@ -7,12 +7,15 @@
   <title>Site Manager · The AC Lab</title>
   <link rel="stylesheet" href="../about/fonts/local-fonts.css">
   <link rel="stylesheet" href="manager.css">
+  <link rel="stylesheet" href="../assets/genome-loader.css">
   <script defer src="../assets/vendor/supabase.js"></script>
 <script defer src="../assets/supabase-config.js"></script>
 <script defer src="../assets/site-data.js"></script>
 <script defer src="../assets/manager-data.js"></script>
 <script defer src="../assets/vendor/jszip.min.js"></script>
 <script defer src="../assets/manager-export.js"></script>
+  <script defer src="../assets/genome-loader.js"></script>
+  <script defer src="live-preview.js"></script>
   <script defer src="manager.js"></script>
 </head>
 <body>
@@ -64,11 +67,13 @@
         <div class="page-hero-actions">
           <span id="draft-status" class="status-chip">กำลังโหลด</span>
           <div class="page-actions">
-            <a id="page-preview" class="button quiet" target="_blank" rel="noopener">ดูหน้าเว็บ</a>
+            <button class="button quiet" id="preview-toggle" type="button" aria-controls="live-preview" aria-expanded="false" disabled>พรีวิวสด</button>
+            <a id="page-preview" class="button quiet" target="_blank" rel="noopener">ดูเว็บที่เผยแพร่</a>
             <button class="button primary" id="save-page" type="button" disabled>บันทึกและเผยแพร่</button>
           </div>
         </div>
       </div>
+      <div class="editor-layout">
       <div class="editor" id="editor" hidden>
         <div class="mode-bar" id="mode-bar" role="group" aria-label="ประเภทการแก้ไข">
           <button type="button" data-mode="settings" aria-pressed="true">ข้อมูลและรายการ</button>
@@ -88,6 +93,32 @@
           <button type="button" id="restore-page" class="button quiet" disabled>คืนค่าที่บันทึกไว้</button>
           <button type="button" id="download-draft" class="button quiet">ดาวน์โหลดข้อมูลหน้านี้</button>
         </div>
+      </div>
+      <aside class="live-preview" id="live-preview" aria-labelledby="preview-heading" hidden>
+        <div class="preview-header">
+          <div class="preview-heading">
+            <span class="eyebrow">LIVE PREVIEW</span>
+            <h2 id="preview-heading" tabindex="-1">ตัวอย่างหน้าเว็บ</h2>
+          </div>
+          <span id="preview-status" class="status-chip" role="status">กำลังโหลด</span>
+        </div>
+        <div class="preview-toolbar">
+          <div class="preview-choice" role="group" aria-label="ขนาดหน้าจอพรีวิว">
+            <button type="button" data-preview-width="390" aria-pressed="true">มือถือ</button>
+            <button type="button" data-preview-width="1200" aria-pressed="false">เดสก์ท็อป</button>
+          </div>
+          <div class="preview-choice" role="group" aria-label="ภาษาของพรีวิว">
+            <button type="button" data-preview-lang="th" aria-pressed="true">TH</button>
+            <button type="button" data-preview-lang="en" aria-pressed="false">EN</button>
+          </div>
+        </div>
+        <div class="preview-location">
+          <p id="preview-location">เลือกช่องแก้ไขเพื่อดูตำแหน่งบนเว็บ</p>
+          <button class="button quiet tiny" id="preview-locate" type="button" disabled>ไปยังจุดที่แก้</button>
+        </div>
+        <div class="preview-viewport" id="preview-viewport" aria-label="หน้าตัวอย่าง"></div>
+        <p class="preview-note" id="preview-note" role="status">ฉบับร่างจะแสดงในกรอบนี้จนกว่าจะกดเผยแพร่</p>
+      </aside>
       </div>
       <p class="workspace-notice" id="workspace-notice" role="status" aria-live="polite"></p>
     </main>

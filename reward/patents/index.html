@@ -1321,6 +1321,7 @@ function patentMeta(label, value, className = '') {
 
 function patentCard(record) {
   const card = make('article', 'ip-card');
+  card.dataset.aclabRecord = record.id;
   const status = record.kind.endsWith('-application') ? 'application' : 'registered';
   const badge = make('span', 'chip', localized(patentKinds[record.kind]));
   badge.dataset.status = status;
