@@ -5,12 +5,9 @@
   const page = loader.dataset.page;
   const embedded = document.getElementById('aclab-editor-snapshot');
   let payload = JSON.parse(embedded.textContent);
-  const ready = ['http:', 'https:'].includes(location.protocol) && !payload.anchors
-    ? fetch(new URL('api/editor/' + page, root), { signal: AbortSignal.timeout(1600), cache: 'no-store' })
-      .then(response => response.ok ? response.json() : payload)
-      .then(result => { payload = result; })
-      .catch(() => {})
-    : Promise.resolve();
+  const ready = window.ACLabData.editor(page)
+    .then(result => { if (result?.anchors) payload = result; })
+    .catch(() => {});
 
   function merge(base, changed) {
     if (base && typeof base === 'object' && !Array.isArray(base) && changed && typeof changed === 'object') {

@@ -1,7 +1,6 @@
 (() => {
   'use strict';
   const $ = id => document.getElementById(id);
-  const endpoint = new URL('../api/team/admin/', location.href);
   const drafts = new Map();
   const expanded = new Set();
   const labels = {
@@ -48,7 +47,7 @@
   let active = null;
   let mode = 'settings';
   let group = '';
-  let csrf = '';
+  let signedIn = false;
   let opening = 0;
   let nextID = 0;
   const label = key => labels[key] || key.replace(/([a-z])([A-Z])/g, '$1 $2');
@@ -77,7 +76,7 @@
   }
 
   function showLogin(message) {
-    csrf = '';
+    signedIn = false;
     opening++;
     $('studio').hidden = true;
     $('top-actions').hidden = true;
@@ -88,23 +87,12 @@
   }
 
   async function request(path, body) {
-    const options = { cache: 'no-store', headers: { Accept: 'application/json' } };
-    if (body !== undefined) {
-      options.method = 'POST';
-      Object.assign(options.headers, {
-        'Content-Type': 'application/json', 'X-ACLab-Manager': '1', 'X-ACLab-CSRF': csrf,
-      });
-      options.body = JSON.stringify(body);
-    }
-    const response = await fetch(new URL(path, endpoint), options);
-    const result = await response.json().catch(() => ({}));
-    if (!response.ok) {
-      const error = new Error(result.error || 'เชื่อมต่อ Manager ไม่สำเร็จ');
-      error.status = response.status;
-      if (csrf && path !== 'login' && [401, 403].includes(error.status)) showLogin(error.message);
+    try {
+      return await window.ACLabManager.request(path, body);
+    } catch (error) {
+      if (signedIn && path !== 'login' && [401, 403].includes(error.status)) showLogin(error.message);
       throw error;
     }
-    return result;
   }
 
   function navigation() {
@@ -530,7 +518,7 @@
   }
 
   async function enter(session) {
-    csrf = session.csrf;
+    signedIn = true;
     pages = (await request('site/catalog')).pages;
     $('manager-account').textContent = session.email;
     $('manager-account').title = session.email;
@@ -570,6 +558,19 @@
     render();
   });
   $('section-search').addEventListener('input',renderFields);
+  $('export-website').addEventListener('click', async event => {
+    const button = event.currentTarget;
+    button.disabled = true;
+    say('กำลังส่งออกเว็บไซต์…');
+    try {
+      await window.ACLabExportWebsite();
+      say('ส่งออกเว็บไซต์แล้ว');
+    } catch (error) {
+      say(error.message, true);
+    } finally {
+      button.disabled = false;
+    }
+  });
   $('save-page').addEventListener('click',save);
   $('restore-page').addEventListener('click',restore);
   $('download-draft').addEventListener('click', () => {
@@ -592,7 +593,7 @@
   const securePage = location.protocol === 'https:' || (location.protocol === 'http:' &&
     ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname));
   if (!securePage) {
-    say('เปิด Manager ผ่านเซิร์ฟเวอร์ Python ที่ localhost หรือผ่านเว็บไซต์ HTTPS', true, 'login-status');
+    say('เปิด Manager จาก GitHub Pages หรือเว็บไซต์ HTTPS', true, 'login-status');
     return;
   }
   request('status').then(async status => {
@@ -600,9 +601,9 @@
     else if (status.configured) {
       $('login-button').disabled = false;
       say('', false, 'login-status');
-    } else say('ตั้งค่า Supabase บนเซิร์ฟเวอร์ตาม README_MANAGER_TH.md', true, 'login-status');
+    } else say('ตรวจ assets/supabase-config.js และรัน SQL ตาม README_MANAGER_TH.md', true, 'login-status');
   }).catch(error => {
-    $('login-button').disabled = error.status !== 503;
+    $('login-button').disabled = false;
     say(error.message, true, 'login-status');
   });
 })();

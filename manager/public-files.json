@@ -1,0 +1,96 @@
+{
+  "pages": [
+    {
+      "id": "main",
+      "path": "index.html"
+    },
+    {
+      "id": "about",
+      "path": "about/index.html"
+    },
+    {
+      "id": "team",
+      "path": "team/index.html"
+    },
+    {
+      "id": "publication",
+      "path": "publication/index.html"
+    },
+    {
+      "id": "blog",
+      "path": "blog/index.html"
+    },
+    {
+      "id": "funding",
+      "path": "reward/funding/index.html"
+    },
+    {
+      "id": "awards",
+      "path": "reward/awards/index.html"
+    },
+    {
+      "id": "patents",
+      "path": "reward/patents/index.html"
+    },
+    {
+      "id": "contact",
+      "path": "contact/index.html"
+    }
+  ],
+  "files": [
+    ".nojekyll",
+    "about/fonts/OFL_Anuphan.txt",
+    "about/fonts/OFL_Noto_Serif_Thai.txt",
+    "about/fonts/embedded-fonts.css",
+    "about/fonts/font-1.woff2",
+    "about/fonts/font-2.woff2",
+    "about/fonts/font-3.woff2",
+    "about/fonts/font-4.woff2",
+    "about/fonts/font-5.woff2",
+    "about/fonts/font-6.woff2",
+    "about/fonts/font-7.woff2",
+    "about/fonts/fonts.css",
+    "about/fonts/google-fonts.css",
+    "about/fonts/local-fonts.css",
+    "about/images/SOURCES.txt",
+    "about/images/botanical.jpg",
+    "about/images/chemistry.jpg",
+    "about/images/fieldwork.jpg",
+    "about/images/laboratory.jpg",
+    "about/images/microscopy.jpg",
+    "about/images/principal.jpg",
+    "about/index.html",
+    "assets/IMAGE_SOURCES.txt",
+    "assets/bento-botanical.jpg",
+    "assets/bento-chemistry.jpg",
+    "assets/bento-microscopy.jpg",
+    "assets/botanical.jpg",
+    "assets/chemistry.jpg",
+    "assets/discovery.jpg",
+    "assets/fieldwork.jpg",
+    "assets/laboratory.jpg",
+    "assets/leaves.jpg",
+    "assets/microscopy.jpg",
+    "assets/molecular-work.jpg",
+    "assets/principal-investigator.jpg",
+    "assets/site-data.js",
+    "assets/site-editor.css",
+    "assets/site-editor.js",
+    "assets/supabase-config.js",
+    "blog/index.html",
+    "contact/index.html",
+    "index.html",
+    "publication/index.html",
+    "reward/awards/index.html",
+    "reward/funding/index.html",
+    "reward/patents/index.html",
+    "team/images/research.jpg",
+    "team/images/student.jpg",
+    "team/index.html",
+    "team/profiles/arunrat.jpg",
+    "team/profiles/nisachon.jpg",
+    "team/profiles/runglawan.jpg",
+    "team/profiles/shiou-yih.webp",
+    "team/profiles/yannick.jpg"
+  ]
+}

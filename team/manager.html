@@ -262,26 +262,56 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 </style></head><body>
 <header class="manager-header"><a class="brand" href="index.html?lang=th"><strong>The AC Lab</strong><span>TEAM MANAGER</span></a><div class="header-actions"><span id="save-state" class="save-state">จัดการข้อมูลทีมวิจัย</span><a class="view-button" href="index.html?lang=th" target="_blank" rel="noopener">ดูหน้าเว็บ ↗</a><button id="export-button" hidden>ส่งออก JSON</button><button id="save-button" class="primary" hidden>บันทึกการเปลี่ยนแปลง</button><button id="logout-button" class="quiet" hidden>ออกจากระบบ</button></div></header>
 <main>
-<section id="login-panel" class="login-panel"><div class="login-art"><p class="eyebrow">THE PEOPLE BEHIND THE SCIENCE</p><h1>ดูแลเรื่องราว<br>ของทีมเรา</h1><p>จัดการบุคลากร รูปภาพ และข้อมูลติดต่อ<br>ในพื้นที่เดียว</p><span class="art-circle circle-one"></span><span class="art-circle circle-two"></span></div><div class="login-form"><p class="eyebrow">TEAM MANAGER</p><h2>ยินดีต้อนรับกลับ</h2><p id="login-description">เข้าสู่ระบบเพื่อจัดการข้อมูลสมาชิก</p><form id="login-form"><label for="password">รหัสผ่านผู้ดูแล</label><input type="password" id="password" name="password" autocomplete="current-password" required maxlength="1024"><button class="primary" type="submit">เข้าสู่ระบบ</button></form><p id="login-message" class="message" aria-live="polite"></p><div id="setup-help" class="setup-help" hidden><strong>เริ่มใช้งานครั้งแรก</strong><p>เปิดไฟล์ <code>START_TEAM_MANAGER.bat</code> แล้วตั้งรหัสผ่านในหน้าต่าง Python จากนั้นเปิดหน้านี้ผ่าน <code>http://127.0.0.1:8000/team/manager.html</code></p><p>macOS / Linux: <code>python3 server.py --manager</code></p></div><a class="back-link" href="index.html?lang=th">← กลับหน้า The Team</a></div></section>
+<section id="login-panel" class="login-panel">
+  <div class="login-art"><p class="eyebrow">THE PEOPLE BEHIND THE SCIENCE</p><h1>ดูแลเรื่องราว<br>ของทีมเรา</h1><p>จัดการบุคลากร รูปภาพ และข้อมูลติดต่อ<br>ในพื้นที่เดียว</p><span class="art-circle circle-one"></span><span class="art-circle circle-two"></span></div>
+  <div class="login-form">
+    <p class="eyebrow">TEAM MANAGER</p><h2>ยินดีต้อนรับกลับ</h2>
+    <p id="login-description">ใช้บัญชี Supabase เดียวกับ Site Manager</p>
+    <form id="login-form" method="post" hidden>
+      <label for="email">อีเมล</label>
+      <input type="email" id="email" name="email" autocomplete="username" required maxlength="320">
+      <label for="password">รหัสผ่าน</label>
+      <input type="password" id="password" name="password" autocomplete="current-password" required maxlength="1024">
+      <button class="primary" type="submit">เข้าสู่ระบบ</button>
+    </form>
+    <p id="login-message" class="message" role="status" aria-live="polite"></p>
+    <div id="setup-help" class="setup-help" hidden><strong>เริ่มใช้งานครั้งแรก</strong><p>รัน SQL และเพิ่มอีเมลผู้ดูแลตาม <code>README_MANAGER_TH.md</code></p></div>
+    <a class="back-link" href="index.html?lang=th">← กลับหน้า The Team</a>
+  </div>
+</section>
 <section id="workspace" class="workspace" hidden>
  <aside class="sidebar"><div class="sidebar-heading"><p class="eyebrow">DIRECTORY</p><h2>สมาชิกในทีม</h2></div><div id="group-tabs" class="group-tabs" aria-label="หมวดบุคลากร"></div><div class="sidebar-list-head"><span id="list-title">Principal investigators</span><button id="add-button" aria-label="เพิ่มสมาชิก">＋</button></div><div id="member-list" class="member-list"></div><div class="sidebar-bottom"><button id="hero-tab" class="hero-tab">▧ ภาพปกและข้อความต้อนรับ</button><p>ร่างและรายการที่ซ่อน จะแสดงเฉพาะใน Manager</p></div></aside>
  <div class="editor-column"><div id="feedback" class="feedback" aria-live="polite" hidden></div><div id="editor-empty" class="editor-empty"><span>＋</span><h2>เริ่มต้นด้วยสมาชิกคนแรก</h2><p>เพิ่มชื่อ รูปภาพ และความเชี่ยวชาญในหมวดนี้</p><button id="empty-add" class="primary">เพิ่มสมาชิก</button></div><form id="editor" class="editor" hidden></form></div>
  <aside class="preview-column"><div class="preview-head"><p class="eyebrow">LIVE PREVIEW</p><div><button id="preview-th" class="selected" type="button">TH</button><button id="preview-en" type="button">EN</button></div></div><div id="member-preview" class="member-preview"></div><p class="preview-note">ตัวอย่างขณะแก้ไข<br>กดบันทึกเพื่ออัปเดตหน้าเว็บไซต์</p></aside>
 </section>
 </main><div id="saving-overlay" class="saving-indicator" role="status" hidden>กำลังบันทึกข้อมูล…</div>
+<script src="../assets/vendor/supabase.js"></script>
+<script src="../assets/supabase-config.js"></script>
+<script src="../assets/site-data.js"></script>
+<script src="../assets/manager-data.js"></script>
 <script>(()=>{'use strict';
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>Array.from(r.querySelectorAll(s));
 const node=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e};
 const groups={pi:'PI',collaboration:'Collaboration',researcher:'Researcher',student:'Student'};
-const base=new URL('../api/team/admin/',location.href);let csrf='',draft=null,group='pi',selected=null,heroMode=false,dirty=false,previewLanguage='th',busy=false,configured=false;
+let signedIn=false,draft=null,group='pi',selected=null,heroMode=false,dirty=false,previewLanguage='th',busy=false;
 const local=(v,lang=previewLanguage)=>typeof v==='string'?v:v?.[lang]||v?.en||v?.th||'';
 function safeImage(raw){if(typeof raw!=='string'||!raw)return '';if(/^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/.test(raw))return raw;try{const u=new URL(raw,location.href);return ['http:','https:'].includes(u.protocol)&&!u.username&&!u.password?u.href:''}catch(_){return ''}}
-const source=value=>safeImage(draft?.media?.[value]||value);
+function source(value) {
+  const image = draft?.media?.[value] || value;
+  return window.ACLabManager.imageURL(image) || safeImage(image);
+}
 function state(){const el=$('#save-state');el.textContent=dirty?'มีการเปลี่ยนแปลงที่ยังไม่บันทึก':draft?'บันทึกแล้ว · ฉบับ '+draft.revision:'จัดการข้อมูลทีมวิจัย';el.classList.toggle('dirty',dirty)}
 function changed(){dirty=true;state();renderList();renderPreview()}
 function setBusy(value,message='กำลังบันทึกข้อมูล…'){busy=value;$('#workspace').inert=value;$('#saving-overlay').hidden=!value;$('#saving-overlay').textContent=message;['save-button','export-button','logout-button'].forEach(id=>$('#'+id).disabled=value)}
 function feedback(message,error=false){const el=$('#feedback');el.hidden=!message;el.textContent=message;el.classList.toggle('error',error)}
-async function api(action,body){const options={cache:'no-store',credentials:'same-origin',headers:{Accept:'application/json'}};if(body!==undefined){options.method='POST';Object.assign(options.headers,{'Content-Type':'application/json','X-ACLab-Manager':'1','X-ACLab-CSRF':csrf});options.body=JSON.stringify(body)}const response=await fetch(new URL(action,base),options);let data;try{data=await response.json()}catch(_){throw Error('ไม่พบระบบ Python กรุณาเปิด START_TEAM_MANAGER.bat แล้วเข้าผ่าน http://127.0.0.1:8000/team/manager.html')}if(!response.ok){const error=Error(data.error||'ไม่สามารถดำเนินการได้');error.status=response.status;throw error}return data}
+async function api(action, body) {
+  try {
+    return await window.ACLabManager.request(action, body);
+  } catch (error) {
+    if (signedIn && action !== 'login' && [401, 403].includes(error.status)) showLogin(error.message);
+    throw error;
+  }
+}
 function activeMember(){return draft?.members.find(m=>m.id===selected)}
 function renderTabs(){const box=$('#group-tabs');box.replaceChildren();Object.entries(groups).forEach(([key,label])=>{const b=node('button','group-tab'+(!heroMode&&key===group?' selected':''));b.type='button';b.append(node('span','',label),node('span','count',String(draft.members.filter(m=>m.group===key).length)));b.addEventListener('click',()=>{group=key;heroMode=false;selected=draft.members.find(m=>m.group===group)?.id||null;feedback('');renderAll()});box.append(b)});$('#hero-tab').classList.toggle('selected',heroMode);$('#list-title').textContent=groups[group]}
 function renderList(){if(!draft)return;const box=$('#member-list');box.replaceChildren();draft.members.filter(m=>m.group===group).forEach(m=>{const b=node('button','member-item'+(!heroMode&&m.id===selected?' selected':''));b.type='button';const initials=(m.name?.en||local(m.name,'th')||'?').split(/\s+/).slice(0,2).map(n=>n[0]).join('');const text=node('span');text.append(node('span','list-name',local(m.name,'th')||'สมาชิกใหม่'));if(m.visible===false)text.append(node('span','list-draft','ร่าง / ซ่อนจากเว็บไซต์'));b.append(node('span','list-initials',initials),text);b.addEventListener('click',()=>{selected=m.id;heroMode=false;feedback('');renderAll()});box.append(b)});$$('.group-tab .count').forEach((e,i)=>e.textContent=String(draft.members.filter(m=>m.group===Object.keys(groups)[i]).length))}
@@ -302,13 +332,62 @@ let [sec,grid]=section('01 · ภาพแบนเนอร์');grid.append(fi
 function renderPreview(){if(!draft)return;const wrap=$('#member-preview');wrap.replaceChildren();$('#preview-th').classList.toggle('selected',previewLanguage==='th');$('#preview-en').classList.toggle('selected',previewLanguage==='en');if(heroMode){const hero=node('div','preview-hero');const url=source(draft.hero.image);if(draft.hero.mode==='image'&&url){const img=node('img');img.src=url;img.alt='';img.style.objectPosition=draft.hero.position;hero.append(img)}const body=node('div');body.append(node('h3','',local(draft.hero.title)),node('p','',local(draft.hero.subtitle)));hero.append(body);wrap.append(hero);return}const m=activeMember();if(!m){wrap.append(node('p','preview-body','เลือกสมาชิกเพื่อดูตัวอย่าง'));return}const figure=node('div','preview-photo');figure.style.setProperty('--origin',m.photoPosition||'50% 25%');figure.style.setProperty('--zoom',String(m.photoZoom||1));const url=source(m.photo);if(url){const img=node('img');img.src=url;img.alt=local(m.name);img.style.objectPosition=m.photoPosition||'50% 25%';figure.append(img)}else figure.append(node('span','preview-placeholder',(m.name?.en||'?').split(/\s+/).slice(0,2).map(s=>s[0]).join('')));const body=node('div','preview-body');body.append(node('p','preview-role',local(m.position)||groups[m.group]),node('h3','',local(m.name)||'ชื่อ–นามสกุล'),node('p','preview-title',local(m.academicTitle)||'ตำแหน่งทางวิชาการ'));const tags=node('div','preview-tags');const skills=m.expertise?.[previewLanguage]?.length?m.expertise[previewLanguage]:m.expertise?.en||[];skills.forEach(skill=>tags.append(node('span','',skill)));body.append(tags,node('p','preview-affiliation',local(m.affiliation)||'สังกัด'),node('p','preview-email',m.email||'ติดต่อผ่านห้องปฏิบัติการ'));wrap.append(figure,body)}
 function renderAll(){renderTabs();renderList();renderEditor();renderPreview();state()}
 function add(){if(!draft)return;const member={id:'member-'+(typeof crypto.randomUUID==='function'?crypto.randomUUID():Array.from(crypto.getRandomValues(new Uint8Array(16)),v=>v.toString(16).padStart(2,'0')).join('')),group,name:{th:'',en:''},academicTitle:{th:'',en:''},position:{th:'',en:''},expertise:{th:[],en:[]},affiliation:{th:'',en:''},bio:{th:'',en:''},email:'',photo:'',photoPosition:'50% 25%',photoZoom:1,sourceUrl:'',visible:false,order:draft.members.length};draft.members.push(member);selected=member.id;heroMode=false;changed();renderAll();$('input[type=text]',$('#editor'))?.focus()}
-async function loadContent(){if(!draft){draft=await api('content');selected=draft.members.find(m=>m.group===group)?.id||null;dirty=false}else feedback('กลับเข้าสู่ระบบแล้ว ฉบับที่กำลังแก้ไขยังอยู่ กดบันทึกเพื่อบันทึกต่อ');$('#login-panel').hidden=true;$('#workspace').hidden=false;['save-button','export-button','logout-button'].forEach(id=>$('#'+id).hidden=false);renderAll()}
+function showLogin(message = '') {
+  signedIn = false;
+  $('#workspace').hidden = true;
+  $('#login-panel').hidden = false;
+  $('#login-form').hidden = false;
+  $('#login-message').textContent = message;
+  ['save-button','export-button','logout-button'].forEach(id => $('#' + id).hidden = true);
+  $('#email').focus();
+}
+async function loadContent(session) {
+  signedIn = true;
+  if (!draft) {
+    draft = await api('content');
+    selected = draft.members.find(member => member.group === group)?.id || null;
+    dirty = false;
+  } else feedback('กลับเข้าสู่ระบบแล้ว ฉบับที่กำลังแก้ไขยังอยู่ กดบันทึกเพื่อบันทึกต่อ');
+  $('#setup-help').hidden = true;
+  $('#login-panel').hidden = true;
+  $('#workspace').hidden = false;
+  ['save-button','export-button','logout-button'].forEach(id => $('#' + id).hidden = false);
+  renderAll();
+}
 function exportDraft(){if(!draft)return;const blob=new Blob([JSON.stringify(draft,null,2)],{type:'application/json;charset=utf-8'}),url=URL.createObjectURL(blob),a=node('a');a.href=url;a.download='The_AC_Lab_Team_Backup.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
-$('#login-form').addEventListener('submit',async e=>{e.preventDefault();const button=$('button',e.currentTarget);button.disabled=true;$('#login-message').textContent='';try{const result=await api('login',{password:$('#password').value});csrf=result.csrf;$('#password').value='';await loadContent()}catch(error){$('#login-message').textContent=error.message;if(error.status===503)$('#setup-help').hidden=false}finally{button.disabled=false}});
-$('#save-button').addEventListener('click',async()=>{if(!draft||busy)return;if(!$('#editor').reportValidity())return;setBusy(true);feedback('');try{const result=await api('save',{content:draft,expectedRevision:draft.revision});draft=result.content;dirty=false;renderAll();feedback('บันทึกแล้ว · หน้า The Team อัปเดตเป็นฉบับ '+result.revision+' เรียบร้อย')}catch(error){feedback(error.message,true);if(error.status===401){$('#workspace').hidden=true;$('#login-panel').hidden=false;$('#login-message').textContent='เซสชันหมดอายุ กรุณาเข้าสู่ระบบอีกครั้ง ฉบับที่กำลังแก้ไขยังอยู่';$('#login-form').hidden=false;$('#password').focus()}}finally{setBusy(false)}});
-$('#logout-button').addEventListener('click',async()=>{if(dirty){feedback('ยังมีการแก้ไขที่ไม่บันทึก กรุณาบันทึกก่อนออกจากระบบ หรือส่งออก JSON เพื่อเก็บฉบับที่กำลังแก้ไข',true);return}try{await api('logout',{});csrf='';draft=null;$('#workspace').hidden=true;$('#login-panel').hidden=false;['save-button','export-button','logout-button'].forEach(id=>$('#'+id).hidden=true);state()}catch(error){feedback(error.message,true)}});
+$('#login-form').addEventListener('submit', async event => {
+  event.preventDefault();
+  const button = $('button', event.currentTarget);
+  button.disabled = true;
+  $('#login-message').textContent = 'กำลังเข้าสู่ระบบ…';
+  try {
+    const session = await api('login', {email:$('#email').value.trim(), password:$('#password').value});
+    await loadContent(session);
+  } catch (error) {
+    $('#login-message').textContent = error.message;
+    $('#setup-help').hidden = error.status !== 503;
+  } finally {
+    $('#password').value = '';
+    button.disabled = false;
+  }
+});
+$('#save-button').addEventListener('click',async()=>{if(!draft||busy)return;if(!$('#editor').reportValidity())return;setBusy(true);feedback('');try{const result=await api('save',{content:draft,expectedRevision:draft.revision});draft=result.content;dirty=false;renderAll();feedback('บันทึกแล้ว · หน้า The Team อัปเดตเป็นฉบับ '+result.revision+' เรียบร้อย')}catch(error){feedback(error.message,true)}finally{setBusy(false)}});
+$('#logout-button').addEventListener('click',async()=>{if(dirty){feedback('ยังมีการแก้ไขที่ไม่บันทึก กรุณาบันทึกก่อนออกจากระบบ หรือส่งออก JSON เพื่อเก็บฉบับที่กำลังแก้ไข',true);return}try{await api('logout',{});draft=null;showLogin();state()}catch(error){feedback(error.message,true)}});
 $('#export-button').addEventListener('click',exportDraft);$('#add-button').addEventListener('click',add);$('#empty-add').addEventListener('click',add);$('#hero-tab').addEventListener('click',()=>{if(!draft)return;heroMode=true;feedback('');renderAll()});$('#preview-th').addEventListener('click',()=>{previewLanguage='th';renderPreview()});$('#preview-en').addEventListener('click',()=>{previewLanguage='en';renderPreview()});$('#editor').addEventListener('submit',e=>e.preventDefault());window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue=''}});
-if(!['http:','https:'].includes(location.protocol)){$('#login-description').textContent='เปิด Manager ผ่าน Python เพื่อบันทึกข้อมูลได้จริง';$('#login-form').hidden=true;$('#setup-help').hidden=false;return}
-api('status').then(async status=>{configured=status.configured;$('#setup-help').hidden=configured;$('#login-form').hidden=!configured;if(!configured)$('#login-description').textContent='ตั้งรหัสผ่านผู้ดูแลผ่าน Python ก่อนเริ่มใช้งาน';if(status.authenticated){csrf=status.csrf;await loadContent()}}).catch(error=>{$('#login-description').textContent='ไม่พบระบบ Python';$('#login-message').textContent=error.message;$('#login-form').hidden=true;$('#setup-help').hidden=false});
+const securePage = location.protocol === 'https:' || (location.protocol === 'http:' &&
+  ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname));
+if (!securePage) {
+  $('#login-message').textContent = 'เปิด Manager จาก GitHub Pages หรือเว็บไซต์ HTTPS';
+  return;
+}
+api('status').then(async status => {
+  $('#setup-help').hidden = status.configured;
+  $('#login-form').hidden = !status.configured;
+  if (status.authenticated) await loadContent(status);
+}).catch(error => {
+  $('#login-message').textContent = error.message;
+  $('#login-form').hidden = false;
+  $('#setup-help').hidden = false;
+});
 })();
 </script></body></html>
