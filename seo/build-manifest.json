@@ -1,0 +1,562 @@
+{
+  "mode": "captured-public-supabase",
+  "fallbackPages": [
+    "publication",
+    "blog"
+  ],
+  "entries": [
+    {
+      "page": "main",
+      "lang": "th",
+      "record": "",
+      "type": "page",
+      "root": false,
+      "title": "The AC Lab (TheACLab) | มหาวิทยาลัยขอนแก่น",
+      "description": "The AC Lab (TheACLab) ห้องปฏิบัติการวิจัย มหาวิทยาลัยขอนแก่น ศึกษาจีโนมพืช พฤกษเคมี และงานวิจัยชีวการแพทย์",
+      "canonical": "https://theaclab.in.th/th/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/assets/aclab-logo-512.png",
+      "languages": [
+        "th",
+        "en"
+      ]
+    },
+    {
+      "page": "main",
+      "lang": "en",
+      "record": "",
+      "type": "page",
+      "root": false,
+      "title": "The AC Lab (TheACLab) | Khon Kaen University",
+      "description": "The AC Lab (TheACLab) at Khon Kaen University. Explore our research in plant genomics, phytochemistry and biomedical science.",
+      "canonical": "https://theaclab.in.th/en/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/assets/aclab-logo-512.png",
+      "languages": [
+        "th",
+        "en"
+      ]
+    },
+    {
+      "page": "about",
+      "lang": "th",
+      "record": "",
+      "type": "page",
+      "root": false,
+      "title": "เกี่ยวกับแล็บ | The AC Lab",
+      "description": "รู้จัก The AC Lab มหาวิทยาลัยขอนแก่น แนวทางวิจัยจีโนมพืช สารจากธรรมชาติ และเครือข่ายวิธีวิจัยของห้องปฏิบัติการ",
+      "canonical": "https://theaclab.in.th/th/about/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/assets/aclab-logo-512.png",
+      "languages": [
+        "th",
+        "en"
+      ]
+    },
+    {
+      "page": "about",
+      "lang": "en",
+      "record": "",
+      "type": "page",
+      "root": false,
+      "title": "About the lab | The AC Lab",
+      "description": "Discover The AC Lab at Khon Kaen University, its research areas and the method network connecting plant genomics, natural products and bioactivity.",
+      "canonical": "https://theaclab.in.th/en/about/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/assets/aclab-logo-512.png",
+      "languages": [
+        "th",
+        "en"
+      ]
+    },
+    {
+      "page": "team",
+      "lang": "th",
+      "record": "",
+      "type": "page",
+      "root": false,
+      "title": "ทีมวิจัย | The AC Lab",
+      "description": "รู้จักบุคลากร หัวหน้าห้องปฏิบัติการ ผู้ร่วมวิจัย นักวิจัย และนักศึกษาของ The AC Lab พร้อมความเชี่ยวชาญและช่องทางติดต่อ",
+      "canonical": "https://theaclab.in.th/th/team/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/assets/aclab-logo-512.png",
+      "languages": [
+        "th",
+        "en"
+      ]
+    },
+    {
+      "page": "team",
+      "lang": "en",
+      "record": "",
+      "type": "page",
+      "root": false,
+      "title": "Research team | The AC Lab",
+      "description": "Meet the principal investigators, collaborators, researchers and students of The AC Lab, with research interests and contact information.",
+      "canonical": "https://theaclab.in.th/en/team/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/assets/aclab-logo-512.png",
+      "languages": [
+        "th",
+        "en"
+      ]
+    },
+    {
+      "page": "publication",
+      "lang": "th",
+      "record": "",
+      "type": "page",
+      "root": false,
+      "title": "ผลงานตีพิมพ์ | The AC Lab",
+      "description": "ผลงานตีพิมพ์ของ The AC Lab ค้นหาตามปีและหัวข้องานวิจัย พร้อมรายชื่อผู้เขียน วารสาร DOI และลิงก์ต้นฉบับ",
+      "canonical": "https://theaclab.in.th/th/publications/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/assets/aclab-logo-512.png",
+      "languages": [
+        "th",
+        "en"
+      ]
+    },
+    {
+      "page": "publication",
+      "lang": "en",
+      "record": "",
+      "type": "page",
+      "root": false,
+      "title": "Publications | The AC Lab",
+      "description": "Browse publications from The AC Lab by year and research topic, with authors, journal details, DOI identifiers and original sources.",
+      "canonical": "https://theaclab.in.th/en/publications/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/assets/aclab-logo-512.png",
+      "languages": [
+        "th",
+        "en"
+      ]
+    },
+    {
+      "page": "blog",
+      "lang": "th",
+      "record": "",
+      "type": "page",
+      "root": false,
+      "title": "บทความจากแล็บ | The AC Lab",
+      "description": "อ่านบทความจากสมาชิก The AC Lab เกี่ยวกับงานวิจัย วิธีทดลอง และประสบการณ์ในห้องปฏิบัติการ เลือกอ่านตามหมวดหมู่และแท็ก",
+      "canonical": "https://theaclab.in.th/th/lab-blog/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/assets/aclab-logo-512.png",
+      "languages": [
+        "th",
+        "en"
+      ]
+    },
+    {
+      "page": "blog",
+      "lang": "en",
+      "record": "",
+      "type": "page",
+      "root": false,
+      "title": "Lab Blog | The AC Lab",
+      "description": "Read articles from The AC Lab about research, methods and laboratory experience. Explore stories by category, topic and author.",
+      "canonical": "https://theaclab.in.th/en/lab-blog/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/assets/aclab-logo-512.png",
+      "languages": [
+        "th",
+        "en"
+      ]
+    },
+    {
+      "page": "funding",
+      "lang": "th",
+      "record": "",
+      "type": "page",
+      "root": false,
+      "title": "ทุนและโครงการวิจัย | The AC Lab",
+      "description": "สำรวจทุนและโครงการวิจัยของ The AC Lab พร้อมชื่อโครงการ ปีงบประมาณ แหล่งทุน และหัวหน้าโครงการ",
+      "canonical": "https://theaclab.in.th/th/research-funding/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/assets/aclab-logo-512.png",
+      "languages": [
+        "th",
+        "en"
+      ]
+    },
+    {
+      "page": "funding",
+      "lang": "en",
+      "record": "",
+      "type": "page",
+      "root": false,
+      "title": "Research funding and projects | The AC Lab",
+      "description": "Explore research funding and projects at The AC Lab, with project titles, fiscal years, funding sources and project leaders.",
+      "canonical": "https://theaclab.in.th/en/research-funding/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/assets/aclab-logo-512.png",
+      "languages": [
+        "th",
+        "en"
+      ]
+    },
+    {
+      "page": "awards",
+      "lang": "th",
+      "record": "",
+      "type": "page",
+      "root": false,
+      "title": "รางวัลและความสำเร็จ | The AC Lab",
+      "description": "รางวัลและความสำเร็จของสมาชิก The AC Lab พร้อมผู้ได้รับรางวัล ปีที่ได้รับ และรายละเอียดจากห้องปฏิบัติการ",
+      "canonical": "https://theaclab.in.th/th/awards/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/assets/aclab-logo-512.png",
+      "languages": [
+        "th",
+        "en"
+      ]
+    },
+    {
+      "page": "awards",
+      "lang": "en",
+      "record": "",
+      "type": "page",
+      "root": false,
+      "title": "Awards and recognition | The AC Lab",
+      "description": "Explore awards and recognition received by members of The AC Lab, including recipients, years and supporting details.",
+      "canonical": "https://theaclab.in.th/en/awards/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/assets/aclab-logo-512.png",
+      "languages": [
+        "th",
+        "en"
+      ]
+    },
+    {
+      "page": "patents",
+      "lang": "th",
+      "record": "",
+      "type": "page",
+      "root": false,
+      "title": "สิทธิบัตรและอนุสิทธิบัตร | The AC Lab",
+      "description": "ผลงานสิทธิบัตรและอนุสิทธิบัตรของ The AC Lab พร้อมประเภท เลขที่เอกสาร และรายละเอียดผลงาน",
+      "canonical": "https://theaclab.in.th/th/patents/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/assets/aclab-logo-512.png",
+      "languages": [
+        "th",
+        "en"
+      ]
+    },
+    {
+      "page": "patents",
+      "lang": "en",
+      "record": "",
+      "type": "page",
+      "root": false,
+      "title": "Patents and petty patents | The AC Lab",
+      "description": "Browse patents and petty patents from The AC Lab, with document types, registration details and descriptions of the work.",
+      "canonical": "https://theaclab.in.th/en/patents/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/assets/aclab-logo-512.png",
+      "languages": [
+        "th",
+        "en"
+      ]
+    },
+    {
+      "page": "contact",
+      "lang": "th",
+      "record": "",
+      "type": "page",
+      "root": false,
+      "title": "ติดต่อและการเดินทาง | The AC Lab",
+      "description": "ติดต่อ The AC Lab คณะวิทยาศาสตร์ มหาวิทยาลัยขอนแก่น ดูอีเมล ที่ตั้งห้องปฏิบัติการ และเส้นทางการเดินทาง",
+      "canonical": "https://theaclab.in.th/th/contact/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/assets/aclab-logo-512.png",
+      "languages": [
+        "th",
+        "en"
+      ]
+    },
+    {
+      "page": "contact",
+      "lang": "en",
+      "record": "",
+      "type": "page",
+      "root": false,
+      "title": "Contact and directions | The AC Lab",
+      "description": "Contact The AC Lab, Faculty of Science, Khon Kaen University. Find the laboratory email, location and directions.",
+      "canonical": "https://theaclab.in.th/en/contact/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/assets/aclab-logo-512.png",
+      "languages": [
+        "th",
+        "en"
+      ]
+    },
+    {
+      "page": "team",
+      "lang": "th",
+      "record": "arunrat",
+      "type": "person",
+      "root": false,
+      "title": "อรุณรัตน์ ฉวีราช | The AC Lab",
+      "description": "ข้อมูลและผลงานวิจัยของ อรุณรัตน์ ฉวีราช · The AC Lab · อนุกรมวิธานเชิงโมเลกุล,พฤกษเคมี,การทดสอบความเป็นพิษ,นาโนเทคโนโลยีสีเขียว,ระบบนำส่งยา,qRT-PCR,นวัตกรรมและทรัพย์สินทางปัญญา",
+      "canonical": "https://theaclab.in.th/th/people/arunrat-chaveerach/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/team/profiles/arunrat.jpg",
+      "languages": [
+        "th",
+        "en"
+      ]
+    },
+    {
+      "page": "team",
+      "lang": "en",
+      "record": "arunrat",
+      "type": "person",
+      "root": false,
+      "title": "Arunrat Chaveerach | The AC Lab",
+      "description": "Profile and research publications of Arunrat Chaveerach · The AC Lab · Molecular systematics,Phytochemistry,Toxicity testing,Green nanotech,Drug delivery,qRT-PCR,Innovation & IP",
+      "canonical": "https://theaclab.in.th/en/people/arunrat-chaveerach/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/team/profiles/arunrat.jpg",
+      "languages": [
+        "th",
+        "en"
+      ]
+    },
+    {
+      "page": "team",
+      "lang": "th",
+      "record": "runglawan",
+      "type": "person",
+      "root": false,
+      "title": "รุ่งลาวัลย์ สุดมูล | The AC Lab",
+      "description": "ข้อมูลและผลงานวิจัยของ รุ่งลาวัลย์ สุดมูล · The AC Lab · ชีวเคมี,ชีววิทยาโมเลกุล,นิติวิทยาศาสตร์",
+      "canonical": "https://theaclab.in.th/th/people/runglawan-sudmoon/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/team/profiles/runglawan.jpg",
+      "languages": [
+        "th",
+        "en"
+      ]
+    },
+    {
+      "page": "team",
+      "lang": "en",
+      "record": "runglawan",
+      "type": "person",
+      "root": false,
+      "title": "Runglawan Sudmoon | The AC Lab",
+      "description": "Profile and research publications of Runglawan Sudmoon · The AC Lab · Biochemistry,Molecular biology,Forensic science",
+      "canonical": "https://theaclab.in.th/en/people/runglawan-sudmoon/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/team/profiles/runglawan.jpg",
+      "languages": [
+        "th",
+        "en"
+      ]
+    },
+    {
+      "page": "team",
+      "lang": "th",
+      "record": "tawatchai",
+      "type": "person",
+      "root": false,
+      "title": "ธวัดชัย ธานี | The AC Lab",
+      "description": "ข้อมูลและผลงานวิจัยของ ธวัดชัย ธานี · The AC Lab · วิทยาศาสตร์สิ่งแวดล้อม,ชีวเคมี",
+      "canonical": "https://theaclab.in.th/th/people/tawatchai-tanee/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/assets/aclab-logo-512.png",
+      "languages": [
+        "th",
+        "en"
+      ]
+    },
+    {
+      "page": "team",
+      "lang": "en",
+      "record": "tawatchai",
+      "type": "person",
+      "root": false,
+      "title": "Tawatchai Tanee | The AC Lab",
+      "description": "Profile and research publications of Tawatchai Tanee · The AC Lab · Environmental science,Biochemistry",
+      "canonical": "https://theaclab.in.th/en/people/tawatchai-tanee/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/assets/aclab-logo-512.png",
+      "languages": [
+        "th",
+        "en"
+      ]
+    },
+    {
+      "page": "team",
+      "lang": "en",
+      "record": "yannick",
+      "type": "person",
+      "root": false,
+      "title": "Yannick D. Benoit | The AC Lab",
+      "description": "Profile and research publications of Yannick D. Benoit · The AC Lab · Molecular biology,Epigenetics,Cancer,Pharmacology,Digestive system",
+      "canonical": "https://theaclab.in.th/en/people/yannick-d-benoit/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/team/profiles/yannick.jpg",
+      "languages": [
+        "en"
+      ]
+    },
+    {
+      "page": "team",
+      "lang": "en",
+      "record": "shiou-yih",
+      "type": "person",
+      "root": false,
+      "title": "Shiou Yih Lee | The AC Lab",
+      "description": "Profile and research publications of Shiou Yih Lee · The AC Lab · Forest biotechnology,Plant phylogenetics,Systematics & evolution,Molecular breeding,Wood forensic",
+      "canonical": "https://theaclab.in.th/en/people/shiou-yih-lee/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/team/profiles/shiou-yih.webp",
+      "languages": [
+        "en"
+      ]
+    },
+    {
+      "page": "team",
+      "lang": "th",
+      "record": "nisachon",
+      "type": "person",
+      "root": false,
+      "title": "นิศาชล แจ้งพรมมา | The AC Lab",
+      "description": "ข้อมูลและผลงานวิจัยของ นิศาชล แจ้งพรมมา · The AC Lab · ชีววิทยาโมเลกุล,ชีวเคมี,โปรตีโอมิกส์,การเพาะเลี้ยงเซลล์,หน้าที่ทางชีวภาพ",
+      "canonical": "https://theaclab.in.th/th/people/nisachon-jangpromma/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/team/profiles/nisachon.jpg",
+      "languages": [
+        "th",
+        "en"
+      ]
+    },
+    {
+      "page": "team",
+      "lang": "en",
+      "record": "nisachon",
+      "type": "person",
+      "root": false,
+      "title": "Nisachon Jangpromma | The AC Lab",
+      "description": "Profile and research publications of Nisachon Jangpromma · The AC Lab · Molecular biology,Biochemistry,Proteomics,Cell culture,Biological function",
+      "canonical": "https://theaclab.in.th/en/people/nisachon-jangpromma/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/team/profiles/nisachon.jpg",
+      "languages": [
+        "th",
+        "en"
+      ]
+    },
+    {
+      "page": "team",
+      "lang": "th",
+      "record": "sakda",
+      "type": "person",
+      "root": false,
+      "title": "ศักดา ดาดวง | The AC Lab",
+      "description": "ข้อมูลและผลงานวิจัยของ ศักดา ดาดวง · The AC Lab · ชีวเคมี,ชีวเคมีภูมิคุ้มกัน,การเพาะเลี้ยงเซลล์สัตว์,พิษวิทยา,โปรตีโอมิกส์,เทคโนโลยีชีวภาพ",
+      "canonical": "https://theaclab.in.th/th/people/sakda-daduang/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/assets/aclab-logo-512.png",
+      "languages": [
+        "th",
+        "en"
+      ]
+    },
+    {
+      "page": "team",
+      "lang": "en",
+      "record": "sakda",
+      "type": "person",
+      "root": false,
+      "title": "Sakda Daduang | The AC Lab",
+      "description": "Profile and research publications of Sakda Daduang · The AC Lab · Biochemistry,Immunological biochem,Animal cell culture,Toxicology,Proteomics,Biotechnology",
+      "canonical": "https://theaclab.in.th/en/people/sakda-daduang/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/assets/aclab-logo-512.png",
+      "languages": [
+        "th",
+        "en"
+      ]
+    },
+    {
+      "page": "main",
+      "lang": "en",
+      "record": "",
+      "type": "page",
+      "root": true,
+      "title": "Welcome to The AC Lab | Khon Kaen University",
+      "description": "Choose Thai or English to explore The AC Lab at Khon Kaen University.",
+      "canonical": "https://theaclab.in.th/",
+      "indexable": true,
+      "image": "https://theaclab.in.th/assets/aclab-logo-512.png",
+      "languages": [
+        "th",
+        "en"
+      ]
+    }
+  ],
+  "profiles": [
+    {
+      "id": "arunrat",
+      "name": {
+        "en": "Arunrat Chaveerach",
+        "th": "อรุณรัตน์ ฉวีราช"
+      },
+      "source": "https://bio.kku.net/showteacher.php?id=arunrat"
+    },
+    {
+      "id": "runglawan",
+      "name": {
+        "en": "Runglawan Sudmoon",
+        "th": "รุ่งลาวัลย์ สุดมูล"
+      },
+      "source": "https://pubmed.ncbi.nlm.nih.gov/35956463/"
+    },
+    {
+      "id": "tawatchai",
+      "name": {
+        "en": "Tawatchai Tanee",
+        "th": "ธวัดชัย ธานี"
+      },
+      "source": "https://pubmed.ncbi.nlm.nih.gov/35956463/"
+    },
+    {
+      "id": "yannick",
+      "name": {
+        "en": "Yannick D. Benoit",
+        "th": ""
+      },
+      "source": "https://www.uottawa.ca/faculty-medicine/directory/dr-yannick-benoit"
+    },
+    {
+      "id": "shiou-yih",
+      "name": {
+        "en": "Shiou Yih Lee",
+        "th": ""
+      },
+      "source": "https://leeshiouyih.owlstown.net/"
+    },
+    {
+      "id": "nisachon",
+      "name": {
+        "en": "Nisachon Jangpromma",
+        "th": "นิศาชล แจ้งพรมมา"
+      },
+      "source": "https://pubmed.ncbi.nlm.nih.gov/38467647/"
+    },
+    {
+      "id": "sakda",
+      "name": {
+        "en": "Sakda Daduang",
+        "th": "ศักดา ดาดวง"
+      },
+      "source": "https://pubmed.ncbi.nlm.nih.gov/40553907/"
+    }
+  ],
+  "articles": []
+}

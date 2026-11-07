@@ -861,6 +861,11 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 <script src="../assets/supabase-config.js"></script>
 <script src="../assets/site-data.js"></script>
 <script src="../assets/site-editor.js" data-page="about"></script>
+<link rel="stylesheet" href="../assets/seo.css">
+<script id="aclab-seo-context" type="application/json">{"page":"about","sourcePath":"about/index.html","root":false}</script>
+<script>window.ACLabSEOContext=JSON.parse(document.getElementById('aclab-seo-context').textContent);</script>
+<script src="../assets/seo-core.js"></script>
+<script defer src="../assets/seo.js" data-page="about"></script>
 </head>
 <body>
   <svg class="sr-only" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
@@ -1009,6 +1014,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     const config=JSON.parse($('#about-config').textContent);
     const icon=name=>`<svg class="icon" aria-hidden="true"><use href="#${name}"/></svg>`;
     const query=new URLSearchParams(location.search);
+if(window.ACLabSEOContext?.lang&&!query.has('lang')) query.set('lang',window.ACLabSEOContext.lang);
     let storedLanguage='en';try{storedLanguage=localStorage.getItem('aclab.language')||'en';}catch(_){}
     let language=['en','th'].includes(query.get('lang'))?query.get('lang'):['en','th'].includes(storedLanguage)?storedLanguage:'en';
     let stageId=config.stages.some(s=>s.id===query.get('stage'))?query.get('stage'):config.stages[0].id;
@@ -1035,7 +1041,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     function node(tag,cls,text){const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;}
     function safeURL(value,image=false){
       if(typeof value!=='string'||!value.trim())return '';
-      try{const u=new URL(value,location.href);if(['http:','https:','file:'].includes(u.protocol))return value;if(image&&/^data:image\/(jpeg|png|webp|gif|avif);base64,/i.test(value))return value;}catch(_){}return '';
+      try{const u=new URL(value,document.baseURI);if(['http:','https:','file:'].includes(u.protocol))return value;if(image&&/^data:image\/(jpeg|png|webp|gif|avif);base64,/i.test(value))return value;}catch(_){}return '';
     }
     // The normal install is /about/index.html. A standalone preview also works in another folder.
     function rootPrefix(){return /\/about\/(?:index\.html)?$/i.test(location.pathname)?'../':'./';}
@@ -1082,7 +1088,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       });
     }
     function currentStage(){return config.stages.find(s=>s.id===stageId)||config.stages[0];}
-    function writeURL(){try{const u=new URL(location.href);u.searchParams.set('lang',language);u.searchParams.set('stage',stageId);u.searchParams.set('node',selectedId);history.replaceState(null,'',u);}catch(_){} }
+    function writeURL(){try{const u=new URL(window.ACLabSEOExport?.url || location.href);u.searchParams.set('lang',language);u.searchParams.set('stage',stageId);u.searchParams.set('node',selectedId);history.replaceState(null,'',u);}catch(_){} }
     function renderTabs(){
       const tabs=$('#method-tabs');tabs.replaceChildren();
       config.stages.forEach((stage,i)=>{

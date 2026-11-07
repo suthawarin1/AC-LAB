@@ -3,30 +3,41 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
   <meta name="theme-color" content="#00796b">
   <title>Site Manager · The AC Lab</title>
   <link rel="stylesheet" href="../about/fonts/local-fonts.css">
   <link rel="stylesheet" href="manager.css">
+  <link rel="stylesheet" href="../assets/seo.css">
   <link rel="stylesheet" href="../assets/genome-loader.css">
+  <link rel="stylesheet" href="../assets/blog-document.css">
+  <link rel="stylesheet" href="blog-editor.css">
   <script defer src="../assets/vendor/supabase.js"></script>
 <script defer src="../assets/supabase-config.js"></script>
 <script defer src="../assets/site-data.js"></script>
+<script defer src="../assets/seo-core.js"></script>
+<script>window.ACLabSEOContext={manager:true};</script>
+<script defer src="../assets/seo.js"></script>
+<script defer src="../assets/seo-pages.js"></script>
 <script defer src="../assets/manager-data.js"></script>
 <script defer src="../assets/vendor/jszip.min.js"></script>
 <script defer src="../assets/manager-export.js"></script>
   <script defer src="../assets/genome-loader.js"></script>
+  <script defer src="../assets/blog-document.js"></script>
+  <script defer src="blog-editor.js"></script>
   <script defer src="live-preview.js"></script>
+  <script defer src="seo-manager.js"></script>
   <script defer src="manager.js"></script>
 </head>
 <body>
   <header class="topbar">
-    <a href="../index.html" class="brand"><strong>The AC Lab</strong><small>KhonKaen University</small></a>
+    <a href="../index.html" class="brand aclab-brand"><img class="aclab-logo" src="../assets/aclab-logo-256.png" width="46" height="46" alt=""><span class="aclab-brand-copy"><strong>The AC Lab</strong><small>KhonKaen University</small></span></a>
     <span class="brand-divider" aria-hidden="true"></span>
     <span class="manager-label">Site Manager</span>
     <div class="top-actions" id="top-actions" hidden>
       <span class="manager-account" id="manager-account"></span>
       <a class="button quiet desktop-action" href="../index.html?lang=th" target="_blank" rel="noopener">เปิดหน้าเว็บ</a>
-      <button class="button quiet" id="export-website" type="button">ส่งออกเว็บ</button>
+      <button class="button quiet" id="export-website" type="button">ส่งออกเว็บ SEO</button>
       <button class="button quiet" type="button" id="logout">ออกจากระบบ</button>
     </div>
   </header>

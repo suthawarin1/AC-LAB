@@ -791,6 +791,11 @@ dialog::backdrop { background: rgba(0, 36, 31, .58); }
 <script src="../../assets/supabase-config.js"></script>
 <script src="../../assets/site-data.js"></script>
 <script src="../../assets/site-editor.js" data-page="funding"></script>
+<link rel="stylesheet" href="../../assets/seo.css">
+<script id="aclab-seo-context" type="application/json">{"page":"funding","sourcePath":"reward/funding/index.html","root":false}</script>
+<script>window.ACLabSEOContext=JSON.parse(document.getElementById('aclab-seo-context').textContent);</script>
+<script src="../../assets/seo-core.js"></script>
+<script defer src="../../assets/seo.js" data-page="funding"></script>
 </head>
 <body class="funding-page" data-section="funding" data-root="../../">
   <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
@@ -922,12 +927,13 @@ dialog::backdrop { background: rgba(0, 36, 31, .58); }
     const aclabCopy = (key, fallback, localeFirst) => aclabEditor?.copy(key, fallback, localeFirst) ?? fallback;
 
 const sectionName = document.body.dataset.section;
-const siteRoot = new URL(document.body.dataset.root || '../', location.href);
+const siteRoot = new URL(document.body.dataset.root || '../', document.baseURI);
 const byId = id => document.getElementById(id);
 const embeddedContent = JSON.parse(byId(`${sectionName}-config`).textContent);
 let content = embeddedContent;
 let routes = JSON.parse(byId('editorial-routes').textContent);
 const initialQuery = new URLSearchParams(location.search);
+if(window.ACLabSEOContext?.lang&&!initialQuery.has('lang')) initialQuery.set('lang',window.ACLabSEOContext.lang);
 let rememberedLanguage = '';
 try { rememberedLanguage = localStorage.getItem('aclab.language') || ''; } catch (error) {}
 let language = initialQuery.get('lang') || rememberedLanguage || 'th';
@@ -1008,7 +1014,7 @@ function mediaURL(key) {
   const source = content.media?.[key] || key;
   if (/^data:image\/(?:jpeg|png|webp|gif);base64,/i.test(source)) return source;
   try {
-    const url = new URL(source, location.href);
+    const url = new URL(source, document.baseURI);
     if (url.protocol === 'https:' || url.origin === location.origin && url.protocol === 'http:') {
       return url.href;
     }
@@ -1036,7 +1042,7 @@ function localURL(path) {
 }
 
 function pageURL(parameters, hash = '') {
-  const url = new URL(location.href);
+  const url = new URL(window.ACLabSEOExport?.url || location.href);
   url.searchParams.set('lang', language);
   for (const [key, value] of Object.entries(parameters)) {
     if (value) url.searchParams.set(key, value);

@@ -1,3 +1,5 @@
+เวอร์ชันปัจจุบัน: อัปโหลดไฟล์ตาม START-HERE-SEO-TH.txt และอ่าน SEO_REPORT_TH.md เปิด Manager ผ่าน /manager/ ด้วย Supabase บน GitHub Pages ได้โดยตรง
+
 # The AC Lab Manager บน GitHub Pages
 
 1. รันไฟล์ `The_AC_Lab_Supabase.sql` ใน SQL Editor ของโปรเจกต์ Supabase เดิม

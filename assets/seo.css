@@ -1,0 +1,16 @@
+.wordmark.aclab-brand, a.brand.aclab-brand { display: flex; flex-direction: row; align-items: center; gap: 10px; }
+.aclab-logo { display: block; width: 46px; height: 46px; flex: none; object-fit: contain; border-radius: 50%; }
+.aclab-brand-copy { display: flex; flex-direction: column; gap: 3px; }
+.seo-brand-note { padding: 12px 24px; margin: 0; color: #506d66; text-align: center; font: 400 12px/1.6 Anuphan, system-ui, sans-serif; }
+.seo-profile-link { display: inline-block; margin-top: 12px; color: #00796b; font-size: 13px; text-underline-offset: 4px; }
+.seo-profile-link:hover { text-decoration: underline; }
+.seo-search-preview { padding: 16px; border: 1px solid #d9e7e2; border-radius: 10px; background: white; overflow-wrap: anywhere; }
+.seo-search-preview h3 { color: #1a0dab; font-size: 20px; font-weight: 500; line-height: 1.35; margin: 4px 0; }
+.seo-search-preview .seo-snippet-url { color: #345745; font-size: 12px; }
+.seo-search-preview p { color: #4d5156; font-size: 14px; line-height: 1.55; }
+.seo-counts { color: #506d66; font-size: 12px; }
+.seo-audit { margin: 0; padding: 12px 12px 12px 30px; border: 1px solid #d9e7e2; border-radius: 8px; background: #f5faf7; font-size: 12px; }
+@media (max-width: 640px) {
+  .aclab-logo { width: 38px; height: 38px; }
+  .wordmark.aclab-brand, a.brand.aclab-brand { gap: 7px; }
+}

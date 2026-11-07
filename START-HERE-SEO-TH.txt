@@ -1,0 +1,24 @@
+THE AC LAB — LOGO + SEO (7 พฤศจิกายน 2569)
+
+1) แตก ZIP แล้วเปิดโฟลเดอร์ AC-LAB
+2) อัปโหลดไฟล์และโฟลเดอร์ทั้งหมดภายใน AC-LAB ไปยังราก GitHub repository เดิม
+   รวม .github, assets, manager, th, en, package.json และ package-lock.json
+   อย่าสร้าง AC-LAB ซ้อนเข้าไปอีกชั้น
+3) GitHub > Settings > Pages > Source > GitHub Actions
+4) Actions > Build and deploy The AC Lab > Run workflow แล้วรอ Deploy สำเร็จ
+5) เปิด https://theaclab.in.th/manager/ เพื่อ login ด้วยบัญชี Supabase เดิม
+   หมวด SEO และการค้นหาอยู่ในแต่ละหน้า
+6) ส่ง sitemap.xml ใน Google Search Console ตาม SEO_REPORT_TH.md
+
+มี HTML ไทย–อังกฤษและ sitemap ที่สร้างไว้ให้แล้ว พร้อมซอร์สและ workflow
+ระบบอ่านข้อมูลที่เผยแพร่ใน Supabase; ถ้าหน้าใดยังไม่เคยบันทึกจะใช้ไฟล์เดิม
+Publications และ Lab Blog บันทึก/เผยแพร่ผ่าน Manager ได้เมื่อพร้อม
+หลังเพิ่ม URL ใหม่ให้ Run workflow หรือใช้ปุ่ม “ส่งออกเว็บ SEO”
+ตารางเดิมใช้งานต่อได้ ไม่ต้องรัน SQL เพิ่มสำหรับ SEO และเปิด Manager ได้โดยไม่รัน Python
+
+ไฟล์รายละเอียด: AC-LAB/SEO_REPORT_TH.md
+คำค้น 58 คำ: AC-LAB/seo/keyword-map.csv (ระดับความสำคัญเป็นสมมติฐาน ไม่ใช่ยอดค้นหาจริง)
+แหล่งตรวจชื่อ: AC-LAB/seo/verification-sources.json
+SQL เดิมเก็บไว้ใน Supabase_Setup สำหรับติดตั้งใหม่เท่านั้น
+
+ไฟล์นี้ยังไม่ได้ถูกอัปโหลดขึ้นเว็บไซต์จริง และไม่รับประกันอันดับ Google

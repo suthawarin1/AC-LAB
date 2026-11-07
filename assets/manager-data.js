@@ -60,10 +60,24 @@
     return catalog;
   }
 
+  function seoDocument(page, document, previous) {
+    const result = structuredClone(document);
+    const SEO = window.ACLabSEO;
+    const settings = result.settings;
+    settings.seo = SEO.merge(SEO.merge(SEO.defaults(page.id), previous?.settings?.seo), settings.seo);
+    const records = page.id === 'team' ? 'members' : page.id === 'blog' ? 'posts' : '';
+    for (const record of records ? settings[records] : []) {
+      const saved = previous?.settings?.[records]?.find(item => item.id === record.id);
+      const defaults = page.id === 'team' ? SEO.personDefaults(record) : SEO.postDefaults(record);
+      record.seo = SEO.merge(SEO.merge(defaults, saved?.seo), record.seo);
+    }
+    return result;
+  }
+
   async function latest(page) {
     const value = result(await client.from('aclab_cms_versions')
       .select('revision,document').eq('page_id', page.id).order('revision', { ascending: false }).limit(1).maybeSingle());
-    if (value) return value;
+    if (value) return { ...value, document: seoDocument(page, value.document) };
     if (!await adminAccess()) fail('บัญชีนี้ไม่มีสิทธิ์ผู้ดูแลเว็บไซต์', 403);
 
     // Use the same defaults as the public page until an editor publishes revision one.
@@ -72,7 +86,7 @@
     if (!response.ok) fail('โหลดข้อมูลตั้งต้นของหน้า ' + page.label.en + ' ไม่สำเร็จ', 503);
     const settings = await response.json();
     const defaults = fields => Object.fromEntries(Object.entries(fields).map(([key, field]) => [key, field.value]));
-    return { revision: 0, document: { settings, copy: defaults(page.copy), static: defaults(page.static), blocks: [] } };
+    return { revision: 0, document: seoDocument(page, { settings, copy: defaults(page.copy), static: defaults(page.static), blocks: [] }) };
   }
 
   function editorState(page, row) {
@@ -102,7 +116,7 @@
     return JSON.stringify(base) === JSON.stringify(value) ? undefined : value;
   }
 
-  const urlKeys = new Set(['url', 'path', 'href', 'pdf', 'sourceUrl', 'mapLink', 'mapEmbed']);
+  const urlKeys = new Set(['url', 'path', 'href', 'pdf', 'sourceUrl', 'mapLink', 'mapEmbed', 'verificationSource']);
   function validateURL(value, image) {
     if (image) value = value.trim();
     if (!value || (image && (mediaPattern.test(value) || dataImagePattern.test(value)))) return;
@@ -125,15 +139,15 @@
     return '';
   }
 
-  function validateTree(value, key = '', inMedia = false, depth = 0) {
-    if (depth > 16) fail('ข้อมูลซ้อนกันลึกเกินกำหนด');
+  function validateTree(value, key = '', inMedia = false, depth = 0, maxDepth = 16) {
+    if (depth > maxDepth) fail('ข้อมูลซ้อนกันลึกเกินกำหนด');
     if (Array.isArray(value)) {
       if (value.length > 2000) fail('จำนวนรายการเกินกำหนด');
-      for (const item of value) validateTree(item, key, inMedia, depth + 1);
+      for (const item of value) validateTree(item, key, inMedia, depth + 1, maxDepth);
     } else if (kind(value) === 'object') {
       for (const [name, item] of Object.entries(value)) {
         if (['__proto__', 'constructor', 'prototype'].includes(name)) fail('รหัสช่องข้อมูลไม่ถูกต้อง');
-        validateTree(item, name, key === 'media', depth + 1);
+        validateTree(item, name, key === 'media', depth + 1, name === 'richBody' ? 64 : maxDepth);
       }
     } else if (typeof value === 'string') {
       if (value.includes('\0')) fail('พบอักขระที่ใช้ไม่ได้');
@@ -177,6 +191,12 @@
       fail('กรุณาเลือกสถานะบทความ');
   }
 
+  function articleImages(value) {
+    if (!value || typeof value !== 'object') return [];
+    return Object.entries(value).flatMap(([key, item]) =>
+      key === 'image' && typeof item === 'string' ? [item] : articleImages(item));
+  }
+
   function publicContent(page, settings) {
     if (page === 'team') {
       const members = settings.members.filter(member => member.visible !== false)
@@ -189,7 +209,8 @@
       const credited = new Set(posts.map(post => post.authorId));
       const authors = Object.fromEntries(Object.entries(settings.authors).filter(([key]) => credited.has(key))
         .map(([key, { name, photo, photoPosition, photoZoom }]) => [key, { name, photo, photoPosition, photoZoom }]));
-      const used = new Set([settings.hero.image, ...posts.map(post => post.cover), ...Object.values(authors).map(author => author.photo)]);
+      const used = new Set([settings.hero.image, ...posts.map(post => post.cover),
+        ...posts.flatMap(post => articleImages(post.richBody)), ...Object.values(authors).map(author => author.photo)]);
       return { ...settings, posts, authors, media: Object.fromEntries(Object.entries(settings.media).filter(([key]) => used.has(key))) };
     }
     return settings;
@@ -246,7 +267,7 @@
     if (!user) fail('กรุณาเข้าสู่ระบบ Manager', 401);
     const page = (await getCatalog()).find(item => item.id === pageId);
     if (!page) fail('ไม่พบหน้าเว็บ', 404);
-    const { settings, copy, static: fields, blocks } = structuredClone(payload);
+    const { settings, copy, static: fields, blocks } = seoDocument(page, payload);
     const draft = { settings, copy, static: fields, blocks };
     validateTree(draft);
     if (reveal) {
@@ -263,7 +284,7 @@
 
   async function savePage(page, row, payload) {
     if (payload.version !== row.revision) fail('มีการแก้หน้านี้จากที่อื่นแล้ว กรุณาดาวน์โหลดฉบับร่างและโหลดข้อมูลล่าสุด', 409);
-    const { settings, copy, static: fields, blocks } = structuredClone(payload);
+    const { settings, copy, static: fields, blocks } = seoDocument(page, payload, row.document);
     if (!sameFields(row.document.settings, settings) ||
         Object.keys(settings).some(key => kind(settings[key]) !== kind(row.document.settings[key])))
       fail('โครงข้อมูลของหน้าเว็บไม่ตรงกับข้อมูลเดิม');
@@ -278,7 +299,15 @@
     validateTree(document);
     checkRecords(page, settings);
     if (page.id === 'team') settings.revision = row.revision + 1;
-    const publication = await publishMedia(publicationFor(page, document));
+    const projection = publicationFor(page, document);
+    let publicRows;
+    try { publicRows = await window.ACLabData.read(true); }
+    catch { fail('โหลดข้อมูลสำหรับตรวจ SEO ไม่สำเร็จ กรุณาลองบันทึกอีกครั้ง', 503); }
+    const issues = window.ACLabSEO.validate({
+      ...publicRows, [page.id]: { ...publicRows[page.id], content: projection.content },
+    });
+    if (issues.length) fail(issues[0]);
+    const publication = await publishMedia(projection);
     const revision = result(await client.rpc('aclab_cms_save_page', {
       p_page_id: page.id, p_expected_revision: row.revision, p_document: document,
       p_public_content: publication.content, p_public_editor: publication.editor,

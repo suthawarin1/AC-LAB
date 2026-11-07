@@ -76,6 +76,7 @@
   const draftPreview = previewRows();
 
   async function read(fresh = false) {
+    if (window.ACLabSEOExport?.rows) return resolveImages(window.ACLabSEOExport.rows);
     if (draftPreview) {
       const rows = await draftPreview;
       if (rows) return rows;
@@ -167,6 +168,13 @@
     const content = rows[page]?.content;
     if (!content) throw new Error('No published content for ' + page);
     const team = rows.team?.content;
+    if (page === 'team' && window.ACLabSEO) return {
+      ...content, members: list(content.members).map(member => {
+        const seo = window.ACLabSEO.person(member);
+        return { ...member, academicTitle: seo.verified ? seo.verifiedTitle : { th: '', en: '' },
+          affiliation: seo.verified ? seo.verifiedAffiliation : { th: '', en: '' } };
+      }),
+    };
     if (page === 'main') return { ...content, contact: rows.contact?.content?.contact ?? content.contact, updates: updates(rows) };
     if (page === 'funding' && team) return {
       ...content,

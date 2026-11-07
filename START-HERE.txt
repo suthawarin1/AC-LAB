@@ -1,44 +1,24 @@
-AREWARIN PORTAL V12 — PUBLIC REGISTRATION SUBWEB
-================================================
+THE AC LAB — LOGO + SEO (7 พฤศจิกายน 2569)
 
-V12 ใช้ต่อจาก V11.1
+1) แตก ZIP แล้วเปิดโฟลเดอร์ AC-LAB
+2) อัปโหลดไฟล์และโฟลเดอร์ทั้งหมดภายใน AC-LAB ไปยังราก GitHub repository เดิม
+   รวม .github, assets, manager, th, en, package.json และ package-lock.json
+   อย่าสร้าง AC-LAB ซ้อนเข้าไปอีกชั้น
+3) GitHub > Settings > Pages > Source > GitHub Actions
+4) Actions > Build and deploy The AC Lab > Run workflow แล้วรอ Deploy สำเร็จ
+5) เปิด https://theaclab.in.th/manager/ เพื่อ login ด้วยบัญชี Supabase เดิม
+   หมวด SEO และการค้นหาอยู่ในแต่ละหน้า
+6) ส่ง sitemap.xml ใน Google Search Console ตาม SEO_REPORT_TH.md
 
-ติดตั้งตามลำดับนี้
+มี HTML ไทย–อังกฤษและ sitemap ที่สร้างไว้ให้แล้ว พร้อมซอร์สและ workflow
+ระบบอ่านข้อมูลที่เผยแพร่ใน Supabase; ถ้าหน้าใดยังไม่เคยบันทึกจะใช้ไฟล์เดิม
+Publications และ Lab Blog บันทึก/เผยแพร่ผ่าน Manager ได้เมื่อพร้อม
+หลังเพิ่ม URL ใหม่ให้ Run workflow หรือใช้ปุ่ม “ส่งออกเว็บ SEO”
+ตารางเดิมใช้งานต่อได้ ไม่ต้องรัน SQL เพิ่มสำหรับ SEO และเปิด Manager ได้โดยไม่รัน Python
 
-1) Supabase → SQL Editor → New query
-   เปิดไฟล์ portal-v12-registration-subweb.sql
-   คัดลอกทั้งหมด → Run
+ไฟล์รายละเอียด: AC-LAB/SEO_REPORT_TH.md
+คำค้น 58 คำ: AC-LAB/seo/keyword-map.csv (ระดับความสำคัญเป็นสมมติฐาน ไม่ใช่ยอดค้นหาจริง)
+แหล่งตรวจชื่อ: AC-LAB/seo/verification-sources.json
+SQL เดิมเก็บไว้ใน Supabase_Setup สำหรับติดตั้งใหม่เท่านั้น
 
-2) GitHub Repository
-   นำ index.html ไปแทน /index.html
-   สร้างโฟลเดอร์ register แล้วนำ register/index.html ใส่ในนั้น
-
-3) โครงสร้างที่ควรได้
-   AreWarinTh/
-   ├── index.html
-   ├── register/
-   │   └── index.html
-   ├── staff/
-   │   └── index.html
-   ├── student/
-   │   └── index.html
-   └── library/
-       └── index.html
-
-4) Commit changes และรอ GitHub Pages
-
-5) เปิด
-   Public Registration:
-   https://suthawarin1.github.io/AreWarinTh/register/
-
-6) ทดสอบ
-   - ระบบหลักมีคอร์สที่อนุมัติ เผยแพร่ และเปิดรับสมัคร
-   - ตั้งแพ็กเกจ ติวเตอร์ และรอบเรียนจากปุ่ม “ใบสมัคร V12”
-   - ส่งใบสมัครทดลองจาก /register/
-   - ตรวจว่าใบสมัครขึ้น Dashboard
-   - กดอนุมัติ
-   - ตรวจ Student ID, Enrollment, ตารางเรียน, ติวเตอร์ และแผนชำระ
-
-ไม่ต้อง Deploy Edge Function ใหม่
-ไม่ต้องแก้ Verify JWT
-ไม่ต้องให้นักเรียนเดิมสมัครบัญชีใหม่
+ไฟล์นี้ยังไม่ได้ถูกอัปโหลดขึ้นเว็บไซต์จริง และไม่รับประกันอันดับ Google

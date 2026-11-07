@@ -1,0 +1,61 @@
+{
+  "checked": "2026-11-07",
+  "relation_to_lab": "Existing website member/collaborator records supplied by the owner; external references confirm only the fields listed.",
+  "people": {
+    "arunrat": {
+      "name": "Arunrat Chaveerach / อรุณรัตน์ ฉวีราช",
+      "verified": [
+        "full name",
+        "Professor",
+        "Department of Biology, Faculty of Science, Khon Kaen University"
+      ],
+      "url": "https://bio.kku.net/showteacher.php?id=arunrat"
+    },
+    "runglawan": {
+      "name": "Runglawan Sudmoon / รุ่งลาวัลย์ สุดมูล",
+      "verified": [
+        "full name"
+      ],
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35956463/",
+      "note": "KKU Faculty of Law council list 2025 lists Lecturer. Current rank and affiliation omitted from new profiles; no Assistant Professor claim.",
+      "additional_url": "https://council.kku.ac.th/wp-content/uploads/2025/02/5-คณะนิติศาสตร์.pdf"
+    },
+    "tawatchai": {
+      "name": "Tawatchai Tanee / ธวัดชัย ธานี",
+      "verified": [
+        "full name"
+      ],
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35956463/",
+      "note": "Current rank and affiliation not asserted. Historical publication affiliations are not treated as current appointments."
+    },
+    "yannick": {
+      "name": "Yannick D. Benoit",
+      "verified": [
+        "full name"
+      ],
+      "url": "https://www.uottawa.ca/faculty-medicine/directory/dr-yannick-benoit"
+    },
+    "shiou-yih": {
+      "name": "Shiou Yih Lee",
+      "verified": [
+        "full name"
+      ],
+      "url": "https://leeshiouyih.owlstown.net/"
+    },
+    "nisachon": {
+      "name": "Nisachon Jangpromma / นิศาชล แจ้งพรมมา",
+      "verified": [
+        "English full name"
+      ],
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38467647/"
+    },
+    "sakda": {
+      "name": "Sakda Daduang / ศักดา ดาดวง",
+      "verified": [
+        "English full name"
+      ],
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40553907/"
+    }
+  },
+  "excluded": "Nickname-only or placeholder records remain in the Team UI if visible but receive no searchable profile until full names and source are verified."
+}

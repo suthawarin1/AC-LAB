@@ -5,6 +5,11 @@
   const drafts = new Map();
   const expanded = new Set();
   const labels = {
+    seo:'SEO และการค้นหา', slug:'Slug ของหน้า', canonical:'Canonical URL',
+    indexable:'อนุญาตให้จัดทำดัชนี', verified:'ตรวจยืนยันข้อมูลบุคลากรแล้ว',
+    alternateNames:'ชื่อทางเลือกที่ใช้จริง', verifiedTitle:'ตำแหน่งที่ตรวจยืนยันแล้ว',
+    verifiedAffiliation:'สังกัดที่ตรวจยืนยันแล้ว', verificationSource:'ลิงก์แหล่งอ้างอิงข้อมูลบุคลากร',
+    brandName:'ชื่อหลักของแล็บ', searchConsoleToken:'Google Search Console verification code',
     alt:'คำอธิบายภาพ', imageAlt:'คำอธิบายภาพ', kicker:'ข้อความนำ', eyebrow:'ข้อความนำ',
     title:'หัวข้อ', name:'ชื่อ', subtitle:'หัวข้อรอง', description:'รายละเอียด', summary:'ข้อความสรุป',
     body:'เนื้อหา', paragraph:'ย่อหน้า', paragraphs:'ย่อหน้า', heading:'หัวข้อย่อย', sections:'เซกชันเนื้อหา',
@@ -141,14 +146,14 @@
     return { path: [area, path[0], ...nested], label: title };
   }
 
-  function mark() {
+  function mark(refresh = true) {
     const entry = activeDraft();
     entry.dirty = true;
     entry.changes++;
     const pageButton = [...$('page-nav').children].find(button => button.dataset.page === active.id);
     pageButton?.classList.add('is-dirty');
     updateStatus();
-    updatePreview();
+    if (refresh) updatePreview();
   }
 
   function entryFor(state) {
@@ -413,6 +418,8 @@
       value.nodes = [newItem([...path,'nodes'], [])];
       value.edges = [];
     }
+    if (key === "members") value.seo = window.ACLabSEO.personDefaults(value);
+    if (key === "posts") value.seo = window.ACLabSEO.postDefaults(value);
     return value;
   }
 
@@ -468,7 +475,8 @@
       container.append(row);
     });
     if (!shown) container.append(element('p','empty', term ? 'ไม่พบรายการที่ตรงกับคำค้น' : 'ยังไม่มีรายการในส่วนนี้'));
-    const add = action(mode === 'blocks' ? '+ เพิ่มเซกชัน' : '+ เพิ่มรายการ', () => {
+    const postList = active.id === 'blog' && path.length === 1 && path[0] === 'posts';
+    const add = action(mode === 'blocks' ? '+ เพิ่มเซกชัน' : postList ? '+ เพิ่มบทความ' : '+ เพิ่มรายการ', () => {
       const value = newItem(path,list);
       const identity = scope + '/' + (value?.id || list.length);
       expanded.add(identity);
@@ -515,6 +523,29 @@
     return box;
   }
 
+  function articleWriter(post, scope) {
+    const launch = element('div', 'writer-launch');
+    const selection = fieldPreview(['posts'], scope + '/richBody', 'เนื้อหาบทความ');
+    launch.append(action('เขียนเนื้อหาบทความ', async () => {
+      const entry = activeDraft();
+      try {
+        await window.ACLabBlogEditor.open({
+          post, title: local(post.title), media: entry.draft.settings.media ?? {},
+          current: () => activeDraft() === entry && launch.isConnected,
+          change(language, document) {
+            post.richBody ??= {};
+            post.richBody[language] = document;
+            mark(false);
+          },
+          done(language) {
+            selectPreview({ ...selection, path: [...selection.path, language], lang: language });
+          },
+        });
+      } catch (error) { say(error.message, true); }
+    }, 'button primary'), element('small', 'editor-hint', 'จัดข้อความ แทรกรูปและตาราง แยกไทย–อังกฤษ'));
+    return launch;
+  }
+
   function renderValue(value, title, path, scope, setter, term = '') {
     const key = path.at(-1) || title;
     if (isPair(value)) return localizedField(value,title,key,fieldPreview(path, scope, title));
@@ -531,8 +562,11 @@
     if (value && typeof value === 'object') {
       if (mode === 'settings' && ['authors','media'].includes(key)) return mapField(value,title,path,scope,term);
       const fields = element('div','object-fields');
+      const post = active.id === 'blog' && path.length === 1 && key === 'posts';
+      if (post) fields.append(articleWriter(value, scope));
       for (const [child, item] of Object.entries(value)) {
         if (child === 'order' && active.id === 'team') continue;
+        if (post && ['sections', 'richBody'].includes(child)) continue;
         if (!searchable(item, term, label(child))) continue;
         const card = renderValue(item,label(child),[...path,child],scope+'/'+child,next=>{value[child]=next;});
         if (item && typeof item === 'object' && !isPair(item)) {
@@ -541,6 +575,7 @@
           fields.append(wrap);
         } else fields.append(card);
       }
+      if (key === 'seo') fields.append(window.ACLabSEOManager.preview(active, activeDraft().draft, scope));
       if (!fields.children.length) fields.append(element('p','empty','ไม่พบข้อมูลที่ตรงกับคำค้น'));
       return fields;
     }
@@ -562,6 +597,7 @@
         next=>{draft.settings[group]=next;},term));
       if (active.id === 'main' && group === 'routes') fields.append(element('p','editor-hint','อีเมล ที่อยู่ และแผนที่แก้ได้ในหน้า Contact'));
       if (active.id === 'team' && group === 'members') {
+        fields.append(element('p','editor-hint','ตำแหน่งและสังกัดบนเว็บใช้ช่องที่ตรวจสอบแล้วใน SEO ของแต่ละคน พร้อมแหล่งอ้างอิง'));
         const link = element('a','button quiet','อัปโหลดรูปใน Team Manager');
         link.href = '../team/manager.html';
         link.target = '_blank';
@@ -597,6 +633,7 @@
         version:draft.version, settings:draft.settings, copy:draft.copy, static:draft.static, blocks:draft.blocks,
       }));
       entry.saved = saved;
+      window.ACLabSEOManager.saved();
       if (entry.changes === changes) {
         entry.draft = clone(saved);
         entry.dirty = false;
