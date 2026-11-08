@@ -104,6 +104,24 @@
   function postSEO(post) { return merge(postDefaults(post), post.seo); }
   function content(rows, page) { return rows[page]?.content || {}; }
   function brand(rows) { return clean(settings('main', content(rows, 'main')).brandName) || 'The AC Lab'; }
+  function brandingDefaults() {
+    return { logo: 'assets/aclab-logo-256.png', favicon: 'assets/aclab-logo-64.png',
+      appleTouchIcon: 'assets/aclab-logo-180.png', socialImage: 'assets/aclab-logo-512.png', logoSvg: '' };
+  }
+  function branding(rows) { return merge(brandingDefaults(), content(rows, 'main').branding); }
+  function brandImage(rows, field = 'logo') {
+    const options = branding(rows);
+    if (field === 'logo' && typeof options.logoSvg === 'string' && options.logoSvg.trim() && options.logoSvg.length <= 262144)
+      return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(options.logoSvg);
+    const raw = options[field] || brandingDefaults()[field];
+    if (field === 'logo' && /^data:image\/(?:png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/.test(raw)) return raw;
+    try {
+      const value = window.ACLabData?.imageSource ? window.ACLabData.imageSource(raw) : raw;
+      const url = new URL(value, origin + '/');
+      if (['http:', 'https:'].includes(url.protocol) && !url.username && !url.password) return url.href;
+    } catch {}
+    return absolute('/' + brandingDefaults()[field]);
+  }
   function personReady(member) {
     const seo = person(member);
     const name = local(member.name, 'en');
@@ -160,7 +178,7 @@
     let description = explicit(seo.description, lang);
     let url = pageURL(rows, page, lang);
     let indexable = seo.indexable !== false;
-    let image = absolute('/assets/aclab-logo-512.png');
+    let image = brandImage(rows, 'socialImage');
     let available = languages;
     let type = 'page';
     if (record && page === 'team') {
@@ -259,7 +277,7 @@
     const options = settings('main', main);
     const organization = { '@type': ['Organization', 'ResearchOrganization'], '@id': lab,
       name: brand(rows), alternateName: list(options.alternateNames).map(clean).filter(Boolean), url: origin + '/',
-      logo: { '@type': 'ImageObject', url: absolute('/assets/aclab-logo-512.png'), width: 512, height: 512 },
+      logo: { '@type': 'ImageObject', url: brandImage(rows, 'socialImage') },
       parentOrganization: { '@type': 'CollegeOrUniversity', name: 'Khon Kaen University', url: 'https://www.kku.ac.th/' } };
     const contact = content(rows, 'contact').contact;
     if (contact?.email) organization.email = clean(contact.email);
@@ -338,7 +356,7 @@
   }
 
   window.ACLabSEO = { origin, languages, pages, verified, pair, clean, local, explicit, list, slug, encoded, absolute,
-    defaults, personDefaults, postDefaults, merge, settings, person, postSEO, content, brand, personReady,
+    defaults, personDefaults, postDefaults, merge, settings, person, postSEO, content, brand, brandingDefaults, branding, brandImage, personReady,
     canonical, pageURL, personURL, postURL, translated, people, articles, papersFor,
     descriptor, resolveImage, entries, validate, graph, sitemap, snapshot };
 })();

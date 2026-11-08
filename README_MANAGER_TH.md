@@ -1,3 +1,5 @@
+เปลี่ยนโลโก้/SVG: Manager → หน้า Main → โลโก้และไอคอนเว็บไซต์ ดู LOGO_SVG_MANAGER_TH.md
+
 เวอร์ชันปัจจุบัน: อัปโหลดไฟล์ตาม START-HERE-SEO-TH.txt และอ่าน SEO_REPORT_TH.md เปิด Manager ผ่าน /manager/ ด้วย Supabase บน GitHub Pages ได้โดยตรง
 
 # The AC Lab Manager บน GitHub Pages

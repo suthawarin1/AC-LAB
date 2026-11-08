@@ -65,6 +65,8 @@
     const SEO = window.ACLabSEO;
     const settings = result.settings;
     settings.seo = SEO.merge(SEO.merge(SEO.defaults(page.id), previous?.settings?.seo), settings.seo);
+    if (page.id === 'main') settings.branding = SEO.merge(
+      SEO.merge(SEO.brandingDefaults(), previous?.settings?.branding), settings.branding);
     const records = page.id === 'team' ? 'members' : page.id === 'blog' ? 'posts' : '';
     for (const record of records ? settings[records] : []) {
       const saved = previous?.settings?.[records]?.find(item => item.id === record.id);
@@ -296,6 +298,19 @@
     }
     if (new Set(blocks.map(block => block.id)).size !== blocks.length) fail('รหัสเซกชันต้องไม่ซ้ำกัน');
     const document = { settings, copy, static: fields, blocks };
+    if (page.id === 'main') {
+      if (typeof settings.branding.logoSvg !== 'string') fail('กรุณาตรวจโค้ด SVG ของโลโก้');
+      if (settings.branding.logoSvg.trim()) {
+        if (!window.ACLabSVGLogo) fail('โหลดเครื่องมือ SVG ไม่สำเร็จ กรุณาโหลดหน้า Manager อีกครั้ง', 503);
+        settings.branding.logoSvg = window.ACLabSVGLogo.sanitize(settings.branding.logoSvg);
+      }
+      for (const key of ['logo', 'favicon', 'appleTouchIcon', 'socialImage']) {
+        if (typeof settings.branding[key] !== 'string') fail('กรุณาตรวจลิงก์โลโก้และไอคอน');
+        validateURL(settings.branding[key], true);
+      }
+      if (['appleTouchIcon', 'socialImage'].some(key => /\.svg(?:$|[?#])/i.test(settings.branding[key])))
+        fail('ไอคอนมือถือและภาพแชร์ต้องเป็น PNG, JPEG หรือ WebP กรุณาใช้ปุ่มอัปโหลด SVG เพื่อสร้างภาพให้');
+    }
     validateTree(document);
     checkRecords(page, settings);
     if (page.id === 'team') settings.revision = row.revision + 1;

@@ -5,6 +5,7 @@
   const drafts = new Map();
   const expanded = new Set();
   const labels = {
+    branding:'โลโก้และไอคอนเว็บไซต์',
     seo:'SEO และการค้นหา', slug:'Slug ของหน้า', canonical:'Canonical URL',
     indexable:'อนุญาตให้จัดทำดัชนี', verified:'ตรวจยืนยันข้อมูลบุคลากรแล้ว',
     alternateNames:'ชื่อทางเลือกที่ใช้จริง', verifiedTitle:'ตำแหน่งที่ตรวจยืนยันแล้ว',
@@ -548,6 +549,17 @@
 
   function renderValue(value, title, path, scope, setter, term = '') {
     const key = path.at(-1) || title;
+    if (mode === 'settings' && active.id === 'main' && key === 'branding') {
+      const entry = activeDraft();
+      return window.ACLabLogoEditor.controls({ value,
+        current: () => activeDraft() === entry && group === 'branding',
+        upload: image => request('upload', { image }),
+        change() {
+          mark();
+          selectPreview({ path: ['settings', 'branding', 'logo'], label: 'โลโก้ในส่วนหัวเว็บไซต์' });
+        },
+      });
+    }
     if (isPair(value)) return localizedField(value,title,key,fieldPreview(path, scope, title));
     if (Array.isArray(value)) {
       if (['desktop','mobile'].includes(key)) {

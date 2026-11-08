@@ -62,6 +62,8 @@
   }
   async function exportWebsite() {
     const[rows,manifest]=await Promise.all([read(true),fetchFile('manager/public-files.json').then(r=>r.json())]);
+    if (rows.main?.content?.branding?.logoSvg)
+      rows.main.content.branding.logoSvg = window.ACLabSVGLogo.sanitize(rows.main.content.branding.logoSvg);
     for (const [page, [path]] of Object.entries(S.pages)) if (!rows[page]?.content) {
       let doc = new DOMParser().parseFromString(await (await fetchFile(path)).text(), 'text/html');
       if (!doc.getElementById(S.snapshotIds[page])) {
@@ -92,6 +94,7 @@
     }
     for(const[page,[path]]of Object.entries(S.pages))if(page!=='main')archive.file(path,S.redirectHTML(rows,page));
     archive.file('sitemap.xml',S.sitemap(rows,entries));
+    if (S.branding(rows).logoSvg) archive.file('assets/aclab-logo-current.svg', S.branding(rows).logoSvg);
     archive.file('robots.txt','User-agent: *\nAllow: /\nSitemap: https://theaclab.in.th/sitemap.xml\n');
     archive.file('CNAME','theaclab.in.th\n');
     archive.file('README_SEO_TH.txt','ไฟล์นี้มีเฉพาะเว็บสาธารณะจากข้อมูลที่เผยแพร่ ไม่รวม Manager หรือรหัสผ่าน\nอัปโหลดเนื้อหาในโฟลเดอร์นี้ทับเว็บสาธารณะ และคงโฟลเดอร์ manager เดิมไว้\nเมื่อเพิ่มบทความหรือเปลี่ยน slug ให้สร้างเว็บไซต์ใหม่ด้วย GitHub Actions หรือส่งออกอีกครั้ง\n');

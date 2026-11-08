@@ -51,7 +51,7 @@
       (area === 'static' && draft.staticFields?.[group]?.group === 'หน้าต้อนรับ') ||
       (area === 'copy' && /^(welcome|enter)/i.test(field || '')));
     const article = page.id === 'blog' && group === 'posts' && id &&
-      (path.includes('sections') || path.includes('sources')) ? id : '';
+      ['sections', 'sources', 'richBody'].some(key => path.includes(key)) ? id : '';
     const reveal = id && (record?.visible === false || (page.id === 'blog' && record?.status === 'draft'))
       ? { id, group: area === 'blocks' ? 'blocks' : group } : null;
     const section = intro ? '#welcome' : article ? '#article-view'
@@ -172,6 +172,11 @@
       (where.index >= 0 && ['bento', 'researchAreas', 'topics'].includes(group)
       ? [...section.querySelectorAll('.bento-card, .research-topic, .scope-card')][where.index] : null);
     const scope = record || section;
+    if (group === 'branding') {
+      doc.getElementById('main-site')?.classList.add('nav-visible');
+      target = [...doc.querySelectorAll('.site-header .aclab-logo, .aclab-logo')].find(showing);
+    }
+    if (group === 'posts' && where.field === 'richBody') target = scope.querySelector('#article-prose');
     if (!target && area === 'copy' && where.field) {
       const key = CSS.escape(where.field);
       target = [...doc.querySelectorAll(`[data-i18n="${key}"], [data-i18n-aria="${key}"], [data-genome-copy="${key}"]`)]

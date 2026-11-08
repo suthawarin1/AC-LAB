@@ -5,7 +5,7 @@
   const pageIds = ['main', 'about', 'team', 'publication', 'blog', 'funding', 'awards', 'patents', 'contact'];
   const pageKey = path => path.replace(/^api\//, '') === 'site' ? 'main' : path.replace(/^api\//, '');
   const list = value => Array.isArray(value) ? value : [];
-  const imageFields = new Set(['image', 'photo', 'cover', 'gallery']);
+  const imageFields = new Set(['image', 'photo', 'cover', 'gallery', 'logo', 'favicon', 'appleTouchIcon', 'socialImage']);
   let pending;
 
   function imageSource(value) {

@@ -60,7 +60,7 @@
     };
     for (const [name, value] of Object.entries(social)) setMeta(doc, name, value, true);
     for (const [name, value] of Object.entries({
-      'twitter:card': meta.image.includes('aclab-logo') ? 'summary' : 'summary_large_image',
+      'twitter:card': meta.image === SEO.brandImage(rows, 'socialImage') ? 'summary' : 'summary_large_image',
       'twitter:title': meta.title, 'twitter:description': meta.description, 'twitter:image': meta.image,
     })) setMeta(doc, name, value);
     let structured = doc.getElementById('aclab-structured-data');
@@ -72,13 +72,13 @@
     }
     structured.textContent = SEO.encoded(SEO.graph(rows, meta));
     for (const icon of doc.head.querySelectorAll('link[rel="icon"],link[rel="shortcut icon"],link[rel="apple-touch-icon"]')) icon.remove();
-    for (const [rel, size] of [['icon', 64], ['apple-touch-icon', 180]]) {
+    for (const [rel, size, field] of [['icon', 64, 'favicon'], ['apple-touch-icon', 180, 'appleTouchIcon']]) {
       const icon = doc.createElement('link');
       icon.rel = rel;
-      icon.type = 'image/png';
-      icon.sizes = size + 'x' + size;
-      icon.href = SEO.absolute ? SEO.absolute('/assets/aclab-logo-' + size + '.png') :
-        SEO.origin + '/assets/aclab-logo-' + size + '.png';
+      icon.href = SEO.brandImage(rows, field);
+      const svg = /\.svg(?:$|[?#])/i.test(icon.href);
+      icon.type = svg ? 'image/svg+xml' : /\.jpe?g(?:$|[?#])/i.test(icon.href) ? 'image/jpeg' : /\.webp(?:$|[?#])/i.test(icon.href) ? 'image/webp' : 'image/png';
+      icon.sizes = svg ? 'any' : size + 'x' + size;
       doc.head.append(icon);
     }
     const token = SEO.settings('main', SEO.content(rows, 'main')).searchConsoleToken;
@@ -86,14 +86,19 @@
   }
 
   function logo(doc, rows) {
+    const selected = SEO.brandImage(rows);
     for (const brand of doc.querySelectorAll('a.brand, .wordmark')) {
-      if (brand.querySelector('.aclab-logo')) continue;
+      const existing = brand.querySelector('.aclab-logo');
+      if (existing) {
+        if (existing.getAttribute('src') !== selected) existing.src = selected;
+        continue;
+      }
       const copy = doc.createElement('span');
       copy.className = 'aclab-brand-copy';
       copy.append(...brand.childNodes);
       const image = doc.createElement('img');
       image.className = 'aclab-logo';
-      image.src = SEO.origin + '/assets/aclab-logo-256.png';
+      image.src = selected;
       image.alt = '';
       image.width = 46;
       image.height = 46;

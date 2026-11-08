@@ -45,6 +45,15 @@ for (const page of Object.keys(S.pages)) if (!rows[page]?.content || !rows[page]
   rows[page] = await embeddedPage(page); fallbackPages.push(page);
 }
 if (fallbackPages.length) console.log('Existing static pages used until first CMS publish: '+fallbackPages.join(', '));
+if (rows.main?.content?.branding?.logoSvg) {
+  const dom = new JSDOM('', { runScripts: 'outside-only' });
+  dom.window.TextEncoder = TextEncoder;
+  try {
+    dom.window.eval(await fs.readFile(resolve(sourceRoot, 'assets/vendor/purify.min.js'), 'utf8'));
+    dom.window.eval(await fs.readFile(resolve(sourceRoot, 'assets/svg-logo.js'), 'utf8'));
+    rows.main.content.branding.logoSvg = dom.window.ACLabSVGLogo.sanitize(rows.main.content.branding.logoSvg);
+  } finally { dom.window.close(); }
+}
 const issues = S.validate(rows);
 if(issues.length) throw new Error('SEO validation failed:\n'+issues.join('\n'));
 await fs.rm(output,{recursive:true,force:true});
@@ -82,6 +91,7 @@ for(const [page,[path]] of Object.entries(S.pages)){
   await fs.writeFile(resolve(output,path),S.redirectHTML(rows,page));
 }
 await fs.writeFile(resolve(output,'sitemap.xml'),S.sitemap(rows,entries));
+if (S.branding(rows).logoSvg) await fs.writeFile(resolve(output,'assets/aclab-logo-current.svg'),S.branding(rows).logoSvg);
 await fs.writeFile(resolve(output,'robots.txt'),'User-agent: *\nAllow: /\nSitemap: https://theaclab.in.th/sitemap.xml\n');
 await fs.writeFile(resolve(output,'.nojekyll'),'');
 const report={mode:offline?'offline-snapshot':process.env.ACLAB_SEO_ROWS?'captured-public-supabase':'published-supabase',fallbackPages,entries:JSON.parse(JSON.stringify(entries)),profiles:S.people(rows).map(p=>({id:p.id,name:p.name,source:S.person(p).verificationSource})),articles:S.articles(rows).map(p=>p.id)};

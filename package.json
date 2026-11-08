@@ -11,6 +11,7 @@
     "check": "node scripts/check-seo.mjs"
   },
   "devDependencies": {
+    "dompurify": "3.4.17",
     "jsdom": "26.1.0"
   }
 }
