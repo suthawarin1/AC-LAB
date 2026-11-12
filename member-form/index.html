@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#00796b">
+  <title>Member Profile Submission | The AC Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;600&display=swap" rel="stylesheet">
+  <link href="form.css" rel="stylesheet">
+  <script defer src="../assets/vendor/supabase.js"></script>
+  <script defer src="../assets/aclab-team-config.js"></script>
+  <script defer src="../assets/aclab-team-db.js"></script>
+  <script defer src="form.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="../index.html"><span class="brand-mark">AC</span><span><strong>The AC Lab</strong><small>Plant Bioscience & Phyto-innovation research</small></span></a>
+    <span class="top-label">MEMBER DIRECTORY</span>
+  </header>
+  <main class="layout">
+    <aside class="intro">
+      <div class="eyebrow"><span class="dot"></span> THE AC LAB · PROFILE STUDIO</div>
+      <h1>Tell us a little <em>about your work.</em></h1>
+      <p>Help us introduce the people behind The AC Lab. Complete your professional profile in English. Thai translations are optional.</p>
+      <div class="process"><span class="process-step">01 <b>Complete your profile</b></span><span class="process-step">02 <b>Review and consent</b></span><span class="process-step">03 <b>Manager approval</b></span></div>
+      <div class="note">Your submission will <strong>not</strong> appear on the website automatically. A lab administrator will review and approve it first.</div>
+    </aside>
+    <div class="form-wrap">
+      <div class="form-heading"><span class="eyebrow">PERSONAL INFORMATION FORM</span><span class="required-note">* Required</span><h2>Member profile</h2><p>Information marked “private” is only for administrative follow-up.</p></div>
+      <form id="member-form" novalidate>
+        <section class="section" aria-labelledby="basic-title"><div class="section-heading"><span class="number">01</span><div><h3 id="basic-title">Identity & lab role</h3><p>How should you appear in our directory?</p></div></div>
+          <div class="fields">
+            <label class="field full">Existing profile <span class="optional">optional</span><select name="existingMemberId" id="existingMemberId"><option value="">I am a new member / not listed yet</option></select><small>If your profile is already on the website, choose it to request an update.</small></label>
+            <label class="field">Full name (English) <span class="req">*</span><input name="nameEN" required maxlength="160" autocomplete="name" placeholder="e.g. Jane A. Smith"></label>
+            <label class="field">Full name (Thai) <span class="optional">optional</span><input name="nameTH" maxlength="160" placeholder="ชื่อ–นามสกุลภาษาไทย"></label>
+            <label class="field">Member category <span class="req">*</span><select name="group" required><option value="">Select your role</option><option value="pi">Principal Investigator (PI)</option><option value="collaboration">Collaborator</option><option value="researcher">Researcher</option><option value="student">Student</option><option value="internship">Internship Student</option></select></label>
+            <label class="field">Academic title (English)<input name="academicTitleEN" maxlength="120" placeholder="e.g. Assistant Professor, Ph.D."></label>
+            <label class="field">Current position (English) <span class="req">*</span><input name="positionEN" required maxlength="160" placeholder="e.g. Graduate Researcher"></label>
+            <label class="field">Current position (Thai)<input name="positionTH" maxlength="160" placeholder="เช่น นักวิจัยระดับบัณฑิตศึกษา"></label>
+            <label class="field full">Academic title (Thai) <span class="optional">optional</span><input name="academicTitleTH" maxlength="120" placeholder="เช่น ผู้ช่วยศาสตราจารย์ ดร."></label>
+          </div>
+        </section>
+        <section class="section" aria-labelledby="academic-title"><div class="section-heading"><span class="number">02</span><div><h3 id="academic-title">Academic background</h3><p>Tell visitors about your expertise and institution.</p></div></div>
+          <div class="fields">
+            <label class="field full">Affiliation (English) <span class="req">*</span><textarea name="affiliationEN" required maxlength="300" rows="2" placeholder="Department of Biology, Faculty of Science, Khon Kaen University"></textarea></label>
+            <label class="field full">Affiliation (Thai)<textarea name="affiliationTH" maxlength="300" rows="2" placeholder="สาขาวิชาชีววิทยา คณะวิทยาศาสตร์ มหาวิทยาลัยขอนแก่น"></textarea></label>
+            <label class="field full">Areas of expertise (English) <span class="req">*</span><input name="expertiseEN" required maxlength="600" placeholder="Molecular biology, Plant genomics, Phytochemistry"><small>Separate keywords with commas (up to 12).</small></label>
+            <label class="field full">Areas of expertise (Thai) <span class="optional">optional</span><input name="expertiseTH" maxlength="600" placeholder="ชีววิทยาโมเลกุล, จีโนมพืช, พฤกษเคมี"></label>
+            <label class="field full">Education / degrees <span class="optional">optional · for review</span><textarea name="education" maxlength="1200" rows="3" placeholder="M.Sc. in Biology — Khon Kaen University (2025–present)"></textarea></label>
+          </div>
+        </section>
+        <section class="section internship-section" id="internship-fields" aria-labelledby="internship-title" hidden>
+          <div class="section-heading"><span class="number">03</span><div><h3 id="internship-title">Internship placement</h3><p>For internship students only. This section appears when you select Internship Student.</p></div></div>
+          <div class="fields">
+            <label class="field full">Home university / college (English) <span class="req">*</span><input name="internshipInstitutionEN" id="internshipInstitutionEN" maxlength="300" placeholder="e.g. Faculty of Science, Khon Kaen University"><small>Your sending institution; this may be included in your approved public profile.</small></label>
+            <label class="field">Degree / study programme <span class="optional">optional</span><input name="internshipProgramEN" maxlength="180" placeholder="e.g. B.Sc. Biotechnology"></label>
+            <label class="field">Lab supervisor / mentor <span class="optional">optional</span><input name="internshipSupervisorEN" maxlength="160" placeholder="Name of your supervising researcher"></label>
+            <label class="field">Internship start date <span class="optional">optional</span><input type="date" name="internshipStart"></label>
+            <label class="field">Internship end date <span class="optional">optional</span><input type="date" name="internshipEnd"></label>
+            <label class="field full">Internship research project <span class="optional">optional</span><textarea name="internshipProjectEN" maxlength="900" rows="3" placeholder="Describe the topic or practical work you will be involved in"></textarea></label>
+          </div>
+        </section>
+        <section class="section" aria-labelledby="research-title"><div class="section-heading"><span class="number">04</span><div><h3 id="research-title">Research & biography</h3><p>A concise, professional introduction for your public profile.</p></div></div>
+          <div class="fields">
+            <label class="field full">Short biography (English) <span class="req">*</span><textarea name="bioEN" required minlength="20" maxlength="2000" rows="5" placeholder="Describe your current role, research interests and contributions to the lab (3–5 sentences)."></textarea><small>Recommended: 60–130 words.</small></label>
+            <label class="field full">Short biography (Thai) <span class="optional">optional</span><textarea name="bioTH" maxlength="2000" rows="4" placeholder="แนะนำตัวและงานวิจัยโดยสังเขป"></textarea></label>
+            <label class="field full">Current projects / research focus <span class="optional">optional · for review</span><textarea name="researchProjects" maxlength="1400" rows="3" placeholder="Research themes, project names, techniques or responsibilities"></textarea></label>
+            <label class="field full">Selected publications (up to three) <span class="optional">optional · for review</span><textarea name="selectedPublications" maxlength="1600" rows="4" placeholder="Author(s). Year. Article title. Journal. DOI or URL."></textarea></label>
+          </div>
+        </section>
+        <section class="section" aria-labelledby="contact-title"><div class="section-heading"><span class="number">05</span><div><h3 id="contact-title">Contact & professional links</h3><p>Choose what the public can see.</p></div></div>
+          <div class="fields">
+            <label class="field">Contact email <span class="req">* · private</span><input type="email" name="contactEmail" required maxlength="320" autocomplete="email" placeholder="you@university.edu"><small>Used for clarification only; never published automatically.</small></label>
+            <label class="field">Public profile email <span class="optional">optional</span><input type="email" name="publicEmail" maxlength="320" placeholder="lab-email@university.edu"></label>
+            <label class="field full checkbox-row"><input type="checkbox" name="showPublicEmail" id="showPublicEmail"><span>Allow my public email address to appear on the website.</span></label>
+            <label class="field">ORCID iD <span class="optional">optional</span><input type="url" name="orcidURL" maxlength="300" placeholder="https://orcid.org/0000-0000-0000-0000"></label>
+            <label class="field">Google Scholar <span class="optional">optional</span><input type="url" name="scholarURL" maxlength="300" placeholder="https://scholar.google.com/..."></label>
+            <label class="field">ResearchGate / professional page<input type="url" name="researchGateURL" maxlength="300" placeholder="https://www.researchgate.net/..."></label>
+            <label class="field">Personal / laboratory website<input type="url" name="websiteURL" maxlength="300" placeholder="https://..."></label>
+          </div>
+        </section>
+        <section class="section" aria-labelledby="photo-title"><div class="section-heading"><span class="number">06</span><div><h3 id="photo-title">Profile photo</h3><p>A clear, professional portrait is recommended.</p></div></div>
+          <div class="photo-zone"><div class="photo-placeholder" id="portrait-preview" aria-label="Photo preview"><span>Photo preview</span></div><div class="photo-choices"><label class="file-button" for="portrait">Choose photo<input type="file" id="portrait" name="portrait" accept="image/jpeg,image/png,image/webp" hidden></label><span id="photo-name">JPG, PNG or WebP · max 5 MB</span><label class="field">Or paste a public image URL<input type="url" name="photoURL" id="photoURL" maxlength="1000" placeholder="https://..."></label><small>Do not include private cloud links that require sign-in. Uploaded files stay in private storage until approval.</small></div></div>
+        </section>
+        <section class="section consent-section" aria-labelledby="consent-title"><div class="section-heading"><span class="number">07</span><div><h3 id="consent-title">Review & publication consent</h3><p>Please read carefully before submitting.</p></div></div>
+          <div class="consent-copy">The AC Lab may review, edit for clarity, and publish the professional profile details I provide on its public website, including my name, affiliation, academic title, position, research interests, biography, and any internship details supplied for public display. Only information approved by a lab administrator is published. My contact email and unpublished research details are for administrative review and are not automatically shared. I can ask the lab administrator to correct or remove my published profile.</div>
+          <label class="checkbox-row"><input type="checkbox" name="consentPublish" required><span><strong>I consent to the review and publication of my professional profile.</strong> <span class="req">*</span></span></label>
+          <label class="checkbox-row"><input type="checkbox" name="consentPhoto" id="consentPhoto"><span>I consent to the public display of the portrait or image URL I provided, if approved.</span></label>
+          <label class="checkbox-row"><input type="checkbox" name="confirmAccurate" required><span>I confirm that the information is accurate and that I have the right to share it. <span class="req">*</span></span></label>
+          <label class="field spam-trap" aria-hidden="true">Leave this empty<input type="text" name="companyWebsite" autocomplete="off" tabindex="-1"></label>
+          <div class="submit-actions"><button type="button" class="secondary" id="review-button">Review my details</button><button type="submit" class="primary" id="submit-button">Submit for approval <span aria-hidden="true">↗</span></button></div>
+          <p role="status" aria-live="polite" id="status-message" class="status-message"></p>
+        </section>
+      </form>
+      <footer class="footer">© The AC Lab · Khon Kaen University <span>Member submission portal</span></footer>
+    </div>
+  </main>
+  <dialog id="review-dialog" aria-labelledby="review-heading"><div class="dialog-header"><div><span class="eyebrow">PRE-SUBMISSION REVIEW</span><h2 id="review-heading">Confirm your profile</h2></div><button type="button" id="close-review" class="secondary">Close</button></div><div id="review-content" class="review-content"></div><button id="confirm-review" type="button" class="primary">Looks correct — return to form</button></dialog>
+</body>
+</html>
