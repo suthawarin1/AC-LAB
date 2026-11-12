@@ -1,5 +1,5 @@
-/* Public browser configuration only. NEVER put sb_secret_ or service_role here. */
+/* The AC Lab: browser-safe Supabase configuration. Never add sb_secret_ keys. */
 window.ACLAB_TEAM_CONFIG = {
-  url: '', // e.g. https://YOUR-PROJECT.supabase.co
-  anonKey: '' // Supabase publishable/anon key (sb_publishable_... or legacy anon JWT)
+  url: 'https://nmzwvxdegtfartbhoixx.supabase.co',
+  anonKey: 'sb_publishable_EsNS8St8xkIZgSqEGxp4yQ_y1BmeTDh'
 };
