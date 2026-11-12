@@ -7,12 +7,14 @@
   <meta name="theme-color" content="#00796b">
   <title>Member Profile Submission | The AC Lab</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;600&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="form.css" rel="stylesheet">
+  <link href="live-preview.css" rel="stylesheet">
   <script defer src="../assets/vendor/supabase.js"></script>
   <script defer src="../assets/aclab-team-config.js"></script>
   <script defer src="../assets/aclab-team-db.js"></script>
   <script defer src="form.js"></script>
+  <script defer src="live-preview.js"></script>
 </head>
 <body>
   <header class="topbar">
@@ -28,7 +30,7 @@
       <div class="note">Your submission will <strong>not</strong> appear on the website automatically. A lab administrator will review and approve it first.</div>
     </aside>
     <div class="form-wrap">
-      <div class="form-heading"><span class="eyebrow">PERSONAL INFORMATION FORM</span><span class="required-note">* Required</span><h2>Member profile</h2><p>Information marked “private” is only for administrative follow-up.</p></div>
+      <div class="form-heading"><span class="eyebrow">PERSONAL INFORMATION FORM</span><span class="required-note">* Required</span><h2>Member profile</h2><p>Information marked “private” is only for administrative follow-up.</p><button class="form-preview-shortcut" type="button" id="open-site-preview">View your profile on The Team ↗</button></div>
       <form id="member-form" novalidate>
         <section class="section" aria-labelledby="basic-title"><div class="section-heading"><span class="number">01</span><div><h3 id="basic-title">Identity & lab role</h3><p>How should you appear in our directory?</p></div></div>
           <div class="fields">
@@ -96,7 +98,39 @@
       </form>
       <footer class="footer">© The AC Lab · Khon Kaen University <span>Member submission portal</span></footer>
     </div>
+    <aside class="site-preview-panel" id="site-preview-panel" aria-label="Live website preview">
+      <div class="site-preview-head"><span class="eyebrow">LIVE WEBSITE PREVIEW</span><span class="site-preview-draft">DRAFT · NOT PUBLIC</span></div>
+      <h2>See it before<br>it goes live.</h2>
+      <p class="site-preview-description">This realistic preview updates as you type. Your profile is not published until a Manager approves it.</p>
+      <div class="site-preview-row">
+        <span class="eyebrow" id="site-preview-current-role">Students</span>
+        <div class="site-preview-segment" role="group" aria-label="Preview language">
+          <button type="button" data-site-preview-lang="en" aria-pressed="true">EN</button>
+          <button type="button" data-site-preview-lang="th" aria-pressed="false">TH</button>
+        </div>
+      </div>
+      <div class="site-preview-row">
+        <span class="eyebrow">THE TEAM DISPLAY</span>
+        <div class="site-preview-segment" role="group" aria-label="Preview display type">
+          <button type="button" data-site-preview-mode="card" aria-pressed="true">Card</button>
+          <button type="button" data-site-preview-mode="profile" aria-pressed="false">Full profile</button>
+        </div>
+      </div>
+      <div class="site-preview-viewport" data-site-preview-host="side" aria-label="Website appearance preview" aria-live="off"></div>
+      <button type="button" id="expand-site-preview" class="site-preview-expand">↗ Open full website preview</button>
+    </aside>
   </main>
+  <dialog class="site-preview-modal" id="site-preview-dialog" aria-labelledby="site-preview-dialog-title">
+    <div class="site-preview-modal-inner">
+      <div class="site-preview-modal-head"><div><span class="eyebrow">THE AC LAB · LIVE WEBSITE SIMULATION</span><h2 id="site-preview-dialog-title">Your profile on The Team</h2><p>This preview shows the information that may become public after approval.</p></div><button type="button" class="site-preview-close" id="close-site-preview">Close ✕</button></div>
+      <div class="site-preview-modal-controls">
+        <div><div class="site-preview-segment" role="group" aria-label="Screen size"><button type="button" data-site-preview-device="desktop" aria-pressed="true">Desktop</button><button type="button" data-site-preview-device="mobile" aria-pressed="false">Mobile</button></div><div class="site-preview-segment" role="group" aria-label="Language"><button type="button" data-site-preview-lang="en" aria-pressed="true">EN</button><button type="button" data-site-preview-lang="th" aria-pressed="false">TH</button></div></div>
+        <div class="site-preview-segment" role="group" aria-label="View type"><button type="button" data-site-preview-mode="card" aria-pressed="true">Directory card</button><button type="button" data-site-preview-mode="profile" aria-pressed="false">Full profile</button></div>
+      </div>
+      <div class="site-preview-viewport" data-site-preview-host="modal" aria-label="Full-size website simulation"></div>
+      <p class="site-preview-modal-note">Private contact email, internal project notes, and unapproved changes are not shown on the public website. Actual publication requires administrator review.</p>
+    </div>
+  </dialog>
   <dialog id="review-dialog" aria-labelledby="review-heading"><div class="dialog-header"><div><span class="eyebrow">PRE-SUBMISSION REVIEW</span><h2 id="review-heading">Confirm your profile</h2></div><button type="button" id="close-review" class="secondary">Close</button></div><div id="review-content" class="review-content"></div><button id="confirm-review" type="button" class="primary">Looks correct — return to form</button></dialog>
 </body>
 </html>
