@@ -3,3 +3,9 @@
 /* Internship-only fields must stay hidden for other roles. */
 .section[hidden]{display:none!important}
 .internship-section{border-left:3px solid #4db6ac}
+
+/* Submission states: visible at the form heading, including on mobile. */
+.submission-alert{margin:15px 0 0!important;padding:12px 15px;border-radius:10px;border:1px solid #c9d9d2;background:#f4f8f5;color:#244f3e;font-size:13px;line-height:1.6;overflow-wrap:anywhere}
+.submission-alert[hidden]{display:none!important}
+.submission-alert.error{color:#9b372b;border-color:#f1c7bc;background:#fff6f3}
+.submission-alert.success{color:#0c6756;border-color:#b9ddd2;background:#f3fbf8}
