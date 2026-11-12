@@ -13,18 +13,19 @@
   <link rel="stylesheet" href="../assets/blog-document.css">
   <link rel="stylesheet" href="blog-editor.css">
   <link rel="stylesheet" href="logo-editor.css">
+  <link rel="stylesheet" href="team-review.css">
   <script defer src="../assets/vendor/supabase.js"></script>
-<script defer src="../assets/supabase-config.js"></script>
-<script defer src="../assets/site-data.js"></script>
-<script defer src="../assets/seo-core.js"></script>
-<script>window.ACLabSEOContext={manager:true};</script>
-<script defer src="../assets/seo.js"></script>
-<script defer src="../assets/seo-pages.js"></script>
-<script defer src="../assets/vendor/purify.min.js"></script>
-<script defer src="../assets/svg-logo.js"></script>
-<script defer src="../assets/manager-data.js"></script>
-<script defer src="../assets/vendor/jszip.min.js"></script>
-<script defer src="../assets/manager-export.js"></script>
+  <script defer src="../assets/supabase-config.js"></script>
+  <script defer src="../assets/site-data.js"></script>
+  <script defer src="../assets/seo-core.js"></script>
+  <script>window.ACLabSEOContext={manager:true};</script>
+  <script defer src="../assets/seo.js"></script>
+  <script defer src="../assets/seo-pages.js"></script>
+  <script defer src="../assets/vendor/purify.min.js"></script>
+  <script defer src="../assets/svg-logo.js"></script>
+  <script defer src="../assets/manager-data.js"></script>
+  <script defer src="../assets/vendor/jszip.min.js"></script>
+  <script defer src="../assets/manager-export.js"></script>
   <script defer src="../assets/genome-loader.js"></script>
   <script defer src="../assets/blog-document.js"></script>
   <script defer src="blog-editor.js"></script>
@@ -32,6 +33,10 @@
   <script defer src="seo-manager.js"></script>
   <script defer src="logo-editor.js"></script>
   <script defer src="manager.js"></script>
+  <!-- ADDITION: Member submissions Manager approval panel -->
+  <script defer src="../assets/aclab-team-config.js"></script>
+  <script defer src="../assets/aclab-team-db.js"></script>
+  <script defer src="team-review.js"></script>
 </head>
 <body>
   <header class="topbar">
@@ -45,98 +50,21 @@
       <button class="button quiet" type="button" id="logout">ออกจากระบบ</button>
     </div>
   </header>
-
   <main id="login-screen" class="login-screen">
-    <div class="login-hero">
-      <p class="eyebrow">THE AC LAB · CONTENT STUDIO</p>
-      <h1>เรื่องราวของแล็บ<br><em>เริ่มต้นที่นี่</em></h1>
-      <p>แก้เนื้อหาทั้งเว็บจากหน้าเดียว</p>
-    </div>
-    <form id="login-form" class="login-panel" method="post">
-      <p class="eyebrow">SITE MANAGER</p>
-      <h2>เข้าสู่ระบบ</h2>
-      <p class="muted">ใช้บัญชี Supabase ของผู้ดูแลเว็บไซต์</p>
-      <label for="email">อีเมล</label>
-      <input id="email" name="email" type="email" required autocomplete="username" maxlength="320">
-      <label for="password">รหัสผ่าน</label>
-      <input id="password" name="password" type="password" required autocomplete="current-password" maxlength="1024">
+    <div class="login-hero"><p class="eyebrow">THE AC LAB · CONTENT STUDIO</p><h1>เรื่องราวของแล็บ<br><em>เริ่มต้นที่นี่</em></h1><p>แก้เนื้อหาทั้งเว็บจากหน้าเดียว</p></div>
+    <form id="login-form" class="login-panel" method="post"><p class="eyebrow">SITE MANAGER</p><h2>เข้าสู่ระบบ</h2><p class="muted">ใช้บัญชี Supabase ของผู้ดูแลเว็บไซต์</p>
+      <label for="email">อีเมล</label><input id="email" name="email" type="email" required autocomplete="username" maxlength="320">
+      <label for="password">รหัสผ่าน</label><input id="password" name="password" type="password" required autocomplete="current-password" maxlength="1024">
       <button class="button primary" id="login-button" type="submit" disabled>เข้าสู่ระบบ</button>
       <p id="login-status" class="notice" role="status">กำลังตรวจสถานะ Manager…</p>
     </form>
   </main>
-
   <div id="studio" class="studio" hidden>
-    <aside class="sidebar" aria-label="หน้าเว็บทั้งหมด">
-      <p class="eyebrow">THE AC LAB</p>
-      <h2>หน้าเว็บทั้งหมด</h2>
-      <nav id="page-nav" class="page-nav" aria-label="เลือกหน้าเว็บ"></nav>
-      <p class="sidebar-note">ข้อความไทย–อังกฤษและรายการของแต่ละหน้า</p>
-    </aside>
-    <main class="workspace" id="workspace" tabindex="-1">
-      <div class="page-hero">
-        <div class="page-hero-copy">
-          <p class="eyebrow">SITE MANAGER <span aria-hidden="true">/</span> <span id="page-number">01</span></p>
-          <h1 id="page-title">จัดการเนื้อหา</h1>
-          <p id="page-subtitle"></p>
-        </div>
-        <div class="page-hero-actions">
-          <span id="draft-status" class="status-chip">กำลังโหลด</span>
-          <div class="page-actions">
-            <button class="button quiet" id="preview-toggle" type="button" aria-controls="live-preview" aria-expanded="false" disabled>พรีวิวสด</button>
-            <a id="page-preview" class="button quiet" target="_blank" rel="noopener">ดูเว็บที่เผยแพร่</a>
-            <button class="button primary" id="save-page" type="button" disabled>บันทึกและเผยแพร่</button>
-          </div>
-        </div>
-      </div>
-      <div class="editor-layout">
-      <div class="editor" id="editor" hidden>
-        <div class="mode-bar" id="mode-bar" role="group" aria-label="ประเภทการแก้ไข">
-          <button type="button" data-mode="settings" aria-pressed="true">ข้อมูลและรายการ</button>
-          <button type="button" data-mode="text" aria-pressed="false">ข้อความบนหน้า</button>
-          <button type="button" data-mode="blocks" aria-pressed="false">เซกชันเพิ่มเติม</button>
-        </div>
-        <div id="group-nav" class="group-nav" role="group" aria-label="เลือกส่วนที่จะปรับ"></div>
-        <div class="editor-heading">
-          <div><h2 id="section-title"></h2><p id="section-help"></p></div>
-          <label class="search" id="search-label">
-            <span class="sr-only">ค้นหาในส่วนนี้</span>
-            <input type="search" id="section-search" placeholder="ค้นหาในส่วนนี้" maxlength="120">
-          </label>
-        </div>
-        <div id="editor-fields" class="editor-fields"></div>
-        <div class="draft-actions">
-          <button type="button" id="restore-page" class="button quiet" disabled>คืนค่าที่บันทึกไว้</button>
-          <button type="button" id="download-draft" class="button quiet">ดาวน์โหลดข้อมูลหน้านี้</button>
-        </div>
-      </div>
-      <aside class="live-preview" id="live-preview" aria-labelledby="preview-heading" hidden>
-        <div class="preview-header">
-          <div class="preview-heading">
-            <span class="eyebrow">LIVE PREVIEW</span>
-            <h2 id="preview-heading" tabindex="-1">ตัวอย่างหน้าเว็บ</h2>
-          </div>
-          <span id="preview-status" class="status-chip" role="status">กำลังโหลด</span>
-        </div>
-        <div class="preview-toolbar">
-          <div class="preview-choice" role="group" aria-label="ขนาดหน้าจอพรีวิว">
-            <button type="button" data-preview-width="390" aria-pressed="true">มือถือ</button>
-            <button type="button" data-preview-width="1200" aria-pressed="false">เดสก์ท็อป</button>
-          </div>
-          <div class="preview-choice" role="group" aria-label="ภาษาของพรีวิว">
-            <button type="button" data-preview-lang="th" aria-pressed="true">TH</button>
-            <button type="button" data-preview-lang="en" aria-pressed="false">EN</button>
-          </div>
-        </div>
-        <div class="preview-location">
-          <p id="preview-location">เลือกช่องแก้ไขเพื่อดูตำแหน่งบนเว็บ</p>
-          <button class="button quiet tiny" id="preview-locate" type="button" disabled>ไปยังจุดที่แก้</button>
-        </div>
-        <div class="preview-viewport" id="preview-viewport" aria-label="หน้าตัวอย่าง"></div>
-        <p class="preview-note" id="preview-note" role="status">ฉบับร่างจะแสดงในกรอบนี้จนกว่าจะกดเผยแพร่</p>
-      </aside>
-      </div>
-      <p class="workspace-notice" id="workspace-notice" role="status" aria-live="polite"></p>
-    </main>
+    <aside class="sidebar" aria-label="หน้าเว็บทั้งหมด"><p class="eyebrow">THE AC LAB</p><h2>หน้าเว็บทั้งหมด</h2><nav id="page-nav" class="page-nav" aria-label="เลือกหน้าเว็บ"></nav><p class="sidebar-note">ข้อความไทย–อังกฤษและรายการของแต่ละหน้า</p></aside>
+    <main class="workspace" id="workspace" tabindex="-1"><div class="page-hero"><div class="page-hero-copy"><p class="eyebrow">SITE MANAGER <span aria-hidden="true">/</span> <span id="page-number">01</span></p><h1 id="page-title">จัดการเนื้อหา</h1><p id="page-subtitle"></p></div>
+      <div class="page-hero-actions"><span id="draft-status" class="status-chip">กำลังโหลด</span><div class="page-actions"><button class="button quiet" id="preview-toggle" type="button" aria-controls="live-preview" aria-expanded="false" disabled>พรีวิวสด</button><a id="page-preview" class="button quiet" target="_blank" rel="noopener">ดูเว็บที่เผยแพร่</a><button class="button primary" id="save-page" type="button" disabled>บันทึกและเผยแพร่</button></div></div></div>
+      <div class="editor-layout"><div class="editor" id="editor" hidden><div class="mode-bar" id="mode-bar" role="group" aria-label="ประเภทการแก้ไข"><button type="button" data-mode="settings" aria-pressed="true">ข้อมูลและรายการ</button><button type="button" data-mode="text" aria-pressed="false">ข้อความบนหน้า</button><button type="button" data-mode="blocks" aria-pressed="false">เซกชันเพิ่มเติม</button></div><div id="group-nav" class="group-nav" role="group" aria-label="เลือกส่วนที่จะปรับ"></div><div class="editor-heading"><div><h2 id="section-title"></h2><p id="section-help"></p></div><label class="search" id="search-label"><span class="sr-only">ค้นหาในส่วนนี้</span><input type="search" id="section-search" placeholder="ค้นหาในส่วนนี้" maxlength="120"></label></div><div id="editor-fields" class="editor-fields"></div><div class="draft-actions"><button type="button" id="restore-page" class="button quiet" disabled>คืนค่าที่บันทึกไว้</button><button type="button" id="download-draft" class="button quiet">ดาวน์โหลดข้อมูลหน้านี้</button></div></div>
+      <aside class="live-preview" id="live-preview" aria-labelledby="preview-heading" hidden><div class="preview-header"><div class="preview-heading"><span class="eyebrow">LIVE PREVIEW</span><h2 id="preview-heading" tabindex="-1">ตัวอย่างหน้าเว็บ</h2></div><span id="preview-status" class="status-chip" role="status">กำลังโหลด</span></div><div class="preview-toolbar"><div class="preview-choice" role="group" aria-label="ขนาดหน้าจอพรีวิว"><button type="button" data-preview-width="390" aria-pressed="true">มือถือ</button><button type="button" data-preview-width="1200" aria-pressed="false">เดสก์ท็อป</button></div><div class="preview-choice" role="group" aria-label="ภาษาของพรีวิว"><button type="button" data-preview-lang="th" aria-pressed="true">TH</button><button type="button" data-preview-lang="en" aria-pressed="false">EN</button></div></div><div class="preview-location"><p id="preview-location">เลือกช่องแก้ไขเพื่อดูตำแหน่งบนเว็บ</p><button class="button quiet tiny" id="preview-locate" type="button" disabled>ไปยังจุดที่แก้</button></div><div class="preview-viewport" id="preview-viewport" aria-label="หน้าตัวอย่าง"></div><p class="preview-note" id="preview-note" role="status">ฉบับร่างจะแสดงในกรอบนี้จนกว่าจะกดเผยแพร่</p></aside></div><p class="workspace-notice" id="workspace-notice" role="status" aria-live="polite"></p></main>
   </div>
   <noscript>กรุณาเปิด JavaScript เพื่อใช้งาน Site Manager</noscript>
 </body>
